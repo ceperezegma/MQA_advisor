@@ -1,0 +1,30 @@
+# IDE
+.idea/
+
+# Excel lock files
+~$*.xlsx
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+
+# Generated output, never source: the manifests and the fetched catalogue data (+ the SQLite
+# database). Keep fetched_catalogues_data/ itself tracked (via .gitkeep) so it exists after a
+# fresh clone.
+catalogues_to_fetch/
+fetched_catalogues_data/*
+!fetched_catalogues_data/.gitkeep
+
+# Scratch output of the tests/manual_*.py scripts
+manual_tests/

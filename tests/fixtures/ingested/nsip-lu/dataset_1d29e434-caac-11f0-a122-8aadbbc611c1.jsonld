@@ -1,0 +1,186 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "_:3f1431cfdf05e7edcc8bb04b9ad09367",
+            "@type": [
+                "vcard:Individual",
+                "vcard:Kind"
+            ],
+            "vcard:hasEmail": {
+                "@id": "mailto:microdata.platform@igss.etat.lu"
+            },
+            "vcard:role": {
+                "@language": "eng",
+                "@value": "Provider"
+            },
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Microdata platform"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/MONTHLY",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Monthly"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Population and society"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/1d29e434-caac-11f0-a122-8aadbbc611c1",
+            "foaf:page": {
+                "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "@type": "dcat:Dataset",
+            "dcat:theme": [
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/data-theme/ECON"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI"
+                }
+            ],
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Child-parent relationships"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "population"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "parents"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "family relationship"
+                }
+            ],
+            "dct:temporal": {
+                "@id": "_:8a15185ca9000cea32ea2a780797a107"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "This dataset contains children pseudonymized individual identification number of residents in Luxembourg and crossborder workers if their children are eligible for Luxembourg family benefits.\nTo be useful, this dataset must be interconnected with some datasets provided by the IGSS within the framework of the Luxembourg Microdata Platform on Labour and Social Protection. For example, this dataset can be linked to “Individual sociodemographic characteristics” dataset to obtain the age of children. \nDelay for providing the most recent data: current month -3.\nData source : CCSS."
+            },
+            "dcat:contactPoint": {
+                "@id": "_:3f1431cfdf05e7edcc8bb04b9ad09367"
+            },
+            "dct:identifier": "1d29e434-caac-11f0-a122-8aadbbc611c1",
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dcat:landingPage": {
+                "@id": "http://ask4mdp.services-publics.lu/"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/ENG"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/MONTHLY"
+            },
+            "dct:publisher": {
+                "@id": "_:b16250cde61758cbf6a4804670bf4ab2"
+            }
+        },
+        {
+            "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ECON",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Economy and finance"
+            }
+        },
+        {
+            "@id": "_:8a15185ca9000cea32ea2a780797a107",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "dcat:startDate": {
+                "@value": "2002-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "@type": "dct:PeriodOfTime"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "http://ask4mdp.services-publics.lu/",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/ENG",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "English"
+            }
+        },
+        {
+            "@id": "_:b16250cde61758cbf6a4804670bf4ab2",
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Inspection générale de la sécurité sociale (IGSS)"
+            }
+        }
+    ],
+    "@context": {
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

@@ -1,0 +1,137 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "_:598733f6f497f7e9247e7f900a1203c9",
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Agence pour le développement de l’emploi (ADEM)"
+            },
+            "@type": [
+                "vcard:Kind",
+                "vcard:Organization"
+            ]
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ECON",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Economy and finance"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/2deb97de-9787-11f0-ab9c-bee5960d250d",
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "labour market"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "employment"
+                }
+            ],
+            "dct:identifier": "2deb97de-9787-11f0-ab9c-bee5960d250d",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Informations sur les offres d'emplois déclarés à l'ADEM par les employeurs"
+            },
+            "dct:publisher": {
+                "@id": "_:c8684d7cf43819967a92262d53171d11"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/DAILY"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:598733f6f497f7e9247e7f900a1203c9"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/ECON"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Professional Confidential Data"
+            },
+            "@type": "dcat:Dataset",
+            "dct:temporal": {
+                "@id": "_:64541d8b65e723145f315ed981f59ea4"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Offres d'emploi"
+            }
+        },
+        {
+            "@id": "_:c8684d7cf43819967a92262d53171d11",
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Agence pour le développement de l’emploi (ADEM)"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/DAILY",
+            "@type": "dct:Frequency",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Daily"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "_:64541d8b65e723145f315ed981f59ea4",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "@type": "dct:PeriodOfTime",
+            "dcat:startDate": {
+                "@value": "2015-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        }
+    ],
+    "@context": {
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

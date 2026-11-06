@@ -1,0 +1,222 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/FRA",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "French"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Population and society"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/8278fa8a-b63b-11f0-a677-aedcf0f53435",
+            "dcatap:applicableLegislation": {
+                "@id": "https://legilux.public.lu/eli/etat/leg/loi/2013/06/19/n3/jo"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "dcat:spatialResolutionInMeters": {
+                "@value": "0",
+                "@type": "http://www.w3.org/2001/XMLSchema#decimal"
+            },
+            "dct:temporal": {
+                "@id": "_:e89f5662b4dae9cb59b19ae0e6061ccb"
+            },
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "family relationship"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "rnpp"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "Luxembourgish population structure"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "population"
+                }
+            ],
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Le numéro d’identification est composé de 13 chiffres comprenant dans l’ordre les composantes suivantes: a) l’année de naissance exprimée par quatre chiffres; b) le mois de naissance exprimé par deux chiffres; c) le jour de naissance exprimé par deux chiffres; d) une plage séquentielle unique par date de naissance exprimée par trois chiffres; e) un numéro de contrôle calculé suivant l’algorithme dit «de Luhn»; f) un numéro de contrôle calculé suivant l’algorithme dit «de Verhoeff»"
+            },
+            "dct:publisher": {
+                "@id": "_:3fb665dfba24b9a7da49c2ae29af420e"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:9a7e874f963e39aa2dce3467a185b984"
+            },
+            "@type": "dcat:Dataset",
+            "dct:creator": {
+                "@id": "_:4a0b928cad2c3f3097671438f214c375"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Registre national des personnes physiques - Numéro d'identification"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT"
+            },
+            "dct:hasPart": [
+                {
+                    "@id": "https://letzdata.public.lu/en/catalogue/catalogue-donnees/9/99bda44e-b63f-11f0-9ab0-aedcf0f53435.html"
+                },
+                {
+                    "@id": "https://letzdata.public.lu/en/catalogue/catalogue-donnees/1/16c923dc-7cf7-11f0-9925-46bf4a153a63.html"
+                },
+                {
+                    "@id": "https://letzdata.public.lu/en/catalogue/catalogue-donnees/b/b3eea39e-b640-11f0-8226-aedcf0f53435.html"
+                },
+                {
+                    "@id": "https://letzdata.public.lu/en/catalogue/catalogue-donnees/9/9f7c9176-7cf4-11f0-9557-46bf4a153a63.html"
+                },
+                {
+                    "@id": "https://letzdata.public.lu/en/catalogue/catalogue-donnees/e/ecf50bc6-b63e-11f0-a957-aedcf0f53435.html"
+                }
+            ],
+            "dct:identifier": "8278fa8a-b63b-11f0-a677-aedcf0f53435",
+            "foaf:page": {
+                "@id": "https://guichet.public.lu/fr/citoyens/citoyennete/registre-national.html"
+            },
+            "dct:issued": {
+                "@value": "2013-07-01T00:00:00",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            }
+        },
+        {
+            "@id": "https://legilux.public.lu/eli/etat/leg/loi/2013/06/19/n3/jo",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "RNPP"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Loi du 19 juin 2013 relative à l’identification des personnes physiques, au registre national des personnes physiques, à la carte d’identité, aux registres communaux des personnes physiques et portant modification de\n\n1)\tl’article 104 du Code civil;\n2)\tla loi modifiée du 30 mars 1979 organisant l’identification numérique des personnes physiques et morales;\n3)\tla loi communale modifiée du 13 décembre 1988;\n4)\tla loi électorale modifiée du 18 février 2003\net abrogeant\n\n1)\tla loi modifiée du 22 décembre 1886 concernant les recensements de population à faire en exécution de la loi électorale et\n2)\tl’arrêté grand-ducal du 30 août 1939 portant introduction de la carte d’identité obligatoire."
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        },
+        {
+            "@id": "_:e89f5662b4dae9cb59b19ae0e6061ccb",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "@type": "dct:PeriodOfTime",
+            "dcat:startDate": {
+                "@value": "2013-07-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            }
+        },
+        {
+            "@id": "_:3fb665dfba24b9a7da49c2ae29af420e",
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Centre des technologies de l’information de l’État (CTIE)"
+            }
+        },
+        {
+            "@id": "_:9a7e874f963e39aa2dce3467a185b984",
+            "@type": [
+                "vcard:Individual",
+                "vcard:Kind"
+            ],
+            "vcard:hasEmail": {
+                "@id": "mailto:jureg@ctie.etat.lu"
+            },
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Pierre Trausch"
+            }
+        },
+        {
+            "@id": "_:4a0b928cad2c3f3097671438f214c375",
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Centre des technologies de l’information de l’État (CTIE)"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Update cont"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "https://guichet.public.lu/fr/citoyens/citoyennete/registre-national.html",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

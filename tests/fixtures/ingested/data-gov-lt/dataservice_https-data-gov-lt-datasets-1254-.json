@@ -1,0 +1,269 @@
+{
+  "status" : "success",
+  "result" : {
+    "id" : "https-data-gov-lt-datasets-1254-",
+    "catalog" : {
+      "id" : "data-gov-lt",
+      "description" : {
+        "pt" : "Dados abertos na Lituânia",
+        "lv" : "Atvērtie dati Lietuvā",
+        "hr" : "Otvoreni podaci u Litvi",
+        "en" : "Open data in Lithuania",
+        "fr" : "Données ouvertes en Lituanie",
+        "hu" : "Nyílt hozzáférésű adatok Litvániában",
+        "ga" : "Sonraí oscailte sa Liotuáin",
+        "pl" : "Otwarte dane na Litwie",
+        "es" : "Datos abiertos en Lituania",
+        "nl" : "Open data in Litouwen",
+        "de" : "Offene Daten in Litauen",
+        "mt" : "Data miftuħa fil-Litwanja",
+        "sv" : "Öppna data i Litauen",
+        "el" : "Ανοικτά δεδομένα στη Λιθουανία",
+        "sk" : "Otvorené dáta v Litve",
+        "it" : "Dati aperti in Lituania",
+        "uk" : "Відкриті дані в Литві",
+        "ro" : "Date deschise în Lituania",
+        "da" : "Åbne data i Litauen",
+        "fi" : "Avoin data Liettuassa",
+        "cs" : "Otevřená data v Litvě",
+        "bg" : "Отворени данни в Литва",
+        "sl" : "Odprti podatki v Litvi",
+        "et" : "Avatud andmed Leedus",
+        "lt" : "Atvirieji duomenys Lietuvoje"
+      },
+      "homepage" : "https://data.gov.lt",
+      "title" : {
+        "sk" : "data.gov.lt",
+        "es" : "data.gov.lt",
+        "sl" : "data.gov.lt",
+        "lt" : "data.gov.lt",
+        "hu" : "data.gov.lt",
+        "el" : "δεδομένα.gov.lt",
+        "pl" : "data.gov.lt",
+        "en" : "data.gov.lt",
+        "bg" : "данни.gov.lt",
+        "mt" : "data.gov.lt",
+        "it" : "data.gov.lt",
+        "ro" : "data.gov.lt",
+        "de" : "daten.gov.lt",
+        "cs" : "data.gov.lt",
+        "pt" : "data.gov.lt",
+        "fi" : "data.gov.lt",
+        "ga" : "data.gov.lt",
+        "et" : "data.gov.lt",
+        "hr" : "data.gov.lt",
+        "lv" : "data.gov.lt",
+        "nl" : "data.gov.lt",
+        "uk" : "data.gov.lt",
+        "da" : "data.gov.lt",
+        "sv" : "data.gov.lt",
+        "fr" : "data.gov.lt"
+      },
+      "issued" : "2022-11-21T05:36:38Z",
+      "publisher" : {
+        "type" : "Agent",
+        "name" : "IVPK Information Society Development Committee",
+        "email" : "mailto:info@ivpk.lt",
+        "homepage" : "https://ivpk.lrv.lt"
+      },
+      "source_type" : "dcat-ap",
+      "modified" : "2023-02-11T16:20:15.856176",
+      "language" : [ {
+        "id" : "lt",
+        "label" : "Lithuanian",
+        "resource" : "http://publications.europa.eu/resource/authority/language/LIT"
+      } ],
+      "country" : {
+        "label" : "Lithuania",
+        "id" : "lt",
+        "resource" : "http://publications.europa.eu/resource/authority/country/LTU"
+      },
+      "spatial_resource" : [ {
+        "label" : "Lithuania",
+        "id" : "lt",
+        "resource" : "http://publications.europa.eu/resource/authority/country/LTU"
+      } ],
+      "translation_meta" : {
+        "details" : {
+          "sk" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "es" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "sl" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "lt" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "hu" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "el" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "pl" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "en" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "bg" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "mt" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "it" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "ro" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "de" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "cs" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "pt" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "fi" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "ga" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "et" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "hr" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "lv" : {
+            "machine_translated" : false
+          },
+          "nl" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "uk" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "da" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "sv" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "fr" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          }
+        },
+        "full_available_languages" : [ "sk", "es", "sl", "lt", "hu", "el", "pl", "en", "bg", "mt", "it", "ro", "de", "cs", "pt", "fi", "ga", "et", "hr", "lv", "nl", "uk", "da", "sv", "fr" ],
+        "status" : "unknown"
+      }
+    },
+    "description" : {
+      "en" : "Traffic intensity (total and heavy average annual traffic intensity), accident sections and black spots (geographical coordinates)",
+      "lt" : "Eismo intensyvumas (bendras ir sunkiasvorių vidutinis metinis paros eismo intensyvumas), avaringi ruožai ir juodosios dėmės (geografinės koordinatės)\n--\nhttps://maps.eismoinfo.lt"
+    },
+    "access_right" : {
+      "resource" : "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+    },
+    "title" : {
+      "en" : "Traffic statistics data",
+      "lt" : "Eismo statistinės informacijos duomenys"
+    },
+    "keywords" : [ {
+      "id" : "sunkiasvorių-eismas",
+      "label" : "sunkiasvorių eismas",
+      "language" : "en"
+    }, {
+      "id" : "eismo-statistika",
+      "label" : "eismo statistika",
+      "language" : "en"
+    }, {
+      "id" : "juodos-dėmės",
+      "label" : "juodos dėmės",
+      "language" : "en"
+    }, {
+      "id" : "eismo-intensyvumas",
+      "label" : "Eismo Intensyvumas",
+      "language" : "en"
+    }, {
+      "id" : "vmpei",
+      "label" : "vmpei",
+      "language" : "en"
+    } ],
+    "theme" : [ {
+      "id" : "REGI",
+      "label" : {
+        "en" : "Regions and cities"
+      },
+      "resource" : "http://publications.europa.eu/resource/authority/data-theme/REGI"
+    }, {
+      "id" : "TRAN",
+      "label" : {
+        "en" : "Transport"
+      },
+      "resource" : "http://publications.europa.eu/resource/authority/data-theme/TRAN"
+    } ],
+    "contact_point" : [ {
+      "type" : "Kind",
+      "email" : "mailto:info@vialietuva.lt"
+    } ],
+    "hvd_category" : [ {
+      "id" : "c_ac64a52d",
+      "label" : {
+        "en" : "Geospatial"
+      },
+      "resource" : "http://data.europa.eu/bna/c_ac64a52d"
+    } ],
+    "publisher" : {
+      "type" : "Organization",
+      "email" : "mailto:info@vialietuva.lt",
+      "name" : "Via Lietuva",
+      "homepage" : "https://vialietuva.lt/"
+    },
+    "applicable_legislation" : [ "http://data.europa.eu/eli/reg_impl/2023/138/oj" ],
+    "endpoint_url" : [ "https://gis.ktvis.lt/arcgis/rest/services/PUB/PUB_KELIO_PARAMETRAI/MapServer/6/query?outFields=*&where=1%253D1&f=geojson" ],
+    "translation_meta" : {
+      "details" : {
+        "en" : {
+          "machine_translated" : false
+        },
+        "lt" : {
+          "machine_translated" : false
+        }
+      },
+      "full_available_languages" : [ "en", "lt" ],
+      "status" : "unknown"
+    }
+  }
+}

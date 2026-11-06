@@ -1,0 +1,233 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "_:e0615044383b10e9cb28cf994a3a6601",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Ministère des Affaires intérieures (MAINT)"
+            },
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ]
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Annual"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/CSV",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "CSV"
+            },
+            "@type": "dct:MediaTypeOrExtent"
+        },
+        {
+            "@id": "_:364676c3b5e61207cef7e9469d4ec42e",
+            "dcat:startDate": {
+                "@value": "2015-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "@type": "dct:PeriodOfTime",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            }
+        },
+        {
+            "@id": "http://data.legilux.public.lu/eli/etat/leg/rgd/1989/12/06/n3/jo",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal du 6 décembre 1989 concernant le congé politique des bourgmestres, échevins et conseillers communaux."
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal du 6 décembre 1989 concernant le congé politique des bourgmestres, échevins et conseillers communaux."
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        },
+        {
+            "@id": "_:adc46516117ce408fec3bf90ca458b2b",
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Ministère des Affaires intérieures (MAINT)"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/FRA",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "French"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/GOVE",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Government and public sector"
+            }
+        },
+        {
+            "@id": "_:48a722fec79c3845e54139b9ee063c56",
+            "vcard:hasEmail": {
+                "@id": "mailto:elrike.vandenheuvel@mai.etat.lu"
+            },
+            "@type": [
+                "vcard:Individual",
+                "vcard:Kind"
+            ],
+            "vcard:role": {
+                "@language": "eng",
+                "@value": "Inventory cooridinator"
+            },
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Elrike van den Heuvel"
+            }
+        },
+        {
+            "@id": "http://data.legilux.public.lu/eli/etat/leg/loi/1988/12/13/n1/jo",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Loi Communale"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Loi du 13 décembre 1988 relative à l’organisation communale\nCette loi définit la commune comme une personne morale de droit public dotée de l’autonomie administrative et financière, sous la tutelle de l’État. Elle fixe la composition des organes communaux (conseil communal, collège des bourgmestre et échevins, bourgmestre) et leurs compétences pour gérer les affaires d’intérêt local. Elle encadre la validité des actes communaux, leur contrôle par le ministre de l’Intérieur et prévoit des dispositions relatives à la gestion financière, aux syndicats de communes et aux services communaux."
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/6ecc7dc0-ca1a-11f0-ba77-8aadbbc611c1",
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL"
+            },
+            "dcat:keyword": {
+                "@language": "eng",
+                "@value": "communal"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:48a722fec79c3845e54139b9ee063c56"
+            },
+            "dcatap:applicableLegislation": [
+                {
+                    "@id": "http://data.legilux.public.lu/eli/etat/leg/rgd/1989/12/06/n3/jo"
+                },
+                {
+                    "@id": "http://data.legilux.public.lu/eli/etat/leg/loi/1988/12/13/n1/jo"
+                }
+            ],
+            "dcat:distribution": {
+                "@id": "http://data.europa.eu/88u/distribution/a64f5978-9068-43b7-a465-9b3802ac1f8d"
+            },
+            "dct:creator": {
+                "@id": "_:adc46516117ce408fec3bf90ca458b2b"
+            },
+            "dct:temporal": {
+                "@id": "_:364676c3b5e61207cef7e9469d4ec42e"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/GOVE"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "@type": "dcat:Dataset",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Jeu de données regroupant les demandes annuelles de remboursement / indemnisation du congé politique des membres des conseils communaux luxembourgeois (Bourgmestre, échevins, conseillers), utilisées pour le remboursement des congés de l’année précédente (N-1)."
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dct:publisher": {
+                "@id": "_:e0615044383b10e9cb28cf994a3a6601"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dct:identifier": "6ecc7dc0-ca1a-11f0-ba77-8aadbbc611c1",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Indemnisation et remboursement des congés politiques des membres du conseil communal"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/a64f5978-9068-43b7-a465-9b3802ac1f8d",
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/CSV"
+            },
+            "dcat:byteSize": {
+                "@value": "2000000",
+                "@type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Congé politique annuel"
+            },
+            "dcat:accessURL": {
+                "@id": "http://www.letzaccessdata.lu/"
+            },
+            "@type": "dcat:Distribution",
+            "dct:rights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:identifier": {
+                "@value": "182",
+                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            }
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

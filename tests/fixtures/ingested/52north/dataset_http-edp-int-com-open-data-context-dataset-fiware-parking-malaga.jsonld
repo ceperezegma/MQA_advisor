@@ -1,0 +1,78 @@
+{
+    "@graph": [
+        {
+            "@id": "_:bd1685ec1123a161beafbbb02f3833ff",
+            "@type": "dct:Location",
+            "locn:geometry": [
+                {
+                    "@value": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-4.57609,36.660522],[-4.339625,36.660522],[-4.339625,36.75975],[-4.57609,36.75975],[-4.57609,36.660522]]]}}]}",
+                    "@type": "https://www.iana.org/assignments/media-types/application/vnd.geo+json"
+                },
+                {
+                    "@value": "POLYGON((-4.57609 36.660522,-4.339625 36.660522,-4.339625 36.75975,-4.57609 36.75975,-4.57609 36.660522))",
+                    "@type": "http://www.opengis.net/ont/geosparql#wktLiteral"
+                }
+            ]
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/2110d2c5-a845-492e-a59b-5bebc81d68e6",
+            "dcat:downloadURL": {
+                "@id": "https://datosabiertos.malaga.eu/recursos/aparcamientos/ocupappublicosmun/ocupappublicosmunfiware.json"
+            },
+            "dct:description": "Results are updated every minute.",
+            "dcat:accessURL": {
+                "@id": "https://datosabiertos.malaga.eu/recursos/aparcamientos/ocupappublicosmun/ocupappublicosmunfiware.json"
+            },
+            "dct:title": "Occupation of parking spaces.",
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/FIWARE-CB"
+            },
+            "@type": "dcat:Distribution"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/http-edp-int-com-open-data-context-dataset-fiware-parking-malaga",
+            "dct:publisher": {
+                "@id": "https://www.fiware.org/foundation/"
+            },
+            "dct:title": "Ocupación de los aparcamientos públicos municipales.",
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/SPA"
+            },
+            "@type": "dcat:Dataset",
+            "dcat:distribution": {
+                "@id": "http://data.europa.eu/88u/distribution/2110d2c5-a845-492e-a59b-5bebc81d68e6"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/UNKNOWN"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/TRAN"
+            },
+            "dct:spatial": {
+                "@id": "_:bd1685ec1123a161beafbbb02f3833ff"
+            },
+            "dct:description": "Ocupación de los aparcamientos públicos municipales. La información de actualiza cada 1 minuto.",
+            "dct:identifier": "http://edp-int.com/open-data/context/dataset/fiware-parking-malaga",
+            "dcat:keyword": "transportation",
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+            },
+            "dct:issued": {
+                "@value": "2020-01-17T10:39:46Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            }
+        },
+        {
+            "@id": "https://www.fiware.org/foundation/",
+            "@type": "foaf:Organization",
+            "foaf:name": "FIWARE Foundation e.V."
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "locn": "http://www.w3.org/ns/locn#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

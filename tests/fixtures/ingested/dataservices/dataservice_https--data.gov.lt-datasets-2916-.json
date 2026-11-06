@@ -1,0 +1,368 @@
+{
+  "status" : "success",
+  "result" : {
+    "id" : "https:-data.gov.lt-datasets-2916-",
+    "catalog" : {
+      "id" : "data-gov-lt",
+      "description" : {
+        "pt" : "Dados abertos na Lituânia",
+        "lv" : "Atvērtie dati Lietuvā",
+        "hr" : "Otvoreni podaci u Litvi",
+        "en" : "Open data in Lithuania",
+        "fr" : "Données ouvertes en Lituanie",
+        "hu" : "Nyílt hozzáférésű adatok Litvániában",
+        "ga" : "Sonraí oscailte sa Liotuáin",
+        "pl" : "Otwarte dane na Litwie",
+        "es" : "Datos abiertos en Lituania",
+        "nl" : "Open data in Litouwen",
+        "de" : "Offene Daten in Litauen",
+        "mt" : "Data miftuħa fil-Litwanja",
+        "sv" : "Öppna data i Litauen",
+        "el" : "Ανοικτά δεδομένα στη Λιθουανία",
+        "sk" : "Otvorené dáta v Litve",
+        "it" : "Dati aperti in Lituania",
+        "uk" : "Відкриті дані в Литві",
+        "ro" : "Date deschise în Lituania",
+        "da" : "Åbne data i Litauen",
+        "fi" : "Avoin data Liettuassa",
+        "cs" : "Otevřená data v Litvě",
+        "bg" : "Отворени данни в Литва",
+        "sl" : "Odprti podatki v Litvi",
+        "et" : "Avatud andmed Leedus",
+        "lt" : "Atvirieji duomenys Lietuvoje"
+      },
+      "homepage" : "https://data.gov.lt",
+      "title" : {
+        "sk" : "data.gov.lt",
+        "es" : "data.gov.lt",
+        "sl" : "data.gov.lt",
+        "lt" : "data.gov.lt",
+        "hu" : "data.gov.lt",
+        "el" : "δεδομένα.gov.lt",
+        "pl" : "data.gov.lt",
+        "en" : "data.gov.lt",
+        "bg" : "данни.gov.lt",
+        "mt" : "data.gov.lt",
+        "it" : "data.gov.lt",
+        "ro" : "data.gov.lt",
+        "de" : "daten.gov.lt",
+        "cs" : "data.gov.lt",
+        "pt" : "data.gov.lt",
+        "fi" : "data.gov.lt",
+        "ga" : "data.gov.lt",
+        "et" : "data.gov.lt",
+        "hr" : "data.gov.lt",
+        "lv" : "data.gov.lt",
+        "nl" : "data.gov.lt",
+        "uk" : "data.gov.lt",
+        "da" : "data.gov.lt",
+        "sv" : "data.gov.lt",
+        "fr" : "data.gov.lt"
+      },
+      "issued" : "2022-11-21T05:36:38Z",
+      "publisher" : {
+        "type" : "Agent",
+        "name" : "IVPK Information Society Development Committee",
+        "email" : "mailto:info@ivpk.lt",
+        "homepage" : "https://ivpk.lrv.lt"
+      },
+      "source_type" : "dcat-ap",
+      "modified" : "2023-02-11T16:20:15.856176",
+      "language" : [ {
+        "id" : "lt",
+        "label" : "Lithuanian",
+        "resource" : "http://publications.europa.eu/resource/authority/language/LIT"
+      } ],
+      "country" : {
+        "label" : "Lithuania",
+        "id" : "lt",
+        "resource" : "http://publications.europa.eu/resource/authority/country/LTU"
+      },
+      "spatial_resource" : [ {
+        "label" : "Lithuania",
+        "id" : "lt",
+        "resource" : "http://publications.europa.eu/resource/authority/country/LTU"
+      } ],
+      "translation_meta" : {
+        "details" : {
+          "sk" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "es" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "sl" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "lt" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "hu" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "el" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "pl" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "en" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "bg" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "mt" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "it" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "ro" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "de" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "cs" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "pt" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "fi" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "ga" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "et" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "hr" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "lv" : {
+            "machine_translated" : false
+          },
+          "nl" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "uk" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "da" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "sv" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "fr" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          }
+        },
+        "full_available_languages" : [ "sk", "es", "sl", "lt", "hu", "el", "pl", "en", "bg", "mt", "it", "ro", "de", "cs", "pt", "fi", "ga", "et", "hr", "lv", "nl", "uk", "da", "sv", "fr" ],
+        "status" : "unknown"
+      },
+      "count" : 2263
+    },
+    "title" : {
+      "es" : "Repositorio de datos abiertos",
+      "sl" : "Repozitorij odprtih podatkov",
+      "lt" : "Atvirų duomenų saugykla",
+      "it" : "Archivio Open Data",
+      "cs" : "Úložiště veřejně přístupných dat",
+      "hu" : "Nyílt adattároló",
+      "el" : "Αποθετήριο ανοικτών δεδομένων",
+      "pt" : "Repositório de Dados Abertos",
+      "uk" : "Репозиторій відкритих даних",
+      "ga" : "Stór Sonraí Oscailte",
+      "fi" : "Avoimen datan arkisto",
+      "pl" : "Repozytorium otwartych danych",
+      "lv" : "Atvērto datu repozitorijs",
+      "fr" : "Répertoire de données ouvertes",
+      "et" : "Avatud andmete hoidla",
+      "hr" : "Repozitorij otvorenih podataka",
+      "da" : "Åbent datalager",
+      "mt" : "Repożitorju tad-Data Miftuħa",
+      "ro" : "Depozitul de date deschise",
+      "nl" : "Open Data Repository",
+      "sk" : "Úložisko otvorených údajov",
+      "sv" : "Open Data Repository",
+      "de" : "Offenes Daten-Repository",
+      "bg" : "Хранилище за свободно достъпни данни"
+    },
+    "serves_dataset" : [ "https://data.gov.lt/datasets/1384/", "https://data.gov.lt/datasets/2692/", "https://data.gov.lt/datasets/2685/", "https://data.gov.lt/datasets/2690/", "https://data.gov.lt/datasets/2717/", "https://data.gov.lt/datasets/2876/", "https://data.gov.lt/datasets/2788/", "https://data.gov.lt/datasets/2793/", "https://data.gov.lt/datasets/2869/", "https://data.gov.lt/datasets/2812/", "https://data.gov.lt/datasets/1568/", "https://data.gov.lt/datasets/2900/", "https://data.gov.lt/datasets/2874/", "https://data.gov.lt/datasets/1757/", "https://data.gov.lt/datasets/1852/", "https://data.gov.lt/datasets/2079/", "https://data.gov.lt/datasets/2091/", "https://data.gov.lt/datasets/2187/", "https://data.gov.lt/datasets/2206/", "https://data.gov.lt/datasets/2211/", "https://data.gov.lt/datasets/1946/", "https://data.gov.lt/datasets/1288/", "https://data.gov.lt/datasets/2280/", "https://data.gov.lt/datasets/1383/", "https://data.gov.lt/datasets/1314/", "https://data.gov.lt/datasets/1293/", "https://data.gov.lt/datasets/2459/", "https://data.gov.lt/datasets/2471/", "https://data.gov.lt/datasets/2547/", "https://data.gov.lt/datasets/1567/", "https://data.gov.lt/datasets/1572/", "https://data.gov.lt/datasets/1565/", "https://data.gov.lt/datasets/2660/", "https://data.gov.lt/datasets/1756/", "https://data.gov.lt/datasets/729/", "https://data.gov.lt/datasets/2078/", "https://data.gov.lt/datasets/1761/", "https://data.gov.lt/datasets/1049/", "https://data.gov.lt/datasets/2090/", "https://data.gov.lt/datasets/2186/", "https://data.gov.lt/datasets/2210/", "https://data.gov.lt/datasets/2179/", "https://data.gov.lt/datasets/2184/", "https://data.gov.lt/datasets/2725/", "https://data.gov.lt/datasets/2732/", "https://data.gov.lt/datasets/2205/", "https://data.gov.lt/datasets/1945/", "https://data.gov.lt/datasets/2203/", "https://data.gov.lt/datasets/2833/", "https://data.gov.lt/datasets/2730/", "https://data.gov.lt/datasets/2458/", "https://data.gov.lt/datasets/2463/", "https://data.gov.lt/datasets/2897/", "https://data.gov.lt/datasets/2456/", "https://data.gov.lt/datasets/2895/", "https://data.gov.lt/datasets/2718/", "https://data.gov.lt/datasets/2546/", "https://data.gov.lt/datasets/2806/", "https://data.gov.lt/datasets/1232/", "https://data.gov.lt/datasets/1328/", "https://data.gov.lt/datasets/1333/", "https://data.gov.lt/datasets/2724/", "https://data.gov.lt/datasets/1588/", "https://data.gov.lt/datasets/2832/", "https://data.gov.lt/datasets/2889/", "https://data.gov.lt/datasets/1586/", "https://data.gov.lt/datasets/2825/", "https://data.gov.lt/datasets/2830/", "https://data.gov.lt/datasets/2894/", "https://data.gov.lt/datasets/1865/", "https://data.gov.lt/datasets/1858/", "https://data.gov.lt/datasets/1801/", "https://data.gov.lt/datasets/2130/", "https://data.gov.lt/datasets/1870/", "https://data.gov.lt/datasets/2219/", "https://data.gov.lt/datasets/1226/", "https://data.gov.lt/datasets/1327/", "https://data.gov.lt/datasets/2314/", "https://data.gov.lt/datasets/2288/", "https://data.gov.lt/datasets/2312/", "https://data.gov.lt/datasets/2383/", "https://data.gov.lt/datasets/1332/", "https://data.gov.lt/datasets/2479/", "https://data.gov.lt/datasets/2503/", "https://data.gov.lt/datasets/2381/", "https://data.gov.lt/datasets/2477/", "https://data.gov.lt/datasets/1484/", "https://data.gov.lt/datasets/2484/", "https://data.gov.lt/datasets/1592/", "https://data.gov.lt/datasets/1585/", "https://data.gov.lt/datasets/1590/", "https://data.gov.lt/datasets/2668/", "https://data.gov.lt/datasets/2029/", "https://data.gov.lt/datasets/1769/", "https://data.gov.lt/datasets/1864/", "https://data.gov.lt/datasets/1857/", "https://data.gov.lt/datasets/1862/", "https://data.gov.lt/datasets/1800/", "https://data.gov.lt/datasets/2218/", "https://data.gov.lt/datasets/2223/", "https://data.gov.lt/datasets/2745/", "https://data.gov.lt/datasets/2738/", "https://data.gov.lt/datasets/2287/", "https://data.gov.lt/datasets/2311/", "https://data.gov.lt/datasets/2750/", "https://data.gov.lt/datasets/2846/", "https://data.gov.lt/datasets/2502/", "https://data.gov.lt/datasets/2476/", "https://data.gov.lt/datasets/2483/", "https://data.gov.lt/datasets/2559/", "https://data.gov.lt/datasets/2481/", "https://data.gov.lt/datasets/2907/", "https://data.gov.lt/datasets/2500/", "https://data.gov.lt/datasets/2819/", "https://data.gov.lt/datasets/2667/", "https://data.gov.lt/datasets/2665/", "https://data.gov.lt/datasets/1340/", "https://data.gov.lt/datasets/2744/", "https://data.gov.lt/datasets/937/", "https://data.gov.lt/datasets/2737/", "https://data.gov.lt/datasets/2845/", "https://data.gov.lt/datasets/1625/", "https://data.gov.lt/datasets/1630/", "https://data.gov.lt/datasets/2742/", "https://data.gov.lt/datasets/1689/", "https://data.gov.lt/datasets/1694/", "https://data.gov.lt/datasets/2048/", "https://data.gov.lt/datasets/1885/", "https://data.gov.lt/datasets/2906/", "https://data.gov.lt/datasets/1782/", "https://data.gov.lt/datasets/2138/", "https://data.gov.lt/datasets/1878/", "https://data.gov.lt/datasets/2136/", "https://data.gov.lt/datasets/2055/", "https://data.gov.lt/datasets/1814/", "https://data.gov.lt/datasets/2818/", "https://data.gov.lt/datasets/1890/", "https://data.gov.lt/datasets/2231/", "https://data.gov.lt/datasets/2143/", "https://data.gov.lt/datasets/1883/", "https://data.gov.lt/datasets/1239/", "https://data.gov.lt/datasets/2327/", "https://data.gov.lt/datasets/2516/", "https://data.gov.lt/datasets/2611/", "https://data.gov.lt/datasets/2523/", "https://data.gov.lt/datasets/2521/", "https://data.gov.lt/datasets/1624/", "https://data.gov.lt/datasets/1688/", "https://data.gov.lt/datasets/1693/", "https://data.gov.lt/datasets/1712/", "https://data.gov.lt/datasets/1509/", "https://data.gov.lt/datasets/673/", "https://data.gov.lt/datasets/1877/", "https://data.gov.lt/datasets/2135/", "https://data.gov.lt/datasets/2047/", "https://data.gov.lt/datasets/1813/", "https://data.gov.lt/datasets/2199/", "https://data.gov.lt/datasets/2142/", "https://data.gov.lt/datasets/1882/", "https://data.gov.lt/datasets/2319/", "https://data.gov.lt/datasets/2140/", "https://data.gov.lt/datasets/2758/", "https://data.gov.lt/datasets/2326/", "https://data.gov.lt/datasets/2853/", "https://data.gov.lt/datasets/2765/", "https://data.gov.lt/datasets/2770/", "https://data.gov.lt/datasets/2324/", "https://data.gov.lt/datasets/1106/", "https://data.gov.lt/datasets/2763/", "https://data.gov.lt/datasets/1175/", "https://data.gov.lt/datasets/2515/", "https://data.gov.lt/datasets/2489/", "https://data.gov.lt/datasets/2508/", "https://data.gov.lt/datasets/2851/", "https://data.gov.lt/datasets/2520/", "https://data.gov.lt/datasets/2839/", "https://data.gov.lt/datasets/665/", "https://data.gov.lt/datasets/1348/", "https://data.gov.lt/datasets/2757/", "https://data.gov.lt/datasets/2700/", "https://data.gov.lt/datasets/2762/", "https://data.gov.lt/datasets/1733/", "https://data.gov.lt/datasets/2850/", "https://data.gov.lt/datasets/1797/", "https://data.gov.lt/datasets/1898/", "https://data.gov.lt/datasets/444/", "https://data.gov.lt/datasets/2239/", "https://data.gov.lt/datasets/1979/", "https://data.gov.lt/datasets/2156/", "https://data.gov.lt/datasets/1807/", "https://data.gov.lt/datasets/2163/", "https://data.gov.lt/datasets/2161/", "https://data.gov.lt/datasets/1259/", "https://data.gov.lt/datasets/1922/", "https://data.gov.lt/datasets/2251/", "https://data.gov.lt/datasets/1347/", "https://data.gov.lt/datasets/1345/", "https://data.gov.lt/datasets/2497/", "https://data.gov.lt/datasets/2440/", "https://data.gov.lt/datasets/1536/", "https://data.gov.lt/datasets/2624/", "https://data.gov.lt/datasets/2509/", "https://data.gov.lt/datasets/1789/", "https://data.gov.lt/datasets/1732/", "https://data.gov.lt/datasets/1897/", "https://data.gov.lt/datasets/1914/", "https://data.gov.lt/datasets/2148/", "https://data.gov.lt/datasets/2238/", "https://data.gov.lt/datasets/1978/", "https://data.gov.lt/datasets/2155/", "https://data.gov.lt/datasets/2682/", "https://data.gov.lt/datasets/2236/", "https://data.gov.lt/datasets/1895/", "https://data.gov.lt/datasets/1983/", "https://data.gov.lt/datasets/1806/", "https://data.gov.lt/datasets/2160/", "https://data.gov.lt/datasets/2714/", "https://data.gov.lt/datasets/2790/", "https://data.gov.lt/datasets/2866/", "https://data.gov.lt/datasets/2778/", "https://data.gov.lt/datasets/2783/", "https://data.gov.lt/datasets/2859/", "https://data.gov.lt/datasets/2802/", "https://data.gov.lt/datasets/2496/", "https://data.gov.lt/datasets/1193/", "https://data.gov.lt/datasets/2871/", "https://data.gov.lt/datasets/2616/", "https://data.gov.lt/datasets/2621/", "https://data.gov.lt/datasets/678/", "https://data.gov.lt/datasets/1285/", "https://data.gov.lt/datasets/2713/", "https://data.gov.lt/datasets/2706/", "https://data.gov.lt/datasets/2865/", "https://data.gov.lt/datasets/2777/", "https://data.gov.lt/datasets/2782/", "https://data.gov.lt/datasets/2858/", "https://data.gov.lt/datasets/1562/", "https://data.gov.lt/datasets/2775/", "https://data.gov.lt/datasets/390/", "https://data.gov.lt/datasets/1753/", "https://data.gov.lt/datasets/1751/", "https://data.gov.lt/datasets/2863/", "https://data.gov.lt/datasets/2075/", "https://data.gov.lt/datasets/2169/", "https://data.gov.lt/datasets/2259/", "https://data.gov.lt/datasets/1942/", "https://data.gov.lt/datasets/1999/", "https://data.gov.lt/datasets/2181/", "https://data.gov.lt/datasets/2257/", "https://data.gov.lt/datasets/2200/", "https://data.gov.lt/datasets/2176/", "https://data.gov.lt/datasets/2460/", "https://data.gov.lt/datasets/2448/", "https://data.gov.lt/datasets/2453/", "https://data.gov.lt/datasets/1556/", "https://data.gov.lt/datasets/1561/", "https://data.gov.lt/datasets/1554/", "https://data.gov.lt/datasets/2644/", "https://data.gov.lt/datasets/2003/", "https://data.gov.lt/datasets/789/", "https://data.gov.lt/datasets/1998/", "https://data.gov.lt/datasets/1941/", "https://data.gov.lt/datasets/2175/", "https://data.gov.lt/datasets/2180/", "https://data.gov.lt/datasets/2168/", "https://data.gov.lt/datasets/2173/", "https://data.gov.lt/datasets/2721/", "https://data.gov.lt/datasets/2879/", "https://data.gov.lt/datasets/2822/", "https://data.gov.lt/datasets/2796/", "https://data.gov.lt/datasets/2815/", "https://data.gov.lt/datasets/2452/", "https://data.gov.lt/datasets/2886/", "https://data.gov.lt/datasets/2891/", "https://data.gov.lt/datasets/2445/", "https://data.gov.lt/datasets/2910/", "https://data.gov.lt/datasets/2707/", "https://data.gov.lt/datasets/2636/", "https://data.gov.lt/datasets/2629/", "https://data.gov.lt/datasets/2609/", "https://data.gov.lt/datasets/1317/", "https://data.gov.lt/datasets/1386/", "https://data.gov.lt/datasets/1324/", "https://data.gov.lt/datasets/2689/", "https://data.gov.lt/datasets/2687/", "https://data.gov.lt/datasets/2878/", "https://data.gov.lt/datasets/2795/", "https://data.gov.lt/datasets/2814/", "https://data.gov.lt/datasets/2890/", "https://data.gov.lt/datasets/1670/", "https://data.gov.lt/datasets/2883/", "https://data.gov.lt/datasets/1759/", "https://data.gov.lt/datasets/2024/", "https://data.gov.lt/datasets/2088/", "https://data.gov.lt/datasets/2093/", "https://data.gov.lt/datasets/1847/", "https://data.gov.lt/datasets/2215/", "https://data.gov.lt/datasets/2220/", "https://data.gov.lt/datasets/2189/", "https://data.gov.lt/datasets/2208/", "https://data.gov.lt/datasets/2213/", "https://data.gov.lt/datasets/2303/", "https://data.gov.lt/datasets/1928/", "https://data.gov.lt/datasets/2301/", "https://data.gov.lt/datasets/1385/", "https://data.gov.lt/datasets/2468/", "https://data.gov.lt/datasets/2473/", "https://data.gov.lt/datasets/2549/", "https://data.gov.lt/datasets/2466/", "https://data.gov.lt/datasets/1569/", "https://data.gov.lt/datasets/2657/", "https://data.gov.lt/datasets/2662/", "https://data.gov.lt/datasets/1758/", "https://data.gov.lt/datasets/1763/", "https://data.gov.lt/datasets/1853/", "https://data.gov.lt/datasets/2092/", "https://data.gov.lt/datasets/2188/", "https://data.gov.lt/datasets/2207/", "https://data.gov.lt/datasets/2212/", "https://data.gov.lt/datasets/2269/", "https://data.gov.lt/datasets/2734/", "https://data.gov.lt/datasets/2727/", "https://data.gov.lt/datasets/998/", "https://data.gov.lt/datasets/1927/", "https://data.gov.lt/datasets/500/", "https://data.gov.lt/datasets/996/", "https://data.gov.lt/datasets/2300/", "https://data.gov.lt/datasets/2842/", "https://data.gov.lt/datasets/2835/", "https://data.gov.lt/datasets/2840/", "https://data.gov.lt/datasets/2472/", "https://data.gov.lt/datasets/2465/", "https://data.gov.lt/datasets/2899/", "https://data.gov.lt/datasets/2548/", "https://data.gov.lt/datasets/2470/", "https://data.gov.lt/datasets/2808/", "https://data.gov.lt/datasets/2661/", "https://data.gov.lt/datasets/1241/", "https://data.gov.lt/datasets/1234/", "https://data.gov.lt/datasets/799/", "https://data.gov.lt/datasets/2733/", "https://data.gov.lt/datasets/2726/", "https://data.gov.lt/datasets/2731/", "https://data.gov.lt/datasets/1621/", "https://data.gov.lt/datasets/2834/", "https://data.gov.lt/datasets/2827/", "https://data.gov.lt/datasets/1163/", "https://data.gov.lt/datasets/2898/", "https://data.gov.lt/datasets/1690/", "https://data.gov.lt/datasets/1779/", "https://data.gov.lt/datasets/2896/", "https://data.gov.lt/datasets/2719/", "https://data.gov.lt/datasets/1874/", "https://data.gov.lt/datasets/1867/", "https://data.gov.lt/datasets/2807/", "https://data.gov.lt/datasets/2044/", "https://data.gov.lt/datasets/2125/", "https://data.gov.lt/datasets/1872/", "https://data.gov.lt/datasets/1803/", "https://data.gov.lt/datasets/2196/", "https://data.gov.lt/datasets/389/", "https://data.gov.lt/datasets/2132/", "https://data.gov.lt/datasets/2309/", "https://data.gov.lt/datasets/1240/", "https://data.gov.lt/datasets/2316/", "https://data.gov.lt/datasets/2321/", "https://data.gov.lt/datasets/2378/", "https://data.gov.lt/datasets/1334/", "https://data.gov.lt/datasets/2390/", "https://data.gov.lt/datasets/2486/", "https://data.gov.lt/datasets/2505/", "https://data.gov.lt/datasets/1948/", "https://data.gov.lt/datasets/2493/", "https://data.gov.lt/datasets/2574/", "https://data.gov.lt/datasets/2512/", "https://data.gov.lt/datasets/2491/", "https://data.gov.lt/datasets/2510/", "https://data.gov.lt/datasets/1587/", "https://data.gov.lt/datasets/1866/", "https://data.gov.lt/datasets/2043/", "https://data.gov.lt/datasets/1859/", "https://data.gov.lt/datasets/2131/", "https://data.gov.lt/datasets/1871/", "https://data.gov.lt/datasets/2747/", "https://data.gov.lt/datasets/2315/", "https://data.gov.lt/datasets/2313/", "https://data.gov.lt/datasets/2485/", "https://data.gov.lt/datasets/2504/", "https://data.gov.lt/datasets/1203/", "https://data.gov.lt/datasets/2382/", "https://data.gov.lt/datasets/2478/", "https://data.gov.lt/datasets/2490/", "https://data.gov.lt/datasets/2566/", "https://data.gov.lt/datasets/2828/", "https://data.gov.lt/datasets/2909/", "https://data.gov.lt/datasets/1261/", "https://data.gov.lt/datasets/1342/", "https://data.gov.lt/datasets/1533/", "https://data.gov.lt/datasets/1445/", "https://data.gov.lt/datasets/2746/", "https://data.gov.lt/datasets/2739/", "https://data.gov.lt/datasets/2751/", "https://data.gov.lt/datasets/1627/", "https://data.gov.lt/datasets/1696/", "https://data.gov.lt/datasets/1786/", "https://data.gov.lt/datasets/1791/", "https://data.gov.lt/datasets/1887/", "https://data.gov.lt/datasets/460/", "https://data.gov.lt/datasets/2908/", "https://data.gov.lt/datasets/1784/", "https://data.gov.lt/datasets/2145/", "https://data.gov.lt/datasets/2152/", "https://data.gov.lt/datasets/1892/", "https://data.gov.lt/datasets/1911/", "https://data.gov.lt/datasets/2233/", "https://data.gov.lt/datasets/2150/", "https://data.gov.lt/datasets/497/", "https://data.gov.lt/datasets/598/", "https://data.gov.lt/datasets/2240/", "https://data.gov.lt/datasets/2329/", "https://data.gov.lt/datasets/2334/", "https://data.gov.lt/datasets/1341/", "https://data.gov.lt/datasets/2525/", "https://data.gov.lt/datasets/2518/", "https://data.gov.lt/datasets/2613/", "https://data.gov.lt/datasets/1633/", "https://data.gov.lt/datasets/1626/", "https://data.gov.lt/datasets/1695/", "https://data.gov.lt/datasets/1790/", "https://data.gov.lt/datasets/1886/", "https://data.gov.lt/datasets/1783/", "https://data.gov.lt/datasets/2139/", "https://data.gov.lt/datasets/1884/", "https://data.gov.lt/datasets/802/", "https://data.gov.lt/datasets/4118/", "https://data.gov.lt/datasets/2137/", "https://data.gov.lt/datasets/1891/", "https://data.gov.lt/datasets/2232/", "https://data.gov.lt/datasets/2144/", "https://data.gov.lt/datasets/2767/", "https://data.gov.lt/datasets/1910/", "https://data.gov.lt/datasets/2703/", "https://data.gov.lt/datasets/2328/", "https://data.gov.lt/datasets/2855/", "https://data.gov.lt/datasets/2333/", "https://data.gov.lt/datasets/1182/", "https://data.gov.lt/datasets/2517/", "https://data.gov.lt/datasets/2860/", "https://data.gov.lt/datasets/2612/", "https://data.gov.lt/datasets/2524/", "https://data.gov.lt/datasets/2610/", "https://data.gov.lt/datasets/2522/", "https://data.gov.lt/datasets/2670/", "https://data.gov.lt/datasets/2759/", "https://data.gov.lt/datasets/2854/", "https://data.gov.lt/datasets/2766/", "https://data.gov.lt/datasets/2771/", "https://data.gov.lt/datasets/2852/", "https://data.gov.lt/datasets/2764/", "https://data.gov.lt/datasets/1176/", "https://data.gov.lt/datasets/1181/", "https://data.gov.lt/datasets/1735/", "https://data.gov.lt/datasets/1708/", "https://data.gov.lt/datasets/2158/", "https://data.gov.lt/datasets/1995/", "https://data.gov.lt/datasets/2165/", "https://data.gov.lt/datasets/2170/", "https://data.gov.lt/datasets/1809/", "https://data.gov.lt/datasets/2253/", "https://data.gov.lt/datasets/1349/", "https://data.gov.lt/datasets/2499/", "https://data.gov.lt/datasets/2442/", "https://data.gov.lt/datasets/2626/", "https://data.gov.lt/datasets/1550/", "https://data.gov.lt/datasets/2633/", "https://data.gov.lt/datasets/2631/", "https://data.gov.lt/datasets/1734/", "https://data.gov.lt/datasets/1727/", "https://data.gov.lt/datasets/1798/", "https://data.gov.lt/datasets/1899/", "https://data.gov.lt/datasets/1796/", "https://data.gov.lt/datasets/2157/", "https://data.gov.lt/datasets/2164/", "https://data.gov.lt/datasets/1707/", "https://data.gov.lt/datasets/1923/", "https://data.gov.lt/datasets/884/", "https://data.gov.lt/datasets/2684/", "https://data.gov.lt/datasets/1808/", "https://data.gov.lt/datasets/2691/", "https://data.gov.lt/datasets/2162/", "https://data.gov.lt/datasets/2716/", "https://data.gov.lt/datasets/2252/", "https://data.gov.lt/datasets/2792/", "https://data.gov.lt/datasets/2250/", "https://data.gov.lt/datasets/2811/", "https://data.gov.lt/datasets/2498/", "https://data.gov.lt/datasets/2441/", "https://data.gov.lt/datasets/2875/", "https://data.gov.lt/datasets/2880/", "https://data.gov.lt/datasets/2873/", "https://data.gov.lt/datasets/2625/", "https://data.gov.lt/datasets/2618/", "https://data.gov.lt/datasets/2630/", "https://data.gov.lt/datasets/1287/", "https://data.gov.lt/datasets/1210/", "https://data.gov.lt/datasets/1292/", "https://data.gov.lt/datasets/2683/", "https://data.gov.lt/datasets/2779/", "https://data.gov.lt/datasets/1559/", "https://data.gov.lt/datasets/2715/", "https://data.gov.lt/datasets/2791/", "https://data.gov.lt/datasets/2867/", "https://data.gov.lt/datasets/2810/", "https://data.gov.lt/datasets/1566/", "https://data.gov.lt/datasets/2784/", "https://data.gov.lt/datasets/1564/", "https://data.gov.lt/datasets/1125/", "https://data.gov.lt/datasets/1196/", "https://data.gov.lt/datasets/2803/", "https://data.gov.lt/datasets/1571/", "https://data.gov.lt/datasets/1755/", "https://data.gov.lt/datasets/2872/", "https://data.gov.lt/datasets/1748/", "https://data.gov.lt/datasets/2020/", "https://data.gov.lt/datasets/1760/", "https://data.gov.lt/datasets/1944/", "https://data.gov.lt/datasets/2178/", "https://data.gov.lt/datasets/2183/", "https://data.gov.lt/datasets/2202/", "https://data.gov.lt/datasets/1286/", "https://data.gov.lt/datasets/2457/", "https://data.gov.lt/datasets/2455/", "https://data.gov.lt/datasets/2545/", "https://data.gov.lt/datasets/2550/", "https://data.gov.lt/datasets/1570/", "https://data.gov.lt/datasets/1754/", "https://data.gov.lt/datasets/1747/", "https://data.gov.lt/datasets/1752/", "https://data.gov.lt/datasets/2619/", "https://data.gov.lt/datasets/2069/", "https://data.gov.lt/datasets/1943/", "https://data.gov.lt/datasets/458/", "https://data.gov.lt/datasets/2182/", "https://data.gov.lt/datasets/2177/", "https://data.gov.lt/datasets/2723/", "https://data.gov.lt/datasets/2201/", "https://data.gov.lt/datasets/916/", "https://data.gov.lt/datasets/2270/", "https://data.gov.lt/datasets/1909/", "https://data.gov.lt/datasets/2888/", "https://data.gov.lt/datasets/2824/", "https://data.gov.lt/datasets/2461/", "https://data.gov.lt/datasets/2449/", "https://data.gov.lt/datasets/2454/", "https://data.gov.lt/datasets/2912/", "https://data.gov.lt/datasets/2638/", "https://data.gov.lt/datasets/1225/", "https://data.gov.lt/datasets/1230/", "https://data.gov.lt/datasets/1223/", "https://data.gov.lt/datasets/827/", "https://data.gov.lt/datasets/1326/", "https://data.gov.lt/datasets/2722/", "https://data.gov.lt/datasets/2720/", "https://data.gov.lt/datasets/1591/", "https://data.gov.lt/datasets/1584/", "https://data.gov.lt/datasets/2816/", "https://data.gov.lt/datasets/2892/", "https://data.gov.lt/datasets/2028/", "https://data.gov.lt/datasets/2885/", "https://data.gov.lt/datasets/2708/", "https://data.gov.lt/datasets/2904/", "https://data.gov.lt/datasets/2026/", "https://data.gov.lt/datasets/2911/", "https://data.gov.lt/datasets/1863/", "https://data.gov.lt/datasets/2121/", "https://data.gov.lt/datasets/1773/", "https://data.gov.lt/datasets/1861/", "https://data.gov.lt/datasets/2279/", "https://data.gov.lt/datasets/2217/", "https://data.gov.lt/datasets/2222/", "https://data.gov.lt/datasets/2369/", "https://data.gov.lt/datasets/2310/", "https://data.gov.lt/datasets/1413/", "https://data.gov.lt/datasets/1325/", "https://data.gov.lt/datasets/1330/", "https://data.gov.lt/datasets/2501/", "https://data.gov.lt/datasets/2482/", "https://data.gov.lt/datasets/2558/", "https://data.gov.lt/datasets/2659/", "https://data.gov.lt/datasets/2480/", "https://data.gov.lt/datasets/1666/", "https://data.gov.lt/datasets/2666/", "https://data.gov.lt/datasets/2664/", "https://data.gov.lt/datasets/1671/", "https://data.gov.lt/datasets/2025/", "https://data.gov.lt/datasets/1860/", "https://data.gov.lt/datasets/2030/", "https://data.gov.lt/datasets/2216/", "https://data.gov.lt/datasets/2743/", "https://data.gov.lt/datasets/2221/", "https://data.gov.lt/datasets/2209/", "https://data.gov.lt/datasets/2736/", "https://data.gov.lt/datasets/2214/", "https://data.gov.lt/datasets/2366/", "https://data.gov.lt/datasets/2844/", "https://data.gov.lt/datasets/2302/", "https://data.gov.lt/datasets/2741/", "https://data.gov.lt/datasets/2837/", "https://data.gov.lt/datasets/2469/", "https://data.gov.lt/datasets/2371/", "https://data.gov.lt/datasets/2467/", "https://data.gov.lt/datasets/2557/", "https://data.gov.lt/datasets/2658/", "https://data.gov.lt/datasets/2555/", "https://data.gov.lt/datasets/2817/", "https://data.gov.lt/datasets/2663/", "https://data.gov.lt/datasets/2905/", "https://data.gov.lt/datasets/739/", "https://data.gov.lt/datasets/1339/", "https://data.gov.lt/datasets/1000/", "https://data.gov.lt/datasets/2735/", "https://data.gov.lt/datasets/2843/", "https://data.gov.lt/datasets/940/", "https://data.gov.lt/datasets/1623/", "https://data.gov.lt/datasets/2740/", "https://data.gov.lt/datasets/2836/", "https://data.gov.lt/datasets/2841/", "https://data.gov.lt/datasets/1687/", "https://data.gov.lt/datasets/1692/", "https://data.gov.lt/datasets/1711/", "https://data.gov.lt/datasets/2809/", "https://data.gov.lt/datasets/1685/", "https://data.gov.lt/datasets/1876/", "https://data.gov.lt/datasets/1812/", "https://data.gov.lt/datasets/2134/", "https://data.gov.lt/datasets/1869/", "https://data.gov.lt/datasets/2198/", "https://data.gov.lt/datasets/422/", "https://data.gov.lt/datasets/2141/", "https://data.gov.lt/datasets/1900/", "https://data.gov.lt/datasets/1881/", "https://data.gov.lt/datasets/1299/", "https://data.gov.lt/datasets/1235/", "https://data.gov.lt/datasets/2325/", "https://data.gov.lt/datasets/2330/", "https://data.gov.lt/datasets/2299/", "https://data.gov.lt/datasets/2318/", "https://data.gov.lt/datasets/2323/", "https://data.gov.lt/datasets/594/", "https://data.gov.lt/datasets/1338/", "https://data.gov.lt/datasets/2514/", "https://data.gov.lt/datasets/2488/", "https://data.gov.lt/datasets/2507/", "https://data.gov.lt/datasets/2495/", "https://data.gov.lt/datasets/1679/", "https://data.gov.lt/datasets/1622/", "https://data.gov.lt/datasets/1620/", "https://data.gov.lt/datasets/1691/", "https://data.gov.lt/datasets/1710/", "https://data.gov.lt/datasets/1804/", "https://data.gov.lt/datasets/1875/", "https://data.gov.lt/datasets/1868/", "https://data.gov.lt/datasets/1873/", "https://data.gov.lt/datasets/2133/", "https://data.gov.lt/datasets/1811/", "https://data.gov.lt/datasets/2050/", "https://data.gov.lt/datasets/2197/", "https://data.gov.lt/datasets/1880/", "https://data.gov.lt/datasets/2195/", "https://data.gov.lt/datasets/2756/", "https://data.gov.lt/datasets/2749/", "https://data.gov.lt/datasets/2379/", "https://data.gov.lt/datasets/2317/", "https://data.gov.lt/datasets/2322/", "https://data.gov.lt/datasets/2761/", "https://data.gov.lt/datasets/2513/", "https://data.gov.lt/datasets/2487/", "https://data.gov.lt/datasets/2506/", "https://data.gov.lt/datasets/2729/", "https://data.gov.lt/datasets/2494/", "https://data.gov.lt/datasets/2492/", "https://data.gov.lt/datasets/2511/", "https://data.gov.lt/datasets/1346/", "https://data.gov.lt/datasets/1351/", "https://data.gov.lt/datasets/1344/", "https://data.gov.lt/datasets/1535/", "https://data.gov.lt/datasets/2748/", "https://data.gov.lt/datasets/2760/", "https://data.gov.lt/datasets/1636/", "https://data.gov.lt/datasets/2753/", "https://data.gov.lt/datasets/2849/", "https://data.gov.lt/datasets/1788/", "https://data.gov.lt/datasets/1731/", "https://data.gov.lt/datasets/1202/", "https://data.gov.lt/datasets/1896/", "https://data.gov.lt/datasets/1889/", "https://data.gov.lt/datasets/2829/", "https://data.gov.lt/datasets/2149/", "https://data.gov.lt/datasets/2147/", "https://data.gov.lt/datasets/2059/", "https://data.gov.lt/datasets/2237/", "https://data.gov.lt/datasets/2242/", "https://data.gov.lt/datasets/1805/", "https://data.gov.lt/datasets/2154/", "https://data.gov.lt/datasets/2235/", "https://data.gov.lt/datasets/1350/", "https://data.gov.lt/datasets/1343/", "https://data.gov.lt/datasets/1534/", "https://data.gov.lt/datasets/1446/", "https://data.gov.lt/datasets/2622/", "https://data.gov.lt/datasets/1444/", "https://data.gov.lt/datasets/2615/", "https://data.gov.lt/datasets/1635/", "https://data.gov.lt/datasets/1628/", "https://data.gov.lt/datasets/1787/", "https://data.gov.lt/datasets/1697/", "https://data.gov.lt/datasets/1792/", "https://data.gov.lt/datasets/1888/", "https://data.gov.lt/datasets/1785/", "https://data.gov.lt/datasets/2146/", "https://data.gov.lt/datasets/2058/", "https://data.gov.lt/datasets/2153/", "https://data.gov.lt/datasets/1912/", "https://data.gov.lt/datasets/2234/", "https://data.gov.lt/datasets/2151/", "https://data.gov.lt/datasets/2712/", "https://data.gov.lt/datasets/2769/", "https://data.gov.lt/datasets/2705/", "https://data.gov.lt/datasets/2864/", "https://data.gov.lt/datasets/2776/", "https://data.gov.lt/datasets/2781/", "https://data.gov.lt/datasets/2857/", "https://data.gov.lt/datasets/2335/", "https://data.gov.lt/datasets/2774/", "https://data.gov.lt/datasets/2526/", "https://data.gov.lt/datasets/2519/", "https://data.gov.lt/datasets/2862/", "https://data.gov.lt/datasets/2614/", "https://data.gov.lt/datasets/607/", "https://data.gov.lt/datasets/779/", "https://data.gov.lt/datasets/1371/", "https://data.gov.lt/datasets/803/", "https://data.gov.lt/datasets/1302/", "https://data.gov.lt/datasets/1300/", "https://data.gov.lt/datasets/2768/", "https://data.gov.lt/datasets/2711/", "https://data.gov.lt/datasets/2780/", "https://data.gov.lt/datasets/1555/", "https://data.gov.lt/datasets/1560/", "https://data.gov.lt/datasets/2773/", "https://data.gov.lt/datasets/2856/", "https://data.gov.lt/datasets/1553/", "https://data.gov.lt/datasets/1185/", "https://data.gov.lt/datasets/1183/", "https://data.gov.lt/datasets/2861/", "https://data.gov.lt/datasets/1737/", "https://data.gov.lt/datasets/2066/", "https://data.gov.lt/datasets/1997/", "https://data.gov.lt/datasets/2174/", "https://data.gov.lt/datasets/2167/", "https://data.gov.lt/datasets/2172/", "https://data.gov.lt/datasets/2262/", "https://data.gov.lt/datasets/1906/", "https://data.gov.lt/datasets/2446/", "https://data.gov.lt/datasets/2451/", "https://data.gov.lt/datasets/2444/", "https://data.gov.lt/datasets/2635/", "https://data.gov.lt/datasets/5962/", "https://data.gov.lt/datasets/1736/", "https://data.gov.lt/datasets/2608/", "https://data.gov.lt/datasets/1709/", "https://data.gov.lt/datasets/2159/", "https://data.gov.lt/datasets/1996/", "https://data.gov.lt/datasets/2249/", "https://data.gov.lt/datasets/1994/", "https://data.gov.lt/datasets/2254/", "https://data.gov.lt/datasets/2171/", "https://data.gov.lt/datasets/2688/", "https://data.gov.lt/datasets/2166/", "https://data.gov.lt/datasets/2686/", "https://data.gov.lt/datasets/2693/", "https://data.gov.lt/datasets/2355/", "https://data.gov.lt/datasets/2820/", "https://data.gov.lt/datasets/2794/", "https://data.gov.lt/datasets/2789/", "https://data.gov.lt/datasets/2813/", "https://data.gov.lt/datasets/2877/", "https://data.gov.lt/datasets/2443/", "https://data.gov.lt/datasets/2882/", "https://data.gov.lt/datasets/2634/", "https://data.gov.lt/datasets/2627/", "https://data.gov.lt/datasets/2632/", "https://data.gov.lt/datasets/1315/" ],
+    "publisher" : {
+      "type" : "Organization",
+      "name" : "Valstybės skaitmeninių sprendimų agentūra",
+      "email" : "mailto:info@vssa.lt",
+      "homepage" : "https://vssa.lrv.lt/"
+    },
+    "description" : {
+      "es" : "Servicio de publicación de datos",
+      "mt" : "Servizz ta' pubblikazzjoni ta' data",
+      "uk" : "Послуга публікації даних",
+      "ro" : "Serviciul de publicare a datelor",
+      "de" : "Datenveröffentlichungsdienst",
+      "pt" : "Serviço de publicação de dados",
+      "bg" : "Услуга за публикуване на данни",
+      "fr" : "Service de publication de données",
+      "lt" : "Duomenų publikavimo paslauga",
+      "hr" : "Usluga objavljivanja podataka",
+      "nl" : "Dienst voor het publiceren van gegevens",
+      "ga" : "Seirbhís foilsitheoireachta sonraí",
+      "sv" : "Datapubliceringstjänst",
+      "cs" : "Služba zveřejňování údajů",
+      "et" : "Andmete avaldamise teenus",
+      "el" : "Υπηρεσία δημοσίευσης δεδομένων",
+      "pl" : "Usługa publikowania danych",
+      "lv" : "Datu publicēšanas pakalpojums",
+      "fi" : "Tietojen julkaisupalvelu",
+      "hu" : "Adatközzétételi szolgáltatás",
+      "da" : "Dataudgivelsestjeneste",
+      "it" : "Servizio di pubblicazione di dati",
+      "sl" : "Storitev objavljanja podatkov",
+      "sk" : "Služba zverejňovania údajov"
+    },
+    "access_right" : {
+      "resource" : "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+    },
+    "endpoint_description" : [ "https://atviriduomenys.readthedocs.io/api/index.html" ],
+    "format" : {
+      "id" : "JSON",
+      "label" : "JSON",
+      "resource" : "http://publications.europa.eu/resource/authority/file-type/JSON"
+    },
+    "endpoint_url" : [ "https://get.data.gov.lt" ],
+    "contact_point" : [ {
+      "type" : "Kind",
+      "email" : "mailto:info@vssa.lt"
+    } ],
+    "translation_meta" : {
+      "details" : {
+        "es" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "sl" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "lt" : {
+          "machine_translated" : false
+        },
+        "it" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "cs" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "hu" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "el" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "pt" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "uk" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "ga" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "fi" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "pl" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "lv" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "fr" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "et" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "hr" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "da" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "mt" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "ro" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "nl" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "sk" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "sv" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "de" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "bg" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        }
+      },
+      "full_available_languages" : [ "es", "sl", "lt", "it", "cs", "hu", "el", "pt", "uk", "ga", "fi", "pl", "lv", "fr", "et", "hr", "da", "mt", "ro", "nl", "sk", "sv", "de", "bg" ],
+      "status" : "unknown"
+    }
+  }
+}

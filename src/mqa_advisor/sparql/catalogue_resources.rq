@@ -1,0 +1,15 @@
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX dct:  <http://purl.org/dc/terms/>
+
+SELECT DISTINCT ?resource ?type
+WHERE {
+  VALUES ?catalogue { <http://data.europa.eu/88u/catalogue/{catalogue}> }
+
+  { ?catalogue dcat:dataset ?resource . }
+  UNION
+  { ?catalogue dcat:service ?resource . }
+
+  ?resource a ?type .
+  VALUES ?type { dcat:Dataset dcat:DataService}
+}
+ORDER BY ?type ?resource

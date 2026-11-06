@@ -1,0 +1,382 @@
+{
+    "@graph": [
+        {
+            "@id": "_:e0765bfb502721697dd81443ea586ebb",
+            "@type": "dcat:Relationship",
+            "dcat:hadRole": {
+                "@id": "http://www.iana.org/assignments/relation/related"
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Population par localité "
+            },
+            "dct:relation": {
+                "@id": "https://data.public.lu/fr/datasets/registre-national-des-personnes-physiques-rnpp-population-par-localite-population-per-locality/"
+            }
+        },
+        {
+            "@id": "http://www.iana.org/assignments/relation/related",
+            "@type": "dcat:Role",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "related"
+            }
+        },
+        {
+            "@id": "_:502ac382a90adcae3fa24af735f00ffa",
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Centre des technologies de l’information de l’État (CTIE)"
+            }
+        },
+        {
+            "@id": "_:a25f639fb10898b7e5167fd3e21b276f",
+            "@type": "dcat:Relationship",
+            "dcat:hadRole": {
+                "@id": "http://www.iana.org/assignments/relation/related"
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Nombre de naissances et décès par commune "
+            },
+            "dct:relation": {
+                "@id": "https://data.public.lu/fr/datasets/registre-national-des-personnes-physiques-rnpp-nombre-de-naissances-et-deces-par-commune-number-of-births-and-deaths-per-municipality/"
+            }
+        },
+        {
+            "@id": "_:c2f5599f37d0b5fbeda09c5809fbe3c3",
+            "@type": "dct:ProvenanceStatement",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Organismes étatiques, administrations communales, organismes habilités, citoyens"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "@type": "dct:RightsStatement",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            }
+        },
+        {
+            "@id": "_:82d2f4073bb40574efd535d99ea7a07f",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Pyramide d'âge par commune "
+            },
+            "@type": "dcat:Relationship",
+            "dct:relation": {
+                "@id": "https://data.public.lu/fr/datasets/registre-national-des-personnes-physiques-rnpp-pyramide-dage-par-commune-population-age-pyramid-per-municipality/"
+            },
+            "dcat:hadRole": {
+                "@id": "http://www.iana.org/assignments/relation/related"
+            }
+        },
+        {
+            "@id": "https://legilux.public.lu/eli/etat/leg/loi/2013/06/19/n3/jo",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Loi du 19 juin 2013 relative à l’identification des personnes physiques, au registre national des personnes physiques, à la carte d’identité, aux registres communaux des personnes physiques et portant modification de\n\n1)\tl’article 104 du Code civil;\n2)\tla loi modifiée du 30 mars 1979 organisant l’identification numérique des personnes physiques et morales;\n3)\tla loi communale modifiée du 13 décembre 1988;\n4)\tla loi électorale modifiée du 18 février 2003\net abrogeant\n\n1)\tla loi modifiée du 22 décembre 1886 concernant les recensements de population à faire en exécution de la loi électorale et\n2)\tl’arrêté grand-ducal du 30 août 1939 portant introduction de la carte d’identité obligatoire."
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "RNPP"
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "https://guichet.public.lu/fr/citoyens/citoyennete/registre-national.html",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "_:6ae6f2e05754ca7595354cd65fdd6a04",
+            "dcat:startDate": {
+                "@value": "2013-07-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "@type": "dct:PeriodOfTime",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            }
+        },
+        {
+            "@id": "_:d08169d11d4131bc06ac98e03e686ae4",
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Centre des technologies de l’information de l’État (CTIE)"
+            }
+        },
+        {
+            "@id": "_:d14cb58736ad822b28dcd4be4c01b10b",
+            "@type": "dcat:Relationship",
+            "dct:relation": {
+                "@id": "https://data.public.lu/fr/datasets/registre-national-des-personnes-physiques-rnpp-nombre-de-luxembourgeois-habitant-a-letranger/"
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Nombre de Luxembourgeois habitant à l'étranger "
+            },
+            "dcat:hadRole": {
+                "@id": "http://www.iana.org/assignments/relation/related"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Update cont"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "_:2ef2c2109594331c94389a99879ff34e",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Nombre de descendants par personne et commune "
+            },
+            "dcat:hadRole": {
+                "@id": "http://www.iana.org/assignments/relation/related"
+            },
+            "@type": "dcat:Relationship",
+            "dct:relation": {
+                "@id": "https://data.public.lu/fr/datasets/registre-national-des-personnes-physiques-rnpp-nombre-de-descendants-par-personne-et-commune-number-of-descendants-per-person-and-municipality/"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/b3eea39e-b640-11f0-8226-aedcf0f53435",
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT"
+            },
+            "dct:isPartOf": {
+                "@id": "https://letzdata.public.lu/en/catalogue/catalogue-donnees/8/8278fa8a-b63b-11f0-a677-aedcf0f53435.html"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Registre national des personnes physiques - Adresse"
+            },
+            "@type": "dcat:Dataset",
+            "dcat:qualifiedRelation": [
+                {
+                    "@id": "_:1f9c64c6b6ca6a7284ec9e9b5014f580"
+                },
+                {
+                    "@id": "_:82d2f4073bb40574efd535d99ea7a07f"
+                },
+                {
+                    "@id": "_:d14cb58736ad822b28dcd4be4c01b10b"
+                },
+                {
+                    "@id": "_:0815342341afe1068b00474c349877a7"
+                },
+                {
+                    "@id": "_:a25f639fb10898b7e5167fd3e21b276f"
+                },
+                {
+                    "@id": "_:df318032026975553645ee46b17c08b3"
+                },
+                {
+                    "@id": "_:e0765bfb502721697dd81443ea586ebb"
+                },
+                {
+                    "@id": "_:64364302298d3203e48f1bc8363413a8"
+                },
+                {
+                    "@id": "_:2ef2c2109594331c94389a99879ff34e"
+                }
+            ],
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "rnpp"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "Luxembourgish population structure"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "family relationship"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "population"
+                }
+            ],
+            "dcat:spatialResolutionInMeters": {
+                "@value": "0",
+                "@type": "http://www.w3.org/2001/XMLSchema#decimal"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:identifier": "b3eea39e-b640-11f0-8226-aedcf0f53435",
+            "foaf:page": {
+                "@id": "https://guichet.public.lu/fr/citoyens/citoyennete/registre-national.html"
+            },
+            "dct:publisher": {
+                "@id": "_:d08169d11d4131bc06ac98e03e686ae4"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:84ae477360a8beaf0fc549f1e6b22da9"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI"
+            },
+            "dct:temporal": {
+                "@id": "_:6ae6f2e05754ca7595354cd65fdd6a04"
+            },
+            "dct:provenance": {
+                "@id": "_:c2f5599f37d0b5fbeda09c5809fbe3c3"
+            },
+            "dct:creator": {
+                "@id": "_:502ac382a90adcae3fa24af735f00ffa"
+            },
+            "dct:issued": {
+                "@value": "2013-07-01T00:00:00",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Adresse : Type d'adresse, pays, commune, localité, rue, numéro, code postal, complément d'adresse, date d'entrée, date de sortie"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dcatap:applicableLegislation": {
+                "@id": "https://legilux.public.lu/eli/etat/leg/loi/2013/06/19/n3/jo"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            }
+        },
+        {
+            "@id": "_:1f9c64c6b6ca6a7284ec9e9b5014f580",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Situation familiale par commune "
+            },
+            "dcat:hadRole": {
+                "@id": "http://www.iana.org/assignments/relation/related"
+            },
+            "dct:relation": {
+                "@id": "https://data.public.lu/fr/datasets/registre-national-des-personnes-physiques-rnpp-situation-familiale-par-commune-family-situation-per-municipality/"
+            },
+            "@type": "dcat:Relationship"
+        },
+        {
+            "@id": "_:0815342341afe1068b00474c349877a7",
+            "@type": "dcat:Relationship",
+            "dcat:hadRole": {
+                "@id": "http://www.iana.org/assignments/relation/related"
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Population par code postal "
+            },
+            "dct:relation": {
+                "@id": "https://data.public.lu/fr/datasets/registre-national-des-personnes-physiques-rnpp-population-par-code-postal-population-per-postal-code/"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/FRA",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "French"
+            }
+        },
+        {
+            "@id": "_:df318032026975553645ee46b17c08b3",
+            "dct:relation": {
+                "@id": "https://data.public.lu/fr/datasets/registre-national-des-personnes-physiques-rnpp-population-par-commune-population-per-municipality/"
+            },
+            "@type": "dcat:Relationship",
+            "dcat:hadRole": {
+                "@id": "http://www.iana.org/assignments/relation/related"
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Population par commune "
+            }
+        },
+        {
+            "@id": "_:84ae477360a8beaf0fc549f1e6b22da9",
+            "vcard:hasEmail": {
+                "@id": "mailto:jureg@ctie.etat.lu"
+            },
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Pierre Trausch"
+            },
+            "@type": [
+                "vcard:Individual",
+                "vcard:Kind"
+            ]
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Population and society"
+            }
+        },
+        {
+            "@id": "_:64364302298d3203e48f1bc8363413a8",
+            "@type": "dcat:Relationship",
+            "dcat:hadRole": {
+                "@id": "http://www.iana.org/assignments/relation/related"
+            },
+            "dct:relation": {
+                "@id": "https://data.public.lu/fr/datasets/registre-national-des-personnes-physiques-rnpp-nombre-de-ressortissants-par-nationalite-et-par-commune-number-of-citizens-per-nationality-and-municipality/"
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Nombre de ressortissants par nationalité et par commune"
+            }
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

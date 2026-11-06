@@ -1,0 +1,3 @@
+# Fetch DCAT-AP metadata via the Registry API, not per-resource browser automation
+
+The known-working way to get a resource's metadata is the portal UI: open its page, open the Metadata menu, download JSON-LD. Driving that per resource with browser automation doesn't scale — a single test Catalogue can hold ~11,000 Distributions. Inspecting the download link (confirmed live against PPE) showed it's just a content-negotiated GET against the Registry API (`/api/hub/repo/{type}/{id}.jsonld`), authenticated by the same session cookie as the rest of the portal. We fetch that URL directly via HTTP instead — one login, then plain per-resource GETs, no browser needed for ingestion.

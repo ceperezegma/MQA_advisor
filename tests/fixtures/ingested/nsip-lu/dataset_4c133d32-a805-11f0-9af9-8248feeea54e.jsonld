@@ -1,0 +1,313 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "@type": "dct:RightsStatement",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/HVD",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "High-value dataset"
+            }
+        },
+        {
+            "@id": "_:48d0de4430b14aa7feeb2a5b4235b9b3",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration du cadastre et de la topographie (ACT)"
+            },
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ]
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/e7700b6a-61da-4738-a3bb-8f36161c61f9",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Accès aux informations des registres fonciers via une interface Web. Le droit d'accès est accordé selon les dispositions légales."
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "dct:rights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:identifier": {
+                "@value": "126",
+                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Registre foncier - Accès Interface Web"
+            },
+            "dcatap:availability": {
+                "@id": "http://publications.europa.eu/resource/authority/planned-availability/AVAILABLE"
+            },
+            "dcat:accessURL": {
+                "@id": "https://xxpfo.intranet.etat.lu/"
+            },
+            "@type": "dcat:Distribution"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/FRA",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "French"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/planned-availability/AVAILABLE",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Available"
+            }
+        },
+        {
+            "@id": "http://data.legilux.public.lu/eli/etat/leg/loi/2003/11/11/n1/jo",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Loi du 11 novembre 2003 relative à la publicité foncière et portant modification\\n - de la loi du 26"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Loi du 11 novembre 2003 relative à la publicité foncière et portant modification\\n - de la loi du 26 juin 1953 concernant la désignation des personnes et des biens dans les actes à transcrire ou à inscrire au bureau des hypothèques;\\n- de la loi du 30 mars 1979 organisant l'identification numérique des personnes physiques et morales;\\n - de la loi du 9 août 1980 relative à l'inscription des testaments."
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Update cont"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/a644c345-06ea-4de8-aac4-1c92088e826e",
+            "@type": "dcat:Distribution",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Registre foncier - REST API Access"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Accès aux informations des registres fonciers via API Gateway du CTIE. Une description détaillée de l'API est disponible sur demande auprès de gestion.pf@act.etat.lu. Le droit d'accès est accordé selon les dispositions légales."
+            },
+            "dct:rights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:identifier": {
+                "@value": "117",
+                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            },
+            "dcatap:availability": {
+                "@id": "http://publications.europa.eu/resource/authority/planned-availability/AVAILABLE"
+            },
+            "dcat:accessURL": {
+                "@id": "https://api-portal-int-prd.intranet.etat.lu/"
+            }
+        },
+        {
+            "@id": "_:bc0e873af5eb3e0c1cf024379c973859",
+            "dct:type": {
+                "@id": "http://purl.org/adms/publishertype/NationalAuthority"
+            },
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration du cadastre et de la topographie (ACT)"
+            },
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ],
+            "foaf:mbox": {
+                "@id": "mailto:info@act.public.lu"
+            }
+        },
+        {
+            "@id": "http://purl.org/adms/publishertype/NationalAuthority",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "National Authority"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/4c133d32-a805-11f0-9af9-8248feeea54e",
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "cadastral reference"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "property rights"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "parcel identification"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "land register"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "property identifier"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "cadastral"
+                }
+            ],
+            "dcatap:applicableLegislation": [
+                {
+                    "@id": "http://data.legilux.public.lu/eli/etat/leg/loi/2002/07/25/n8/jo"
+                },
+                {
+                    "@id": "http://data.legilux.public.lu/eli/etat/leg/loi/2003/11/11/n1/jo"
+                },
+                {
+                    "@id": "http://data.legilux.public.lu/eli/etat/leg/loi/1988/03/19/n2/jo"
+                }
+            ],
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/HVD"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dcat:distribution": [
+                {
+                    "@id": "http://data.europa.eu/88u/distribution/a644c345-06ea-4de8-aac4-1c92088e826e"
+                },
+                {
+                    "@id": "http://data.europa.eu/88u/distribution/e7700b6a-61da-4738-a3bb-8f36161c61f9"
+                }
+            ],
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/GOVE"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:63b92b1f37dc907b25e68c02dc916093"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "@type": "dcat:Dataset",
+            "dct:creator": {
+                "@id": "_:48d0de4430b14aa7feeb2a5b4235b9b3"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "dct:temporal": {
+                "@id": "_:1175e0e2ba9cea72c97e63ccf7544b79"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Registre foncier"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Ensemble des données contenant les détails sur les parcelles et les lots dans les immeubles en copropriété, avec indication du détenteur de droit réel (propriétaire, usufruitier, emphytéote, superficiaire), ainsi que l'historique de ces informations.\n"
+            },
+            "dct:identifier": "4c133d32-a805-11f0-9af9-8248feeea54e",
+            "dct:publisher": {
+                "@id": "_:bc0e873af5eb3e0c1cf024379c973859"
+            }
+        },
+        {
+            "@id": "http://data.legilux.public.lu/eli/etat/leg/loi/2002/07/25/n8/jo",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Loi du 25 juillet 2002 portant réorganisation de l'administration du cadastre et de la topographie."
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Loi du 25 juillet 2002 portant réorganisation de l'administration du cadastre et de la topographie."
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/GOVE",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Government and public sector"
+            }
+        },
+        {
+            "@id": "_:63b92b1f37dc907b25e68c02dc916093",
+            "vcard:hasEmail": {
+                "@id": "mailto:info@act.public.lu"
+            },
+            "@type": [
+                "vcard:Organization",
+                "vcard:Kind"
+            ],
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Administration du cadastre et de la topographie (ACT)"
+            }
+        },
+        {
+            "@id": "_:1175e0e2ba9cea72c97e63ccf7544b79",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "dcat:startDate": {
+                "@value": "1971-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "@type": "dct:PeriodOfTime"
+        },
+        {
+            "@id": "http://data.legilux.public.lu/eli/etat/leg/loi/1988/03/19/n2/jo",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Loi du 19 mars 1988 sur la publicité foncière en matière de copropriété."
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Loi du 19 mars 1988 sur la publicité foncière en matière de copropriété."
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

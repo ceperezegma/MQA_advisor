@@ -1,0 +1,206 @@
+{
+    "@graph": [
+        {
+            "@id": "_:7054cd3031f8a6de45eb60d9023e243b",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Inspection générale de la sécurité sociale (IGSS)"
+            },
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ]
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/MONTHLY",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Monthly"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "_:5d106b7056cb622b691d2545f5b95b2a",
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Microdata platform"
+            },
+            "@type": [
+                "vcard:Kind",
+                "vcard:Individual"
+            ],
+            "vcard:role": {
+                "@language": "eng",
+                "@value": "Provider"
+            },
+            "vcard:hasEmail": {
+                "@id": "mailto:microdata.platform@igss.etat.lu"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Population and society"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ECON",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Economy and finance"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/ENG",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "English"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/1eb6a0ee-caac-11f0-a122-8aadbbc611c1",
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "labour market"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "parental leave"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "replacement benefits"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "family benefits"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "work-life balance"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "social assistance benefits"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "unemployment benefits"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "pensions"
+                }
+            ],
+            "dcat:contactPoint": {
+                "@id": "_:5d106b7056cb622b691d2545f5b95b2a"
+            },
+            "dct:publisher": {
+                "@id": "_:7054cd3031f8a6de45eb60d9023e243b"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dcat:theme": [
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/data-theme/ECON"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI"
+                }
+            ],
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dct:temporal": {
+                "@id": "_:09f446f070f70c87df8ad74e5e804233"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/MONTHLY"
+            },
+            "foaf:page": {
+                "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dcat:landingPage": {
+                "@id": "http://ask4mdp.services-publics.lu/"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "This dataset contains all social benefits received by beneficiaries for a reference period (year and month) and paid out under Luxembourg's social policy. These include family benefits, replacement income and minimum income. All variables concerning social benefits are related to a reference period (year and month). \nThis dataset is part of those provided by the IGSS within the framework of the Luxembourg Microdata Platform on Labour and Social Protection. All datasets offered by the IGSS are designed to be interoperable through the use of common pseudonymized identifiers, enabling the linkage of information across different datasets. \nAll the variables in this dataset are personal data and are subject to GDPR compliant protection measures. \nScope: all persons receiving social benefits provided by Luxembourg. \nDelay for providing the most recent data: current month -3. \nData sources : CCSS, CAE, ADEM, CNAP, public pension schemes."
+            },
+            "dct:identifier": "1eb6a0ee-caac-11f0-a122-8aadbbc611c1",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Social benefits"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/ENG"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "@type": "dcat:Dataset"
+        },
+        {
+            "@id": "_:09f446f070f70c87df8ad74e5e804233",
+            "dcat:startDate": {
+                "@value": "2002-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "@type": "dct:PeriodOfTime"
+        },
+        {
+            "@id": "http://ask4mdp.services-publics.lu/",
+            "@type": "foaf:Document"
+        }
+    ],
+    "@context": {
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

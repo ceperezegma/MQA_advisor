@@ -1,0 +1,240 @@
+{
+    "@graph": [
+        {
+            "@id": "_:204b40677c58aeb71271663514ab8ae2",
+            "dcat:startDate": {
+                "@value": "2021-04-30",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "@type": "dct:PeriodOfTime",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/HEAL",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Health"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/97611d06-685c-11f0-bf1f-0a3b730051aa",
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/DAILY"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dcat:distribution": {
+                "@id": "http://data.europa.eu/88u/distribution/458f6a6c-5ffa-4bc7-9e51-ede32bc4458d"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Vaccine administration recorded in the Luxembourg National Electronic Vaccine Record (CVE)"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": [
+                {
+                    "@language": "eng",
+                    "@value": "Personal Data"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "Statistically Confidential Data"
+                }
+            ],
+            "dct:temporal": {
+                "@id": "_:204b40677c58aeb71271663514ab8ae2"
+            },
+            "dct:publisher": {
+                "@id": "_:c19f18ae034ecf1bfeb5562c044d21e5"
+            },
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "health"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "vaccine"
+                }
+            ],
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/HEAL"
+            },
+            "@type": "dcat:Dataset",
+            "dcat:contactPoint": {
+                "@id": "_:a81a2280da9ce6ca51aacbee394e7c89"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dcat:version": "1",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "This dataset contains detailed information on vaccine administrations from the Luxembourg Electronic Vaccine Record.  For consistency, the start date of the dataset is defined as the earliest date on which a vaccination record was created in the system."
+            },
+            "dct:identifier": "97611d06-685c-11f0-bf1f-0a3b730051aa",
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STATISTICAL"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/DAILY",
+            "@type": "dct:Frequency",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Daily"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/FRA",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "French"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/458f6a6c-5ffa-4bc7-9e51-ede32bc4458d",
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/CSV"
+            },
+            "dcat:accessURL": {
+                "@id": "https://www.esante.lu/portal/fr/connexion-inscription-19-51.html"
+            },
+            "dct:rights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "@type": "dcat:Distribution",
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "dct:license": {
+                "@id": "http://publications.europa.eu/resource/authority/licence/other"
+            },
+            "dcatap:availability": {
+                "@id": "http://publications.europa.eu/resource/authority/planned-availability/AVAILABLE"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "List of vaccine administrations"
+            },
+            "adms:status": {
+                "@id": "http://publications.europa.eu/resource/authority/distribution-status/COMPLETED"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "List of vaccine administrations registered into the National Electronic Vaccine Record (CVE)"
+            },
+            "dct:identifier": {
+                "@value": "17",
+                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            },
+            "dcat:mediaType": {
+                "@id": "http://www.iana.org/assignments/media-types/text/csv"
+            }
+        },
+        {
+            "@id": "_:c19f18ae034ecf1bfeb5562c044d21e5",
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Agence eSanté GIE"
+            }
+        },
+        {
+            "@id": "_:a81a2280da9ce6ca51aacbee394e7c89",
+            "@type": [
+                "vcard:Kind",
+                "vcard:Organization"
+            ],
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Agence eSanté GIE"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STATISTICAL",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Statistical data"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/CSV",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "CSV"
+            },
+            "@type": "dct:MediaTypeOrExtent"
+        },
+        {
+            "@id": "http://www.iana.org/assignments/media-types/text/csv",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "text/csv"
+            },
+            "@type": "dct:MediaType"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/distribution-status/COMPLETED",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Completed"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/licence/other",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Other"
+            },
+            "@type": "dct:LicenseDocument"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/planned-availability/AVAILABLE",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Available"
+            }
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "adms": "http://www.w3.org/ns/adms#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

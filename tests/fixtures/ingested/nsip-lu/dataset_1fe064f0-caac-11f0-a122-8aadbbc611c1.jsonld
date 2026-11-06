@@ -1,0 +1,181 @@
+{
+    "@graph": [
+        {
+            "@id": "_:92dc515cebc316c0d0952a2ff3f83a06",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Inspection générale de la sécurité sociale (IGSS)"
+            },
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ]
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "_:9cce7e6e26d10aefc33451564e666da9",
+            "vcard:hasEmail": {
+                "@id": "mailto:microdata.platform@igss.etat.lu"
+            },
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Microdata platform"
+            },
+            "@type": [
+                "vcard:Individual",
+                "vcard:Kind"
+            ],
+            "vcard:role": {
+                "@language": "eng",
+                "@value": "Provider"
+            }
+        },
+        {
+            "@id": "_:ccadc2a970bb8c0bb2f62a6e7876909b",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "@type": "dct:PeriodOfTime",
+            "dcat:startDate": {
+                "@value": "2012-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/ENG",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "English"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/1fe064f0-caac-11f0-a122-8aadbbc611c1",
+            "foaf:page": {
+                "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dct:identifier": "1fe064f0-caac-11f0-a122-8aadbbc611c1",
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "healthcare"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "billing and reimbursement"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "public health"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "health expenditure"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "medical and paramedical services"
+                }
+            ],
+            "dct:description": {
+                "@language": "eng",
+                "@value": "This dataset contains auxiliary services. They are defined as services linked to a principal medical act recorded in the register \"Medical acts\". If any, auxiliary services can be an anaesthesia, an operating assistance or rental of medical equipment or material. They are considered as auxiliary services if they are performed on the same day than the principal medical act. \nThis dataset is part of those provided by the IGSS within the framework of the Luxembourg Microdata Platform on Labour and Social Protection. All datasets offered by the IGSS are designed to be interoperable through the use of common pseudonymized identifiers, enabling the linkage of information across different datasets. \nAll the variables in this dataset are personal data and are subject to GDPR compliant protection measures. \nScope: Auxiliary services related to medical acts. \nDelay for providing the most recent data: current month -24. \nData sources : CNS."
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:9cce7e6e26d10aefc33451564e666da9"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL"
+            },
+            "dct:publisher": {
+                "@id": "_:92dc515cebc316c0d0952a2ff3f83a06"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Auxiliary services related to medical acts"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/HEAL"
+            },
+            "dcat:landingPage": {
+                "@id": "http://ask4mdp.services-publics.lu/"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "@type": "dcat:Dataset",
+            "dct:temporal": {
+                "@id": "_:ccadc2a970bb8c0bb2f62a6e7876909b"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/ENG"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Annual"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/HEAL",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Health"
+            }
+        },
+        {
+            "@id": "http://ask4mdp.services-publics.lu/",
+            "@type": "foaf:Document"
+        }
+    ],
+    "@context": {
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

@@ -1,0 +1,147 @@
+[
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/af481ec4-2336-48d4-8790-71e5c4efebf1",
+    "type": "dataset",
+    "resource_id": "af481ec4-2336-48d4-8790-71e5c4efebf1"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/annual-report-2004",
+    "type": "dataset",
+    "resource_id": "annual-report-2004"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/annual-report-2005",
+    "type": "dataset",
+    "resource_id": "annual-report-2005"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/annual-report-2006",
+    "type": "dataset",
+    "resource_id": "annual-report-2006"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/annual-report-2007",
+    "type": "dataset",
+    "resource_id": "annual-report-2007"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/annual-report-2008",
+    "type": "dataset",
+    "resource_id": "annual-report-2008"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/european-union-terrorism-situation-and-trend-report-2015",
+    "type": "dataset",
+    "resource_id": "european-union-terrorism-situation-and-trend-report-2015"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/european-union-terrorism-situation-and-trend-report-2016",
+    "type": "dataset",
+    "resource_id": "european-union-terrorism-situation-and-trend-report-2016"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/european-union-terrorism-situation-and-trend-report-2017",
+    "type": "dataset",
+    "resource_id": "european-union-terrorism-situation-and-trend-report-2017"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/european-union-terrorism-situation-and-trend-report-2018",
+    "type": "dataset",
+    "resource_id": "european-union-terrorism-situation-and-trend-report-2018"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/europol-and-covid-19-reports-on-crime",
+    "type": "dataset",
+    "resource_id": "europol-and-covid-19-reports-on-crime"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/europol-annual-report-1999",
+    "type": "dataset",
+    "resource_id": "europol-annual-report-1999"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/europol-review-2009",
+    "type": "dataset",
+    "resource_id": "europol-review-2009"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/europol-review-2010",
+    "type": "dataset",
+    "resource_id": "europol-review-2010"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/europol-review-2011",
+    "type": "dataset",
+    "resource_id": "europol-review-2011"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/europol-review-2012",
+    "type": "dataset",
+    "resource_id": "europol-review-2012"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/europol-review-2013",
+    "type": "dataset",
+    "resource_id": "europol-review-2013"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/europol-review-2014",
+    "type": "dataset",
+    "resource_id": "europol-review-2014"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/europol-review-2015",
+    "type": "dataset",
+    "resource_id": "europol-review-2015"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/europol-review-2016-2017",
+    "type": "dataset",
+    "resource_id": "europol-review-2016-2017"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/serious-and-organised-crime-threat-assessment-2017",
+    "type": "dataset",
+    "resource_id": "serious-and-organised-crime-threat-assessment-2017"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/te-sat-2007-eu-terrorism-situation-and-trend-report",
+    "type": "dataset",
+    "resource_id": "te-sat-2007-eu-terrorism-situation-and-trend-report"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/te-sat-2008-eu-terrorism-situation-and-trend-report",
+    "type": "dataset",
+    "resource_id": "te-sat-2008-eu-terrorism-situation-and-trend-report"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/te-sat-2009-eu-terrorism-situation-and-trend-report",
+    "type": "dataset",
+    "resource_id": "te-sat-2009-eu-terrorism-situation-and-trend-report"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/te-sat-2010-eu-terrorism-situation-and-trend-report",
+    "type": "dataset",
+    "resource_id": "te-sat-2010-eu-terrorism-situation-and-trend-report"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/te-sat-2011-eu-terrorism-situation-and-trend-report",
+    "type": "dataset",
+    "resource_id": "te-sat-2011-eu-terrorism-situation-and-trend-report"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/te-sat-2012-eu-terrorism-situation-and-trend-report",
+    "type": "dataset",
+    "resource_id": "te-sat-2012-eu-terrorism-situation-and-trend-report"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/te-sat-2013-eu-terrorism-situation-and-trend-report",
+    "type": "dataset",
+    "resource_id": "te-sat-2013-eu-terrorism-situation-and-trend-report"
+  },
+  {
+    "resource_uri": "http://data.europa.eu/88u/dataset/te-sat-2014-european-union-terrorism-situation-and-trend-report-2014",
+    "type": "dataset",
+    "resource_id": "te-sat-2014-european-union-terrorism-situation-and-trend-report-2014"
+  }
+]

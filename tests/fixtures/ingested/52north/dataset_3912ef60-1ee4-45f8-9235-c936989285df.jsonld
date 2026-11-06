@@ -1,0 +1,470 @@
+{
+    "@graph": [
+        {
+            "@id": "http://data.europa.eu/88u/distribution/8d375fe1-0906-4fa5-b5e8-732da4afa866",
+            "dct:description": [
+                {
+                    "@language": "el-t-en-t0-mtec",
+                    "@value": "Τα αποτελέσματα ενημερώνονται κάθε λεπτό."
+                },
+                {
+                    "@language": "sv-t-en-t0-mtec",
+                    "@value": "Resultaten uppdateras varje minut."
+                },
+                {
+                    "@language": "sl-t-en-t0-mtec",
+                    "@value": "Rezultati se posodabljajo vsako minuto."
+                },
+                {
+                    "@language": "mt-t-en-t0-mtec",
+                    "@value": "Ir-riżultati jiġu aġġornati kull minuta."
+                },
+                "Results are updated every minute.",
+                {
+                    "@language": "nl-t-en-t0-mtec",
+                    "@value": "De resultaten worden elke minuut bijgewerkt."
+                },
+                {
+                    "@language": "de-t-en-t0-mtec",
+                    "@value": "Die Ergebnisse werden jede Minute aktualisiert."
+                },
+                {
+                    "@language": "uk-t-en-t0-mtec",
+                    "@value": "Результати оновлюються щохвилини."
+                },
+                {
+                    "@language": "hr-t-en-t0-mtec",
+                    "@value": "Rezultati se ažuriraju svake minute."
+                },
+                {
+                    "@language": "lv-t-en-t0-mtec",
+                    "@value": "Rezultāti tiek atjaunināti katru minūti."
+                },
+                {
+                    "@language": "ro-t-en-t0-mtec",
+                    "@value": "Rezultatele sunt actualizate în fiecare minut."
+                },
+                {
+                    "@language": "es-t-en-t0-mtec",
+                    "@value": "Los resultados se actualizan cada minuto."
+                },
+                {
+                    "@language": "bg-t-en-t0-mtec",
+                    "@value": "Резултатите се актуализират всяка минута."
+                },
+                {
+                    "@language": "fi-t-en-t0-mtec",
+                    "@value": "Tulokset päivitetään joka minuutti."
+                },
+                {
+                    "@language": "hu-t-en-t0-mtec",
+                    "@value": "Az eredmények percenként frissülnek."
+                },
+                {
+                    "@language": "da-t-en-t0-mtec",
+                    "@value": "Resultaterne opdateres hvert minut."
+                },
+                {
+                    "@language": "it-t-en-t0-mtec",
+                    "@value": "I risultati vengono aggiornati ogni minuto."
+                },
+                {
+                    "@language": "pl-t-en-t0-mtec",
+                    "@value": "Wyniki są aktualizowane co minutę."
+                },
+                {
+                    "@language": "et-t-en-t0-mtec",
+                    "@value": "Tulemusi uuendatakse iga minut."
+                },
+                {
+                    "@language": "ga-t-en-t0-mtec",
+                    "@value": "Déantar na torthaí a nuashonrú gach nóiméad."
+                },
+                {
+                    "@language": "lt-t-en-t0-mtec",
+                    "@value": "Rezultatai atnaujinami kiekvieną minutę."
+                },
+                {
+                    "@language": "sk-t-en-t0-mtec",
+                    "@value": "Výsledky sa aktualizujú každú minútu."
+                },
+                {
+                    "@language": "cs-t-en-t0-mtec",
+                    "@value": "Výsledky jsou aktualizovány každou minutu."
+                },
+                {
+                    "@language": "fr-t-en-t0-mtec",
+                    "@value": "Les résultats sont mis à jour chaque minute."
+                },
+                {
+                    "@language": "pt-t-en-t0-mtec",
+                    "@value": "Os resultados são atualizados a cada minuto."
+                }
+            ],
+            "dct:title": [
+                {
+                    "@language": "mt-t-en-t0-mtec",
+                    "@value": "Postijiet ta' karozzi tal-linja pubbliċi."
+                },
+                {
+                    "@language": "fr-t-en-t0-mtec",
+                    "@value": "Emplacements des autobus publics."
+                },
+                "Locations of public busses.",
+                {
+                    "@language": "et-t-en-t0-mtec",
+                    "@value": "Ühisbusside asukohad."
+                },
+                {
+                    "@language": "es-t-en-t0-mtec",
+                    "@value": "Ubicaciones de autobuses públicos."
+                },
+                {
+                    "@language": "sv-t-en-t0-mtec",
+                    "@value": "Platser för offentliga bussar."
+                },
+                {
+                    "@language": "pl-t-en-t0-mtec",
+                    "@value": "Lokalizacje autobusów publicznych."
+                },
+                {
+                    "@language": "lt-t-en-t0-mtec",
+                    "@value": "Viešųjų autobusų vietos."
+                },
+                {
+                    "@language": "nl-t-en-t0-mtec",
+                    "@value": "Locaties van openbare bussen."
+                },
+                {
+                    "@language": "cs-t-en-t0-mtec",
+                    "@value": "Lokality veřejných autobusů."
+                },
+                {
+                    "@language": "lv-t-en-t0-mtec",
+                    "@value": "Sabiedrisko autobusu atrašanās vietas."
+                },
+                {
+                    "@language": "bg-t-en-t0-mtec",
+                    "@value": "Местонахождения на обществени автобуси."
+                },
+                {
+                    "@language": "hr-t-en-t0-mtec",
+                    "@value": "Lokacije javnih autobusa."
+                },
+                {
+                    "@language": "ro-t-en-t0-mtec",
+                    "@value": "Localizarea autobuzelor publice."
+                },
+                {
+                    "@language": "de-t-en-t0-mtec",
+                    "@value": "Standorte von öffentlichen Bussen."
+                },
+                {
+                    "@language": "ga-t-en-t0-mtec",
+                    "@value": "Suíomhanna bus poiblí."
+                },
+                {
+                    "@language": "sl-t-en-t0-mtec",
+                    "@value": "Lokacije javnih avtobusov."
+                },
+                {
+                    "@language": "it-t-en-t0-mtec",
+                    "@value": "Ubicazione degli autobus pubblici."
+                },
+                {
+                    "@language": "uk-t-en-t0-mtec",
+                    "@value": "Локації громадських автобусів."
+                },
+                {
+                    "@language": "sk-t-en-t0-mtec",
+                    "@value": "Umiestnenie verejných autobusov."
+                },
+                {
+                    "@language": "hu-t-en-t0-mtec",
+                    "@value": "A tömegközlekedési buszok elhelyezkedése."
+                },
+                {
+                    "@language": "da-t-en-t0-mtec",
+                    "@value": "Lokalisering af offentlige busser."
+                },
+                {
+                    "@language": "pt-t-en-t0-mtec",
+                    "@value": "Locais de autocarros públicos."
+                },
+                {
+                    "@language": "el-t-en-t0-mtec",
+                    "@value": "Τοποθεσίες δημόσιων λεωφορείων."
+                },
+                {
+                    "@language": "fi-t-en-t0-mtec",
+                    "@value": "Julkisten bussien sijainnit."
+                }
+            ],
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/FIWARE-CB"
+            },
+            "dcat:accessURL": {
+                "@id": "http://datosabiertos.malaga.eu/recursos/transporte/EMT/EMTlineasUbicaciones/lineasyubicacionesfiware.geojson"
+            },
+            "@type": "dcat:Distribution",
+            "dcat:downloadURL": {
+                "@id": "http://datosabiertos.malaga.eu/recursos/transporte/EMT/EMTlineasUbicaciones/lineasyubicacionesfiware.geojson"
+            }
+        },
+        {
+            "@id": "https://www.fiware.org/foundation/",
+            "@type": "foaf:Organization",
+            "foaf:name": "FIWARE Foundation e.V."
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/3912ef60-1ee4-45f8-9235-c936989285df",
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/TRAN"
+            },
+            "dct:title": [
+                {
+                    "@language": "lt-t-en-t0-mtec",
+                    "@value": "EMT autobusų vietos realiu laiku"
+                },
+                {
+                    "@language": "mt-t-en-t0-mtec",
+                    "@value": "Postijiet tal-karozzi tal-linja EMT f'ħin reali"
+                },
+                {
+                    "@language": "sv-t-en-t0-mtec",
+                    "@value": "EMT-bussplatser i realtid"
+                },
+                {
+                    "@language": "ga-t-en-t0-mtec",
+                    "@value": "Suíomhanna bus EMT i bhfíor-am"
+                },
+                {
+                    "@language": "da-t-en-t0-mtec",
+                    "@value": "EMT bus steder i realtid"
+                },
+                {
+                    "@language": "nl-t-en-t0-mtec",
+                    "@value": "EMT-buslocaties in realtime"
+                },
+                {
+                    "@language": "et-t-en-t0-mtec",
+                    "@value": "EMT busside asukohad reaalajas"
+                },
+                {
+                    "@language": "sk-t-en-t0-mtec",
+                    "@value": "Autobusy EMT v reálnom čase"
+                },
+                {
+                    "@language": "hr-t-en-t0-mtec",
+                    "@value": "EMT lokacije autobusa u realnom vremenu"
+                },
+                {
+                    "@language": "fi-t-en-t0-mtec",
+                    "@value": "EMT bussien sijainnit reaaliajassa"
+                },
+                {
+                    "@language": "pl-t-en-t0-mtec",
+                    "@value": "Lokalizacje autobusów EMT w czasie rzeczywistym"
+                },
+                {
+                    "@language": "cs-t-en-t0-mtec",
+                    "@value": "EMT autobusové lokality v reálném čase"
+                },
+                {
+                    "@language": "hu-t-en-t0-mtec",
+                    "@value": "EMT busz helyszínek valós időben"
+                },
+                "EMT bus locations in real time",
+                {
+                    "@language": "lv-t-en-t0-mtec",
+                    "@value": "EMT autobusu atrašanās vietas reālajā laikā"
+                },
+                {
+                    "@language": "uk-t-en-t0-mtec",
+                    "@value": "Місця розташування автобусів EMT в режимі реального часу"
+                },
+                {
+                    "@language": "it-t-en-t0-mtec",
+                    "@value": "Località degli autobus EMT in tempo reale"
+                },
+                {
+                    "@language": "es-t-en-t0-mtec",
+                    "@value": "Ubicaciones de autobuses EMT en tiempo real"
+                },
+                {
+                    "@language": "pt-t-en-t0-mtec",
+                    "@value": "Locais de autocarros EMT em tempo real"
+                },
+                {
+                    "@language": "ro-t-en-t0-mtec",
+                    "@value": "Locațiile autobuzelor EMT în timp real"
+                },
+                {
+                    "@language": "sl-t-en-t0-mtec",
+                    "@value": "EMT avtobusne lokacije v realnem času"
+                },
+                {
+                    "@language": "fr-t-en-t0-mtec",
+                    "@value": "Emplacements des bus EMT en temps réel"
+                },
+                {
+                    "@language": "de-t-en-t0-mtec",
+                    "@value": "EMT-Busstandorte in Echtzeit"
+                },
+                {
+                    "@language": "bg-t-en-t0-mtec",
+                    "@value": "Местонахождения на автобусите EMT в реално време"
+                },
+                {
+                    "@language": "el-t-en-t0-mtec",
+                    "@value": "Τοποθεσίες λεωφορείων σε πραγματικό χρόνο"
+                }
+            ],
+            "dct:description": [
+                {
+                    "@language": "et-t-en-t0-mtec",
+                    "@value": "EMT busside asukohad reaalajas, positsioone uuendatakse iga minut. Erinevad bussiliinid on värvikoodiga. Täpsemat teavet iga bussi palun kliki värvilised täpid. Avaldatakse FIWARE CB GeoJSONi ressurss."
+                },
+                {
+                    "@language": "cs-t-en-t0-mtec",
+                    "@value": "EMT autobusové lokality v reálném čase, pozice jsou aktualizovány každou minutu. Různé autobusové linky jsou barevně odlišeny. Pro detailní informace o každém autobusu prosím klikněte na barevné tečky. Je zveřejněn zdroj FIWARE CB GeoJSON."
+                },
+                {
+                    "@language": "fi-t-en-t0-mtec",
+                    "@value": "EMT bussien sijainnit reaaliajassa, sijainnit päivitetään joka minuutti. Linja-autolinjat ovat värikoodattuja. Saadaksesi yksityiskohtaista tietoa jokaisesta bussista, klikkaa värillisiä pisteitä. FIWARE CB GeoJSON -resurssi on julkaistu."
+                },
+                {
+                    "@language": "da-t-en-t0-mtec",
+                    "@value": "EMT bus steder i realtid, positioner opdateres hvert minut. De forskellige buslinjer er farvekodede. For detaljerede oplysninger om hver bus skal du klikke på de farvede prikker. En FIWARE CB GeoJSON ressource er offentliggjort."
+                },
+                {
+                    "@language": "pt-t-en-t0-mtec",
+                    "@value": "Localizações de autocarros EMT em tempo real, as posições são atualizadas a cada minuto. As diferentes linhas de autocarro são codificadas por cores. Para obter informações detalhadas sobre cada autocarro, clique nos pontos coloridos. Um recurso FIWARE CB GeoJSON é publicado."
+                },
+                {
+                    "@language": "sl-t-en-t0-mtec",
+                    "@value": "EMT avtobusne lokacije v realnem času, položaji se posodabljajo vsako minuto. Različne avtobusne linije so barvno označene. Za podrobnejše informacije o vsakem avtobusu kliknite na barvne pike. Objavljen je FIWARE CB GeoJSON vir."
+                },
+                {
+                    "@language": "sk-t-en-t0-mtec",
+                    "@value": "Miesta autobusov EMT v reálnom čase, pozície sa aktualizujú každú minútu. Rôzne autobusové linky sú farebne označené. Pre podrobné informácie o každom autobuse, prosím, kliknite na farebné bodky. Zdroj FIWARE CB GeoJSON je zverejnený."
+                },
+                {
+                    "@language": "lt-t-en-t0-mtec",
+                    "@value": "EMT autobusų vietose realiu laiku, pozicijos atnaujinamos kiekvieną minutę. Įvairios autobusų linijos yra užkoduotos spalvomis. Norėdami gauti išsamią informaciją apie kiekvieną autobusą, spustelėkite spalvotus taškus. Paskelbtas FIWARE CB GeoJSON šaltinis."
+                },
+                {
+                    "@language": "lv-t-en-t0-mtec",
+                    "@value": "EMT autobusu atrašanās vietas reālajā laikā, pozīcijas tiek atjauninātas katru minūti. Dažādās autobusu līnijas ir krāsu kodētas. Lai iegūtu detalizētu informāciju par katru autobusu, lūdzu, noklikšķiniet uz krāsainajiem punktiem. Tiek publicēts FIWARE CB GeoJSON resurss."
+                },
+                {
+                    "@language": "de-t-en-t0-mtec",
+                    "@value": "EMT-Busstandorte in Echtzeit, Positionen werden jede Minute aktualisiert. Die verschiedenen Buslinien sind farbcodiert. Für detaillierte Informationen zu jedem Bus klicken Sie bitte auf die farbigen Punkte. Eine FIWARE CB GeoJSON-Ressource wird veröffentlicht."
+                },
+                {
+                    "@language": "nl-t-en-t0-mtec",
+                    "@value": "EMT-buslocaties in realtime, posities worden elke minuut bijgewerkt. De verschillende buslijnen zijn kleurgecodeerd. Voor gedetailleerde informatie over elke bus klikt u op de gekleurde stippen. Een FIWARE CB GeoJSON bron wordt gepubliceerd."
+                },
+                {
+                    "@language": "el-t-en-t0-mtec",
+                    "@value": "Οι θέσεις λεωφορείων σε πραγματικό χρόνο, οι θέσεις ενημερώνονται κάθε λεπτό. Οι διάφορες γραμμές λεωφορείων είναι χρωματικά κωδικοποιημένες. Για λεπτομερείς πληροφορίες σχετικά με κάθε λεωφορείο, κάντε κλικ στις χρωματιστές κουκίδες. Δημοσιεύεται ένας πόρος FIWARE CB GeoJSON."
+                },
+                {
+                    "@language": "it-t-en-t0-mtec",
+                    "@value": "Le posizioni degli autobus EMT in tempo reale, le posizioni vengono aggiornate ogni minuto. Le diverse linee di autobus sono codificate a colori. Per informazioni dettagliate su ogni autobus si prega di fare clic sui punti colorati. Viene pubblicata una risorsa FIWARE CB GeoJSON."
+                },
+                {
+                    "@language": "fr-t-en-t0-mtec",
+                    "@value": "Emplacements des bus EMT en temps réel, les positions sont mises à jour chaque minute. Les différentes lignes de bus sont codées par couleur. Pour des informations détaillées sur chaque bus, veuillez cliquer sur les points colorés. Une ressource FIWARE CB GeoJSON est publiée."
+                },
+                "EMT bus locations in real time, positions are updated every minute. The different bus lines are color-coded. For detailed information about each bus please click on the colored dots. A FIWARE CB GeoJSON resource is published.",
+                {
+                    "@language": "ga-t-en-t0-mtec",
+                    "@value": "Suíomhanna bus EMT i bhfíor-am, déantar suíomhanna a nuashonrú gach nóiméad. Tá na línte bus éagsúla dathchódaithe. Chun faisnéis mhionsonraithe a fháil faoi gach bus, cliceáil ar na poncanna daite. Foilsítear acmhainn GeoJSON FIWARE CB."
+                },
+                {
+                    "@language": "hr-t-en-t0-mtec",
+                    "@value": "EMT lokacije autobusa u stvarnom vremenu, pozicije se ažuriraju svake minute. Različite autobusne linije su obojene. Za detaljne informacije o svakom autobusu molimo kliknite na obojene točke. Objavljen je resurs FIWARE CB GeoJSON."
+                },
+                {
+                    "@language": "sv-t-en-t0-mtec",
+                    "@value": "EMT buss platser i realtid, positioner uppdateras varje minut. De olika busslinjerna är färgkodade. För detaljerad information om varje buss klicka på de färgade prickarna. En FIWARE CB GeoJSON-resurs publiceras."
+                },
+                {
+                    "@language": "es-t-en-t0-mtec",
+                    "@value": "Ubicaciones de autobuses EMT en tiempo real, las posiciones se actualizan cada minuto. Las diferentes líneas de autobús están codificadas por colores. Para obtener información detallada sobre cada autobús, haga clic en los puntos de colores. Se publica un recurso FIWARE CB GeoJSON."
+                },
+                {
+                    "@language": "ro-t-en-t0-mtec",
+                    "@value": "Locațiile autobuzelor EMT în timp real, pozițiile sunt actualizate în fiecare minut. Diferitele linii de autobuz sunt codificate în culori. Pentru informații detaliate despre fiecare autobuz vă rugăm să faceți clic pe punctele colorate. Este publicată o resursă FIWARE CB GeoJSON."
+                },
+                {
+                    "@language": "uk-t-en-t0-mtec",
+                    "@value": "Місця розташування автобусів EMT в режимі реального часу, позиції оновлюються щохвилини. Різні лінії шини мають кольорове кодування. Для отримання детальної інформації про кожен автобус, будь ласка, натисніть на кольорові точки. Опубліковано ресурс FIWARE CB GeoJSON."
+                },
+                {
+                    "@language": "hu-t-en-t0-mtec",
+                    "@value": "EMT busz helyszínek valós időben, pozíciók frissülnek minden percben. A különböző buszjáratok színkóddal vannak ellátva. Az egyes buszokkal kapcsolatos részletes információkért kattintson a színes pontokra. Megjelent egy FIWARE CB GeoJSON forrás."
+                },
+                {
+                    "@language": "bg-t-en-t0-mtec",
+                    "@value": "Местоположения на автобусите в реално време, позициите се актуализират всяка минута. Различните автобусни линии са цветно кодирани. За подробна информация за всеки автобус, моля кликнете върху цветните точки. Публикуван е ресурс на FIWARE CB GeoJSON."
+                },
+                {
+                    "@language": "pl-t-en-t0-mtec",
+                    "@value": "Lokalizacje autobusów EMT w czasie rzeczywistym, pozycje są aktualizowane co minutę. Różne linie autobusowe są oznaczone kolorami. Aby uzyskać szczegółowe informacje na temat każdego autobusu, kliknij na kolorowe kropki. Publikowany jest zasób FIWARE CB GeoJSON."
+                },
+                {
+                    "@language": "mt-t-en-t0-mtec",
+                    "@value": "Il-postijiet tal-karozzi tal-linja EMT f'ħin reali, il-pożizzjonijiet jiġu aġġornati kull minuta. Il-linji differenti tal-karozzi tal-linja huma kkodifikati bil-kulur. Għal informazzjoni dettaljata dwar kull karozza tal-linja, jekk jogħġbok ikklikkja fuq it-tikek ikkuluriti. Tiġi ppubblikata riżorsa FIWARE CB GeoJSON."
+                }
+            ],
+            "dct:spatial": {
+                "@id": "_:3aa8951640ce3603071f82f27c167b69"
+            },
+            "dct:publisher": {
+                "@id": "https://www.fiware.org/foundation/"
+            },
+            "@type": "dcat:Dataset",
+            "dct:issued": {
+                "@value": "2020-01-17T10:39:46Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dcat:distribution": {
+                "@id": "http://data.europa.eu/88u/distribution/8d375fe1-0906-4fa5-b5e8-732da4afa866"
+            },
+            "dct:identifier": "3912ef60-1ee4-45f8-9235-c936989285df",
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/SPA"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+            },
+            "dcat:keyword": "transportation",
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/UNKNOWN"
+            }
+        },
+        {
+            "@id": "_:3aa8951640ce3603071f82f27c167b69",
+            "locn:geometry": [
+                {
+                    "@value": "POLYGON((-4.57609 36.660522,-4.339625 36.660522,-4.339625 36.75975,-4.57609 36.75975,-4.57609 36.660522))",
+                    "@type": "http://www.opengis.net/ont/geosparql#wktLiteral"
+                },
+                {
+                    "@value": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-4.57609,36.660522],[-4.339625,36.660522],[-4.339625,36.75975],[-4.57609,36.75975],[-4.57609,36.660522]]]}}]}",
+                    "@type": "https://www.iana.org/assignments/media-types/application/vnd.geo+json"
+                }
+            ],
+            "@type": "dct:Location"
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "locn": "http://www.w3.org/ns/locn#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

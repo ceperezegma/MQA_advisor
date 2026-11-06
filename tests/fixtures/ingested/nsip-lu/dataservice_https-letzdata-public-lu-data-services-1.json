@@ -1,0 +1,219 @@
+{
+  "status" : "success",
+  "result" : {
+    "id" : "https-letzdata-public-lu-data-services-1",
+    "catalog" : {
+      "id" : "nsip-lu",
+      "title" : {
+        "lt" : "Liuksemburgo nacionalinis bendras informacinis punktas",
+        "mt" : "Punt Nazzjonali Uniku ta’ Informazzjoni fil-Lussemburgu",
+        "el" : "Εθνικό Ενιαίο Σημείο Πληροφόρησης Λουξεμβούργο",
+        "hu" : "Luxemburgi nemzeti egyablakos információs pont",
+        "es" : "Punto Único Nacional de Información Luxemburgo",
+        "pt" : "Ponto de Informação Único Nacional Luxemburgo",
+        "uk" : "Національний єдиний інформаційний пункт Люксембург",
+        "ro" : "Punctul național unic de informare Luxemburg",
+        "pl" : "Krajowy pojedynczy punkt informacyjny Luksemburg",
+        "cs" : "Národní jednotné informační místo Lucembursko",
+        "sv" : "Nationell central informationspunkt Luxemburg",
+        "bg" : "Национален единен информационен център Люксембург",
+        "nl" : "Nationaal centraal informatiepunt Luxemburg",
+        "hr" : "Jedinstvena nacionalna informacijska točka Luksemburg",
+        "lv" : "Valsts vienotais informācijas punkts Luksemburgā",
+        "fr" : "Point d'information unique national Luxembourg",
+        "ga" : "Pointe Faisnéise Aonair Náisiúnta Lucsamburg",
+        "en" : "National Single Information Point Luxemburg",
+        "sk" : "Národné jednotné informačné miesto Luxemburg",
+        "it" : "Punto d'informazione unico nazionale Lussemburgo",
+        "et" : "Luksemburgi riiklik ühtne teabepunkt",
+        "fi" : "Kansallinen keskitetty tietopiste Luxemburg",
+        "de" : "Nationale zentrale Informationsstelle Luxemburg",
+        "sl" : "Nacionalna enotna informacijska točka Luksemburg",
+        "da" : "Det nationale centrale informationssted Luxembourg"
+      },
+      "issued" : "2026-03-20T10:47:29Z",
+      "description" : {
+        "mt" : "Katalgu nazzjonali tas-settijiet tad-data u tas-servizzi tad-data b’aċċess mhux pubbliku jew ristrett.",
+        "uk" : "Національний каталог наборів даних і сервісів даних з непублічним або обмеженим доступом.",
+        "lt" : "Nacionalinis neviešos arba ribotos prieigos duomenų rinkinių ir duomenų paslaugų katalogas.",
+        "ga" : "Catalóg náisiúnta de Thacair Sonraí agus de sheirbhísí Sonraí a bhfuil rochtain neamhphoiblí nó shrianta acu.",
+        "de" : "Nationaler Katalog von Datensätzen und Datendiensten mit nicht öffentlichem oder eingeschränktem Zugang.",
+        "sk" : "Národný katalóg súborov údajov a dátových služieb s neverejným alebo obmedzeným prístupom.",
+        "sl" : "Nacionalni katalog naborov podatkov in podatkovnih storitev z nejavnim ali omejenim dostopom.",
+        "ro" : "Catalog național de seturi de date și servicii de date cu acces nepublic sau restricționat.",
+        "pl" : "Krajowy katalog zbiorów danych i usług w zakresie danych z dostępem niepublicznym lub ograniczonym.",
+        "nl" : "Nationale catalogus van datasets en datadiensten met niet-openbare of beperkte toegang.",
+        "el" : "Εθνικός κατάλογος συνόλων δεδομένων και υπηρεσιών δεδομένων με μη δημόσια ή περιορισμένη πρόσβαση.",
+        "da" : "Nationalt katalog over datasæt og datatjenester med ikkeoffentlig eller begrænset adgang.",
+        "en" : "National catalogue of Datasets and Data services with non-public or restricted access.",
+        "fi" : "Kansallinen luettelo data-aineistoista ja datapalveluista, joihin on ei-julkinen tai rajoitettu pääsy.",
+        "bg" : "Национален каталог на наборите от данни и услугите за данни с непубличен или ограничен достъп.",
+        "it" : "Catalogo nazionale delle serie di dati e dei servizi di dati ad accesso non pubblico o limitato.",
+        "lv" : "Valsts datu kopu un datu pakalpojumu katalogs ar nepublisku vai ierobežotu piekļuvi.",
+        "es" : "Catálogo nacional de conjuntos de datos y servicios de datos con acceso no público o restringido.",
+        "cs" : "Národní katalog datových souborů a datových služeb s neveřejným nebo omezeným přístupem.",
+        "hr" : "Nacionalni katalog skupova podataka i podatkovnih usluga s nejavnim ili ograničenim pristupom.",
+        "et" : "Mitteavaliku või piiratud juurdepääsuga andmekogumite ja andmeteenuste riiklik kataloog.",
+        "fr" : "Catalogue national des ensembles de données et des services de données à accès non public ou restreint.",
+        "pt" : "Catálogo nacional de conjuntos de dados e serviços de dados com acesso não público ou restrito.",
+        "hu" : "Nem nyilvános vagy korlátozott hozzáféréssel rendelkező adatkészletek és adatszolgáltatások nemzeti katalógusa.",
+        "sv" : "Nationell katalog över dataset och datatjänster med icke-offentlig eller begränsad åtkomst."
+      },
+      "country" : {
+        "label" : "Luxembourg",
+        "id" : "lu",
+        "resource" : "http://publications.europa.eu/resource/authority/country/LUX"
+      },
+      "spatial_resource" : [ {
+        "label" : "Luxembourg",
+        "id" : "lu",
+        "resource" : "http://publications.europa.eu/resource/authority/country/LUX"
+      } ],
+      "publisher" : {
+        "type" : "Agent",
+        "email" : "mailto:data@digital.etat.lu",
+        "name" : "Ministry for Digitalisation, Luxembourg"
+      },
+      "is_part_of" : "erpd",
+      "source_type" : "dcat-ap",
+      "language" : [ {
+        "id" : "en",
+        "label" : "English",
+        "resource" : "http://publications.europa.eu/resource/authority/language/ENG"
+      } ],
+      "homepage" : "https://www.letzdata.lu",
+      "translation_meta" : {
+        "details" : {
+          "lt" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "mt" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "el" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "hu" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "es" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "pt" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "uk" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "ro" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "pl" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "cs" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "sv" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "bg" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "nl" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "hr" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "lv" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "fr" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "ga" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "en" : {
+            "machine_translated" : false
+          },
+          "sk" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "it" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "et" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "fi" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "de" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "sl" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          },
+          "da" : {
+            "machine_translated" : true,
+            "original_language" : "en"
+          }
+        },
+        "full_available_languages" : [ "lt", "mt", "el", "hu", "es", "pt", "uk", "ro", "pl", "cs", "sv", "bg", "nl", "hr", "lv", "fr", "ga", "en", "sk", "it", "et", "fi", "de", "sl", "da" ],
+        "status" : "unknown"
+      },
+      "count" : 40
+    },
+    "access_right" : {
+      "label" : "Non public",
+      "resource" : "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+    },
+    "publisher" : {
+      "type" : "Agent",
+      "name" : "Ministère de l'Agriculture, de l'Alimentation et de la Viticulture (MAAV) - Direction de la protection des consommateurs (DPC)"
+    },
+    "title" : {
+      "eng" : "SharePoint et OpenData / Qlik"
+    },
+    "license" : {
+      "resource" : "http://www.opendatacommons.org/licenses/odbl/1.0/",
+      "id" : "http://www.opendatacommons.org/licenses/odbl/1.0/",
+      "label" : "http://www.opendatacommons.org/licenses/odbl/1.0/"
+    },
+    "endpoint_url" : [ "https://data.public.lu/en/" ],
+    "translation_meta" : {
+      "details" : {
+        "eng" : {
+          "machine_translated" : false
+        }
+      },
+      "full_available_languages" : [ "eng" ],
+      "status" : "unknown"
+    }
+  }
+}

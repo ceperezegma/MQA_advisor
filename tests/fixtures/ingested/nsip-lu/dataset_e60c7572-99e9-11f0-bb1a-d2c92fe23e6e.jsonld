@@ -1,0 +1,327 @@
+{
+    "@graph": [
+        {
+            "@id": "_:4a779e41a846417a2929936637015735",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Luxembourg Institute of Science and Technology (LIST)"
+            },
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ]
+        },
+        {
+            "@id": "_:8f100358de8f3c0b7da4080f96c93fb0",
+            "@type": "prov:Activity",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "AGE"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "@type": "dct:RightsStatement",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/ENG",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "English"
+            },
+            "@type": "dct:LinguisticSystem"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/b7879e6e-d727-4ea5-b22f-34bc8db176d1",
+            "dct:identifier": {
+                "@value": "300",
+                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            },
+            "dcat:temporalResolution": {
+                "@value": "PT1M",
+                "@type": "http://www.w3.org/2001/XMLSchema#duration"
+            },
+            "dcat:accessURL": [
+                {
+                    "@id": "http://letzaccessdata.lu/"
+                },
+                {
+                    "@id": "https://envdata.private.list.lu/"
+                }
+            ],
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/CSV"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Luxembourg Eco-hydrological Observatory"
+            },
+            "dcatap:availability": {
+                "@id": "http://publications.europa.eu/resource/authority/planned-availability/AVAILABLE"
+            },
+            "@type": "dcat:Distribution",
+            "dcat:byteSize": {
+                "@value": "135000000000",
+                "@type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            },
+            "dct:rights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/CSV",
+            "@type": "dct:MediaTypeOrExtent",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "CSV"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/planned-availability/AVAILABLE",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Available"
+            }
+        },
+        {
+            "@id": "_:b5bdcd6980b7b81c830a7de83385bf9f",
+            "@type": [
+                "vcard:Individual",
+                "vcard:Kind"
+            ],
+            "vcard:hasEmail": {
+                "@id": "mailto:aaron.firoz@list.lu"
+            },
+            "vcard:role": {
+                "@language": "eng",
+                "@value": "Manager Luxembourg Eco-hydrological Observatory"
+            },
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Aaron Firoz"
+            }
+        },
+        {
+            "@id": "_:e30eeb328826b36b33b5380058b9719e",
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration de la gestion de l’eau (AGE)"
+            }
+        },
+        {
+            "@id": "_:75a5c82a713c72e47f43ba409daddddf",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "METEOLUX"
+            },
+            "@type": "prov:Activity"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Update cont"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/e60c7572-99e9-11f0-bb1a-d2c92fe23e6e",
+            "@type": "dcat:Dataset",
+            "dct:temporal": {
+                "@id": "_:91e908527ee0857f80485896924cace0"
+            },
+            "dcat:distribution": {
+                "@id": "http://data.europa.eu/88u/distribution/b7879e6e-d727-4ea5-b22f-34bc8db176d1"
+            },
+            "dct:publisher": {
+                "@id": "_:65810cd6d077ebc0074629671adbe580"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:b5bdcd6980b7b81c830a7de83385bf9f"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Intellectual Property Data"
+            },
+            "dct:provenance": {
+                "@id": "_:4924eda464b80fdd19d66d206d565d79"
+            },
+            "dct:creator": [
+                {
+                    "@id": "_:2bee8ce81769bdc56730b83ea7050919"
+                },
+                {
+                    "@id": "_:e30eeb328826b36b33b5380058b9719e"
+                },
+                {
+                    "@id": "_:4a779e41a846417a2929936637015735"
+                },
+                {
+                    "@id": "_:2d1fd1a4966c5fecc0ce597b69d850a2"
+                }
+            ],
+            "dct:title": {
+                "@language": "eng",
+                "@value": "LIST hydro-meteorological database"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI"
+            },
+            "dcat:temporalResolution": {
+                "@value": "PT1M",
+                "@type": "http://www.w3.org/2001/XMLSchema#duration"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/ENG"
+            },
+            "dcat:keyword": {
+                "@language": "eng",
+                "@value": "environment"
+            },
+            "prov:wasGeneratedBy": [
+                {
+                    "@id": "_:4845e08130b4fc2fa457e2063116e401"
+                },
+                {
+                    "@id": "_:8f100358de8f3c0b7da4080f96c93fb0"
+                },
+                {
+                    "@id": "_:75a5c82a713c72e47f43ba409daddddf"
+                },
+                {
+                    "@id": "_:1f91d8ebcbdffa42796d4d380f08c9d8"
+                }
+            ],
+            "dct:description": {
+                "@language": "eng",
+                "@value": "The datasets in this database provide long-term hydro-climatological information for Luxembourg, monitored and managed by the Luxembourg Eco-hydrological Observatory (LEO) platform of the Luxembourg Institute of Science and Technology (LIST).\nData are updated regularly; Therefore, please take note of the creation date of each dataset. The data tables include Quality Control (QC) codes indicating validation status, which may be revised over time.\nIn addition to LEO data, the datasets also integrate contributions from national public agencies, including the Administration de la Gestion de l’Eau (AGE), the Administration des Services Techniques de l’Agriculture (ASTA), and MeteoLux."
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dct:identifier": "e60c7572-99e9-11f0-bb1a-d2c92fe23e6e"
+        },
+        {
+            "@id": "_:91e908527ee0857f80485896924cace0",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "dcat:startDate": {
+                "@value": "1996-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "@type": "dct:PeriodOfTime"
+        },
+        {
+            "@id": "_:65810cd6d077ebc0074629671adbe580",
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Luxembourg Institute of Science and Technology (LIST)"
+            }
+        },
+        {
+            "@id": "_:4924eda464b80fdd19d66d206d565d79",
+            "@type": "dct:ProvenanceStatement",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Luxembourg Eco-hydrological Observatory (LEO) environmental monitoring network"
+            }
+        },
+        {
+            "@id": "_:2bee8ce81769bdc56730b83ea7050919",
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration de la navigation aérienne (ANA)"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Environment"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "_:4845e08130b4fc2fa457e2063116e401",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "ASTA"
+            },
+            "@type": "prov:Activity"
+        },
+        {
+            "@id": "_:2d1fd1a4966c5fecc0ce597b69d850a2",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration des services techniques de l’agriculture (ASTA)"
+            },
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ]
+        },
+        {
+            "@id": "_:1f91d8ebcbdffa42796d4d380f08c9d8",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "LIST"
+            },
+            "@type": "prov:Activity"
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "prov": "http://www.w3.org/ns/prov#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

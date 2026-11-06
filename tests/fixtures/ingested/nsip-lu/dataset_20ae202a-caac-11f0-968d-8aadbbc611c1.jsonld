@@ -1,0 +1,189 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/20ae202a-caac-11f0-968d-8aadbbc611c1",
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "hospital utilization"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "healthcare"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "billing and reimbursement"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "patient admissions"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "public health"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "clinical coding"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "health expenditure"
+                }
+            ],
+            "dct:temporal": {
+                "@id": "_:ea3a66110ee0212cad11e6fd68fab063"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Hospital activities represent the costs invoiced by hospitals during a stay or treatment in hospital. This is to be considered as the counterpart to medical acts that are performed in a hospital setting. \nThis dataset is part of those provided by the IGSS within the framework of the Luxembourg Microdata Platform on Labour and Social Protection. All datasets offered by the IGSS are designed to be interoperable through the use of common pseudonymized identifiers, enabling the linkage of information across different datasets. More particularly, this dataset  must be interconnected with the “Stays and treatments in hospital” dataset using the variable hosp_stay_treat_IDnumber. \nAll the variables in this dataset are personal data and are subject to GDPR compliant protection measures. \nScope: hospital stays and treatments, including day cases, outpatient cases and inpatient cases, registered in a Luxembourg hospital. \nDelay for providing the most recent data: current month -24. \nData sources : CNS."
+            },
+            "dcat:contactPoint": {
+                "@id": "_:fad7146fa32c19ff1c1e4240ef1c13f0"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/HEAL"
+            },
+            "foaf:page": {
+                "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf"
+            },
+            "@type": "dcat:Dataset",
+            "dct:identifier": "20ae202a-caac-11f0-968d-8aadbbc611c1",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Hospital activities"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/ENG"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL"
+            },
+            "dcat:landingPage": {
+                "@id": "http://ask4mdp.services-publics.lu/"
+            },
+            "dct:publisher": {
+                "@id": "_:8d44911ed84fc76a3ca3e0c9edd515b3"
+            }
+        },
+        {
+            "@id": "_:ea3a66110ee0212cad11e6fd68fab063",
+            "@type": "dct:PeriodOfTime",
+            "dcat:startDate": {
+                "@value": "2012-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "_:fad7146fa32c19ff1c1e4240ef1c13f0",
+            "@type": [
+                "vcard:Kind",
+                "vcard:Individual"
+            ],
+            "vcard:hasEmail": {
+                "@id": "mailto:microdata.platform@igss.etat.lu"
+            },
+            "vcard:role": {
+                "@language": "eng",
+                "@value": "Provider"
+            },
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Microdata platform"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/HEAL",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Health"
+            }
+        },
+        {
+            "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/ENG",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "English"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Annual"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://ask4mdp.services-publics.lu/",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "_:8d44911ed84fc76a3ca3e0c9edd515b3",
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Inspection générale de la sécurité sociale (IGSS)"
+            }
+        }
+    ],
+    "@context": {
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

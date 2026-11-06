@@ -1,0 +1,190 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/MONTHLY",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Monthly"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Population and society"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/1e9c7d90-caac-11f0-a122-8aadbbc611c1",
+            "dcat:contactPoint": {
+                "@id": "_:ffe37d10abec7944dad8ad9e4f8cc776"
+            },
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "redeployment"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "workers"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "labour market"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "cross-border"
+                }
+            ],
+            "dct:description": {
+                "@language": "eng",
+                "@value": "This dataset contains all external and internal redeployment decisions made by the “commission mixte”.\nThis dataset is part of those provided by the IGSS within the framework of the Luxembourg Microdata Platform on Labour and Social Protection. All datasets offered by the IGSS are designed to be interoperable through the use of common pseudonymized identifiers, enabling the linkage of information across different datasets. \nAll the variables in this dataset are personal data and are subject to GDPR compliant protection measures. \nScope: redeployment decisions  for people living in Luxembourg and cross border workers. \nDelay for providing the most recent data: current month -3. \nData sources : CCSS."
+            },
+            "dcat:theme": [
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/data-theme/ECON"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI"
+                }
+            ],
+            "dct:publisher": {
+                "@id": "_:55e231b0aa3cd39eb16499c71a35a7de"
+            },
+            "dct:temporal": {
+                "@id": "_:3253af0b2315f1376fee373976c9b2ff"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "foaf:page": {
+                "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Redeployments"
+            },
+            "dct:identifier": "1e9c7d90-caac-11f0-a122-8aadbbc611c1",
+            "dcat:landingPage": {
+                "@id": "http://ask4mdp.services-publics.lu/"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/MONTHLY"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/ENG"
+            },
+            "@type": "dcat:Dataset"
+        },
+        {
+            "@id": "_:ffe37d10abec7944dad8ad9e4f8cc776",
+            "vcard:role": {
+                "@language": "eng",
+                "@value": "Provider"
+            },
+            "vcard:hasEmail": {
+                "@id": "mailto:microdata.platform@igss.etat.lu"
+            },
+            "@type": [
+                "vcard:Kind",
+                "vcard:Individual"
+            ],
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Microdata platform"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ECON",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Economy and finance"
+            }
+        },
+        {
+            "@id": "_:55e231b0aa3cd39eb16499c71a35a7de",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Inspection générale de la sécurité sociale (IGSS)"
+            },
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ]
+        },
+        {
+            "@id": "_:3253af0b2315f1376fee373976c9b2ff",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "dcat:startDate": {
+                "@value": "2002-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "@type": "dct:PeriodOfTime"
+        },
+        {
+            "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "http://ask4mdp.services-publics.lu/",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/ENG",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "English"
+            }
+        }
+    ],
+    "@context": {
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

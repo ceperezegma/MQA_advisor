@@ -1,0 +1,196 @@
+{
+    "@graph": [
+        {
+            "@id": "_:eaf1ddd3f24cc8e6c54ac4da18094c1a",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Ministère de la Recherche et de l’Enseignement supérieur (MESR)"
+            },
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ]
+        },
+        {
+            "@id": "_:16357081ef81169e65155239283861a2",
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "MESR Secretariat"
+            },
+            "@type": [
+                "vcard:Kind",
+                "vcard:Individual"
+            ],
+            "vcard:hasEmail": {
+                "@id": "mailto:secretariat@mesr.etat.lu"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "_:cbc706e2214f893603c928331a7f32a4",
+            "dcat:startDate": {
+                "@value": "2016-09-14",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "@type": "dct:PeriodOfTime"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/EDUC",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Education, culture and sport"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/51df2646-0bff-11f1-b0ab-7e66bed59843",
+            "dct:type": [
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/dataset-type/STATISTICAL"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+                }
+            ],
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Ce fichier contient les données individuelles requises dans le cadre des aides financières pour les études supérieures, ainsi que la décision administrative correspondante et, le cas échéant, le montant de l’aide attribuée selon les différentes tranches."
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:identifier": "51df2646-0bff-11f1-b0ab-7e66bed59843",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Aides financières pour études supérieures"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/EDUC"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:16357081ef81169e65155239283861a2"
+            },
+            "dct:temporal": {
+                "@id": "_:cbc706e2214f893603c928331a7f32a4"
+            },
+            "dct:publisher": {
+                "@id": "_:eaf1ddd3f24cc8e6c54ac4da18094c1a"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "@type": "dcat:Dataset",
+            "dcat:distribution": {
+                "@id": "http://data.europa.eu/88u/distribution/ea30388a-9763-4f92-908c-d54ea94c2126"
+            },
+            "dcatap:applicableLegislation": {
+                "@id": "http://data.legilux.public.lu/eli/etat/leg/loi/2016/07/23/n10/jo"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STATISTICAL",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Statistical data"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Annual"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/ea30388a-9763-4f92-908c-d54ea94c2126",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "CSV Distribution"
+            },
+            "dcat:accessURL": {
+                "@id": "http://www.letzaccessdata.lu/"
+            },
+            "dct:rights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/CSV"
+            },
+            "@type": "dcat:Distribution",
+            "dcat:byteSize": {
+                "@value": "125829120",
+                "@type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            },
+            "dct:identifier": {
+                "@value": "178",
+                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "http://data.legilux.public.lu/eli/etat/leg/loi/2016/07/23/n10/jo",
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Loi du 23 juillet 2016 portant modification de la loi du 24 juillet 2014 concernant l'aide financière de l'Etat pour études supérieures."
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Loi du 23 juillet 2016 portant modification de la loi du 24 juillet 2014 concernant l'aide financièr"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/CSV",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "CSV"
+            },
+            "@type": "dct:MediaTypeOrExtent"
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

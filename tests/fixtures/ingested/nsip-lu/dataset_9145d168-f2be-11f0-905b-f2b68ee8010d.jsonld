@@ -1,0 +1,154 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/9145d168-f2be-11f0-905b-f2b68ee8010d",
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "awareness raising"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "activities"
+                }
+            ],
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "@type": "dcat:Dataset",
+            "dcat:contactPoint": {
+                "@id": "_:1e2f46617efe1ed2ac40041dc22914d5"
+            },
+            "dct:publisher": {
+                "@id": "_:81cf172c9b92fd5a7c75cbf50ea5d295"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Booking database for awareness raising activities at the \nnature and forest agency; planification, allocation of guides \nand resources, budget management, drawing statistics\nPersonal data which is collected is the Personal Data and Address of the guide, the Personal Data and Address of the client / Group of client and the VAT number of the client."
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "ACTIPLAN"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dct:temporal": {
+                "@id": "_:75f85e6256f5d27fdcf68416e8239adb"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI"
+            },
+            "dct:identifier": "9145d168-f2be-11f0-905b-f2b68ee8010d",
+            "dct:creator": {
+                "@id": "_:9ed5c0f998e0a082a81270d474b6c8c0"
+            }
+        },
+        {
+            "@id": "_:1e2f46617efe1ed2ac40041dc22914d5",
+            "vcard:hasEmail": {
+                "@id": "mailto:steve.jungen@anf.etat.lu"
+            },
+            "@type": [
+                "vcard:Kind",
+                "vcard:Individual"
+            ],
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Steve Jungen"
+            }
+        },
+        {
+            "@id": "_:81cf172c9b92fd5a7c75cbf50ea5d295",
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration de la nature et des forêts (ANF)"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Update cont"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "_:75f85e6256f5d27fdcf68416e8239adb",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "@type": "dct:PeriodOfTime",
+            "dcat:startDate": {
+                "@value": "2026-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Environment"
+            }
+        },
+        {
+            "@id": "_:9ed5c0f998e0a082a81270d474b6c8c0",
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration de la nature et des forêts (ANF)"
+            }
+        }
+    ],
+    "@context": {
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

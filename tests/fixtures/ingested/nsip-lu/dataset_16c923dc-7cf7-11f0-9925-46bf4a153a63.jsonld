@@ -1,0 +1,263 @@
+{
+    "@graph": [
+        {
+            "@id": "_:ceb7214e43467dbdd441de0b9da7181d",
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Centre des technologies de l’information de l’État (CTIE)"
+            }
+        },
+        {
+            "@id": "_:146b64a3c40324ea7696487a04f479da",
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Centre des technologies de l’information de l’État (CTIE)"
+            }
+        },
+        {
+            "@id": "_:071937f2e84ae5de36189b178e681578",
+            "vcard:hasEmail": {
+                "@id": "mailto:jureg@ctie.etat.lu"
+            },
+            "@type": [
+                "vcard:Kind",
+                "vcard:Individual"
+            ],
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Pierre Trausch"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "@type": "dct:RightsStatement",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            }
+        },
+        {
+            "@id": "https://legilux.public.lu/eli/etat/leg/loi/2013/06/19/n3/jo",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Loi du 19 juin 2013 relative à l’identification des personnes physiques, au registre national des personnes physiques, à la carte d’identité, aux registres communaux des personnes physiques et portant modification de\n\n1)\tl’article 104 du Code civil;\n2)\tla loi modifiée du 30 mars 1979 organisant l’identification numérique des personnes physiques et morales;\n3)\tla loi communale modifiée du 13 décembre 1988;\n4)\tla loi électorale modifiée du 18 février 2003\net abrogeant\n\n1)\tla loi modifiée du 22 décembre 1886 concernant les recensements de population à faire en exécution de la loi électorale et\n2)\tl’arrêté grand-ducal du 30 août 1939 portant introduction de la carte d’identité obligatoire."
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "RNPP"
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "https://guichet.public.lu/fr/citoyens/citoyennete/registre-national.html",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "_:291b37a5c186c786206820adb13a52ba",
+            "dct:relation": {
+                "@id": "https://data.public.lu/fr/datasets/registre-national-des-personnes-physiques-rnpp-nombre-de-naissances-et-deces-par-commune-number-of-births-and-deaths-per-municipality/"
+            },
+            "dcat:hadRole": {
+                "@id": "http://www.iana.org/assignments/relation/related"
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Nombre de naissances et décès par commune "
+            },
+            "@type": "dcat:Relationship"
+        },
+        {
+            "@id": "http://www.iana.org/assignments/relation/related",
+            "@type": "dcat:Role",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "related"
+            }
+        },
+        {
+            "@id": "_:00b7af2000d61292dd04c8b647b34f40",
+            "@type": "dct:PeriodOfTime",
+            "dcat:startDate": {
+                "@value": "2013-07-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Update cont"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/FRA",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "French"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/16c923dc-7cf7-11f0-9925-46bf4a153a63",
+            "dct:temporal": {
+                "@id": "_:00b7af2000d61292dd04c8b647b34f40"
+            },
+            "dct:creator": {
+                "@id": "_:ceb7214e43467dbdd441de0b9da7181d"
+            },
+            "dcatap:applicableLegislation": {
+                "@id": "https://legilux.public.lu/eli/etat/leg/loi/2013/06/19/n3/jo"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dcat:spatialResolutionInMeters": {
+                "@value": "0",
+                "@type": "http://www.w3.org/2001/XMLSchema#decimal"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "dcat:qualifiedRelation": [
+                {
+                    "@id": "_:c3d30653630cc7c9a25bace44b2d99ff"
+                },
+                {
+                    "@id": "_:291b37a5c186c786206820adb13a52ba"
+                }
+            ],
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Signalétique : Nom / prénoms / sexe / nom de naissance / date, pays, lieu et date de naissance, lieu et date de décès"
+            },
+            "dct:provenance": {
+                "@id": "_:268b41bb1f912ce13e8bc8c1c246374b"
+            },
+            "foaf:page": {
+                "@id": "https://guichet.public.lu/fr/citoyens/citoyennete/registre-national.html"
+            },
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "rnpp"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "population"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "Luxembourgish population structure"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "family relationship"
+                }
+            ],
+            "dct:publisher": {
+                "@id": "_:146b64a3c40324ea7696487a04f479da"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:071937f2e84ae5de36189b178e681578"
+            },
+            "@type": "dcat:Dataset",
+            "dct:issued": {
+                "@value": "2013-07-01T00:00:00",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dct:isPartOf": {
+                "@id": "https://letzdata.public.lu/en/catalogue/catalogue-donnees/8/8278fa8a-b63b-11f0-a677-aedcf0f53435.html"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Registre national des personnes physiques - Signalétique"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:identifier": "16c923dc-7cf7-11f0-9925-46bf4a153a63",
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI"
+            }
+        },
+        {
+            "@id": "_:c3d30653630cc7c9a25bace44b2d99ff",
+            "@type": "dcat:Relationship",
+            "dcat:hadRole": {
+                "@id": "http://www.iana.org/assignments/relation/related"
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Prénoms les plus donnés au Luxembourg"
+            },
+            "dct:relation": {
+                "@id": "https://data.public.lu/fr/datasets/prenoms-les-plus-donnes-au-luxembourg/"
+            }
+        },
+        {
+            "@id": "_:268b41bb1f912ce13e8bc8c1c246374b",
+            "@type": "dct:ProvenanceStatement",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Organismes étatiques, administrations communales, organismes habilités, citoyens"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Population and society"
+            }
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

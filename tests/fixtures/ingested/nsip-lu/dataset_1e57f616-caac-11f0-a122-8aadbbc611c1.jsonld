@@ -1,0 +1,190 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/MONTHLY",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Monthly"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Population and society"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ECON",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Economy and finance"
+            }
+        },
+        {
+            "@id": "_:7eb4d587f2368b05dd351db8d77bf0da",
+            "vcard:role": {
+                "@language": "eng",
+                "@value": "Provider"
+            },
+            "@type": [
+                "vcard:Kind",
+                "vcard:Individual"
+            ],
+            "vcard:hasEmail": {
+                "@id": "mailto:microdata.platform@igss.etat.lu"
+            },
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Microdata platform"
+            }
+        },
+        {
+            "@id": "_:4a89d31e561dfbb57a4629d01b15f13d",
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Inspection générale de la sécurité sociale (IGSS)"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/ENG",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "English"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "_:636c0c13523f15caeec32761e486db7d",
+            "@type": "dct:PeriodOfTime",
+            "dcat:startDate": {
+                "@value": "2002-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/1e57f616-caac-11f0-a122-8aadbbc611c1",
+            "@type": "dcat:Dataset",
+            "dct:temporal": {
+                "@id": "_:636c0c13523f15caeec32761e486db7d"
+            },
+            "dcat:theme": [
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/data-theme/ECON"
+                }
+            ],
+            "dct:publisher": {
+                "@id": "_:4a89d31e561dfbb57a4629d01b15f13d"
+            },
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "cross-border"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "employers"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "labour market"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "firms"
+                }
+            ],
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Characteristics of employers"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/ENG"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "foaf:page": {
+                "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "dcat:landingPage": {
+                "@id": "http://ask4mdp.services-publics.lu/"
+            },
+            "dct:identifier": "1e57f616-caac-11f0-a122-8aadbbc611c1",
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/MONTHLY"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:7eb4d587f2368b05dd351db8d77bf0da"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "This dataset contains some characteristics relating to employers. All variables concerning employers are related to a reference period (year and month). \nThis dataset is part of those provided by the IGSS within the framework of the Luxembourg Microdata Platform on Labour and Social Protection. All datasets offered by the IGSS are designed to be interoperable through the use of common pseudonymized identifiers, enabling the linkage of information across different datasets. \nScope: companies registered in Luxembourg. \nDelay for providing the most recent data: current month -3. \nData sources : CCSS, STATEC."
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            }
+        },
+        {
+            "@id": "http://ask4mdp.services-publics.lu/",
+            "@type": "foaf:Document"
+        }
+    ],
+    "@context": {
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

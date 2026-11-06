@@ -1,0 +1,185 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/3fdb2c57-e586-42dd-ba1a-66a28bb6d74e",
+            "dct:license": {
+                "@id": "http://publications.europa.eu/resource/authority/licence/no_license"
+            },
+            "dcat:accessURL": {
+                "@id": "http://letzaccessdata.lu/"
+            },
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/XLSX"
+            },
+            "dcatap:availability": {
+                "@id": "http://publications.europa.eu/resource/authority/planned-availability/AVAILABLE"
+            },
+            "dcat:byteSize": {
+                "@value": "149999",
+                "@type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "XLSX Distribution"
+            },
+            "dct:identifier": {
+                "@value": "296",
+                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            },
+            "@type": "dcat:Distribution",
+            "dct:rights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/licence/no_license",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "No License"
+            },
+            "@type": "dct:LicenseDocument"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/XLSX",
+            "@type": "dct:MediaTypeOrExtent",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "XLSX"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/planned-availability/AVAILABLE",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Available"
+            }
+        },
+        {
+            "@id": "_:8623466e86534963e3711351b474fe63",
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Observatoire national des PME GIE"
+            }
+        },
+        {
+            "@id": "https://www.observatoirepme.lu/",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "_:64693580275a2fd7f6d903875841d266",
+            "@type": [
+                "vcard:Organization",
+                "vcard:Kind"
+            ],
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Observatoire national des PME GIE"
+            }
+        },
+        {
+            "@id": "_:2aabe900b27a7542514088ec3e7fefe5",
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Observatoire national des PME GIE"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/939662ba-7b68-11f1-8dda-fe0ba101412f",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Le Cadastre de Commerce est une base de données nationale qui recense les commerces, ainsi que d'autres activités économiques telles que l’Horeca, l’artisanat et les services au Luxembourg. Il fournit des données fiables et régulièrement actualisées sur la structure, la répartition géographique et l’évolution du tissu économique. Grâce à un tableau de bord, un outil cartographique et des données complémentaires, il aide les communes, syndicats et autres partenaires à mieux comprendre leur territoire et à prendre des décisions éclairées en matière de développement urbain, de planification, de marketing territorial et de développement économique."
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dcat:landingPage": {
+                "@id": "https://www.observatoirepme.lu/"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT"
+            },
+            "dcat:distribution": {
+                "@id": "http://data.europa.eu/88u/distribution/3fdb2c57-e586-42dd-ba1a-66a28bb6d74e"
+            },
+            "@type": "dcat:Dataset",
+            "dcat:contactPoint": {
+                "@id": "_:64693580275a2fd7f6d903875841d266"
+            },
+            "dct:publisher": {
+                "@id": "_:2aabe900b27a7542514088ec3e7fefe5"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Cadastre de Commerce"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Commercially Confidential Data"
+            },
+            "dct:creator": {
+                "@id": "_:8623466e86534963e3711351b474fe63"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dct:temporal": {
+                "@id": "_:53105f01271a9e60b9fc7e22f1b7ee0c"
+            },
+            "dct:identifier": "939662ba-7b68-11f1-8dda-fe0ba101412f"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Update cont"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "_:53105f01271a9e60b9fc7e22f1b7ee0c",
+            "@type": "dct:PeriodOfTime",
+            "dcat:startDate": {
+                "@value": "2019-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            }
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

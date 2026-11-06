@@ -1,0 +1,404 @@
+{
+  "status" : "success",
+  "result" : {
+    "id" : "https-data-gov-lt-datasets-3499-",
+    "catalog" : {
+      "id" : "data-gov-lt",
+      "description" : {
+        "pt" : "Dados abertos na Lituânia",
+        "lv" : "Atvērtie dati Lietuvā",
+        "hr" : "Otvoreni podaci u Litvi",
+        "en" : "Open data in Lithuania",
+        "fr" : "Données ouvertes en Lituanie",
+        "hu" : "Nyílt hozzáférésű adatok Litvániában",
+        "ga" : "Sonraí oscailte sa Liotuáin",
+        "pl" : "Otwarte dane na Litwie",
+        "es" : "Datos abiertos en Lituania",
+        "nl" : "Open data in Litouwen",
+        "de" : "Offene Daten in Litauen",
+        "mt" : "Data miftuħa fil-Litwanja",
+        "sv" : "Öppna data i Litauen",
+        "el" : "Ανοικτά δεδομένα στη Λιθουανία",
+        "sk" : "Otvorené dáta v Litve",
+        "it" : "Dati aperti in Lituania",
+        "uk" : "Відкриті дані в Литві",
+        "ro" : "Date deschise în Lituania",
+        "da" : "Åbne data i Litauen",
+        "fi" : "Avoin data Liettuassa",
+        "cs" : "Otevřená data v Litvě",
+        "bg" : "Отворени данни в Литва",
+        "sl" : "Odprti podatki v Litvi",
+        "et" : "Avatud andmed Leedus",
+        "lt" : "Atvirieji duomenys Lietuvoje"
+      },
+      "homepage" : "https://data.gov.lt",
+      "title" : {
+        "sk" : "data.gov.lt",
+        "es" : "data.gov.lt",
+        "sl" : "data.gov.lt",
+        "lt" : "data.gov.lt",
+        "hu" : "data.gov.lt",
+        "el" : "δεδομένα.gov.lt",
+        "pl" : "data.gov.lt",
+        "en" : "data.gov.lt",
+        "bg" : "данни.gov.lt",
+        "mt" : "data.gov.lt",
+        "it" : "data.gov.lt",
+        "ro" : "data.gov.lt",
+        "de" : "daten.gov.lt",
+        "cs" : "data.gov.lt",
+        "pt" : "data.gov.lt",
+        "fi" : "data.gov.lt",
+        "ga" : "data.gov.lt",
+        "et" : "data.gov.lt",
+        "hr" : "data.gov.lt",
+        "lv" : "data.gov.lt",
+        "nl" : "data.gov.lt",
+        "uk" : "data.gov.lt",
+        "da" : "data.gov.lt",
+        "sv" : "data.gov.lt",
+        "fr" : "data.gov.lt"
+      },
+      "issued" : "2022-11-21T05:36:38Z",
+      "publisher" : {
+        "type" : "Agent",
+        "name" : "IVPK Information Society Development Committee",
+        "email" : "mailto:info@ivpk.lt",
+        "homepage" : "https://ivpk.lrv.lt"
+      },
+      "source_type" : "dcat-ap",
+      "modified" : "2023-02-11T16:20:15.856176",
+      "language" : [ {
+        "id" : "lt",
+        "label" : "Lithuanian",
+        "resource" : "http://publications.europa.eu/resource/authority/language/LIT"
+      } ],
+      "country" : {
+        "label" : "Lithuania",
+        "id" : "lt",
+        "resource" : "http://publications.europa.eu/resource/authority/country/LTU"
+      },
+      "spatial_resource" : [ {
+        "label" : "Lithuania",
+        "id" : "lt",
+        "resource" : "http://publications.europa.eu/resource/authority/country/LTU"
+      } ],
+      "translation_meta" : {
+        "details" : {
+          "sk" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "es" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "sl" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "lt" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "hu" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "el" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "pl" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "en" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "bg" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "mt" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "it" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "ro" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "de" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "cs" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "pt" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "fi" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "ga" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "et" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "hr" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "lv" : {
+            "machine_translated" : false
+          },
+          "nl" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "uk" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "da" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "sv" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          },
+          "fr" : {
+            "machine_translated" : true,
+            "original_language" : "lv"
+          }
+        },
+        "full_available_languages" : [ "sk", "es", "sl", "lt", "hu", "el", "pl", "en", "bg", "mt", "it", "ro", "de", "cs", "pt", "fi", "ga", "et", "hr", "lv", "nl", "uk", "da", "sv", "fr" ],
+        "status" : "unknown"
+      },
+      "count" : 2263
+    },
+    "title" : {
+      "da" : "Copernicusdata – Natura 2000 2012 (WMS-visningstjeneste)",
+      "ga" : "Sonraí Copernicus - Natura 2000 2012 (seirbhís amhairc WMS)",
+      "lv" : "Copernicus dati — Natura 2000 2012 (WMS skatīšanas pakalpojums)",
+      "bg" : "Данни по програма „Коперник“ — „Натура 2000“ 2012 г. (WMS view service)",
+      "sk" : "Údaje programu Copernicus – Natura 2000 2012 (služba WMS view)",
+      "pl" : "Dane z programu Copernicus – Natura 2000 2012 (usługa przeglądania WMS)",
+      "fi" : "Copernicus-data – Natura 2000 2012 (WMS-katselupalvelu)",
+      "mt" : "- tad-data ta' Copernicus Natura 2000 2012 (servizz ta' viżjoni tad-WMS)",
+      "ro" : "Date Copernicus - Natura 2000 2012 (serviciul de vizualizare WMS)",
+      "el" : "Δεδομένα Copernicus - Natura 2000 2012 (υπηρεσία προβολής WMS)",
+      "fr" : "Données Copernicus - Natura 2000 2012 (service de consultation WMS)",
+      "hr" : "Podaci programa Copernicus – Natura 2000 2012. (usluga prikaza WMS-a)",
+      "sl" : "Podatki programa Copernicus – Natura 2000 2012 (storitev pregleda WMS)",
+      "hu" : "Kopernikusz-adatok – Natura 2000 2012 (WMS megtekintési szolgáltatás)",
+      "et" : "Copernicuse andmed – Natura 2000 2012 (WMSi vaatamisteenus)",
+      "it" : "Dati Copernicus - Natura 2000 2012 (servizio di consultazione WMS)",
+      "cs" : "Data z programu Copernicus – Natura 2000 2012 (prohlížecí služba WMS)",
+      "uk" : "Дані Copernicus - Natura 2000 2012 (сервіс перегляду WMS)",
+      "lt" : "Copernicus programos duomenys - „Natura 2000“ 2012 (WMS peržiūros paslauga)",
+      "de" : "Copernicus-Daten – Natura 2000 2012 (WMS-Ansichtsdienst)",
+      "es" : "Datos de Copernicus - Natura 2000 2012 (servicio de visualización WMS)",
+      "en" : "\"Natura 2000\" 2012 (WMS service)",
+      "pt" : "Dados Copernicus - Natura 2000 2012 (serviço de visualização WMS)",
+      "sv" : "Copernicusdata – Natura 2000 2012 (WMS-vytjänst)",
+      "nl" : "Copernicusgegevens - Natura 2000 2012 (WMS-viewdienst)"
+    },
+    "keywords" : [ {
+      "id" : "lietuva",
+      "label" : "Lietuva",
+      "language" : "en"
+    }, {
+      "id" : "land-cover",
+      "label" : "land cover",
+      "language" : "en"
+    }, {
+      "id" : "copernicus-programos-duomenys",
+      "label" : "copernicus programos duomenys",
+      "language" : "en"
+    }, {
+      "id" : "infomapaccessservice",
+      "label" : "infomapaccessservice",
+      "language" : "en"
+    }, {
+      "id" : "environmental-data",
+      "label" : "environmental data",
+      "language" : "en"
+    }, {
+      "id" : "natura-2000",
+      "label" : "Natura 2000",
+      "language" : "en"
+    }, {
+      "id" : "duomenys-aplinkosaugai",
+      "label" : "duomenys aplinkosaugai",
+      "language" : "en"
+    }, {
+      "id" : "land-use",
+      "label" : "land use",
+      "language" : "en"
+    } ],
+    "description" : {
+      "sl" : "„Evropsko ekološko omrežje Natura 2000“ pomeni celotno omrežje zavarovanih območij, pomembnih za Skupnost, ki ga sestavljajo območja s seznamov območij, pomembnih za ohranjanje habitatov in ptic, ki jih je sprejela vlada, ter območja s seznama območij, ki izpolnjujejo merila za izbiro območij, pomembnih za ohranjanje habitatov, ki jih je sprejela institucija, ki jo je pooblastila vlada, in so namenjena ohranjanju, vzdrževanju in po potrebi obnovitvi ugodnega stanja ohranjenosti naravnih habitatnih tipov ter živalskih in rastlinskih vrst na njihovem naravnem območju razširjenosti.\nZbirka Natura 2000 je sestavljena iz 62 razredov. Tehnična specifikacija: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nPodatki so bili ustvarjeni s podporo Evropske unije. program Copernicus za avtorske pravice. \n\nODGOVORNOST: Agencija za razvoj gradbenega sektorja se je s pogodbo št. 3436/R0-Copernicus/EEA.56943, podpisano v okviru izvajanja storitev na podlagi pogodbe št. EEA/IDM/R0/16/009/Litva, zavezala, da bo razširjala podatke v imenu Evropske agencije za okolje (EEA). Agencija za razvoj gradbenega sektorja ne prevzema nobene odgovornosti za vsebino in uporabo teh podatkov.",
+      "bg" : "„Европейска екологична мрежа „Натура 2000“ означава цялата мрежа от защитени територии от значение за Общността, състояща се от териториите, включени в приетите от правителството списъци на териториите от значение за опазването на местообитанията и птиците, както и териториите, включени в списъка на териториите, отговарящи на критериите за подбор на териториите от значение за опазването на местообитанията, приети от институция, оправомощена от правителството, и предназначени да опазват, поддържат и при необходимост да възстановяват до благоприятен природозащитен статус типовете естествени местообитания и животинските и растителните видове в техния естествен район на разпространение.\nКолекцията „Натура 2000“ се състои от 62 класа. Техническа спецификация: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nДанните са създадени с подкрепата на Европейския съюз. Програма „Коперник“ в областта на авторското право. \n\nОТГОВОРНОСТ: Съгласно договор No 3436/R0-Copernicus/EEA.56943, подписан в контекста на изпълнението на услуги по договор No EEA/IDM/R0/16/009/Литва, Агенцията за развитие на строителния сектор се ангажира да разпространява данните от името на Европейската агенция за околна среда (ЕАОС). Агенцията за развитие на строителния сектор не носи отговорност за съдържанието и използването на тези данни.",
+      "lv" : "“Eiropas ekoloģiskais tīkls Natura 2000” ir kopējais Kopienā nozīmīgo aizsargājamo teritoriju tīkls, kurā ietilpst teritorijas, kas iekļautas valdības pieņemtajos dzīvotņu un putnu aizsardzībai nozīmīgo teritoriju sarakstos, kā arī teritorijas, kas iekļautas valdības pilnvarotas iestādes pieņemtajā dzīvotņu aizsardzībai nozīmīgo teritoriju sarakstā, un kura mērķis ir saglabāt, uzturēt un vajadzības gadījumā atjaunot labvēlīgu aizsardzības statusu dabiskajiem dzīvotņu veidiem un dzīvnieku un augu sugām to dabiskās izplatības areālā.\nNatura 2000 kolekcijā ir 62 klases. Tehniskā specifikācija: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nDati tika radīti ar Eiropas Savienības atbalstu. Autortiesības Copernicus programma. \n\nAtbildība: Saskaņā ar līgumu Nr. 3436/R0-Copernicus/EEA.56943, kas parakstīts saistībā ar pakalpojumu īstenošanu saskaņā ar līgumu Nr. EEA/IDM/R0/16/009/Lietuva, Būvniecības nozares attīstības aģentūra ir apņēmusies izplatīt datus Eiropas Vides aģentūras (EVA) vārdā. Būvniecības nozares attīstības aģentūra neuzņemas atbildību par šo datu saturu un izmantošanu.",
+      "sk" : "„európska ekologická sústava Natura 2000“ je celková sústava chránených území európskeho významu pozostávajúca z oblastí zahrnutých do zoznamov oblastí dôležitých pre ochranu biotopov a vtáctva prijatých vládou, ako aj oblastí zahrnutých do zoznamu oblastí spĺňajúcich kritériá výberu oblastí dôležitých pre ochranu biotopov prijatého inštitúciou poverenou vládou a určených na zachovanie, zachovanie a v prípade potreby obnovenie priaznivého stavu ochrany typov prirodzených biotopov a živočíšnych a rastlinných druhov v ich prirodzenom areáli.\nZbierka Natura 2000 pozostáva zo 62 tried. Technická špecifikácia: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nÚdaje boli vytvorené s podporou Európskej únie. Program Copernicus v oblasti autorských práv. \n\nZODPOVEDNOSŤ: Na základe zmluvy č. 3436/R0-Copernicus/EEA.56943, podpísanej v súvislosti s vykonávaním služieb na základe zmluvy č. EEA/IDM/R0/16/009/Litva, sa Agentúra pre rozvoj sektora stavebníctva zaviazala šíriť údaje v mene Európskej environmentálnej agentúry (EEA). Agentúra pre rozvoj stavebného sektora nenesie žiadnu zodpovednosť za obsah a používanie týchto údajov.",
+      "nl" : "„Europees ecologisch netwerk Natura 2000”: het algemene netwerk van beschermde gebieden van communautair belang, bestaande uit de gebieden die zijn opgenomen in de door de regering vastgestelde lijsten van gebieden die van belang zijn voor de instandhouding van habitats en vogels, alsmede de gebieden die zijn opgenomen in de door een door de regering erkende instelling vastgestelde lijst van gebieden die voldoen aan de criteria voor de selectie van gebieden die van belang zijn voor de instandhouding van habitats, en die bedoeld zijn om typen natuurlijke habitats en dier- en plantensoorten in hun natuurlijke verspreidingsgebied in stand te houden, in stand te houden en, indien nodig, in een gunstige staat van instandhouding te herstellen.\nDe Natura 2000-collectie bestaat uit 62 klassen. Technische specificatie: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nDe gegevens zijn gemaakt met de steun van de Europese Unie. Copernicus-programma voor auteursrechten. \n\nVERANTWOORDELIJKHEID: In het kader van contract nr. 3436/R0-Copernicus/EEA.56943, ondertekend in het kader van de uitvoering van diensten in het kader van contract nr. EEA/IDM/R0/16/009/Litouwen, heeft het Agentschap voor de ontwikkeling van de bouwsector zich ertoe verbonden de gegevens namens het Europees Milieuagentschap (EEA) te verspreiden. De Dienst Ontwikkeling Bouwsector aanvaardt geen verantwoordelijkheid voor de inhoud en het gebruik van deze gegevens.",
+      "da" : "»det europæiske økologiske net Natura 2000«: det samlede net af beskyttede områder af fællesskabsbetydning bestående af de områder, der er opført på de lister over områder af betydning for bevaringen af levesteder og fugle, som regeringen har vedtaget, samt de områder, der er opført på den liste over områder, der opfylder kriterierne for udvælgelse af områder af betydning for bevaringen af levesteder, som er vedtaget af en institution, der er bemyndiget af regeringen, og som har til formål at bevare, opretholde og om nødvendigt genoprette en gunstig bevaringsstatus for naturtyper samt dyre- og plantearter i deres naturlige udbredelsesområde.\nNatura 2000-samlingen består af 62 klasser. Teknisk specifikation: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nDataene blev oprettet med støtte fra Den Europæiske Union. Copernicusprogrammet vedrørende ophavsret. \n\nAnsvarlighed: I henhold til kontrakt nr. 3436/R0-Copernicus/EEA.56943, der blev undertegnet i forbindelse med gennemførelsen af tjenesteydelser i henhold til kontrakt nr. EEA/IDM/R0/16/009/Litauen, har agenturet for udvikling af byggesektoren forpligtet sig til at formidle dataene på vegne af Det Europæiske Miljøagentur (EEA). Styrelsen for Byggeri og Anlæg påtager sig intet ansvar for indholdet og anvendelsen af disse data.",
+      "cs" : "„evropskou ekologickou sítí Natura 2000“ celková síť chráněných oblastí významných pro Společenství sestávající z oblastí zařazených na seznamy oblastí významných pro ochranu stanovišť a ptáků přijaté vládou, jakož i z oblastí zařazených na seznam oblastí splňujících kritéria pro výběr oblastí významných pro ochranu stanovišť přijatá orgánem schváleným vládou a určených k zachování, zachování a případně obnovení příznivého stavu z hlediska ochrany u typů přírodních stanovišť a živočišných a rostlinných druhů v jejich přirozeném areálu rozšíření.\nSbírka Natura 2000 se skládá z 62 tříd. Technická specifikace: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nData byla vytvořena s podporou Evropské unie. Program Copernicus v oblasti autorského práva. \n\nOdpovědnost: Na základě smlouvy č. 3436/R0-Copernicus/EEA.56943, podepsané v rámci provádění služeb podle smlouvy č. EEA/IDM/R0/16/009/Litva, se Agentura pro rozvoj odvětví stavebnictví zavázala šířit údaje jménem Evropské agentury pro životní prostředí (EEA). Agentura pro rozvoj stavebního sektoru nepřebírá žádnou odpovědnost za obsah a použití těchto údajů.",
+      "en" : "Natura 2000 (N2K) is a network of core breeding and resting sites for rare and threatened species, as well as for some rare natural habitat types which are protected in their own right. It stretches across all 28 EU countries, both on land and at sea. The aim of the network is to ensure the long-term survival of Europe's most valuable and threatened species and habitats that are listed under the Birds Directive and the Habitats Directive.\nPreviously, in 2015 a selection of N2K grassland-rich sites (chosen from within five grassland habitats types, namely, 6210, 6240, 6250, 6510 and 6520) and covering approx. 160.000 km2 was mapped, including a 2km buffer to allow for an analysis of pressures and threats. The mapping product offered a detailed LC/LU product applying a hierarchical nomenclature with 62 classes. Technical specification: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\nData was produced with funding by the European Union. Copyright Copernicus Programme\n\nDISCLAIMER: Construction Sector Development Agency has undertaken to distribute the data on behalf of EEA under Specific Contract No 3436/R0-Copernicus/EEA.56943 implementing Framework service contract No EEA/IDM/R0/16/009/Lithuania. SE «GIS-Centras» accepts no responsibility or liability whatsoever with regard to the content and use of these data.",
+      "uk" : "‘Європейська екологічна мережа Natura 2000’ означає загальну мережу природоохоронних територій значення Співтовариства, що складається з територій, включених до переліків територій, що мають важливе значення для збереження середовищ існування та птахів, прийнятих Урядом, а також територій, включених до переліку територій, що відповідають критеріям вибору територій, що мають важливе значення для збереження середовищ існування, прийнятих установою, уповноваженою Урядом, і призначених для збереження, підтримки та, у разі необхідності, відновлення до сприятливого природоохоронного статусу природних типів середовищ існування та видів тварин і рослин у їх природному ареалі.\nКолекція Natura 2000 складається з 62 класів. Технічна специфікація: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nДані були створені за підтримки Європейського Союзу. Програма авторського права Copernicus. \n\nВІДПОВІДАЛЬНІСТЬ: За контрактом 3436/R0-Copernicus/EEA.56943, підписаним у контексті виконання послуг за контрактом No EEA/IDM/R0/16/009/Литва, Агентство з розвитку будівельного сектору зобов'язалося поширювати дані від імені Європейського агентства з навколишнього середовища (EEA). Агентство з розвитку будівельного сектору не несе відповідальності за зміст і використання цих даних.",
+      "mt" : "“network ekoloġiku Ewropew Natura 2000” tfisser in-network ġenerali ta’ żoni protetti ta’ importanza Komunitarja li jikkonsisti fiż-żoni inklużi fil-listi ta’ żoni ta’ importanza għall-konservazzjoni tal-ħabitats u tal-għasafar adottati mill-Gvern, kif ukoll iż-żoni inklużi fil-lista ta’ żoni li jissodisfaw il-kriterji għall-għażla ta’ żoni ta’ importanza għall-konservazzjoni tal-ħabitats adottati minn istituzzjoni awtorizzata mill-Gvern, u maħsuba biex jikkonservaw, iżommu u, fejn meħtieġ, jirrestawraw għal stat ta’ konservazzjoni favorevoli t-tipi ta’ ħabitats naturali u l-ispeċijiet ta’ annimali u pjanti fil-firxa naturali tagħhom.\nIl-kollezzjoni tan-Natura 2000 tikkonsisti fi 62 klassi. Speċifikazzjoni teknika: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nId-data nħolqot bl-appoġġ tal-Unjoni Ewropea. Il-Programm Copernicus dwar id-Drittijiet tal-Awtur. \n\nResponsabbiltà: Skont il-kuntratt Nru 3436/R0-Copernicus/EEA.56943, iffirmat fil-kuntest tal-implimentazzjoni tas-servizzi skont il-kuntratt Nru EEA/IDM/R0/16/009/Lithuania, l-Aġenzija għall-Iżvilupp tas-Settur tal-Kostruzzjoni impenjat ruħha li xxerred id-data f’isem l-Aġenzija Ewropea għall-Ambjent (EEA). L-Aġenzija għall-Iżvilupp tas-Settur tal-Kostruzzjoni ma tassumi l-ebda responsabbiltà għall-kontenut u l-użu ta’ din id-data.",
+      "et" : "„Euroopa ökoloogiline võrgustik Natura 2000” – ühenduse tähtsusega kaitsealade üldine võrgustik, mis koosneb aladest, mis on kantud valitsuse poolt vastu võetud elupaikade ja lindude kaitse seisukohast oluliste alade loetellu, ning aladest, mis on kantud valitsuse poolt volitatud institutsiooni poolt vastu võetud elupaikade kaitse seisukohast oluliste alade valikukriteeriumidele vastavasse loetellu ning mille eesmärk on kaitsta, säilitada ja vajaduse korral taastada nende soodsat kaitsestaatust looduslike elupaigatüüpide ning looma- ja taimeliikide looduslikul levilal.\nNatura 2000 kogu koosneb 62 klassist. Tehniline kirjeldus: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nAndmed on loodud Euroopa Liidu toel. Autoriõiguse Copernicuse programm. \n\nVastutus: Lepingu nr 3436/R0-Copernicus/EEA.56943 alusel, mis allkirjastati seoses teenuste osutamisega lepingu nr EEA/IDM/R0/16/009/Leedu alusel, kohustus ehitussektori arendusamet levitama andmeid Euroopa Keskkonnaameti (EEA) nimel. Ehitussektori arendusagentuur ei vastuta nende andmete sisu ja kasutamise eest.",
+      "sv" : "det europeiska ekologiska nätverket Natura 2000: det övergripande nätverket av skyddade områden av gemenskapsintresse bestående av de områden som ingår i de förteckningar över områden av betydelse för bevarandet av livsmiljöer och fåglar som antagits av regeringen samt de områden som ingår i den förteckning över områden som uppfyller kriterierna för urval av områden av betydelse för bevarandet av livsmiljöer som antagits av en institution som godkänts av regeringen och som är avsedda att bevara, bevara och vid behov återställa en gynnsam bevarandestatus hos livsmiljötyper och djur- och växtarter i deras naturliga utbredningsområde.\nNatura 2000-samlingen består av 62 klasser. Tekniska specifikationer: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nUppgifterna skapades med stöd av Europeiska unionen. Copernicusprogrammet för upphovsrätt. \n\nAnsvar: Enligt avtal nr 3436/R0-Copernicus/EEA.56943, som undertecknades i samband med genomförandet av tjänster enligt avtal nr EEA/IDM/R0/16/009/Litauen, har byrån för utveckling av byggsektorn åtagit sig att sprida uppgifterna på uppdrag av Europeiska miljöbyrån (EEA). Byggsektorns Utvecklingsbyrå tar inget ansvar för innehållet och användningen av dessa uppgifter.",
+      "ro" : "„rețea ecologică europeană Natura 2000” înseamnă rețeaua globală de arii protejate de importanță comunitară formată din ariile incluse în listele de arii importante pentru conservarea habitatelor și a păsărilor adoptate de guvern, precum și din ariile incluse în lista de arii care îndeplinesc criteriile de selecție a ariilor importante pentru conservarea habitatelor adoptate de o instituție autorizată de guvern și destinate conservării, menținerii și, dacă este necesar, readucerii la un stadiu corespunzător de conservare a tipurilor de habitate naturale și a speciilor de animale și plante în aria lor de extindere naturală.\nColecția Natura 2000 cuprinde 62 de clase. Specificații tehnice: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nDatele au fost create cu sprijinul Uniunii Europene. Programul Copernicus privind drepturile de autor. \n\nResponsabilitatea: În temeiul contractului nr. 3436/R0-Copernicus/EEA.56943, semnat în contextul executării serviciilor în temeiul contractului nr. EEA/IDM/R0/16/009/Lituania, Agenția pentru Dezvoltarea Sectorului Construcțiilor s-a angajat să difuzeze datele în numele Agenției Europene de Mediu (AEM). Agenția de Dezvoltare a Sectorului Construcțiilor nu își asumă nicio responsabilitate pentru conținutul și utilizarea acestor date.",
+      "fi" : "’eurooppalaisella ekologisella Natura 2000 -verkostolla’ yhteisön tärkeinä pitämien suojelualueiden kokonaisverkostoa, joka koostuu alueista, jotka sisältyvät hallituksen hyväksymiin luontotyyppien ja lintujen suojelun kannalta tärkeiden alueiden luetteloihin, sekä alueista, jotka sisältyvät hallituksen hyväksymän laitoksen hyväksymään luetteloon alueista, jotka täyttävät luontotyyppien suojelun kannalta tärkeiden alueiden valintaperusteet ja joiden tarkoituksena on luontotyyppien sekä eläin- ja kasvilajien suotuisan suojelun tason säilyttäminen, säilyttäminen ja tarvittaessa ennalleen saattaminen niiden luontaisella levinneisyysalueella.\nNatura 2000 -kokoelmassa on 62 luokkaa. Tekninen eritelmä: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nTiedot on luotu Euroopan unionin tuella. Tekijänoikeus-Copernicus-ohjelma. \n\nVASTUUVAPAUS: Sopimuksen N:o 3436/R0-Copernicus/EEA.56943 mukaisesti, joka on allekirjoitettu sopimuksen N:o EEA/IDM/R0/16/009/Liettua mukaisten palvelujen toteuttamisen yhteydessä, rakennusalan kehittämiskeskus on sitoutunut levittämään tietoja Euroopan ympäristökeskuksen (EEA) puolesta. Rakennusalan kehittämisvirasto ei vastaa näiden tietojen sisällöstä ja käytöstä.",
+      "de" : "„Europäisches ökologisches Netz Natura 2000“ das Gesamtnetz von Schutzgebieten von gemeinschaftlicher Bedeutung, das aus den Gebieten besteht, die in den von der Regierung angenommenen Listen von Gebieten von Bedeutung für die Erhaltung von Lebensräumen und Vögeln aufgeführt sind, sowie aus den Gebieten, die in der von einer von der Regierung genehmigten Einrichtung angenommenen Liste von Gebieten aufgeführt sind, die die Kriterien für die Auswahl von Gebieten von Bedeutung für die Erhaltung von Lebensräumen erfüllen und dazu bestimmt sind, natürliche Lebensraumtypen sowie Tier- und Pflanzenarten in ihrem natürlichen Verbreitungsgebiet zu erhalten, zu erhalten und erforderlichenfalls wieder in einen günstigen Erhaltungszustand zu versetzen.\nDie Natura 2000-Sammlung besteht aus 62 Klassen. Technische Spezifikation: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nDie Daten wurden mit Unterstützung der Europäischen Union erstellt. Urheberrecht Copernicus-Programm. \n\nVERANTWORTUNG: Im Rahmen des Vertrags Nr. 3436/R0-Copernicus/EEA.56943, der im Rahmen der Erbringung von Dienstleistungen im Rahmen des Vertrags Nr. EEA/IDM/R0/16/009/Litauen unterzeichnet wurde, hat sich die Agentur für die Entwicklung des Bausektors verpflichtet, die Daten im Namen der Europäischen Umweltagentur (EUA) zu verbreiten. Die Agentur für die Entwicklung des Bausektors übernimmt keine Verantwortung für den Inhalt und die Verwendung dieser Daten.",
+      "ga" : "ciallaíonn ‘líonra éiceolaíoch Eorpach Natura 2000’ líonra foriomlán na limistéar faoi chosaint a bhfuil tábhacht Chomhphobail leo agus atá comhdhéanta de na limistéir a áirítear ar na liostaí limistéar a bhfuil tábhacht leo maidir le gnáthóga agus éin a chaomhnú arna nglacadh ag an Rialtas, chomh maith leis na limistéir a áirítear ar liosta na limistéar a chomhlíonann na critéir maidir le roghnú limistéar a bhfuil tábhacht leo maidir le gnáthóga a chaomhnú arna nglacadh ag institiúid arna húdarú ag an Rialtas, agus a bhfuil sé beartaithe leo cineálacha gnáthóige nádúrtha agus speicis ainmhithe agus plandaí ina raon nádúrtha a chaomhnú, a chothabháil agus, i gcás inar gá, a athbhunú go stádas caomhantais fabhrach.\nTá 62 aicme i mbailiúchán Natura 2000. Sonraíocht theicniúil: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nCruthaíodh na sonraí le tacaíocht ón Aontas Eorpach. Clár Copernicus um Chóipcheart. \n\nFreagracht: Faoi chonradh Uimh. 3436/R0-Copernicus/EEA.56943, arna shíniú i gcomhthéacs chur chun feidhme na seirbhísí faoi chonradh Uimh. EEA/IDM/R0/16/009/an Liotuáin, tá gealltanas tugtha ag an nGníomhaireacht Forbartha d’Earnáil na Foirgníochta na sonraí a scaipeadh thar ceann na Gníomhaireachta Eorpaí Comhshaoil (EEA). Ní ghlacann an Ghníomhaireacht Forbartha na hEarnála Foirgníochta aon fhreagracht as ábhar agus úsáid na sonraí seo.",
+      "el" : "«ευρωπαϊκό οικολογικό δίκτυο Natura 2000»: το συνολικό δίκτυο προστατευόμενων περιοχών κοινοτικής σημασίας, το οποίο αποτελείται από τις περιοχές που περιλαμβάνονται στους καταλόγους σημαντικών περιοχών για τη διατήρηση των οικοτόπων και των πτηνών που ενέκρινε η κυβέρνηση, καθώς και από τις περιοχές που περιλαμβάνονται στον κατάλογο των περιοχών που πληρούν τα κριτήρια για την επιλογή σημαντικών περιοχών για τη διατήρηση των οικοτόπων, οι οποίοι έχουν εγκριθεί από φορέα εξουσιοδοτημένο από την κυβέρνηση και προορίζονται για τη διατήρηση, τη διατήρηση και, κατά περίπτωση, την αποκατάσταση σε ικανοποιητική κατάσταση διατήρησης των τύπων φυσικών οικοτόπων και των ζωικών και φυτικών ειδών στην περιοχή φυσικής κατανομής τους.\nΗ συλλογή Natura 2000 αποτελείται από 62 κατηγορίες. Τεχνική προδιαγραφή: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nΤα δεδομένα δημιουργήθηκαν με την υποστήριξη της Ευρωπαϊκής Ένωσης. Πρόγραμμα Copernicus για τα δικαιώματα πνευματικής ιδιοκτησίας. \n\nΕΥΘΥΝΗ: Βάσει της σύμβασης αριθ. 3436/R0-Copernicus/EEA.56943, η οποία υπεγράφη στο πλαίσιο της εκτέλεσης των υπηρεσιών βάσει της σύμβασης αριθ. EEA/IDM/R0/16/009/Λιθουανία, ο Οργανισμός Ανάπτυξης του Κατασκευαστικού Τομέα ανέλαβε να διαδώσει τα δεδομένα για λογαριασμό του Ευρωπαϊκού Οργανισμού Περιβάλλοντος (ΕΟΠ). Ο Οργανισμός Ανάπτυξης του Κατασκευαστικού Τομέα δεν αναλαμβάνει καμία ευθύνη για το περιεχόμενο και τη χρήση αυτών των δεδομένων.",
+      "hr" : "„Europska ekološka mreža Natura 2000” znači cjelokupna mreža zaštićenih područja od značaja za Zajednicu koja se sastoji od područja uvrštenih na popise područja važnih za očuvanje staništa i ptica koje je donijela vlada, kao i područja uvrštenih na popis područja koja ispunjavaju kriterije za odabir područja važnih za očuvanje staništa koje je donijela institucija koju je ovlastila vlada, a čiji je cilj očuvanje, održavanje i, prema potrebi, vraćanje u povoljno stanje očuvanosti prirodnih stanišnih tipova i životinjskih i biljnih vrsta u njihovu prirodnom arealu.\nZbirka Natura 2000 sastoji se od 62 razreda. Tehnička specifikacija: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nPodaci su izrađeni uz potporu Europske unije. Program Copernicus za autorska prava. \n\nODGOVORNOST: Na temelju ugovora br. 3436/R0-Copernicus/EEA.56943, potpisanog u kontekstu pružanja usluga na temelju ugovora br. EEA/IDM/R0/16/009/Litva, Agencija za razvoj građevinskog sektora obvezala se širiti podatke u ime Europske agencije za okoliš (EEA). Agencija za razvoj građevinskog sektora ne preuzima nikakvu odgovornost za sadržaj i korištenje tih podataka.",
+      "pl" : "„europejska sieć ekologiczna Natura 2000” oznacza ogólną sieć obszarów chronionych mających znaczenie dla Wspólnoty składającą się z obszarów ujętych w wykazach obszarów mających znaczenie dla ochrony siedlisk i ptaków przyjętych przez rząd, jak również obszarów ujętych w wykazie obszarów spełniających kryteria wyboru obszarów mających znaczenie dla ochrony siedlisk przyjętym przez instytucję upoważnioną przez rząd i mających na celu ochronę, zachowanie i, w razie potrzeby, przywrócenie do właściwego stanu ochrony typów siedlisk przyrodniczych oraz gatunków zwierząt i roślin w ich naturalnym zasięgu.\nKolekcja Natura 2000 składa się z 62 klas. Specyfikacja techniczna: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nDane powstały przy wsparciu Unii Europejskiej. Prawa autorskie do programu Copernicus. \n\nODPOWIEDZIALNOŚĆ: Na mocy umowy nr 3436/R0-Copernicus/EEA.56943, podpisanej w ramach realizacji usług w ramach umowy nr EEA/IDM/R0/16/009/Litwa, Agencja Rozwoju Sektora Budownictwa zobowiązała się do rozpowszechniania danych w imieniu Europejskiej Agencji Środowiska (EEA). Agencja Rozwoju Sektora Budowlanego nie ponosi odpowiedzialności za treść i wykorzystanie tych danych.",
+      "lt" : "Europos ekologinis tinklas „Natura 2000“ – Europos Bendrijos svarbos saugomų teritorijų bendras tinklas, susidedantis iš teritorijų, įtrauktų į Vyriausybės patvirtintus buveinių ir paukščių apsaugai svarbių teritorijų sąrašus, taip pat teritorijų, įtrauktų į Vyriausybės įgaliotos institucijos tvirtinamą vietovių, atitinkančių buveinių apsaugai svarbių teritorijų atrankos kriterijus, sąrašą, ir skirtas išsaugoti, palaikyti ir prireikus atkurti iki tinkamos apsaugos būklės natūralius buveinių tipus ir gyvūnų bei augalų rūšis jų natūraliame paplitimo areale.\nNatura 2000 rinkinį sudaro 62 klasės. Techninė specifikacija: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nDuomenys sukurti Europos Sąjungos lėšomis. Autoriaus teisės Copernicus programa. \n\nATSAKOMYBĖ: VšĮ Statybos sektoriaus vystymo agentūra vadovaudamasis sutartimi Nr. 3436/R0-Copernicus/EEA.56943, kuri pasirašyta įgyvendinant paslaugas pagal sutartį Nr. EEA/IDM/R0/16/009/Lithuania, yra įsipareigojęs Europos aplinkos agentūros (EAA) vardu platinti duomenis. VšĮ Statybos sektoriaus vystymo agentūra neprisiima jokios atsakomybės už šių duomenų turinį ir naudojimą.",
+      "hu" : "„Natura 2000 európai ökológiai hálózat”: közösségi jelentőségű védett területek teljes hálózata, amely a Kormány által elfogadott, az élőhelyek és madarak védelme szempontjából fontos területek jegyzékében szereplő területekből, valamint a Kormány által felhatalmazott intézmény által elfogadott, az élőhelyek védelme szempontjából fontos területek kiválasztási kritériumainak megfelelő területek jegyzékében szereplő azon területekből áll, amelyek célja a természetes élőhelytípusok, valamint az állat- és növényfajok kedvező védettségi állapotának megőrzése, fenntartása és szükség esetén helyreállítása természetes elterjedési területükön.\nA Natura 2000 gyűjtemény 62 osztályból áll. Műszaki leírás: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nAz adatok az Európai Unió támogatásával jöttek létre. Szerzői jogi Kopernikusz program. \n\nFELELŐSSÉG: Az EEA/IDM/R0/16/009/Litvánia szerződés szerinti szolgáltatások végrehajtása keretében aláírt 3436/R0-Copernicus/EEA.56943. sz. szerződés értelmében az Építési Ágazatfejlesztési Ügynökség vállalta, hogy az Európai Környezetvédelmi Ügynökség (EEA) nevében terjeszti az adatokat. Az Építőipari Fejlesztési Ügynökség nem vállal felelősséget ezen adatok tartalmáért és felhasználásáért.",
+      "pt" : "«Rede ecológica europeia Natura 2000», a rede global de zonas protegidas de importância comunitária constituída pelas zonas incluídas nas listas de zonas importantes para a conservação dos habitats e das aves adotadas pelo Governo, bem como pelas zonas incluídas na lista de zonas que satisfazem os critérios de seleção das zonas importantes para a conservação dos habitats adotados por uma instituição autorizada pelo Governo, e que se destinam a conservar, manter e, se necessário, restabelecer um estado de conservação favorável dos tipos de habitats naturais e das espécies animais e vegetais na sua área de repartição natural.\nA coleção Natura 2000 é composta por 62 classes. Especificação técnica: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nOs dados foram criados com o apoio da União Europeia. Programa Copernicus de direitos de autor. \n\nResponsabilidade: Nos termos do contrato n.o 3436/R0-Copernicus/EEA.56943, assinado no contexto da execução de serviços ao abrigo do contrato n.o EEA/IDM/R0/16/009/Lituânia, a Agência de Desenvolvimento do Setor da Construção comprometeu-se a divulgar os dados em nome da Agência Europeia do Ambiente (AEA). A Agência de Desenvolvimento do Setor da Construção não assume qualquer responsabilidade pelo conteúdo e utilização destes dados.",
+      "fr" : "«réseau écologique européen Natura 2000»: l’ensemble du réseau de zones protégées d’importance communautaire constitué des zones figurant sur les listes de zones d’importance pour la conservation des habitats et des oiseaux adoptées par le gouvernement, ainsi que des zones figurant sur la liste des zones répondant aux critères de sélection des zones d’importance pour la conservation des habitats adoptés par une institution autorisée par le gouvernement, et destinées à conserver, maintenir et, le cas échéant, rétablir dans un état de conservation favorable les types d’habitats naturels et les espèces animales et végétales de leur aire de répartition naturelle.\nLa collection Natura 2000 se compose de 62 classes. Spécification technique: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nLes données ont été créées avec le soutien de l'Union européenne. Copyright Programme Copernicus. \n\nRESPONSABILITÉ: En vertu du contrat n° 3436/R0-Copernicus/EEA.56943, signé dans le cadre de la mise en œuvre de services au titre du contrat n° EEA/IDM/R0/16/009/Lituanie, l'Agence pour le développement du secteur de la construction s'est engagée à diffuser les données pour le compte de l'Agence européenne pour l'environnement (AEE). L'Agence de développement du secteur de la construction n'assume aucune responsabilité quant au contenu et à l'utilisation de ces données.",
+      "it" : "\"rete ecologica europea Natura 2000\": la rete globale di zone protette di importanza comunitaria costituita dalle zone incluse negli elenchi delle zone importanti per la conservazione degli habitat e degli uccelli adottati dal governo, nonché dalle zone incluse nell'elenco delle zone che soddisfano i criteri di selezione delle zone importanti per la conservazione degli habitat adottati da un'istituzione autorizzata dal governo e destinati a conservare, mantenere e, se necessario, ripristinare in uno stato di conservazione soddisfacente i tipi di habitat naturali e le specie animali e vegetali nella loro area di ripartizione naturale.\nLa collezione Natura 2000 comprende 62 classi. Specifiche tecniche: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nI dati sono stati creati con il sostegno dell'Unione Europea. Copyright Programma Copernicus. \n\nRESPONSABILITÀ: Ai sensi del contratto n. 3436/R0-Copernicus/EEA.56943, firmato nell'ambito dell'esecuzione dei servizi ai sensi del contratto n. EEA/IDM/R0/16/009/Lithuania, l'Agenzia per lo sviluppo del settore delle costruzioni si è impegnata a diffondere i dati per conto dell'Agenzia europea dell'ambiente (AEA). L'Agenzia per lo sviluppo del settore delle costruzioni non si assume alcuna responsabilità per il contenuto e l'uso di questi dati.",
+      "es" : "«Red ecológica europea Natura 2000»: la red global de zonas protegidas de importancia comunitaria constituida por las zonas incluidas en las listas de zonas de importancia para la conservación de hábitats y aves adoptadas por el Gobierno, así como las zonas incluidas en la lista de zonas que cumplen los criterios de selección de zonas de importancia para la conservación de hábitats adoptados por una institución autorizada por el Gobierno y destinadas a conservar, mantener y, en su caso, restablecer en un estado de conservación favorable los tipos de hábitats naturales y las especies animales y vegetales de su área de distribución natural.\nLa colección Natura 2000 consta de 62 clases. Especificación técnica: https://land.copernicus.eu/user-corner/technical-library/N2K_Nomenclature_Guidelines.pdf\n\nLos datos fueron creados con el apoyo de la Unión Europea. Programa Copernicus sobre derechos de autor. \n\nRESPONSABILIDAD: En virtud del contrato n.o 3436/R0-Copernicus/EEA.56943, firmado en el contexto de la ejecución de servicios en virtud del contrato n.o EEA/IDM/R0/16/009/Lituania, la Agencia de Desarrollo del Sector de la Construcción se ha comprometido a difundir los datos en nombre de la Agencia Europea de Medio Ambiente (AEMA). La Agencia de Desarrollo del Sector de la Construcción no asume ninguna responsabilidad por el contenido y el uso de estos datos."
+    },
+    "format" : {
+      "id" : "WMS_SRVC",
+      "label" : "WMS",
+      "resource" : "http://publications.europa.eu/resource/authority/file-type/WMS_SRVC"
+    },
+    "contact_point" : [ {
+      "type" : "Kind",
+      "email" : "mailto:agentura@ssva.lt"
+    } ],
+    "access_right" : {
+      "resource" : "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+    },
+    "endpoint_url" : [ "https://www.geoportal.lt/mapproxy/rest/services/gisc_geoportal_public/EAA_NATURA2000/MapServer" ],
+    "publisher" : {
+      "type" : "Organization",
+      "name" : "Viešoji įstaiga Statybos sektoriaus vystymo agentūra",
+      "email" : "mailto:agentura@ssva.lt",
+      "homepage" : "https://ssva.lt"
+    },
+    "translation_meta" : {
+      "details" : {
+        "da" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "ga" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "lv" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "bg" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "sk" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "pl" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "fi" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "mt" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "ro" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "el" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "fr" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "hr" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "sl" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "hu" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "et" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "it" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "cs" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "uk" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "lt" : {
+          "machine_translated" : false
+        },
+        "de" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "es" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "en" : {
+          "machine_translated" : false
+        },
+        "pt" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "sv" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        },
+        "nl" : {
+          "machine_translated" : true,
+          "original_language" : "lt"
+        }
+      },
+      "full_available_languages" : [ "da", "ga", "lv", "bg", "sk", "pl", "fi", "mt", "ro", "el", "fr", "hr", "sl", "hu", "et", "it", "cs", "uk", "lt", "de", "es", "en", "pt", "sv", "nl" ],
+      "status" : "unknown"
+    }
+  }
+}

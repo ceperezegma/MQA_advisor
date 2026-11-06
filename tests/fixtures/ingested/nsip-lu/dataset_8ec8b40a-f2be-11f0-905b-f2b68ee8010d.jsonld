@@ -1,0 +1,400 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/AGRI",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Agriculture, fisheries, forestry and food"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/8ec8b40a-f2be-11f0-905b-f2b68ee8010d",
+            "dcat:theme": [
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/data-theme/AGRI"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI"
+                }
+            ],
+            "dct:identifier": "8ec8b40a-f2be-11f0-905b-f2b68ee8010d",
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "Contrats Biodiversité"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "Primes biodiversité"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "Primes agricoles"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "ANF"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "Biodiv"
+                }
+            ],
+            "dcat:distribution": [
+                {
+                    "@id": "http://data.europa.eu/88u/distribution/11543871-ca44-48d4-b088-107b05f20bbc"
+                },
+                {
+                    "@id": "http://data.europa.eu/88u/distribution/46eeddbb-4b21-450b-a1dc-e6836237f237"
+                }
+            ],
+            "dct:language": [
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/language/DEU"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+                }
+            ],
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Un jeu de données concernant tous les contrats biodiversité, selon le RGD du 24.07.2024, conclus avec les exploitants agricoles par les Stations biologiques, les Bureaux d'études ou l'Administration de la Nature et des Forêts. Les primes sont gérées par l'ANF et liquidées par le SER .\n\nY compris sont les contrôles des échantillons annuels par l'Entité mobile de l'Administration de la Nature et des Forêts\nLes données sensibles récoltées sont le nom et le prénom du bénéficiaire."
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:a2cbb417ea9c3987001b33162a3d52c9"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "dct:type": [
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/dataset-type/GEOSPATIAL"
+                }
+            ],
+            "dcatap:applicableLegislation": [
+                {
+                    "@id": "http://data.legilux.public.lu/eli/etat/leg/rect/2024/07/24/a378/jo"
+                },
+                {
+                    "@id": "http://data.legilux.public.lu/eli/etat/leg/rgd/2024/07/24/a329/jo"
+                }
+            ],
+            "dct:creator": {
+                "@id": "_:8d548e077ccdb29e3e113799efccd250"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL"
+            },
+            "dct:publisher": {
+                "@id": "_:7240e85545914d88517dbbd306ab2613"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Contrats biodiversité"
+            },
+            "dct:temporal": {
+                "@id": "_:b9ccb9faaf58edf5989c878bcbca7002"
+            },
+            "@type": "dcat:Dataset"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Environment"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/11543871-ca44-48d4-b088-107b05f20bbc",
+            "dct:identifier": {
+                "@value": "156",
+                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Contrats biodiversité (Export ShapeFile)"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Export des Données spatiaux des contrats biodiversité"
+            },
+            "dcat:packageFormat": {
+                "@id": "http://www.iana.org/assignments/media-types/application/zip"
+            },
+            "dct:rights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/SHP"
+            },
+            "dcat:compressFormat": {
+                "@id": "http://www.iana.org/assignments/media-types/application/zip"
+            },
+            "dcatap:availability": {
+                "@id": "http://publications.europa.eu/resource/authority/planned-availability/STABLE"
+            },
+            "dct:license": {
+                "@id": "http://publications.europa.eu/resource/authority/licence/no_license"
+            },
+            "dcat:accessURL": {
+                "@id": "http://www.letzaccessdata.lu/"
+            },
+            "dcat:byteSize": {
+                "@value": "900000",
+                "@type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "@type": "dcat:Distribution",
+            "dcat:mediaType": {
+                "@id": "http://www.iana.org/assignments/media-types/application/zip"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/DEU",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "German"
+            },
+            "@type": "dct:LinguisticSystem"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "@type": "dct:RightsStatement",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            }
+        },
+        {
+            "@id": "_:a2cbb417ea9c3987001b33162a3d52c9",
+            "vcard:hasEmail": {
+                "@id": "mailto:biodiv@anf.etat.lu"
+            },
+            "@type": [
+                "vcard:Individual",
+                "vcard:Kind"
+            ],
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Service de la Nature de l'Administration de la Nature et des Forêts"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/FRA",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "French"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "http://data.legilux.public.lu/eli/etat/leg/rect/2024/07/24/a378/jo",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal du 24 juillet 2024 relatif aux aides en faveur de la sauvegarde de la biodiver"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal du 24 juillet 2024 relatif aux aides en faveur de la sauvegarde de la biodiversité en milieu rural - RECTIFICATIF."
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        },
+        {
+            "@id": "_:8d548e077ccdb29e3e113799efccd250",
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration de la nature et des forêts (ANF)"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL",
+            "@type": "dct:Frequency",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Annual"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/GEOSPATIAL",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Geospatial data"
+            }
+        },
+        {
+            "@id": "http://data.legilux.public.lu/eli/etat/leg/rgd/2024/07/24/a329/jo",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal du 24 juillet 2024 relatif aux aides en faveur de la sauvegarde de la biodiver"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal du 24 juillet 2024 relatif aux aides en faveur de la sauvegarde de la biodiversité en milieu rural."
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        },
+        {
+            "@id": "_:7240e85545914d88517dbbd306ab2613",
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration de la nature et des forêts (ANF)"
+            }
+        },
+        {
+            "@id": "_:b9ccb9faaf58edf5989c878bcbca7002",
+            "@type": "dct:PeriodOfTime",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "dcat:startDate": {
+                "@value": "2000-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/46eeddbb-4b21-450b-a1dc-e6836237f237",
+            "dcatap:availability": {
+                "@id": "http://publications.europa.eu/resource/authority/planned-availability/STABLE"
+            },
+            "dct:license": {
+                "@id": "http://publications.europa.eu/resource/authority/licence/no_license"
+            },
+            "dcat:compressFormat": {
+                "@id": "http://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "dcat:byteSize": {
+                "@value": "100000",
+                "@type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            },
+            "@type": "dcat:Distribution",
+            "dcat:mediaType": {
+                "@id": "http://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Contrats biodiversité (Export Excel)"
+            },
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/XLSX"
+            },
+            "dcat:accessURL": {
+                "@id": "http://www.letzaccessdata.lu/"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Export des Données brutes des contrats biodiversité"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "dct:rights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dcat:packageFormat": {
+                "@id": "http://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "dct:identifier": {
+                "@value": "157",
+                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/licence/no_license",
+            "@type": "dct:LicenseDocument",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "No License"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/XLSX",
+            "@type": "dct:MediaTypeOrExtent",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "XLSX"
+            }
+        },
+        {
+            "@id": "http://www.iana.org/assignments/media-types/application/zip",
+            "@type": "dct:MediaType",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "application/zip"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/SHP",
+            "@type": "dct:MediaTypeOrExtent",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "SHP"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/planned-availability/STABLE",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Stable"
+            }
+        },
+        {
+            "@id": "http://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "@type": "dct:MediaType"
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

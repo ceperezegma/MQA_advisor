@@ -1,0 +1,3489 @@
+{
+    "@graph": [
+        {
+            "@id": "_:6e9eb89f9f313df25c614afa6428051f",
+            "vcard:hasEmail": {
+                "@id": "mailto:savivaldybe@klaipedos-r.lt"
+            },
+            "@type": "vcard:Kind"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/XLSX",
+            "@type": "dct:MediaTypeOrExtent"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/2be9f0b7-8cae-42a8-b5f2-9ba0e98005bb",
+            "dct:title": [
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Berichte über Probleme im Bezirk Klaipeda"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Ziņojumi par problēmām Klaipēdas rajonā"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Αναφορές προβλημάτων στην περιοχή Klaipeda"
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Izvješća o problemima u okrugu Klaipeda"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Rapporter om problem i Klaipeda-distriktet"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Tuairiscí ar fhadhbanna i gceantar Klaipeda"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Повідомлення про проблеми в Клайпедському районі"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Segnalazioni di problemi nel distretto di Klaipeda"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "A Klaipeda körzet problémáiról szóló jelentések"
+                },
+                {
+                    "@language": "en-t-lt-t0-mtec",
+                    "@value": "Reports of problems in Klaipeda district"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Доклади за проблеми в област Клайпеда"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Pranešimai apie problemas Klaipėdos rajone"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Rapporti ta' problemi fid-distrett ta' Klaipeda"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Relatórios de problemas no distrito de Klaipeda"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Informes de problemas en el distrito de Klaipeda"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Zprávy o problémech v okrese Klaipeda"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Klaipeda piirkonna probleemidest teatamine"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Meldingen van problemen in Klaipeda district"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Rapoarte de probleme în raionul Klaipeda"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Poročila o težavah v okrožju Klaipeda"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Rapporter om problemer i Klaipeda-distriktet"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Správy o problémoch v okrese Klaipeda"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Rapports de problèmes dans le district de Klaipeda"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Raporty o problemach w powiecie kłajpedzkim"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Raportit ongelmista Klaipedan alueella"
+                }
+            ],
+            "dct:description": [
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Harta problemelor permite rezidenților să raporteze orice încălcări sau eșecuri observate în orice moment al zilei și să monitorizeze progresul examinării raportului lor, iar după analiza raportului, sistemul va informa despre răspunsul primit. Secțiunea \"Probleme pe hartă\" vă permite să vizualizați problemele înregistrate de alți utilizatori, iar secțiunea \"Lista de probleme\" vă permite să vizualizați toate problemele înregistrate. "
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Probleemikaart võimaldab elanikel teatada täheldatud rikkumistest või ebaõnnestumistest igal ajal ja jälgida oma aruande läbivaatamise edenemist ning pärast aruande analüüsimist teavitab süsteem saadud vastusest. Jaotis \"Probleemid kaardil\" võimaldab teil vaadata teiste kasutajate registreeritud probleeme ja jaotis \"Probleemide loend\" võimaldab teil vaadata kõiki registreeritud probleeme. "
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "El mapa de problemas permite a los residentes reportar cualquier violación o falla observada en cualquier momento del día y monitorear el progreso del examen de su informe, y después del análisis del informe, el sistema informará sobre la respuesta recibida. La sección \"Problemas en el mapa\" le permite ver los problemas registrados por otros usuarios, y la sección \"Lista de problemas\" le permite ver todos los problemas registrados. "
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Ongelmakartan avulla asukkaat voivat ilmoittaa havaituista rikkomuksista tai vioista mihin vuorokaudenaikaan tahansa ja seurata raporttinsa tarkastelun etenemistä, ja raportin analysoinnin jälkeen järjestelmä ilmoittaa saadusta vastauksesta. Ongelmat kartalla -osiossa voit tarkastella muiden käyttäjien rekisteröimiä ongelmia, ja Ongelmaluettelo-osiossa voit tarkastella kaikkia rekisteröityjä ongelmia. "
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Die Problemkarte ermöglicht es den Bewohnern, beobachtete Verstöße oder Ausfälle zu jeder Tageszeit zu melden und den Fortschritt der Prüfung ihres Berichts zu überwachen, und nach der Analyse des Berichts informiert das System über die erhaltene Antwort. Im Abschnitt \"Probleme auf der Karte\" können Sie Probleme anzeigen, die von anderen Benutzern registriert wurden, und im Abschnitt \"Problemliste\" können Sie alle registrierten Probleme anzeigen. "
+                },
+                {
+                    "@language": "en-t-lt-t0-mtec",
+                    "@value": "The problem map allows residents to report any observed violations or failures at any time of the day and monitor the progress of the examination of their report, and after the analysis of the report, the system will inform about the response received. The \"Problems on the map\" section allows you to view problems registered by other users, and the \"Problems list\" section allows you to view all registered problems. "
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Il-mappa tal-problema tippermetti lir-residenti jirrapportaw kwalunkwe ksur jew nuqqas osservat fi kwalunkwe ħin tal-ġurnata u jimmonitorjaw il-progress tal-eżami tar-rapport tagħhom, u wara l-analiżi tar-rapport, is-sistema tinforma dwar ir-rispons riċevut. It-taqsima \"Problemi fuq il-mappa\" tippermettilek tara problemi rreġistrati minn utenti oħra, u t-taqsima \"Lista ta 'Problemi\" tippermettilek tara l-problemi rreġistrati kollha. "
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Problemkartan gör det möjligt för boende att rapportera eventuella observerade överträdelser eller misslyckanden när som helst på dagen och övervaka hur granskningen av deras rapport fortskrider, och efter analysen av rapporten kommer systemet att informera om det mottagna svaret. I avsnittet Problem på kartan kan du se problem som registrerats av andra användare, och i avsnittet Problemlista kan du se alla registrerade problem. "
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Problemkortet giver beboerne mulighed for at rapportere eventuelle observerede overtrædelser eller fejl på ethvert tidspunkt af dagen og overvåge forløbet af undersøgelsen af deres rapport, og efter analysen af rapporten vil systemet informere om det modtagne svar. Afsnittet \"Problemer på kortet\" giver dig mulighed for at se problemer, der er registreret af andre brugere, og afsnittet \"Problemer liste\" giver dig mulighed for at se alle registrerede problemer. "
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Mapa problémů umožňuje obyvatelům kdykoli během dne nahlásit jakékoli zjištěné porušení nebo selhání a sledovat průběh zkoumání jejich zprávy a po analýze zprávy bude systém informovat o obdržené odpovědi. Sekce \"Problémy na mapě\" umožňuje zobrazit problémy zaregistrované ostatními uživateli a sekce \"Seznam problémů\" umožňuje zobrazit všechny zaregistrované problémy. "
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "La carte des problèmes permet aux résidents de signaler toute violation ou défaillance observée à tout moment de la journée et de suivre l'avancement de l'examen de leur rapport, et après l'analyse du rapport, le système informera de la réponse reçue. La section \"Problèmes sur la carte\" vous permet de voir les problèmes enregistrés par d'autres utilisateurs, et la section \"Liste des problèmes\" vous permet de voir tous les problèmes enregistrés. "
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "De probleemkaart stelt bewoners in staat om waargenomen schendingen of storingen op elk moment van de dag te melden en de voortgang van het onderzoek van hun rapport te volgen, en na de analyse van het rapport zal het systeem informeren over de ontvangen reactie. In het gedeelte \"Problemen op de kaart\" kunt u problemen bekijken die door andere gebruikers zijn geregistreerd, en in het gedeelte \"Problemenlijst\" kunt u alle geregistreerde problemen bekijken. "
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Karta problema omogućuje stanovnicima da prijave sve uočene povrede ili propuste u bilo koje doba dana i prate napredak pregleda njihovog izvješća, a nakon analize izvješća sustav će obavijestiti o primljenom odgovoru. Odjeljak \"Problemi na karti\" omogućuje vam pregled problema koje su registrirali drugi korisnici, a odjeljak \"Popis problema\" omogućuje vam pregled svih registriranih problema. "
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Mapa problémov umožňuje obyvateľom kedykoľvek počas dňa nahlásiť akékoľvek zistené porušenia alebo zlyhania a monitorovať priebeh preskúmania ich hlásenia a po analýze hlásenia bude systém informovať o prijatej odpovedi. Sekcia \"Problémy na mape\" vám umožňuje zobraziť problémy zaregistrované inými používateľmi a sekcia \"Zoznam problémov\" vám umožňuje zobraziť všetky zaregistrované problémy. "
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "A problématérkép lehetővé teszi a lakosok számára, hogy a nap bármely szakában jelentsék a megfigyelt jogsértéseket vagy hibákat, és nyomon kövessék jelentésük vizsgálatának előrehaladását, és a jelentés elemzése után a rendszer tájékoztatja a kapott válaszról. A \"Problémák a térképen\" rész lehetővé teszi a más felhasználók által regisztrált problémák megtekintését, a \"Problémák listája\" rész pedig az összes regisztrált probléma megtekintését. "
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Ligeann an léarscáil fadhbanna do chónaitheoirí aon sáruithe nó teipeanna breathnaithe a thuairisciú ag am ar bith den lá agus monatóireacht a dhéanamh ar dhul chun cinn an scrúdaithe ar a dtuarascáil, agus tar éis anailís a dhéanamh ar an tuarascáil, cuirfidh an córas an freagra a fuarthas ar an eolas. Ligeann an chuid \"Fadhbanna ar an léarscáil\" duit fadhbanna atá cláraithe ag úsáideoirí eile a fheiceáil, agus tugann an chuid \"Liosta fadhbanna\" deis duit gach fadhb chláraithe a fheiceáil. "
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Zemljevid težav omogoča prebivalcem, da poročajo o vseh ugotovljenih kršitvah ali napakah kadar koli v dnevu in spremljajo napredek pri pregledu svojega poročila, po analizi poročila pa bo sistem obvestil o prejetem odzivu. V razdelku »Težave na zemljevidu« si lahko ogledate težave, ki so jih registrirali drugi uporabniki, v razdelku »Seznam težav« pa si lahko ogledate vse registrirane težave. "
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "O mapa do problema permite que os residentes relatem quaisquer violações ou falhas observadas a qualquer momento do dia e monitorem o progresso do exame de seu relatório e, após a análise do relatório, o sistema informará sobre a resposta recebida. A secção \"Problemas no mapa\" permite-lhe ver problemas registados por outros utilizadores e a secção \"Lista de problemas\" permite-lhe ver todos os problemas registados. "
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Problēmu karte ļauj iedzīvotājiem ziņot par novērotajiem pārkāpumiem vai neveiksmēm jebkurā diennakts laikā un uzraudzīt sava ziņojuma izskatīšanas gaitu, un pēc ziņojuma analīzes sistēma informēs par saņemto atbildi. Sadaļā \"Problēmas kartē\" varat skatīt citu lietotāju reģistrētās problēmas, savukārt sadaļā \"Problēmu saraksts\" varat skatīt visas reģistrētās problēmas. "
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Problemų žemėlapis gyventojams leidžia bet kuriuo paros metu pranešti apie pastebėtus pažeidimus ar gedimus ir stebėti savo pranešimo nagrinėjimo eigą, o pranešimą išanalizavus, sistema informuos apie gautą atsakymą. Skiltyje „Problemos žemėlapyje“ galima peržiūrėti kitų vartotojų užregistruotas problemas, o skiltyje „Problemų sąrašas“ –  visas užregistruotas problemas. "
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Карта проблем дозволяє мешканцям повідомляти про будь-які виявлені порушення або збої в будь-який час доби та контролювати хід експертизи свого звіту, а після аналізу звіту система повідомить про отриману відповідь. Розділ «Проблеми на карті» дозволяє переглядати проблеми, зареєстровані іншими користувачами, а розділ «Список проблем» дозволяє переглядати всі зареєстровані проблеми. "
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Mapa problemu umożliwia mieszkańcom zgłaszanie wszelkich zaobserwowanych naruszeń lub awarii o dowolnej porze dnia i monitorowanie postępów w badaniu ich raportu, a po analizie raportu system poinformuje o otrzymanej odpowiedzi. Sekcja \"Problemy na mapie\" umożliwia przeglądanie problemów zarejestrowanych przez innych użytkowników, a sekcja \"Lista problemów\" umożliwia przeglądanie wszystkich zarejestrowanych problemów. "
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Ο χάρτης προβλημάτων επιτρέπει στους κατοίκους να αναφέρουν τυχόν παρατηρούμενες παραβιάσεις ή αποτυχίες ανά πάσα στιγμή της ημέρας και να παρακολουθούν την πρόοδο της εξέτασης της αναφοράς τους και μετά την ανάλυση της αναφοράς, το σύστημα θα ενημερώσει για την απάντηση που έλαβε. Η ενότητα \"Προβλήματα στο χάρτη\" σας επιτρέπει να προβάλετε προβλήματα που έχουν εγγραφεί από άλλους χρήστες και η ενότητα \"Λίστα προβλημάτων\" σας επιτρέπει να δείτε όλα τα εγγεγραμμένα προβλήματα. "
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "La mappa dei problemi consente ai residenti di segnalare eventuali violazioni o guasti osservati in qualsiasi momento della giornata e monitorare lo stato di avanzamento dell'esame della loro segnalazione e, dopo l'analisi della segnalazione, il sistema informerà sulla risposta ricevuta. La sezione \"Problemi sulla mappa\" consente di visualizzare i problemi registrati da altri utenti e la sezione \"Elenco problemi\" consente di visualizzare tutti i problemi registrati. "
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Картата на проблемите позволява на жителите да докладват за всички наблюдавани нарушения или неуспехи по всяко време на деня и да наблюдават напредъка на разглеждането на техния доклад, а след анализа на доклада системата ще информира за получения отговор. Разделът \"Проблеми на картата\" ви позволява да видите проблемите, регистрирани от други потребители, а разделът \"Списък с проблеми\" ви позволява да видите всички регистрирани проблеми. "
+                }
+            ],
+            "@type": "dcat:Distribution",
+            "dct:issued": {
+                "@value": "2023-04-25",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:license": {
+                "@id": "https://creativecommons.org/licenses/by/4.0/deed.lt"
+            },
+            "dcat:accessURL": {
+                "@id": "https://data.gov.lt/media/filer_public/4d/b6/4db63618-6aa7-40ef-83de-e63f33104462/pranesimai-apie-problemas-klaipedos-rajone.csv"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/distribution-type/DOWNLOADABLE_FILE"
+            },
+            "dcat:mediaType": {
+                "@id": "https://www.iana.org/assignments/media-types/text/csv"
+            },
+            "dct:modified": {
+                "@value": "2023-04-25",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/CSV"
+            },
+            "dcat:downloadURL": {
+                "@id": "https://data.gov.lt/media/filer_public/4d/b6/4db63618-6aa7-40ef-83de-e63f33104462/pranesimai-apie-problemas-klaipedos-rajone.csv"
+            }
+        },
+        {
+            "@id": "https://creativecommons.org/licenses/by/4.0/deed.lt",
+            "@type": "dct:LicenseDocument"
+        },
+        {
+            "@id": "https://www.iana.org/assignments/media-types/text/csv",
+            "@type": "dct:MediaType"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/CSV",
+            "@type": "dct:MediaTypeOrExtent"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/c50bcc2f-303d-493b-af26-593857d2a8bf",
+            "dct:title": [
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Izvješća o problemima u okrugu Klaipeda"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Zprávy o problémech v okrese Klaipeda"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Informes de problemas en el distrito de Klaipeda"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Rapporter om problemer i Klaipeda-distriktet"
+                },
+                {
+                    "@language": "en-t-lt-t0-mtec",
+                    "@value": "Reports of problems in Klaipeda district"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Berichte über Probleme im Bezirk Klaipeda"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Αναφορές προβλημάτων στην περιοχή Klaipeda"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Rapporter om problem i Klaipeda-distriktet"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Ziņojumi par problēmām Klaipēdas rajonā"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Meldingen van problemen in Klaipeda district"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Pranešimai apie problemas Klaipėdos rajone"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Rapports de problèmes dans le district de Klaipeda"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Raporty o problemach w powiecie kłajpedzkim"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Повідомлення про проблеми в Клайпедському районі"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Rapporti ta' problemi fid-distrett ta' Klaipeda"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Rapoarte de probleme în raionul Klaipeda"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Relatórios de problemas no distrito de Klaipeda"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Доклади за проблеми в област Клайпеда"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Poročila o težavah v okrožju Klaipeda"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Správy o problémoch v okrese Klaipeda"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "A Klaipeda körzet problémáiról szóló jelentések"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Raportit ongelmista Klaipedan alueella"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Klaipeda piirkonna probleemidest teatamine"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Tuairiscí ar fhadhbanna i gceantar Klaipeda"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Segnalazioni di problemi nel distretto di Klaipeda"
+                }
+            ],
+            "dct:description": [
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Raporty problemów w powiecie kłajpedzkim Nowe wpisy na okres 2023 r."
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Ziņojumi par problēmām Klaipēdas rajonā Jauni ieraksti par 2023. gada periodu"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Správy o problémoch v okrese Klaipėda Nové záznamy za obdobie 2023"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Tuarascálacha ar fhadhbanna i gceantar Klaipėda Iontrálacha nua don tréimhse 2023"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Доклади за проблеми в област Клайпеда Нови записи за периода 2023 г."
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Звіти про проблеми в Клайпедському районі Нові записи за період 2023 року"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "Problémákról szóló jelentések a Klaipėda kerületben Új bejegyzések a 2023-as időszakra"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Poročila o težavah v okrožju Klaipėda Novi vnosi za obdobje 2023"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Rapporter om problemer i Klaipėda-distriktet Nye oplysninger for perioden 2023"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Berichte über Probleme im Bezirk Klaipėda Neue Einträge für den Zeitraum 2023"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Relatórios de problemas no distrito de Klaipėda Novas entradas para o período de 2023"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Informes de problemas en el distrito de Klaipėda Nuevas entradas para el período de 2023"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Zprávy o problémech v okrese Klaipėda Nové záznamy za období 2023"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Rapporter om problem i Klaipėda-distriktet Nya poster för perioden 2023"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Αναφορές προβλημάτων στην περιοχή Klaipėda Νέες εγγραφές για την περίοδο 2023"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Rapporti ta’ problemi fid-distrett ta’ Klaipėda Entrati ġodda għall-perjodu tal-2023"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Klaipėda piirkonna probleemidest teatamine Uued kanded 2023. aasta kohta"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Segnalazioni di problemi nel distretto di Klaipėda Nuove voci per il periodo del 2023"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Rapoarte de probleme în districtul Klaipėda Înscrieri noi pentru perioada 2023"
+                },
+                {
+                    "@language": "en-t-lt-t0-mtec",
+                    "@value": "Reports of problems in Klaipėda district New entries for the period of 2023"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Pranešimai apie problemas Klaipėdos rajone nauji įrašai 2023 metų laikotarpio"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Meldingen van problemen in het district Klaipėda Nieuwe vermeldingen voor de periode 2023"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Raportit ongelmista Klaipėdan alueella Uusia merkintöjä vuodelle 2023"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Rapports de problèmes dans le district de Klaipėda Nouvelles entrées pour la période 2023"
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Izvješća o problemima u okrugu Klaipėda Novi unosi za razdoblje 2023."
+                }
+            ],
+            "dct:license": {
+                "@id": "https://creativecommons.org/licenses/by/4.0/deed.lt"
+            },
+            "@type": "dcat:Distribution",
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/XLSX"
+            },
+            "dct:issued": {
+                "@value": "2023-12-05",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:modified": {
+                "@value": "2023-12-05",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dcat:mediaType": {
+                "@id": "https://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "dcat:accessURL": {
+                "@id": "https://data.gov.lt/media/filer_public/98/fb/98fb666e-47e9-4fac-94a0-805747bafe0d/problemos_klaipedos_rajone_2023-04-25_-_2023-12-05.xlsx"
+            },
+            "dcat:downloadURL": {
+                "@id": "https://data.gov.lt/media/filer_public/98/fb/98fb666e-47e9-4fac-94a0-805747bafe0d/problemos_klaipedos_rajone_2023-04-25_-_2023-12-05.xlsx"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/distribution-type/DOWNLOADABLE_FILE"
+            }
+        },
+        {
+            "@id": "https://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "@type": "dct:MediaType"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/JSON",
+            "@type": "dct:MediaTypeOrExtent"
+        },
+        {
+            "@id": "_:71a197c31f9c4bf2927b2de2e242a8f5",
+            "foaf:name": "Klaipėdos rajono savivaldybės administracija",
+            "foaf:homepage": {
+                "@id": "http://www.klaipedos-r.lt"
+            },
+            "foaf:mbox": {
+                "@id": "mailto:savivaldybe@klaipedos-r.lt"
+            },
+            "@type": "foaf:Organization"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/BIHOURLY",
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/BIMONTHLY",
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/9ec71fdc-bb4f-4f19-9120-3149a3ffcd28",
+            "dcat:accessService": {
+                "@id": "https://data.gov.lt/datasets/2916/"
+            },
+            "dct:description": [
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Ziņojumi par problēmām Klaipēdas rajonā"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Rapports de problèmes dans le district de Klaipeda"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Informes de problemas en el distrito de Klaipeda"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Raporty o problemach w powiecie kłajpedzkim"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Pranešimai apie problemas Klaipėdos rajone"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Rapporter om problem i Klaipeda-distriktet"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Správy o problémoch v okrese Klaipeda"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Rapporter om problemer i Klaipeda-distriktet"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Rapporti ta' problemi fid-distrett ta' Klaipeda"
+                },
+                {
+                    "@language": "en-t-lt-t0-mtec",
+                    "@value": "Reports of problems in Klaipeda district"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Повідомлення про проблеми в Клайпедському районі"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Доклади за проблеми в област Клайпеда"
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Izvješća o problemima u okrugu Klaipeda"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Poročila o težavah v okrožju Klaipeda"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "A Klaipeda körzet problémáiról szóló jelentések"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Relatórios de problemas no distrito de Klaipeda"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Meldingen van problemen in Klaipeda district"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Raportit ongelmista Klaipedan alueella"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Klaipeda piirkonna probleemidest teatamine"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Tuairiscí ar fhadhbanna i gceantar Klaipeda"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Berichte über Probleme im Bezirk Klaipeda"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Segnalazioni di problemi nel distretto di Klaipeda"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Zprávy o problémech v okrese Klaipeda"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Αναφορές προβλημάτων στην περιοχή Klaipeda"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Rapoarte de probleme în raionul Klaipeda"
+                }
+            ],
+            "dct:title": [
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Rapoarte de probleme în raionul Klaipeda"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Pranešimai apie problemas Klaipėdos rajone"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Informes de problemas en el distrito de Klaipeda"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Správy o problémoch v okrese Klaipeda"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Zprávy o problémech v okrese Klaipeda"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Повідомлення про проблеми в Клайпедському районі"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Rapports de problèmes dans le district de Klaipeda"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Meldingen van problemen in Klaipeda district"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Rapporti ta' problemi fid-distrett ta' Klaipeda"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Ziņojumi par problēmām Klaipēdas rajonā"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "A Klaipeda körzet problémáiról szóló jelentések"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Relatórios de problemas no distrito de Klaipeda"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Αναφορές προβλημάτων στην περιοχή Klaipeda"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Segnalazioni di problemi nel distretto di Klaipeda"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Raportit ongelmista Klaipedan alueella"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Rapporter om problemer i Klaipeda-distriktet"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Klaipeda piirkonna probleemidest teatamine"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Tuairiscí ar fhadhbanna i gceantar Klaipeda"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Rapporter om problem i Klaipeda-distriktet"
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Izvješća o problemima u okrugu Klaipeda"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Berichte über Probleme im Bezirk Klaipeda"
+                },
+                {
+                    "@language": "en-t-lt-t0-mtec",
+                    "@value": "Reports of problems in Klaipeda district"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Доклади за проблеми в област Клайпеда"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Raporty o problemach w powiecie kłajpedzkim"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Poročila o težavah v okrožju Klaipeda"
+                }
+            ],
+            "dcat:accessURL": {
+                "@id": "https://data.gov.lt/media/filer_public/1c/4e/1c4ec8ca-740e-47da-8a55-330b3f82f2ed/locations.csv"
+            },
+            "dct:issued": {
+                "@value": "2025-09-02",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:license": {
+                "@id": "https://creativecommons.org/licenses/by/4.0/deed.lt"
+            },
+            "@type": "dcat:Distribution",
+            "dcat:downloadURL": {
+                "@id": "https://data.gov.lt/media/filer_public/1c/4e/1c4ec8ca-740e-47da-8a55-330b3f82f2ed/locations.csv"
+            },
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/CSV"
+            },
+            "dct:modified": {
+                "@value": "2025-09-02",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/distribution-type/DOWNLOADABLE_FILE"
+            },
+            "dcat:mediaType": {
+                "@id": "https://www.iana.org/assignments/media-types/text/csv"
+            }
+        },
+        {
+            "@id": "https://data.gov.lt/datasets/2916/",
+            "dcat:servesDataset": [
+                {
+                    "@id": "https://data.gov.lt/datasets/1328/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2315/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2808/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/5962/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2742/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2758/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1347/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1292/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2621/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2090/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2723/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1809/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1858/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2518/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1804/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1797/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1550/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/789/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2257/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2525/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1338/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2136/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2877/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2770/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2238/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2208/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2059/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1944/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1240/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2143/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2817/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1853/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1707/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2812/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2078/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2749/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1175/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2574/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1860/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1886/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1000/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2630/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1509/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/500/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2446/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1261/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2327/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2164/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2160/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1385/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2003/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2744/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2714/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1881/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2854/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2145/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2751/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2777/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2686/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2558/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2451/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2497/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1783/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1753/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1625/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2213/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2259/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2488/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2369/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1585/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2910/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2220/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2148/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2833/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2138/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1998/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1891/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1196/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2155/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2896/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2840/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2151/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2721/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2735/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2705/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2500/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1872/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2516/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2619/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1711/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2614/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2269/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2523/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1690/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1445/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2458/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1688/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2355/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1569/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2875/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2889/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2782/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/444/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2906/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2700/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1317/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1914/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2882/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2829/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1865/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1226/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2810/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2661/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2763/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2635/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1898/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1693/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1183/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2453/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1737/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/598/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2507/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2460/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2215/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1350/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1555/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2325/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2176/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2222/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2859/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2172/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2803/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2756/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1900/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2866/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2157/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1788/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2789/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1732/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1758/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2684/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2502/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2463/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/607/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2479/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2668/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1560/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2302/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2318/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2486/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/460/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2861/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2845/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2206/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2043/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2784/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1341/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1996/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1942/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2726/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2894/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1877/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2791/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1760/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2663/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2733/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2024/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2717/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/673/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1870/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1884/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1814/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1695/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2330/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2612/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1534/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2547/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2299/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2444/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2383/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1628/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1567/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2232/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2309/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2178/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2815/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2768/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2712/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/390/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1863/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2852/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2197/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2822/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2181/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2761/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2775/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1049/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2633/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2030/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2670/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2465/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1751/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1623/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1562/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2382/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2519/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2472/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1630/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1324/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1285/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2311/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2188/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1259/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2184/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1343/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1912/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1203/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2689/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2878/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2169/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1847/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1786/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2708/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/827/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1805/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2514/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1800/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1679/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1572/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/799/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1588/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/729/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2253/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2521/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2549/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2456/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1334/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2132/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2873/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2899/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2234/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2843/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2218/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2055/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2796/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2738/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2029/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1315/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2691/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1808/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2880/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1875/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1210/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2824/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2745/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1882/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2493/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2449/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2624/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2559/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2498/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2442/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2909/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1553/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2323/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1287/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2806/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2904/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2827/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2740/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2766/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1371/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2911/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2839/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2850/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2834/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2139/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2773/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1756/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2682/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2477/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1763/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1621/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1779/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1635/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2316/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2484/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1413/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2480/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2379/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1348/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2262/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2288/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1293/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2134/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1446/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2729/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1994/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2069/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2091/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2724/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2892/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2141/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2167/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/916/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1859/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1798/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2608/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2731/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2747/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1866/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2526/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2512/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2610/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2636/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2626/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2239/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2454/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2209/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1565/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1241/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2871/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2885/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2144/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2818/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2216/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2140/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2794/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1383/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1327/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1176/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1861/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1887/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2125/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2836/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2757/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2048/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2631/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2629/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1789/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1733/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2328/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/594/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2503/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/678/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2211/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2321/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2335/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2855/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2146/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2778/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1910/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2093/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2687/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2862/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2809/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2153/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1784/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1948/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1754/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2657/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1943/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2703/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2566/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2690/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1791/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1868/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1761/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2489/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2664/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1633/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1586/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2638/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2314/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2221/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2482/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1670/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1696/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2492/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1346/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1535/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1299/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2841/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2202/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2780/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2270/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2722/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2706/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2890/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1873/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2179/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1803/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1889/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2718/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2088/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1906/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2020/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1712/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2713/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2759/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1880/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1185/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2524/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1896/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1691/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1181/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2459/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1689/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/802/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1735/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2496/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2237/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2505/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2466/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2440/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1624/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2907/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2883/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2174/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2811/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2857/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2170/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2764/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1927/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1325/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/389/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1899/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1234/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2137/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2864/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1106/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2771/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1983/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1999/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2659/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1945/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2508/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2461/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/937/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1708/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2666/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2300/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2326/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1556/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2515/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2279/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2223/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2333/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2867/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2180/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1444/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2158/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2750/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2685/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2874/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2165/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1782/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1796/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2161/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2692/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2715/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2510/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2487/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1773/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1812/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1747/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1584/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2494/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2545/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2452/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2207/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1330/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2490/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2468/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1591/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1626/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2895/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2200/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2214/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2792/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2813/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/422/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2079/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2025/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2734/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1978/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1288/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2807/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1871/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2820/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2741/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1710/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2613/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2548/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1125/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1193/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2445/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1568/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2555/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2249/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2517/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2478/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1386/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2905/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2317/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2900/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2828/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2186/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2198/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1484/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1225/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1239/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2869/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2182/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2762/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1349/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1232/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2830/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2135/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2876/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2846/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1752/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2058/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2550/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1852/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1878/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2473/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2609/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1570/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2312/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2251/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1332/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1344/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2371/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2130/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2156/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2897/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2280/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2720/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1351/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2736/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1806/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2819/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2177/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2163/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2173/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2743/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2769/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2615/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1862/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2522/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2632/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1759/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2622/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2557/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2235/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2205/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1561/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1302/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2242/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2319/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2212/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2790/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2825/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2746/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1909/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1339/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1883/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1922/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/940/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2121/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2147/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2832/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2753/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2044/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2625/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1997/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1202/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2727/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1890/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2499/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1785/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2443/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1554/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2324/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1587/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2196/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2851/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2774/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/996/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2683/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2888/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2781/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1857/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2816/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1864/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2471/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2485/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2660/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2481/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2366/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2634/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2310/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/739/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1692/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1342/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2142/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2168/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2707/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2908/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2748/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1286/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2175/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1885/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2858/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2149/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2802/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1928/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2171/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2627/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2520/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1892/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1685/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2455/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1787/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1731/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1757/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/4118/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2233/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2501/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2217/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1620/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1384/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1666/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1636/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1314/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2301/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2240/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2254/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1223/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2853/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2760/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2837/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2250/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2776/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1895/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/998/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1230/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2860/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2133/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2159/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2844/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2783/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1734/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1995/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1941/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2739/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2509/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2725/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/665/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2504/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1876/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2662/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2322/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2618/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2390/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2511/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/497/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1694/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1533/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2863/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2154/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2879/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2150/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2886/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1792/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2793/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1869/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1801/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2814/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2665/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2026/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2767/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2711/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1979/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2483/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1671/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1697/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1687/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2457/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2378/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1536/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1590/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2203/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2219/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1622/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1300/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2891/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2381/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2303/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1559/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2329/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2210/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2719/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2075/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2730/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/458/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2187/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2199/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1811/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1897/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1182/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2183/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2195/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/803/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1736/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2092/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1911/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1163/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2688/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2506/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2467/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2441/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1769/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/779/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1564/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2513/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2470/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1571/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1326/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2313/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2252/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2912/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1235/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2865/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2835/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2849/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2047/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2788/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1333/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1345/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1946/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2131/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2872/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2898/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2842/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1709/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2066/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2795/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2667/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2737/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2050/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2028/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1807/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1874/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1888/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/884/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1727/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2334/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2616/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2287/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2448/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1340/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2152/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2166/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2236/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2162/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2732/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2693/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2716/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1790/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1867/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2856/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2189/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1813/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2765/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2779/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1748/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2611/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1923/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2495/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2546/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2469/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1755/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2491/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2644/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2658/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1592/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1627/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1566/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2231/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2201/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2476/"
+                }
+            ],
+            "dct:publisher": {
+                "@id": "_:50a5f2b666702dc5fc56a6581b102667"
+            },
+            "dct:creator": {
+                "@id": "_:a7c36b0ba3cb808b336ba009ce97e56e"
+            },
+            "@type": "dcat:DataService",
+            "dct:title": [
+                {
+                    "@language": "en",
+                    "@value": ""
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Atvirų duomenų saugykla"
+                }
+            ],
+            "dct:description": [
+                {
+                    "@language": "en",
+                    "@value": ""
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Duomenų publikavimo paslauga"
+                }
+            ],
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/JSON"
+            },
+            "dcat:endpointURL": {
+                "@id": "https://get.data.gov.lt"
+            },
+            "dct:modified": {
+                "@value": "2026-09-07",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/BIHOURLY"
+            },
+            "dcat:endpointDescription": {
+                "@id": "https://atviriduomenys.readthedocs.io/api/index.html"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:3d444161911c56b95df346ad2345b334"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+            }
+        },
+        {
+            "@id": "_:760dc7731a30f9155544e7694b81b1dc",
+            "foaf:homepage": {
+                "@id": "http://www.klaipedos-r.lt"
+            },
+            "foaf:mbox": {
+                "@id": "mailto:savivaldybe@klaipedos-r.lt"
+            },
+            "@type": "foaf:Organization",
+            "foaf:name": "Klaipėdos rajono savivaldybės administracija"
+        },
+        {
+            "@id": "_:50a5f2b666702dc5fc56a6581b102667",
+            "foaf:mbox": {
+                "@id": "mailto:info@vssa.lt"
+            },
+            "foaf:homepage": {
+                "@id": "https://vssa.lrv.lt/"
+            },
+            "@type": "foaf:Organization",
+            "foaf:name": "Valstybės skaitmeninių sprendimų agentūra"
+        },
+        {
+            "@id": "_:3d444161911c56b95df346ad2345b334",
+            "vcard:hasEmail": {
+                "@id": "mailto:info@vssa.lt"
+            },
+            "@type": "vcard:Kind"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/https-data-gov-lt-datasets-2275-",
+            "dct:description": [
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Datafil med information om problem i Klaipeda-distriktet. Information som ska lämnas: Registreringsnummer, Registreringsdatum, Kort beskrivning av problemet, Problemstatus, Problemlänk till webbplatsen problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Αρχείο δεδομένων που περιέχει πληροφορίες σχετικά με προβλήματα στην περιοχή Klaipeda. Πληροφορίες που πρέπει να παρέχονται: Αριθμός εγγραφής, ημερομηνία εγγραφής, σύντομη περιγραφή του προβλήματος, κατάσταση προβλήματος, σύνδεσμος προβλήματος προς τον ιστότοπο problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Fișier de date care conține informații despre problemele din districtul Klaipeda. Informații care trebuie furnizate: Numărul de înregistrare, Data înregistrării, Scurtă descriere a problemei, Starea problemei, Link-ul problemei către site-ul problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Podatkovna datoteka, ki vsebuje informacije o težavah v okrožju Klaipeda. Informacije, ki jih je treba predložiti: Registracijska številka, datum registracije, kratek opis težave, status težave, povezava težave na spletišče problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Fajl tad-data li fih informazzjoni dwar problemi fid-distrett ta’ Klaipeda. Informazzjoni li għandha tiġi pprovduta: Numru tar-reġistrazzjoni, Data tar-reġistrazzjoni, Deskrizzjoni qasira tal-problema, Status tal-problema, Link tal-problema għas-sit web problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "File di dati contenente informazioni sui problemi nel distretto di Klaipeda. Informazioni da fornire: Numero di registrazione, data di registrazione, breve descrizione del problema, stato del problema, collegamento del problema al sito web problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Fichier de données contenant des informations sur les problèmes dans le district de Klaipeda. Informations à fournir: Numéro d'enregistrement, Date d'enregistrement, Brève description du problème, État du problème, Lien du problème vers le site problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Rekisteri, joka sisältää tietoja Klaipedan alueen ongelmista. Toimitettavat tiedot: Rekisteröintinumero, Rekisteröintipäivä, Lyhyt kuvaus ongelmasta, Ongelman tila, Ongelmalinkki problem.klaipėdos-r.lt-verkkosivustolle."
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Datu fails, kas satur informāciju par problēmām Klaipēdas rajonā. Sniedzamā informācija: Reģistrācijas numurs, Reģistrācijas datums, Īss problēmas apraksts, Problēmas statuss, Problēmas saite uz problem.klaipėdos-r.lt mājas lapu."
+                },
+                {
+                    "@language": "en",
+                    "@value": "A data file that provides information about problems in the district. Information provided: Registration number, Registration date, A brief description of the issues, Problem status, Problem reference on problemos.klaipedos-r.lt website."
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Archivo de datos que contiene información sobre problemas en el distrito de Klaipeda. Información que debe facilitarse: Número de registro, Fecha de registro, Breve descripción del problema, Estado del problema, Enlace del problema al sitio web problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Ficheiro de dados que contém informações sobre problemas no distrito de Klaipeda. Informações a fornecer: Número de registo, Data de registo, Breve descrição do problema, Estado do problema, Ligação do problema para o site problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Файл даних, що містить інформацію про проблеми в Клайпедському районі. Інформація, яку необхідно надати: Реєстраційний номер, Дата реєстрації, Короткий опис проблеми, Статус проблеми, Посилання на сайт problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Duomenų failas, kuriame pateikiama informacija apie problemas Klaipėdos rajone. Pateikiama informacija: Registracijos numeris, Registracijos data, Trumpas problemos aprašymas, Problemos statusas, Problemos nuoroda problemos.klaipedos-r.lt svetainėje."
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Andmefail, mis sisaldab teavet Klaipeda piirkonna probleemide kohta. Esitatav teave: Registreerimisnumber, Registreerimiskuupäev, Probleemi lühikirjeldus, Probleemi staatus, Probleemi link veebisaidile problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Plik z danymi zawierający informacje o problemach w dzielnicy Kłajpeda. Informacje, które należy przekazać: Numer rejestracji, Data rejestracji, Krótki opis problemu, Status problemu, Link problemu do strony internetowej problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Comhad sonraí ina bhfuil faisnéis faoi fhadhbanna i gceantar Klaipeda. Faisnéis atá le soláthar: Uimhir chlárúcháin, Dáta clárúcháin, Tuairisc ghairid ar an bhfadhb, Stádas na faidhbe, Nasc na faidhbe le suíomh gréasáin problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Datový soubor obsahující informace o problémech v okrese Klaipeda. Poskytované informace: Registrační číslo, datum registrace, stručný popis problému, stav problému, odkaz na webovou stránku problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Datafil, der indeholder oplysninger om problemer i Klaipeda-distriktet. Oplysninger, der skal gives: Registreringsnummer, Registreringsdato, Kort beskrivelse af problemet, Problemstatus, Problemlink til webstedet problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Podatkovna datoteka koja sadržava informacije o problemima u okrugu Klaipeda. Informacije koje treba dostaviti: Registracijski broj, datum registracije, kratak opis problema, status problema, poveznica problema na web-mjesto problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Файл с данни, съдържащ информация за проблеми в област Клайпеда. Информация, която трябва да бъде предоставена: Регистрационен номер, дата на регистрация, кратко описание на проблема, състояние на проблема, връзка към уебсайта problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Datendatei mit Informationen über Probleme im Bezirk Klaipeda. Zu übermittelnde Informationen: Registrierungsnummer, Registrierungsdatum, Kurzbeschreibung des Problems, Problemstatus, Problemlink zur Website problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "Adatfájl, amely információkat tartalmaz a Klaipeda kerületi problémákról. Megadandó információk: Regisztrációs szám, Regisztráció dátuma, A probléma rövid leírása, Problémaállapot, Problémahivatkozás a problem.klaipėdos-r.lt weboldalra."
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Gegevensbestand met informatie over problemen in het district Klaipeda. Te verstrekken informatie: Registratienummer, Registratiedatum, Korte beschrijving van het probleem, Probleemstatus, Probleemlink naar de website problem.klaipėdos-r.lt."
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Dátový súbor obsahujúci informácie o problémoch v okrese Klaipeda. Informácie, ktoré sa majú poskytnúť: Registračné číslo, Dátum registrácie, Stručný opis problému, Stav problému, Odkaz na stránku problem.klaipėdos-r.lt."
+                }
+            ],
+            "dcat:contactPoint": {
+                "@id": "_:6e9eb89f9f313df25c614afa6428051f"
+            },
+            "dct:title": [
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Rapports de problèmes dans le district de Klaipeda"
+                },
+                {
+                    "@language": "en",
+                    "@value": "Reports of problems in the Klaipėda district"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Berichte über Probleme im Bezirk Klaipeda"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Pranešimai apie problemas Klaipėdos rajone"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "Problémák jelentése Klaipeda kerületben"
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Izvješća o problemima u okrugu Klaipeda"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Raporty o problemach w dzielnicy Kłajpeda"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Rapporter om problem i Klaipeda-distriktet"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Rapoarte de probleme în districtul Klaipeda"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Raportit Klaipedan alueen ongelmista"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Relatórios de problemas no distrito de Klaipeda"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Ziņojumi par problēmām Klaipēdas rajonā"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Informes de problemas en el distrito de Klaipeda"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Problemen in het district Klaipeda"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Segnalazioni di problemi nel distretto di Klaipeda"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Съобщения за проблеми в област Клайпеда"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Zprávy o problémech v okrese Klaipeda"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Αναφορές προβλημάτων στην περιοχή Klaipeda"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Správy o problémoch v okrese Klaipeda"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Tuairiscí ar fhadhbanna i gceantar Klaipeda"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Poročila o težavah v okrožju Klaipeda"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Rapporter om problemer i Klaipeda-distriktet"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Klaipeda piirkonna probleemidest teatamine"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Rapporti ta' problemi fid-distrett ta' Klaipeda"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Повідомлення про проблеми в Клайпедському районі"
+                }
+            ],
+            "dct:creator": {
+                "@id": "_:760dc7731a30f9155544e7694b81b1dc"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/REGI"
+            },
+            "dcat:keyword": [
+                "Rajono Problemos",
+                "Duobės",
+                "Aplinka"
+            ],
+            "dct:publisher": {
+                "@id": "_:71a197c31f9c4bf2927b2de2e242a8f5"
+            },
+            "dct:issued": {
+                "@value": "2023-04-25",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+            },
+            "dct:modified": {
+                "@value": "2025-12-18",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/BIMONTHLY"
+            },
+            "@type": "dcat:Dataset",
+            "dcat:distribution": [
+                {
+                    "@id": "http://data.europa.eu/88u/distribution/c50bcc2f-303d-493b-af26-593857d2a8bf"
+                },
+                {
+                    "@id": "http://data.europa.eu/88u/distribution/9ec71fdc-bb4f-4f19-9120-3149a3ffcd28"
+                },
+                {
+                    "@id": "http://data.europa.eu/88u/distribution/2be9f0b7-8cae-42a8-b5f2-9ba0e98005bb"
+                }
+            ]
+        },
+        {
+            "@id": "_:a7c36b0ba3cb808b336ba009ce97e56e",
+            "foaf:mbox": {
+                "@id": "mailto:info@vssa.lt"
+            },
+            "foaf:homepage": {
+                "@id": "https://vssa.lrv.lt/"
+            },
+            "@type": "foaf:Organization",
+            "foaf:name": "Valstybės skaitmeninių sprendimų agentūra"
+        }
+    ],
+    "@context": {
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

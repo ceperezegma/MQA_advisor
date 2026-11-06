@@ -1,0 +1,314 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "@type": "dct:RightsStatement",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/DEU",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "German"
+            },
+            "@type": "dct:LinguisticSystem"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/ENG",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "English"
+            },
+            "@type": "dct:LinguisticSystem"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/00a6ece6-6bd8-4640-a489-87903a44bda8",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Arbres remarquables (CSV files)"
+            },
+            "dct:rights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dcat:compressFormat": {
+                "@id": "http://www.iana.org/assignments/media-types/text/csv"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "dct:identifier": {
+                "@value": "145",
+                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "A distribution documenting trees protected for their exceptional and remarkable characteristics across the Grand-Duchy of Luxembourg based on CSV files. This distribution contains exact X/Y coordinates in the LUREF references system. This distribution contains all trees including those that Owners asked to hold confidential and that are only visible for Agents of the Administration de la nature et des forêts."
+            },
+            "dct:license": {
+                "@id": "http://publications.europa.eu/resource/authority/licence/other"
+            },
+            "dcatap:availability": {
+                "@id": "http://publications.europa.eu/resource/authority/planned-availability/STABLE"
+            },
+            "dcat:byteSize": {
+                "@value": "264000",
+                "@type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            },
+            "dcat:packageFormat": {
+                "@id": "http://www.iana.org/assignments/media-types/text/csv"
+            },
+            "dcat:mediaType": {
+                "@id": "http://www.iana.org/assignments/media-types/text/csv"
+            },
+            "@type": "dcat:Distribution",
+            "dcat:accessURL": {
+                "@id": "http://www.letzaccessdata.lu/"
+            },
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/CSV"
+            }
+        },
+        {
+            "@id": "http://www.iana.org/assignments/media-types/text/csv",
+            "@type": "dct:MediaType",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "text/csv"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/FRA",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "French"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/licence/other",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Other"
+            },
+            "@type": "dct:LicenseDocument"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/planned-availability/STABLE",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Stable"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/CSV",
+            "@type": "dct:MediaTypeOrExtent",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "CSV"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/LTZ",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourgish"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Update cont"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/8cd576f6-f2be-11f0-91e6-f2b68ee8010d",
+            "dct:language": [
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/language/LTZ"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/language/ENG"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/language/DEU"
+                }
+            ],
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:creator": {
+                "@id": "_:e92ce1f52d9a3d1159d531f230bf240d"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "A dataset documenting trees protected for their exceptional and remarkable characteristics across the Grand-Duchy of Luxembourg."
+            },
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "trees"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "remarkable trees"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "environnement"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "protection"
+                }
+            ],
+            "dcat:distribution": {
+                "@id": "http://data.europa.eu/88u/distribution/00a6ece6-6bd8-4640-a489-87903a44bda8"
+            },
+            "dct:identifier": "8cd576f6-f2be-11f0-91e6-f2b68ee8010d",
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/GEOSPATIAL"
+            },
+            "dcatap:applicableLegislation": {
+                "@id": "http://data.legilux.public.lu/eli/etat/leg/rgd/2025/01/31/a40/jo"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "@type": "dcat:Dataset",
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Professional Confidential Data"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:605fe9db250647dfcd3b264907aed988"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Arbres remarquables"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT"
+            },
+            "dct:temporal": {
+                "@id": "_:024be7d69d3c7b13e55581292b066783"
+            },
+            "dct:publisher": {
+                "@id": "_:8ebffa145da2ecd68b4898a26ea29d65"
+            },
+            "foaf:page": {
+                "@id": "https://geocatalogue.geoportail.lu/geonetwork/srv/fre/catalog.search#/metadata/373df6df-a91c-4e66-b211-ac2bc1675d56"
+            }
+        },
+        {
+            "@id": "_:e92ce1f52d9a3d1159d531f230bf240d",
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration de la nature et des forêts (ANF)"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/GEOSPATIAL",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Geospatial data"
+            }
+        },
+        {
+            "@id": "http://data.legilux.public.lu/eli/etat/leg/rgd/2025/01/31/a40/jo",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal du 31 janvier 2025 établissant la liste des arbres remarquables."
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal du 31 janvier 2025 établissant la liste des arbres remarquables."
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Environment"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "_:605fe9db250647dfcd3b264907aed988",
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Service des forêts"
+            },
+            "vcard:hasEmail": {
+                "@id": "mailto:forets@anf.etat.lu"
+            },
+            "@type": [
+                "vcard:Individual",
+                "vcard:Kind"
+            ]
+        },
+        {
+            "@id": "_:024be7d69d3c7b13e55581292b066783",
+            "dcat:startDate": {
+                "@value": "2025-01-31",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "@type": "dct:PeriodOfTime",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            }
+        },
+        {
+            "@id": "_:8ebffa145da2ecd68b4898a26ea29d65",
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration de la nature et des forêts (ANF)"
+            }
+        },
+        {
+            "@id": "https://geocatalogue.geoportail.lu/geonetwork/srv/fre/catalog.search#/metadata/373df6df-a91c-4e66-b211-ac2bc1675d56",
+            "@type": "foaf:Document"
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

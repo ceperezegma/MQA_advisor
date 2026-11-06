@@ -1,0 +1,191 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/BEL",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Belgium"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/FRA",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "French"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/4a5b1874-9915-11f0-ad29-da78b5d21580",
+            "dct:temporal": {
+                "@id": "_:bbada360162a8046ff5d6927f954e326"
+            },
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "labour market"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "population"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "individual sociodemographic characteristics"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "employment"
+                }
+            ],
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI"
+            },
+            "dct:publisher": {
+                "@id": "_:380d3ba056ff892077dd622f2483c6ea"
+            },
+            "dct:spatial": [
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/country/FRA"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/country/DEU"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/country/BEL"
+                }
+            ],
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/DAILY"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "@type": "dcat:Dataset",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Informations sur les caractéristiques des demandeurs d'emploi inscrits à l'ADEM"
+            },
+            "dct:identifier": "4a5b1874-9915-11f0-ad29-da78b5d21580",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Demandeurs d'emploi - caractéristiques"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:5a2166a9d45b65aaadaa39294593a93c"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            }
+        },
+        {
+            "@id": "_:bbada360162a8046ff5d6927f954e326",
+            "dcat:startDate": {
+                "@value": "2014-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "@type": "dct:PeriodOfTime"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/SOCI",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Population and society"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "_:380d3ba056ff892077dd622f2483c6ea",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Agence pour le développement de l’emploi (ADEM)"
+            },
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ]
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/FRA",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "France"
+            },
+            "@type": "dct:Location"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/DEU",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Germany"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/DAILY",
+            "@type": "dct:Frequency",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Daily"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "_:5a2166a9d45b65aaadaa39294593a93c",
+            "@type": [
+                "vcard:Kind",
+                "vcard:Organization"
+            ],
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Agence pour le développement de l’emploi (ADEM)"
+            }
+        }
+    ],
+    "@context": {
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

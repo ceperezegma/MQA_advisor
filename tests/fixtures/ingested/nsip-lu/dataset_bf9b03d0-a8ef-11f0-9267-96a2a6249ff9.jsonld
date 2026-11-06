@@ -1,0 +1,275 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "@type": "dct:RightsStatement",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/MONTHLY",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Monthly"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "_:9eba4c1fee631444a51fd8672bfce6d6",
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Administration de l’environnement (AEV)"
+            },
+            "vcard:hasEmail": {
+                "@id": "mailto:data@aev.etat.lu"
+            },
+            "@type": [
+                "vcard:Organization",
+                "vcard:Kind"
+            ]
+        },
+        {
+            "@id": "_:42cf75eb711985f4d4c2890ec582af26",
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ],
+            "foaf:mbox": {
+                "@id": "mailto:data@aev.etat.lu"
+            },
+            "dct:type": {
+                "@id": "http://purl.org/adms/publishertype/NationalAuthority"
+            },
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration de l’environnement (AEV)"
+            }
+        },
+        {
+            "@id": "http://purl.org/adms/publishertype/NationalAuthority",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "National Authority"
+            }
+        },
+        {
+            "@id": "_:3c5a937c017719d0be35e2dbdad2f38a",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "dcat:startDate": {
+                "@value": "2001-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "@type": "dct:PeriodOfTime"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/bf9b03d0-a8ef-11f0-9267-96a2a6249ff9",
+            "dcatap:applicableLegislation": [
+                {
+                    "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2012/12/12/n1/jo"
+                },
+                {
+                    "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2007/12/21/n29"
+                },
+                {
+                    "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2004/07/20/n1/jo"
+                },
+                {
+                    "@id": "http://data.legilux.public.lu/eli/etat/leg/loi/2016/12/23/n20/jo"
+                },
+                {
+                    "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2009/04/20/n1/jo"
+                },
+                {
+                    "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2022/04/07/a180/jo"
+                },
+                {
+                    "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2005/08/03/n1/jo"
+                }
+            ],
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "renewable energy"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "subsidies / financial aid"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "high-energy performance building"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "primehouse / klimabonus wunnen"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "primehouse"
+                }
+            ],
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Aides allouées dans le cadre du régime d’aides financières «Klimabonus Wunnen» et «PRIMe House» pour la promotion de la durabilité, de l’utilisation rationnelle de l’énergie et des énergies renouvelables dans le domaine du logement (assainissement énergétique, installations techniques, logement durable)"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Klimabonus Wunnen"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:temporal": {
+                "@id": "_:3c5a937c017719d0be35e2dbdad2f38a"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:9eba4c1fee631444a51fd8672bfce6d6"
+            },
+            "dct:publisher": {
+                "@id": "_:42cf75eb711985f4d4c2890ec582af26"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/MONTHLY"
+            },
+            "dct:identifier": "bf9b03d0-a8ef-11f0-9267-96a2a6249ff9",
+            "@type": "dcat:Dataset"
+        },
+        {
+            "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2012/12/12/n1/jo",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "RGD 2012 Utilisation rationnelle de l'énergie et énergies renouvelables"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal modifié du 12 décembre 2012 instituant un régime d'aides pour la promotion de l'utilisation rationnelle de l'énergie et la mise en valeur des énergies renouvelables dans le domaine du logement "
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Environment"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2007/12/21/n29",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal du 21 décembre 2007 instituant un régime d'aides pour des personnes physiques en ce qui concerne la promotion de l'utilisation rationnelle de l'énergie et la mise en valeur des énergies renouvelables "
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "RGD 2007 utilisation rationnelle de l'énergie et énergies renouvelables"
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        },
+        {
+            "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2004/07/20/n1/jo",
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "RGD 2001 Utilisation rationnelle de l'énergie et sources d'énergie renouvelables"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal modifié du 17 juillet 2001 instituant un régime d'aides pour la promotion de l'utilisation rationnelle de l'énergie et la mise en valeur des sources d'énergie renouvelables"
+            }
+        },
+        {
+            "@id": "http://data.legilux.public.lu/eli/etat/leg/loi/2016/12/23/n20/jo",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Loi modifiée du 23 décembre 2016 instituant un régime d’aides pour la promotion de la durabilité, de l’utilisation rationnelle de l’énergie et des énergies renouvelables dans le domaine du logement"
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Loi 2016 énergie logement"
+            }
+        },
+        {
+            "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2009/04/20/n1/jo",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal modifié du 20 avril 2009 instituant un régime d'aides pour la promotion de l'utilisation rationnelle de l'énergie et la mise en valeur des énergies renouvelables"
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "RGD 2009 Utilisation rationnelle de l'énergie et énergies renouvelables"
+            }
+        },
+        {
+            "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2022/04/07/a180/jo",
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal modifié du 7 avril 2022 déterminant les mesures d’exécution de la loi du 23 décembre 2016 instituant un régime d’aides pour la promotion de la durabilité, de l’utilisation rationnelle de l’énergie et des énergies renouvelables dans le domaine du logement"
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "RGD 2022 énergie logement"
+            }
+        },
+        {
+            "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2005/08/03/n1/jo",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "RGD 2005 Utilisation rationnelle de l'énergie et sources d'énergie renouvelables"
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal modifié du 3 août 2005 instituant un régime d'aides pour des personnes physiques en ce qui concerne la promotion de l'utilisation rationnelle de l'énergie et la mise en valeur des sources d'énergie renouvelables"
+            }
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

@@ -1,0 +1,181 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/209d236a-caac-11f0-968d-8aadbbc611c1",
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/HEAL"
+            },
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "clinical coding"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "patient admissions"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "healthcare"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "hospital utilization"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "public health"
+                }
+            ],
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Secondary identified diagnosis related to stays or treatments in hospital"
+            },
+            "dct:identifier": "209d236a-caac-11f0-968d-8aadbbc611c1",
+            "dcat:contactPoint": {
+                "@id": "_:8ee50fd1c0e91b474308287fd3982c11"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "This dataset contains secondary diagnoses that may be declared during hospital stays.  \nThis dataset is part of those provided by the IGSS within the framework of the Luxembourg Microdata Platform on Labour and Social Protection. All datasets offered by the IGSS are designed to be interoperable through the use of common pseudonymized identifiers, enabling the linkage of information across different datasets. More particularly, this dataset  must be interconnected with the “Stays and treatments in hospital” dataset using the variable hosp_stay_treat_IDnumber. \nAll the variables in this dataset are personal data and are subject to GDPR compliant protection measures. \nScope: hospital stays and treatments, including day cases, outpatient cases and inpatient cases, registered in a Luxembourg hospital. \nDelay for providing the most recent data: current month -24. \nData sources : CNS."
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/ENG"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dct:publisher": {
+                "@id": "_:bed6c0ff75214d9c95b6e654c9b9cedb"
+            },
+            "foaf:page": {
+                "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf"
+            },
+            "dct:temporal": {
+                "@id": "_:925c403b0747bf3772fb3b4a290e5644"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "@type": "dcat:Dataset",
+            "dcat:landingPage": {
+                "@id": "http://ask4mdp.services-publics.lu/"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/HEAL",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Health"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Annual"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "_:8ee50fd1c0e91b474308287fd3982c11",
+            "vcard:role": {
+                "@language": "eng",
+                "@value": "Provider"
+            },
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Microdata platform"
+            },
+            "@type": [
+                "vcard:Individual",
+                "vcard:Kind"
+            ],
+            "vcard:hasEmail": {
+                "@id": "mailto:microdata.platform@igss.etat.lu"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/ENG",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "English"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "_:bed6c0ff75214d9c95b6e654c9b9cedb",
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Inspection générale de la sécurité sociale (IGSS)"
+            }
+        },
+        {
+            "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "_:925c403b0747bf3772fb3b4a290e5644",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "dcat:startDate": {
+                "@value": "2018-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "@type": "dct:PeriodOfTime"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://ask4mdp.services-publics.lu/",
+            "@type": "foaf:Document"
+        }
+    ],
+    "@context": {
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

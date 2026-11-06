@@ -1,0 +1,291 @@
+{
+    "@graph": [
+        {
+            "@id": "_:202cf4551446ca3c9c522a155c07bc23",
+            "@type": "dct:PeriodOfTime",
+            "dcat:startDate": {
+                "@value": "2001-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/licence/no_license",
+            "@type": "dct:LicenseDocument",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "No License"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "_:a1410c558781fdba6a4803f08b2ee352",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration de la nature et des forêts (ANF)"
+            },
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ]
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/XLSX",
+            "@type": "dct:MediaTypeOrExtent",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "XLSX"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "@type": "dct:RightsStatement",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "_:7420e6162bb61a5063a8c04776df902b",
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Cellule Finances et Budget"
+            },
+            "@type": [
+                "vcard:Individual",
+                "vcard:Kind"
+            ],
+            "vcard:hasEmail": {
+                "@id": "mailto:cellule.finances@anf.etat.lu"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Update cont"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/8f834400-f2be-11f0-905b-f2b68ee8010d",
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:7420e6162bb61a5063a8c04776df902b"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": [
+                {
+                    "@language": "eng",
+                    "@value": "Commercially Confidential Data"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "Personal Data"
+                }
+            ],
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "Factures"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "Ordres de paiement"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "Fournisseurs"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "Dépenses"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "ANF"
+                }
+            ],
+            "dct:creator": {
+                "@id": "_:660ab22d4a3b5ce0ea1f402857d9e9dc"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dépenses de l'ANF payées par le budget interne de l'Administration"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "@type": "dcat:Dataset",
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT"
+            },
+            "dct:temporal": {
+                "@id": "_:202cf4551446ca3c9c522a155c07bc23"
+            },
+            "dct:publisher": {
+                "@id": "_:a1410c558781fdba6a4803f08b2ee352"
+            },
+            "dcat:distribution": {
+                "@id": "http://data.europa.eu/88u/distribution/6a380f1c-f557-4880-9205-47eadbee713e"
+            },
+            "dcat:theme": [
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/data-theme/ECON"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI"
+                }
+            ],
+            "dcatap:applicableLegislation": {
+                "@id": "https://legilux.public.lu/eli/etat/leg/loi/1999/06/08/n2/consolide/20250101"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Jeu de données incluant tous les ordres de paiement payés sur le budget interne de l'ANF.\nLes données sensibles récoltées sont le numéro de la pièce, le numéro de l'ordre de paiement, la pièce de paiement, le nom du fournisseur."
+            },
+            "dct:identifier": "8f834400-f2be-11f0-905b-f2b68ee8010d"
+        },
+        {
+            "@id": "_:660ab22d4a3b5ce0ea1f402857d9e9dc",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration de la nature et des forêts (ANF)"
+            },
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ]
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/FRA",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "French"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/6a380f1c-f557-4880-9205-47eadbee713e",
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "dct:identifier": {
+                "@value": "159",
+                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            },
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/XLSX"
+            },
+            "dct:rights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "@type": "dcat:Distribution",
+            "dcatap:availability": {
+                "@id": "http://publications.europa.eu/resource/authority/planned-availability/STABLE"
+            },
+            "dcat:mediaType": {
+                "@id": "http://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "dcat:compressFormat": {
+                "@id": "http://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "dcat:accessURL": {
+                "@id": "http://www.letzaccessdata.lu/"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Rapport détaillé selon les filtres choisis"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dépenses de l'ANF payées par le budget interne de l'Administration (Rapport détaillé)"
+            },
+            "dct:license": {
+                "@id": "http://publications.europa.eu/resource/authority/licence/no_license"
+            },
+            "dcat:packageFormat": {
+                "@id": "http://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "dcat:byteSize": {
+                "@value": "100000",
+                "@type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ECON",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Economy and finance"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "https://legilux.public.lu/eli/etat/leg/loi/1999/06/08/n2/consolide/20250101",
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "https://legilux.public.lu/eli/etat/leg/loi/1999/06/08/n2/consolide/20250101"
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Environment"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "http://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "@type": "dct:MediaType"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/planned-availability/STABLE",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Stable"
+            }
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

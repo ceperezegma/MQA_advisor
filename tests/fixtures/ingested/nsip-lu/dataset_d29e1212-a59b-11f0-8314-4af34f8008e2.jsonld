@@ -1,0 +1,331 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/HTML",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "HTML"
+            },
+            "@type": "dct:MediaTypeOrExtent"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/licence/no_license",
+            "@type": "dct:LicenseDocument",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "No License"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "@type": "dct:RightsStatement",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/fb09d308-6b8b-4cfe-b74c-7abbdbf91f8a",
+            "dct:rights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "@type": "dcat:Distribution",
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/CSV"
+            },
+            "dcat:accessURL": [
+                {
+                    "@id": "http://www.letzaccessdata.lu/"
+                },
+                {
+                    "@id": "https://letzdata.public.lu/"
+                }
+            ],
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Company addresses relating to business permits applications as CSV-file"
+            },
+            "dcatap:availability": {
+                "@id": "http://publications.europa.eu/resource/authority/planned-availability/AVAILABLE"
+            },
+            "dct:license": {
+                "@id": "http://publications.europa.eu/resource/authority/licence/no_license"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Data on company addresses relating to business permits in .csv-file form"
+            },
+            "dcat:byteSize": {
+                "@value": "1",
+                "@type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            },
+            "dct:identifier": {
+                "@value": "111",
+                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/FRA",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "French"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/CSV",
+            "@type": "dct:MediaTypeOrExtent",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "CSV"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/planned-availability/AVAILABLE",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Available"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/AS_NEEDED",
+            "@type": "dct:Frequency",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "As needed"
+            }
+        },
+        {
+            "@id": "_:6d81be219819e6a6db10d5b171ceb5ac",
+            "@type": "dct:PeriodOfTime",
+            "dcat:startDate": {
+                "@value": "1913-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            }
+        },
+        {
+            "@id": "_:477f0f3d620c2fc36a28b32e174563a3",
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Ministère de l’Économie (MECO) - Direction générale PME, simplification administrative, artisanat et commerce"
+            }
+        },
+        {
+            "@id": "_:ae31f1ba67e83723ff1df9f55db876a6",
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ],
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Ministère de l’Économie (MECO)"
+            },
+            "dct:type": {
+                "@id": "http://purl.org/adms/publishertype/NationalAuthority"
+            },
+            "foaf:mbox": {
+                "@id": "mailto:data@eco.etat.lu"
+            }
+        },
+        {
+            "@id": "http://purl.org/adms/publishertype/NationalAuthority",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "National Authority"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ECON",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Economy and finance"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/GOVE",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Government and public sector"
+            }
+        },
+        {
+            "@id": "_:9d84ecf2352b81d26e13d9646bf2c410",
+            "vcard:hasEmail": {
+                "@id": "mailto:data@eco.etat.lu"
+            },
+            "@type": [
+                "vcard:Individual",
+                "vcard:Kind"
+            ],
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "data@eco.etat.lu"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/d29e1212-a59b-11f0-8314-4af34f8008e2",
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "prior notification certificates"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "business"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "operating address"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "craft"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "point of sale"
+                }
+            ],
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "dct:creator": {
+                "@id": "_:477f0f3d620c2fc36a28b32e174563a3"
+            },
+            "dct:temporal": {
+                "@id": "_:6d81be219819e6a6db10d5b171ceb5ac"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/AS_NEEDED"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "This dataset contains information on company addresses relating to business permits. These are required for commercial and craft activities, as well as certain liberal professions, when carried out by self-employed individuals or companies, in Luxembourg. Once the business permit has been cancelled, the addresses are not updated anymore.\nPlease note that most of the variables in this dataset are \"This dataset contains information on company addresses relating to business permits. These are required for commercial and craft activities, as well as certain liberal professions, when carried out by self-employed individuals or companies, in Luxembourg. Once the business permit has been cancelled, the addresses are not updated anymore. Please note that most of the variables in this dataset are public."
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dcat:distribution": [
+                {
+                    "@id": "http://data.europa.eu/88u/distribution/425cdae2-d51b-4fd8-b439-7fb6022ba0a9"
+                },
+                {
+                    "@id": "http://data.europa.eu/88u/distribution/fb09d308-6b8b-4cfe-b74c-7abbdbf91f8a"
+                }
+            ],
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Business permits: Company addresses"
+            },
+            "dct:identifier": "d29e1212-a59b-11f0-8314-4af34f8008e2",
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:publisher": {
+                "@id": "_:ae31f1ba67e83723ff1df9f55db876a6"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:9d84ecf2352b81d26e13d9646bf2c410"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dcat:theme": [
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/data-theme/ECON"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/data-theme/GOVE"
+                }
+            ],
+            "@type": "dcat:Dataset"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/425cdae2-d51b-4fd8-b439-7fb6022ba0a9",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Company addresses relating to business permits via the MMAET system"
+            },
+            "dct:license": {
+                "@id": "http://publications.europa.eu/resource/authority/licence/no_license"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Data on company addresses relating to business permits via the Ministry of Economy's back office system, MMAET."
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "dcat:accessURL": [
+                {
+                    "@id": "http://www.letzaccessdata.lu/"
+                },
+                {
+                    "@id": "https://mm-aet.intranet.etat.lu/"
+                }
+            ],
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/HTML"
+            },
+            "dcatap:availability": {
+                "@id": "http://publications.europa.eu/resource/authority/planned-availability/AVAILABLE"
+            },
+            "dct:rights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:identifier": {
+                "@value": "112",
+                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            },
+            "@type": "dcat:Distribution",
+            "dcat:byteSize": {
+                "@value": "1",
+                "@type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            }
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

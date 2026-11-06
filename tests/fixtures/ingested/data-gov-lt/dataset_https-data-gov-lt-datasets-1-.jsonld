@@ -1,0 +1,335 @@
+{
+    "@graph": [
+        {
+            "@id": "_:482966d36b9f0715a54c34334fb5e197",
+            "@type": "foaf:Organization",
+            "foaf:mbox": {
+                "@id": "mailto:info@nsa.smm.lt"
+            },
+            "foaf:name": "Nacionalinė švietimo agentūra",
+            "foaf:homepage": {
+                "@id": "http://www.nsa.smm.lt"
+            }
+        },
+        {
+            "@id": "https://creativecommons.org/licenses/by/4.0/deed.lt",
+            "@type": "dct:LicenseDocument"
+        },
+        {
+            "@id": "https://www.iana.org/assignments/media-types/text/csv",
+            "@type": "dct:MediaType"
+        },
+        {
+            "@id": "_:41d9ffe218ba336c7db883c23c27e777",
+            "@type": "vcard:Kind",
+            "vcard:hasEmail": {
+                "@id": "mailto:info@nsa.smm.lt"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/352fba30-570d-4271-9e18-c6b893fa23f4",
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/CSV"
+            },
+            "dcat:accessURL": {
+                "@id": "https://data.gov.lt/media/filer_public/aa/44/aa4425de-8b1b-4a8b-8d7a-97e641304218/vaiku_neformaliojo_svietimo_teikeju_skaicius-1-lt-lt.csv"
+            },
+            "dct:title": {
+                "@language": "lt",
+                "@value": "﻿Vaikų neformaliojo švietimo teikėjų skaičius"
+            },
+            "@type": "dcat:Distribution",
+            "dcat:downloadURL": {
+                "@id": "https://data.gov.lt/media/filer_public/aa/44/aa4425de-8b1b-4a8b-8d7a-97e641304218/vaiku_neformaliojo_svietimo_teikeju_skaicius-1-lt-lt.csv"
+            },
+            "dct:issued": {
+                "@value": "2020-04-15",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:modified": {
+                "@value": "2026-10-23",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/distribution-type/DOWNLOADABLE_FILE"
+            },
+            "dct:license": {
+                "@id": "https://creativecommons.org/licenses/by/4.0/deed.lt"
+            },
+            "dct:description": {
+                "@language": "lt",
+                "@value": "﻿Vaikų neformaliojo švietimo teikėjų skaičius"
+            },
+            "dcat:mediaType": {
+                "@id": "https://www.iana.org/assignments/media-types/text/csv"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/CSV",
+            "@type": "dct:MediaTypeOrExtent"
+        },
+        {
+            "@id": "_:320ab7ccac2753c4cf7d52028171726b",
+            "foaf:mbox": {
+                "@id": "mailto:info@nsa.smm.lt"
+            },
+            "foaf:name": "Nacionalinė švietimo agentūra",
+            "@type": "foaf:Organization",
+            "foaf:homepage": {
+                "@id": "http://www.nsa.smm.lt"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/https-data-gov-lt-datasets-1-",
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL"
+            },
+            "dct:description": [
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Lista de proveedores de educación con acceso a programas acreditados de educación no formal para niños"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Luettelo koulutuksen tarjoajista, joilla on pääsy akkreditoituihin epävirallisiin lasten koulutusohjelmiin"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Seznam ponudnikov izobraževanja z dostopom do akreditiranih programov neformalnega izobraževanja za otroke"
+                },
+                {
+                    "@language": "en",
+                    "@value": "List of education providers with access to accredited non-formal education programs for children"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Lista ta’ fornituri tal-edukazzjoni b’aċċess għal programmi ta’ edukazzjoni mhux formali akkreditati għat-tfal"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Lista furnizorilor de educație care au acces la programe acreditate de educație non-formală pentru copii"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Loetelu haridusasutustest, kellel on juurdepääs lastele mõeldud akrediteeritud mitteformaalse hariduse programmidele"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Liosta de sholáthraithe oideachais a bhfuil rochtain acu ar chláir oideachais sheachfhoirmiúla chreidiúnaithe do leanaí"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Wykaz organizatorów kształcenia mających dostęp do akredytowanych programów kształcenia pozaformalnego dla dzieci"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Перелік закладів освіти, які мають доступ до акредитованих програм неформальної освіти для дітей"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Κατάλογος παρόχων εκπαίδευσης με πρόσβαση σε διαπιστευμένα προγράμματα μη τυπικής εκπαίδευσης για παιδιά"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Seznam poskytovatelů vzdělávání s přístupem k akreditovaným programům neformálního vzdělávání pro děti"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Liste der Bildungsanbieter mit Zugang zu akkreditierten nichtformalen Bildungsprogrammen für Kinder"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "A gyermekeknek szóló akkreditált nem formális oktatási programokhoz hozzáféréssel rendelkező oktatási szolgáltatók jegyzéke"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Lista de prestadores de ensino com acesso a programas de ensino não formal acreditados para crianças"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Liste des prestataires d’enseignement ayant accès à des programmes d’éducation non formelle accrédités pour les enfants"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Izglītības pakalpojumu sniedzēju saraksts, kuriem ir piekļuve akreditētām bērnu neformālās izglītības programmām"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Förteckning över utbildningsanordnare med tillgång till ackrediterade icke-formella utbildningsprogram för barn"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Zoznam poskytovateľov vzdelávania s prístupom k akreditovaným programom neformálneho vzdelávania pre deti"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Liste over uddannelsesudbydere med adgang til akkrediterede ikkeformelle uddannelsesprogrammer for børn"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Elenco degli erogatori di istruzione che hanno accesso a programmi di istruzione non formale accreditati per i bambini"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Списък на доставчиците на образование с достъп до акредитирани програми за неформално образование за деца"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Lijst van onderwijsaanbieders met toegang tot geaccrediteerde niet-formele onderwijsprogramma's voor kinderen"
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Popis pružatelja obrazovanja s pristupom akreditiranim programima neformalnog obrazovanja za djecu"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Švietimo teikėjų, turinčių galimybę vykdyti akredituotas neformaliojo vaikų švietimo programas, sąrašas"
+                }
+            ],
+            "dct:title": [
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Lastele mitteformaalse hariduse pakkujad"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Aanbieders van niet-formeel onderwijs voor kinderen"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "A gyermekek nem formális oktatását nyújtó szolgáltatók"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Πάροχοι μη τυπικής εκπαίδευσης για παιδιά"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Anbieter von nichtformaler Bildung für Kinder"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Prestadores de educação não formal para crianças"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Fournisseurs d'éducation non formelle pour les enfants"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Udbydere af ikkeformel uddannelse for børn"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Fornituri ta' edukazzjoni mhux formali għat-tfal"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "I fornitori di istruzione non formale per i bambini"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Bērnu neformālās izglītības nodrošinātāji"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Vaikų neformaliojo švietimo teikėjai"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Poskytovatelé neformálního vzdělávání pro děti"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Tillhandahållare av icke-formell utbildning för barn"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Izvajalci neformalnega izobraževanja otrok"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Poskytovatelia neformálneho vzdelávania pre deti"
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Pružatelji neformalnog obrazovanja za djecu"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Провайдери неформальної освіти для дітей"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Proveedores de educación no formal para niños"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Lasten epävirallisen koulutuksen tarjoajat"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Доставчици на неформално образование за деца"
+                },
+                {
+                    "@language": "en",
+                    "@value": "Non-formal education providers for children"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Dostawcy kształcenia pozaformalnego dla dzieci"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Soláthraithe oideachais sheachfhoirmiúil do leanaí"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Furnizori de educație non-formală pentru copii"
+                }
+            ],
+            "dcat:keyword": [
+                "Švietimo Tiekėjai",
+                "Neformalus Švietimas"
+            ],
+            "dct:modified": {
+                "@value": "2025-12-18",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dcat:distribution": {
+                "@id": "http://data.europa.eu/88u/distribution/352fba30-570d-4271-9e18-c6b893fa23f4"
+            },
+            "dct:publisher": {
+                "@id": "_:482966d36b9f0715a54c34334fb5e197"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:41d9ffe218ba336c7db883c23c27e777"
+            },
+            "dct:issued": {
+                "@value": "2023-04-06",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/EDUC"
+            },
+            "@type": "dcat:Dataset",
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+            },
+            "dct:creator": {
+                "@id": "_:320ab7ccac2753c4cf7d52028171726b"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL",
+            "@type": "dct:Frequency"
+        }
+    ],
+    "@context": {
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

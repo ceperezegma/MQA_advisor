@@ -1,0 +1,281 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/licence/no_license",
+            "@type": "dct:LicenseDocument",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "No License"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "@type": "dct:RightsStatement",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/XLSX",
+            "@type": "dct:MediaTypeOrExtent",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "XLSX"
+            }
+        },
+        {
+            "@id": "_:a846b7c72454ee88e45df6dce3730d0a",
+            "dcat:startDate": {
+                "@value": "2012-10-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "@type": "dct:PeriodOfTime"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "_:a6a1ea4182c39793d15de28e924bacab",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration de la nature et des forêts (ANF)"
+            },
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ]
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/LTZ",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourgish"
+            }
+        },
+        {
+            "@id": "http://data.legilux.public.lu/eli/etat/leg/rgd/2023/08/30/a569/jo",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal du 30 août 2023 concernant l’indemnisation des dégâts matériels commis par certaines espèces animales protégées et les subventions pour les mesures préventives y relatives."
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal du 30 août 2023 concernant l’indemnisation des dégâts matériels commis par cer"
+            },
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource"
+        },
+        {
+            "@id": "http://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "@type": "dct:MediaType"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/FRA",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "French"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/DAILY",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Daily"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/9110dd1e-f2be-11f0-905b-f2b68ee8010d",
+            "dct:publisher": {
+                "@id": "_:5d68cdec10806ee758b65cfd69d86813"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:5ec8dc1cf074dafbeb5dfc4ef07e5e45"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dégâts causés par Espèces protégées"
+            },
+            "dcatap:applicableLegislation": {
+                "@id": "http://data.legilux.public.lu/eli/etat/leg/rgd/2023/08/30/a569/jo"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/DAILY"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI"
+            },
+            "dcat:distribution": {
+                "@id": "http://data.europa.eu/88u/distribution/dc436f2c-5f68-4b31-9ae6-1dec676d2c5d"
+            },
+            "dct:language": [
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+                },
+                {
+                    "@id": "http://publications.europa.eu/resource/authority/language/LTZ"
+                }
+            ],
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Dégâts dans les cultures causés par les espèces sauvages protégées qui sont remboursés par l'État aux demandeurs  \nselon des tarifs définis par le Service  d'Économie rurale du Ministère de l'Agriculture, de l'Alimentation et de la Viticulture.\nLes données sensibles récoltées sont le nom, l'adresse du demandeur ainsi que le détail de la surface où une culture a été endommagée ou bien détruite par une espèce protégée de la faune sauvage."
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "@type": "dcat:Dataset",
+            "dct:identifier": "9110dd1e-f2be-11f0-905b-f2b68ee8010d",
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "ANF"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "espèces protégées"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "dégâts cultures"
+                }
+            ],
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "dct:temporal": {
+                "@id": "_:a846b7c72454ee88e45df6dce3730d0a"
+            },
+            "dct:creator": {
+                "@id": "_:a6a1ea4182c39793d15de28e924bacab"
+            }
+        },
+        {
+            "@id": "_:5d68cdec10806ee758b65cfd69d86813",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration de la nature et des forêts (ANF)"
+            },
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ]
+        },
+        {
+            "@id": "_:5ec8dc1cf074dafbeb5dfc4ef07e5e45",
+            "@type": [
+                "vcard:Individual",
+                "vcard:Kind"
+            ],
+            "vcard:hasEmail": {
+                "@id": "mailto:fauna@anf.etat.lu"
+            },
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Laurent SCHLEY"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Environment"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/dc436f2c-5f68-4b31-9ae6-1dec676d2c5d",
+            "dct:identifier": {
+                "@value": "163",
+                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            },
+            "dcat:compressFormat": {
+                "@id": "http://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "@type": "dcat:Distribution",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Données collectées par le Service Faune sauvage et Chasse via des déclarations sous format d'un formulaire préimprimé"
+            },
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/FRA"
+            },
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dégâts causés par Espèces protégées (Données brutes - Excel)"
+            },
+            "dcat:packageFormat": {
+                "@id": "http://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "dcatap:availability": {
+                "@id": "http://publications.europa.eu/resource/authority/planned-availability/STABLE"
+            },
+            "dcat:mediaType": {
+                "@id": "http://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "dcat:byteSize": {
+                "@value": "100000",
+                "@type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            },
+            "dct:rights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dcat:accessURL": {
+                "@id": "http://www.letzaccessdata.lu/"
+            },
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/XLSX"
+            },
+            "dct:license": {
+                "@id": "http://publications.europa.eu/resource/authority/licence/no_license"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/planned-availability/STABLE",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Stable"
+            }
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

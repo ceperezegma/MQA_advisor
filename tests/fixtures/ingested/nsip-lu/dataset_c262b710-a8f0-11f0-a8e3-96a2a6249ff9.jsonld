@@ -1,0 +1,219 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/MONTHLY",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Monthly"
+            },
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "http://purl.org/adms/publishertype/NationalAuthority",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "National Authority"
+            },
+            "@type": "skos:Concept"
+        },
+        {
+            "@id": "http://data.legilux.public.lu/eli/etat/leg/loi/2020/12/15/a994/jo",
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Loi du 15 décembre 2020 relative au climat"
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "Loi 2020 climat"
+            }
+        },
+        {
+            "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2019/03/07/a183/jo",
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal modifié du 7 mars 2019 portant introduction d’une aide financière pour la promotion des véhicules routiers à zéro ou à faibles émissions de CO2"
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "RGD 2019 véhicules faibles émissions CO2"
+            }
+        },
+        {
+            "@id": "_:09b57c458bd2d8a223c46a421fbff01e",
+            "dcat:startDate": {
+                "@value": "2019-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "@type": "dct:PeriodOfTime",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Environment"
+            }
+        },
+        {
+            "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2020/08/19/a702/jo",
+            "@type": "http://data.europa.eu/eli/ontology#LegalResource",
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Règlement grand-ducal du 19 août 2020 portant introduction d’une aide financière pour l’installation de bornes de charge privées pour véhicules électriques"
+            },
+            "rdfs:label": {
+                "@language": "eng",
+                "@value": "RGD 2020 bornes de charge "
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/c262b710-a8f0-11f0-a8e3-96a2a6249ff9",
+            "dcat:contactPoint": {
+                "@id": "_:e7b4128f41823341186b15706eda27f0"
+            },
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "wallbox"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "subsidies / financial aid"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "pedal-assisted cycles"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "electric vehicles"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "bicycles"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "klimabonus mobilitéit"
+                }
+            ],
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            },
+            "dct:publisher": {
+                "@id": "_:9fd6b842e00f58fddf2609651d09d31a"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/MONTHLY"
+            },
+            "dct:temporal": {
+                "@id": "_:09b57c458bd2d8a223c46a421fbff01e"
+            },
+            "@type": "dcat:Dataset",
+            "dcatap:applicableLegislation": [
+                {
+                    "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2020/08/19/a702/jo"
+                },
+                {
+                    "@id": "http://data.legilux.public.lu/eli/etat/leg/loi/2020/12/15/a994/jo"
+                },
+                {
+                    "@id": "https://legilux.public.lu/eli/etat/leg/rgd/2019/03/07/a183/jo"
+                }
+            ],
+            "dct:identifier": "c262b710-a8f0-11f0-a8e3-96a2a6249ff9",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Klimabonus Mobilitéit"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "Aides allouées dans le cadre du régime d’aides financières «Klimabonus Mobilitéit» pour la promotion des véhicules routiers à zéro émission de CO2 (véhicules & cycles) ainsi que pour l’installation de bornes de charge privées pour véhicules électriques (Mise à jour mensuelle)"
+            }
+        },
+        {
+            "@id": "_:e7b4128f41823341186b15706eda27f0",
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Administration de l’environnement (AEV)"
+            },
+            "vcard:hasEmail": {
+                "@id": "mailto:data@aev.etat.lu"
+            },
+            "@type": [
+                "vcard:Kind",
+                "vcard:Organization"
+            ]
+        },
+        {
+            "@id": "_:9fd6b842e00f58fddf2609651d09d31a",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Administration de l’environnement (AEV)"
+            },
+            "foaf:mbox": {
+                "@id": "mailto:data@aev.etat.lu"
+            },
+            "@type": [
+                "foaf:Organization",
+                "foaf:Agent"
+            ],
+            "dct:type": {
+                "@id": "http://purl.org/adms/publishertype/NationalAuthority"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

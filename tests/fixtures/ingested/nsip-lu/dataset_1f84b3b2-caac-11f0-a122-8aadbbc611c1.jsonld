@@ -1,0 +1,181 @@
+{
+    "@graph": [
+        {
+            "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Non public"
+            },
+            "@type": "dct:RightsStatement"
+        },
+        {
+            "@id": "_:20f04cef4f3de3ab4dccac9a35bdf461",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Dataset Coverage Period"
+            },
+            "dcat:startDate": {
+                "@value": "2012-01-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "@type": "dct:PeriodOfTime"
+        },
+        {
+            "@id": "_:cc1ea47e04b113160e12413f7f71c06e",
+            "vcard:fn": {
+                "@language": "eng",
+                "@value": "Microdata platform"
+            },
+            "@type": [
+                "vcard:Kind",
+                "vcard:Individual"
+            ],
+            "vcard:hasEmail": {
+                "@id": "mailto:microdata.platform@igss.etat.lu"
+            },
+            "vcard:role": {
+                "@language": "eng",
+                "@value": "Provider"
+            }
+        },
+        {
+            "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/1f84b3b2-caac-11f0-a122-8aadbbc611c1",
+            "dct:publisher": {
+                "@id": "_:c0d8c27ebb63007f0cc5537089303240"
+            },
+            "dct:description": {
+                "@language": "eng",
+                "@value": "This dataset contains all the medical acts performed by doctors and dentists for a reference period (year and month), covered by Luxembourg social security and performed in the country. This includes residents and non-residents, provided they are affiliated to the Luxembourg social protection system. \nThis dataset is part of those provided by the IGSS within the framework of the Luxembourg Microdata Platform on Labour and Social Protection. All datasets offered by the IGSS are designed to be interoperable through the use of common pseudonymized identifiers, enabling the linkage of information across different datasets. \nAll the variables in this dataset are personal data and are subject to GDPR compliant protection measures. \nScope: medical acts performed by doctors and dentists, covered by Luxembourg social security and performed in the country. \nDelay for providing the most recent data: current month -24. \nData sources : CNS."
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/LUX"
+            },
+            "dcat:keyword": [
+                {
+                    "@language": "eng",
+                    "@value": "medical and paramedical services"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "public health"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "health expenditure"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "healthcare"
+                },
+                {
+                    "@language": "eng",
+                    "@value": "billing and reimbursement"
+                }
+            ],
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/ENG"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/HEAL"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA"
+            },
+            "dct:temporal": {
+                "@id": "_:20f04cef4f3de3ab4dccac9a35bdf461"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+            },
+            "dcat:landingPage": {
+                "@id": "http://ask4mdp.services-publics.lu/"
+            },
+            "dct:identifier": "1f84b3b2-caac-11f0-a122-8aadbbc611c1",
+            "foaf:page": {
+                "@id": "https://igss.gouvernement.lu/dam-assets/microdata-platform/data-dictionary.pdf"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL"
+            },
+            "@type": "dcat:Dataset",
+            "dct:title": {
+                "@language": "eng",
+                "@value": "Medical acts"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:cc1ea47e04b113160e12413f7f71c06e"
+            },
+            "http://www.w3.org/ns/dpv#dataProtectionType": {
+                "@language": "eng",
+                "@value": "Personal Data"
+            }
+        },
+        {
+            "@id": "_:c0d8c27ebb63007f0cc5537089303240",
+            "foaf:name": {
+                "@language": "eng",
+                "@value": "Inspection générale de la sécurité sociale (IGSS)"
+            },
+            "@type": [
+                "foaf:Agent",
+                "foaf:Organization"
+            ]
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/country/LUX",
+            "@type": "dct:Location",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Luxembourg"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/language/ENG",
+            "@type": "dct:LinguisticSystem",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "English"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/data-theme/HEAL",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Health"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/dataset-type/STRUCTURED_DATA",
+            "@type": "skos:Concept",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Structured data"
+            }
+        },
+        {
+            "@id": "http://ask4mdp.services-publics.lu/",
+            "@type": "foaf:Document"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/ANNUAL",
+            "skos:prefLabel": {
+                "@language": "eng",
+                "@value": "Annual"
+            },
+            "@type": "dct:Frequency"
+        }
+    ],
+    "@context": {
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

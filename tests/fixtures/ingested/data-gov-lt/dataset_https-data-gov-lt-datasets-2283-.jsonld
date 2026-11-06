@@ -1,0 +1,3728 @@
+{
+    "@graph": [
+        {
+            "@id": "_:a72c583db6d311c4bcfac4a2b898abb7",
+            "foaf:name": "Valstybės skaitmeninių sprendimų agentūra",
+            "@type": "foaf:Organization",
+            "foaf:mbox": {
+                "@id": "mailto:info@vssa.lt"
+            },
+            "foaf:homepage": {
+                "@id": "https://vssa.lrv.lt/"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/XLSX",
+            "@type": "dct:MediaTypeOrExtent"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/CSV",
+            "@type": "dct:MediaTypeOrExtent"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/file-type/JSON",
+            "@type": "dct:MediaTypeOrExtent"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/fa5a423e-c3c0-4f18-a01b-ab0463d85923",
+            "@type": "dcat:Distribution",
+            "dct:description": [
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "Bérek és keresetek"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Mzdy a platy"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Μισθοί και ημερομίσθια"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Löhne und Gehälter"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Salari e stipendi"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Löner"
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Plaće i nadnice"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Salaires et traitements"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Algas"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Salarios y sueldos"
+                },
+                {
+                    "@language": "en-t-lt-t0-mtec",
+                    "@value": "Wages and salaries"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Pá agus tuarastail"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Palgad ja töötasud"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Mzdy a platy"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Plače"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Palkat ja palkkiot"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Надници и заплати"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Darbo užmokestis"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Lonen en salarissen"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Wynagrodzenia"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Lønninger og vederlag"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Заробітна плата та заробітна плата"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Ordenados e salários"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Salarii și salarii"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Pagi u salarji"
+                }
+            ],
+            "dct:title": [
+                {
+                    "@language": "en-t-lt-t0-mtec",
+                    "@value": "Wages and salaries"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Palkat ja palkkiot"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Palgad ja töötasud"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Pá agus tuarastail"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Salarii și salarii"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "Bérek és keresetek"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Wynagrodzenia"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Ordenados e salários"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Lonen en salarissen"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Salaires et traitements"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Salarios y sueldos"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Darbo užmokestis"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Заробітна плата та заробітна плата"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Salari e stipendi"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Μισθοί και ημερομίσθια"
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Plaće i nadnice"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Algas"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Mzdy a platy"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Надници и заплати"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Lønninger og vederlag"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Plače"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Löner"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Pagi u salarji"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Löhne und Gehälter"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Mzdy a platy"
+                }
+            ],
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/CSV"
+            },
+            "dct:modified": {
+                "@value": "2023-04-25",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:issued": {
+                "@value": "2023-04-25",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dcat:accessURL": {
+                "@id": "https://data.gov.lt/media/filer_public/58/d8/58d81b3c-534f-437b-9e1b-0f4c03aef86a/duadministracija.csv"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/distribution-type/DOWNLOADABLE_FILE"
+            },
+            "dcat:downloadURL": {
+                "@id": "https://data.gov.lt/media/filer_public/58/d8/58d81b3c-534f-437b-9e1b-0f4c03aef86a/duadministracija.csv"
+            },
+            "dct:license": {
+                "@id": "https://creativecommons.org/licenses/by/4.0/deed.lt"
+            },
+            "dcat:mediaType": {
+                "@id": "https://www.iana.org/assignments/media-types/text/csv"
+            }
+        },
+        {
+            "@id": "https://creativecommons.org/licenses/by/4.0/deed.lt",
+            "@type": "dct:LicenseDocument"
+        },
+        {
+            "@id": "https://www.iana.org/assignments/media-types/text/csv",
+            "@type": "dct:MediaType"
+        },
+        {
+            "@id": "_:27533a908a3887802f62d7bc26004214",
+            "foaf:name": "Valstybės skaitmeninių sprendimų agentūra",
+            "@type": "foaf:Organization",
+            "foaf:mbox": {
+                "@id": "mailto:info@vssa.lt"
+            },
+            "foaf:homepage": {
+                "@id": "https://vssa.lrv.lt/"
+            }
+        },
+        {
+            "@id": "_:3c84fb7756b5e2dc30d108ecd644cdf1",
+            "foaf:name": "Klaipėdos rajono savivaldybės administracija",
+            "@type": "foaf:Organization",
+            "foaf:homepage": {
+                "@id": "http://www.klaipedos-r.lt"
+            },
+            "foaf:mbox": {
+                "@id": "mailto:savivaldybe@klaipedos-r.lt"
+            }
+        },
+        {
+            "@id": "_:e4801ee9b50834940b941a4078004c99",
+            "vcard:hasEmail": {
+                "@id": "mailto:savivaldybe@klaipedos-r.lt"
+            },
+            "@type": "vcard:Kind"
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/QUARTERLY",
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "_:2e7cc6c68ae71aa90b9585357afa1554",
+            "foaf:name": "Klaipėdos rajono savivaldybės administracija",
+            "@type": "foaf:Organization",
+            "foaf:homepage": {
+                "@id": "http://www.klaipedos-r.lt"
+            },
+            "foaf:mbox": {
+                "@id": "mailto:savivaldybe@klaipedos-r.lt"
+            }
+        },
+        {
+            "@id": "https://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "@type": "dct:MediaType"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/dataset/https-data-gov-lt-datasets-2283-",
+            "dct:title": [
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Μέσες μηνιαίες σταθερές (διορισμένες) αποδοχές των υπαλλήλων της δημοτικής διοίκησης που κατείχαν την ίδια θέση κατά το τρίτο τρίμηνο του 2022"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Средно месечно фиксирано (назначено) възнаграждение на служителите в общинската администрация, заемащи същата длъжност през третото тримесечие на 2022 г."
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Prosječne mjesečne fiksne (imenovane) plaće zaposlenika općinske uprave na istom radnom mjestu u trećem tromjesečju 2022."
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Średnie miesięczne stałe (wyznaczone) wynagrodzenie pracowników administracji gminnej zajmujących to samo stanowisko w III kwartale 2022 r."
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Remuneração média mensal fixa (nomeada) dos trabalhadores da administração municipal que ocupam o mesmo cargo no terceiro trimestre de 2022"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Meánluach saothair seasta míosúil (ceaptha) fhostaithe an riaracháin bhardasaigh a bhfuil an post céanna acu in R3 2022"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Durchschnittliche monatliche feste (ernannte) Vergütung der Mitarbeiter der Gemeindeverwaltung, die im dritten Quartal 2022 dieselbe Position innehatten"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Retribuzione media mensile fissa (nominata) dei dipendenti dell'amministrazione comunale che ricoprivano la stessa posizione nel terzo trimestre del 2022"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Savivaldybės administracijos darbuotojų, einančių vienodas pareigas, 2022 m. III ketv. vidutinis mėnesinis nustatytasis (paskirtasis) darbo užmokestis"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Priemerná mesačná pevná (vymenovaná) odmena zamestnancov obecnej správy zastávajúcich rovnakú pozíciu v 3. štvrťroku 2022"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Ir-remunerazzjoni fissa medja fix-xahar (maħtura) tal-impjegati tal-amministrazzjoni muniċipali li għandhom l-istess pożizzjoni fit-tielet trimestru tal-2022"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Vidējais mēneša fiksētais (ieceltais) atalgojums pašvaldības pārvaldes darbiniekiem, kuri ieņem tādu pašu amatu 2022. gada 3. ceturksnī"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Rémunération mensuelle fixe (nommée) moyenne des employés de l’administration municipale occupant le même poste au troisième trimestre 2022"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Gemiddelde maandelijkse vaste (benoemde) beloning van werknemers van het gemeentebestuur met dezelfde functie in het derde kwartaal van 2022"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Samassa asemassa olevien kunnallishallinnon työntekijöiden keskimääräiset kiinteät (nimitetyt) kuukausipalkat vuoden 2022 kolmannella neljänneksellä"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Remuneración media mensual fija (nombrada) de los empleados de la administración municipal que ocupaban el mismo puesto en el tercer trimestre de 2022"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "2022. aasta kolmandas kvartalis samal ametikohal töötavate munitsipaalvalitsuse töötajate keskmine igakuine kindlaksmääratud (ametisse nimetatud) töötasu"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "Az azonos pozíciót betöltő önkormányzati alkalmazottak átlagos havi rögzített (kinevezett) javadalmazása 2022 harmadik negyedévében"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Gennemsnitlig månedlig fast (udnævnt) aflønning af ansatte i den kommunale forvaltning i samme stilling i tredje kvartal 2022"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Середньомісячна фіксована (призначена) винагорода працівників муніципальної адміністрації на аналогічній посаді у ІІІ кварталі 2022 року"
+                },
+                {
+                    "@language": "en",
+                    "@value": "2022 of employees of the municipal administration holding equal positions. III quarter average monthly fixed (assigned) wage"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Povprečni mesečni fiksni (imenovani) prejemki zaposlenih v občinski upravi na enakem položaju v tretjem četrtletju leta 2022"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Genomsnittlig månatlig fast (utsedd) ersättning till anställda inom den kommunala förvaltningen med samma befattning under tredje kvartalet 2022"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Remunerația lunară medie fixă (numită) a angajaților administrației municipale care au deținut aceeași poziție în T3 2022"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Průměrná měsíční pevná (jmenovaná) odměna zaměstnanců obecní správy ve stejném postavení ve třetím čtvrtletí 2022"
+                }
+            ],
+            "dcat:distribution": [
+                {
+                    "@id": "http://data.europa.eu/88u/distribution/54117bb6-9f24-45d1-a773-daabf18ebccd"
+                },
+                {
+                    "@id": "http://data.europa.eu/88u/distribution/1ca1594c-f5ab-4c91-95c0-f9a1ecd562d2"
+                },
+                {
+                    "@id": "http://data.europa.eu/88u/distribution/fbdf0e2e-c626-4419-850e-f8f906b7da57"
+                },
+                {
+                    "@id": "http://data.europa.eu/88u/distribution/fa5a423e-c3c0-4f18-a01b-ab0463d85923"
+                }
+            ],
+            "dct:description": [
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Statistická zpráva o mzdách"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Relazione statistica sulle retribuzioni"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Štatistická správa o mzdách"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Palkkoja koskeva tilastoraportti"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Statistično poročilo o plačah"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Sprawozdanie statystyczne dotyczące wynagrodzeń"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Статистичний звіт по заробітній платі"
+                },
+                {
+                    "@language": "en",
+                    "@value": "Statistical report of wages"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Raport statistic privind salariile"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Rapport statistiku dwar il-pagi"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Statistikas ziņojums par algām"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Tuarascáil staidrimh ar phá"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Informe estadístico sobre los salarios"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Statistisch verslag over de lonen"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Статистически доклад за заплатите"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Στατιστική έκθεση για τους μισθούς"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "Statisztikai jelentés a bérekről"
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Statističko izvješće o plaćama"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Darbo užmokesčio statistinė ataskaita"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Relatório estatístico sobre salários"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Statistischer Lohnbericht"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Statistisk rapport om lønninger"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Palka käsitlev statistiline aruanne"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Statistikrapport om löner"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Rapport statistique sur les salaires"
+                }
+            ],
+            "dct:creator": {
+                "@id": "_:2e7cc6c68ae71aa90b9585357afa1554"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/GOVE"
+            },
+            "dct:issued": {
+                "@value": "2023-04-25",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:publisher": {
+                "@id": "_:3c84fb7756b5e2dc30d108ecd644cdf1"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+            },
+            "@type": "dcat:Dataset",
+            "dcat:contactPoint": {
+                "@id": "_:e4801ee9b50834940b941a4078004c99"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/QUARTERLY"
+            },
+            "dct:modified": {
+                "@value": "2025-12-18",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dcat:keyword": "Darbo Užmokestis"
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/54117bb6-9f24-45d1-a773-daabf18ebccd",
+            "dct:description": [
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Заплащане на работни места през 2024 г."
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Plat za prácu v roku 2024"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Salariul locurilor de muncă în 2024"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Retribuzione del lavoro nel 2024"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Darbo užmokėstis 2024 metais"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Arbeitsentgelt im Jahr 2024"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Płace za pracę w 2024 r."
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Plaća na radnom mjestu 2024."
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "Munkahelyi fizetés 2024-ben"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Jobløn i 2024"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Plačilo za delo v letu 2024"
+                },
+                {
+                    "@language": "en-t-lt-t0-mtec",
+                    "@value": "Job pay in 2024"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Arbetslön 2024"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Αμοιβή εργασίας το 2024"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Töötasu 2024. aastal"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Platy za práci v roce 2024"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Työpalkka vuonna 2024"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Darba samaksa 2024. gadā"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Il-paga tal-impjiegi fl-2024"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Rémunération de l’emploi en 2024"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Оплата праці в 2024 році"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Remuneração do trabalho em 2024"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Banenloon in 2024"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Pá poist in 2024"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Remuneración del empleo en 2024"
+                }
+            ],
+            "dct:title": [
+                {
+                    "@language": "lt",
+                    "@value": "Darbo užmokėstis 2024 metais"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Darba samaksa 2024. gadā"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Αμοιβή εργασίας το 2024"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Remuneração do trabalho em 2024"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Platy za práci v roce 2024"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Płace za pracę w 2024 r."
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Remuneración del empleo en 2024"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Arbetslön 2024"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Salariul locurilor de muncă în 2024"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Töötasu 2024. aastal"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Arbeitsentgelt im Jahr 2024"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Pá poist in 2024"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Retribuzione del lavoro nel 2024"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Jobløn i 2024"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Rémunération de l’emploi en 2024"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Заплащане на работни места през 2024 г."
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Työpalkka vuonna 2024"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Banenloon in 2024"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "Munkahelyi fizetés 2024-ben"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Оплата праці в 2024 році"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Plačilo za delo v letu 2024"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Plat za prácu v roku 2024"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Il-paga tal-impjiegi fl-2024"
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Plaća na radnom mjestu 2024."
+                },
+                {
+                    "@language": "en-t-lt-t0-mtec",
+                    "@value": "Job pay in 2024"
+                }
+            ],
+            "dcat:mediaType": {
+                "@id": "https://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "dct:modified": {
+                "@value": "2025-09-02",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:issued": {
+                "@value": "2025-09-02",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dcat:accessURL": {
+                "@id": "https://data.gov.lt/media/filer_public/67/aa/67aa4c8b-7bf6-490d-b6f1-ad098c3d107c/du-administracija-2024-m-1.xlsx"
+            },
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/XLSX"
+            },
+            "@type": "dcat:Distribution",
+            "dcat:downloadURL": {
+                "@id": "https://data.gov.lt/media/filer_public/67/aa/67aa4c8b-7bf6-490d-b6f1-ad098c3d107c/du-administracija-2024-m-1.xlsx"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/distribution-type/DOWNLOADABLE_FILE"
+            },
+            "dct:license": {
+                "@id": "https://creativecommons.org/licenses/by/4.0/deed.lt"
+            },
+            "dcat:accessService": {
+                "@id": "https://data.gov.lt/datasets/2916/"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/1ca1594c-f5ab-4c91-95c0-f9a1ecd562d2",
+            "dcat:downloadURL": {
+                "@id": "https://data.gov.lt/media/filer_public/4b/c8/4bc85893-d76f-4cee-9d87-8c6b35c6d4f2/du-administracija-2025-m.xlsx"
+            },
+            "dct:title": [
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Plătiți pentru muncă în 2025"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Betala för arbete 2025"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Palkka työstä vuonna 2025"
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Plaća za rad u 2025."
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Оплата праці в 2025 році"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Remuneración del trabajo en 2025"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Αμοιβή για εργασία το 2025"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Pá as obair in 2025"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Плащане за работа през 2025 г."
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Ħlas għax-xogħol fl-2025"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Töötasu 2025. aastal"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Remuneração pelo trabalho em 2025"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Platit za práci v roce 2025"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Wynagrodzenie za pracę w 2025 r."
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Betalen voor werk in 2025"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Lohn für Arbeit im Jahr 2025"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Darbo užmokėstis 2025 metais"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Plačilo za delo v letu 2025"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Rémunération du travail en 2025"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Darba samaksa 2025. gadā"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "Munkabér 2025-ben"
+                },
+                {
+                    "@language": "en-t-lt-t0-mtec",
+                    "@value": "Pay for work in 2025"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Retribuzione del lavoro nel 2025"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Løn for arbejde i 2025"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Plat za prácu v roku 2025"
+                }
+            ],
+            "dcat:accessService": {
+                "@id": "https://data.gov.lt/datasets/2916/"
+            },
+            "dct:description": [
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Betalen voor werk in 2025"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Platit za práci v roce 2025"
+                },
+                {
+                    "@language": "en-t-lt-t0-mtec",
+                    "@value": "Pay for work in 2025"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Оплата праці в 2025 році"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Remuneración del trabajo en 2025"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Αμοιβή για εργασία το 2025"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Lohn für Arbeit im Jahr 2025"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Palkka työstä vuonna 2025"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Wynagrodzenie za pracę w 2025 r."
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Betala för arbete 2025"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Ħlas għax-xogħol fl-2025"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Rémunération du travail en 2025"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Pá as obair in 2025"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Плащане за работа през 2025 г."
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Plaća za rad u 2025."
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "Munkabér 2025-ben"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Løn for arbejde i 2025"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Darbo užmokėstis 2025 metais"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Plat za prácu v roku 2025"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Darba samaksa 2025. gadā"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Retribuzione del lavoro nel 2025"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Plačilo za delo v letu 2025"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Töötasu 2025. aastal"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Plătiți pentru muncă în 2025"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Remuneração pelo trabalho em 2025"
+                }
+            ],
+            "@type": "dcat:Distribution",
+            "dct:issued": {
+                "@value": "2025-09-02",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dcat:accessURL": {
+                "@id": "https://data.gov.lt/media/filer_public/4b/c8/4bc85893-d76f-4cee-9d87-8c6b35c6d4f2/du-administracija-2025-m.xlsx"
+            },
+            "dcat:mediaType": {
+                "@id": "https://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/distribution-type/DOWNLOADABLE_FILE"
+            },
+            "dct:license": {
+                "@id": "https://creativecommons.org/licenses/by/4.0/deed.lt"
+            },
+            "dct:modified": {
+                "@value": "2025-09-02",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/XLSX"
+            }
+        },
+        {
+            "@id": "http://data.europa.eu/88u/distribution/fbdf0e2e-c626-4419-850e-f8f906b7da57",
+            "dct:title": [
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Remuneração do trabalho em 2023"
+                },
+                {
+                    "@language": "en-t-lt-t0-mtec",
+                    "@value": "Job pay in 2023"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Arbeitsentgelt im Jahr 2023"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Töötasu 2023. aastal"
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Оплата праці у 2023 році"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Salariul locurilor de muncă în 2023"
+                },
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Jobløn i 2023"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Bezoldiging van banen in 2023"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Заплащане на работни места през 2023 г."
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Il-paga tal-impjiegi fl-2023"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Plačilo za delo v letu 2023"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Retribuzione del lavoro nel 2023"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Rémunération de l’emploi en 2023"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Työpalkka vuonna 2023"
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Plaća na radnom mjestu 2023."
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Remuneración del empleo en 2023"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Darba samaksa 2023. gadā"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Plat za prácu v roku 2023"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Αμοιβή εργασίας το 2023"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Arbetslön 2023"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Darbo užmokėstis 2023 metais"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Płace za pracę w 2023 r."
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Platy za práci v roce 2023"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "Munkahelyi fizetés 2023-ban"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Pá poist in 2023"
+                }
+            ],
+            "dct:description": [
+                {
+                    "@language": "da-t-lt-t0-mtec",
+                    "@value": "Jobløn i 2023"
+                },
+                {
+                    "@language": "lv-t-lt-t0-mtec",
+                    "@value": "Darba samaksa 2023. gadā"
+                },
+                {
+                    "@language": "el-t-lt-t0-mtec",
+                    "@value": "Αμοιβή εργασίας το 2023"
+                },
+                {
+                    "@language": "it-t-lt-t0-mtec",
+                    "@value": "Retribuzione del lavoro nel 2023"
+                },
+                {
+                    "@language": "sk-t-lt-t0-mtec",
+                    "@value": "Plat za prácu v roku 2023"
+                },
+                {
+                    "@language": "hu-t-lt-t0-mtec",
+                    "@value": "Munkahelyi fizetés 2023-ban"
+                },
+                {
+                    "@language": "cs-t-lt-t0-mtec",
+                    "@value": "Platy za práci v roce 2023"
+                },
+                {
+                    "@language": "et-t-lt-t0-mtec",
+                    "@value": "Töötasu 2023. aastal"
+                },
+                {
+                    "@language": "nl-t-lt-t0-mtec",
+                    "@value": "Bezoldiging van banen in 2023"
+                },
+                {
+                    "@language": "pl-t-lt-t0-mtec",
+                    "@value": "Płace za pracę w 2023 r."
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Darbo užmokėstis 2023 metais"
+                },
+                {
+                    "@language": "fi-t-lt-t0-mtec",
+                    "@value": "Työpalkka vuonna 2023"
+                },
+                {
+                    "@language": "bg-t-lt-t0-mtec",
+                    "@value": "Заплащане на работни места през 2023 г."
+                },
+                {
+                    "@language": "en-t-lt-t0-mtec",
+                    "@value": "Job pay in 2023"
+                },
+                {
+                    "@language": "ga-t-lt-t0-mtec",
+                    "@value": "Pá poist in 2023"
+                },
+                {
+                    "@language": "hr-t-lt-t0-mtec",
+                    "@value": "Plaća na radnom mjestu 2023."
+                },
+                {
+                    "@language": "uk-t-lt-t0-mtec",
+                    "@value": "Оплата праці у 2023 році"
+                },
+                {
+                    "@language": "pt-t-lt-t0-mtec",
+                    "@value": "Remuneração do trabalho em 2023"
+                },
+                {
+                    "@language": "de-t-lt-t0-mtec",
+                    "@value": "Arbeitsentgelt im Jahr 2023"
+                },
+                {
+                    "@language": "mt-t-lt-t0-mtec",
+                    "@value": "Il-paga tal-impjiegi fl-2023"
+                },
+                {
+                    "@language": "ro-t-lt-t0-mtec",
+                    "@value": "Salariul locurilor de muncă în 2023"
+                },
+                {
+                    "@language": "sl-t-lt-t0-mtec",
+                    "@value": "Plačilo za delo v letu 2023"
+                },
+                {
+                    "@language": "sv-t-lt-t0-mtec",
+                    "@value": "Arbetslön 2023"
+                },
+                {
+                    "@language": "es-t-lt-t0-mtec",
+                    "@value": "Remuneración del empleo en 2023"
+                },
+                {
+                    "@language": "fr-t-lt-t0-mtec",
+                    "@value": "Rémunération de l’emploi en 2023"
+                }
+            ],
+            "dcat:mediaType": {
+                "@id": "https://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            },
+            "dcat:accessURL": {
+                "@id": "https://data.gov.lt/media/filer_public/8e/10/8e103e07-9cb5-44ec-a453-ad33d600c19c/du-administracija-2023-m.xlsx"
+            },
+            "dct:issued": {
+                "@value": "2025-09-02",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dcat:downloadURL": {
+                "@id": "https://data.gov.lt/media/filer_public/8e/10/8e103e07-9cb5-44ec-a453-ad33d600c19c/du-administracija-2023-m.xlsx"
+            },
+            "dct:license": {
+                "@id": "https://creativecommons.org/licenses/by/4.0/deed.lt"
+            },
+            "dcat:accessService": {
+                "@id": "https://data.gov.lt/datasets/2916/"
+            },
+            "@type": "dcat:Distribution",
+            "dct:type": {
+                "@id": "http://publications.europa.eu/resource/authority/distribution-type/DOWNLOADABLE_FILE"
+            },
+            "dct:modified": {
+                "@value": "2025-09-02",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/XLSX"
+            }
+        },
+        {
+            "@id": "https://data.gov.lt/datasets/2916/",
+            "dcat:servesDataset": [
+                {
+                    "@id": "https://data.gov.lt/datasets/1328/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2315/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2808/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/5962/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2742/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2758/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1347/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1292/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2621/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2090/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2723/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1809/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1858/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2518/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1804/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1797/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1550/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/789/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2257/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2525/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1338/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2136/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2877/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2770/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2238/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2208/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2059/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1944/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1240/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2143/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2817/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1853/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1707/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2812/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2078/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2749/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1175/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2574/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1860/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1886/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1000/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2630/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1509/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/500/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2446/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1261/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2327/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2164/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2160/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1385/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2003/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2744/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2714/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1881/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2854/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2145/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2751/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2777/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2686/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2558/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2451/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2497/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1783/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1753/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1625/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2213/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2259/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2488/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2369/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1585/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2910/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2220/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2148/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2833/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2138/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1998/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1891/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1196/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2155/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2896/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2840/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2151/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2721/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2735/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2705/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2500/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1872/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2516/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2619/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1711/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2614/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2269/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2523/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1690/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1445/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2458/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1688/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2355/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1569/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2875/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2889/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2782/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/444/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2906/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2700/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1317/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1914/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2882/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2829/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1865/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1226/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2810/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2661/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2763/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2635/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1898/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1693/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1183/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2453/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1737/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/598/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2507/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2460/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2215/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1350/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1555/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2325/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2176/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2222/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2859/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2172/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2803/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2756/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1900/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2866/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2157/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1788/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2789/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1732/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1758/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2684/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2502/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2463/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/607/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2479/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2668/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1560/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2302/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2318/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2486/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/460/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2861/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2845/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2206/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2043/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2784/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1341/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1996/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1942/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2726/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2894/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1877/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2791/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1760/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2663/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2733/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2024/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2717/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/673/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1870/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1884/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1814/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1695/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2330/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2612/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1534/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2547/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2299/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2444/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2383/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1628/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1567/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2232/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2309/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2178/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2815/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2768/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2712/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/390/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1863/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2852/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2197/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2822/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2181/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2761/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2775/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1049/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2633/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2030/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2670/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2465/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1751/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1623/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1562/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2382/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2519/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2472/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1630/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1324/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1285/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2311/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2188/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1259/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2184/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1343/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1912/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1203/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2689/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2878/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2169/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1847/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1786/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2708/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/827/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1805/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2514/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1800/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1679/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1572/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/799/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1588/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/729/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2253/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2521/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2549/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2456/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1334/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2132/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2873/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2899/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2234/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2843/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2218/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2055/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2796/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2738/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2029/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1315/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2691/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1808/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2880/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1875/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1210/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2824/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2745/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1882/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2493/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2449/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2624/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2559/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2498/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2442/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2909/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1553/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2323/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1287/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2806/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2904/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2827/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2740/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2766/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1371/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2911/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2839/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2850/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2834/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2139/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2773/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1756/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2682/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2477/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1763/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1621/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1779/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1635/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2316/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2484/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1413/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2480/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2379/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1348/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2262/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2288/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1293/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2134/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1446/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2729/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1994/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2069/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2091/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2724/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2892/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2141/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2167/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/916/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1859/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1798/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2608/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2731/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2747/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1866/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2526/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2512/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2610/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2636/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2626/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2239/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2454/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2209/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1565/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1241/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2871/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2885/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2144/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2818/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2216/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2140/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2794/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1383/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1327/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1176/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1861/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1887/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2125/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2836/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2757/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2048/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2631/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2629/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1789/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1733/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2328/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/594/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2503/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/678/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2211/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2321/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2335/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2855/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2146/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2778/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1910/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2093/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2687/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2862/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2809/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2153/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1784/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1948/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1754/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2657/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1943/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2703/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2566/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2690/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1791/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1868/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1761/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2489/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2664/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1633/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1586/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2638/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2314/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2221/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2482/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1670/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1696/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2492/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1346/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1535/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1299/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2841/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2202/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2780/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2270/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2722/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2706/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2890/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1873/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2179/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1803/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1889/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2718/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2088/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1906/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1712/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2713/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2020/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2759/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1880/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1185/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2524/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1896/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1691/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1181/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2459/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1689/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/802/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1735/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2496/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2237/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2505/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2466/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2440/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1624/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2907/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2883/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2174/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2811/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2857/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2170/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2764/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1927/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1325/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/389/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1899/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1234/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2137/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2864/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1106/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2771/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1983/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1999/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2659/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1945/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2508/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2461/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/937/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1708/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2666/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2300/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2326/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1556/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2515/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2279/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2223/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2333/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2867/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2180/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1444/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2158/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2750/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2685/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2874/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2165/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1782/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1796/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2161/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2692/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2715/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2510/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2487/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1773/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1812/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1747/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1584/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2494/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2545/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2452/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2207/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1330/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2490/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2468/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1591/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1626/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2895/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2200/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2214/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2792/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2813/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/422/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2079/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2025/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2734/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1978/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1288/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2807/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1871/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2820/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2741/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1710/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2613/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2548/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1125/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1193/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2445/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1568/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2555/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2249/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2517/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2478/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1386/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2905/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2317/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2900/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2828/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2186/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2198/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1484/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1225/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1239/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2869/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2182/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2762/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1349/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1232/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2830/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2135/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2876/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2846/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1752/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2058/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2550/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1852/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1878/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2473/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2609/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1570/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2312/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2251/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1332/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1344/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2371/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2130/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2156/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2897/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2280/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2720/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1351/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2736/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1806/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2819/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2177/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2163/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2173/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2743/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2769/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2615/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1862/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2522/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2632/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1759/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2622/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2557/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2235/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2205/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1561/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1302/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2242/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2319/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2212/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2790/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2825/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2746/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1909/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1339/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1883/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1922/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/940/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2121/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2147/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2832/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2753/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2044/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2625/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1997/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1202/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2727/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1890/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2499/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1785/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2443/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1554/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2324/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1587/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2196/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2851/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2774/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/996/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2683/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2888/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2781/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1857/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2816/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1864/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2471/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2485/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2660/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2481/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2366/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2634/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2310/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/739/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1692/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1342/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2142/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2168/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2707/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2908/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2748/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1286/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2175/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1885/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2858/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2149/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2802/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1928/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2171/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2627/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2520/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1892/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1685/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2455/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1787/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1731/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1757/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/4118/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2233/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2501/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2217/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1620/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1384/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1666/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1636/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1314/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2301/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2240/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2254/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1223/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2853/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2760/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2837/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2250/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2776/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1895/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/998/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1230/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2860/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2133/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2159/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2844/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2783/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1734/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1995/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1941/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2739/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2509/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2725/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/665/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2504/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1876/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2662/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2322/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2618/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2390/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2511/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/497/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1694/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1533/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2863/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2154/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2879/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2150/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2886/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1792/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2793/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1869/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1801/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2814/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2665/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2026/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2767/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2711/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1979/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2483/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1671/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1697/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1687/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2457/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2378/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1536/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1590/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2203/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2219/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1622/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1300/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2891/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2381/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2303/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1559/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2329/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2210/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2719/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2075/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2730/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/458/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2187/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2199/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1811/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1897/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1182/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2183/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2195/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/803/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1736/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2092/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1911/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1163/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2688/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2506/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2467/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2441/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1769/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/779/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1564/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2513/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2470/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1571/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1326/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2313/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2252/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2912/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1235/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2865/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2835/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2849/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2047/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2788/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1333/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1345/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1946/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2131/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2872/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2898/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2842/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1709/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2066/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2795/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2667/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2737/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2050/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2028/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1807/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1874/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1888/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/884/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1727/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2334/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2616/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2287/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2448/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1340/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2152/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2166/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2236/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2162/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2732/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2693/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2716/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1790/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1867/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2856/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2189/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1813/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2765/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2779/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1748/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2611/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1923/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2495/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2546/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2469/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1755/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2491/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2644/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2658/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1592/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1627/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/1566/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2231/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2201/"
+                },
+                {
+                    "@id": "https://data.gov.lt/datasets/2476/"
+                }
+            ],
+            "dct:creator": {
+                "@id": "_:27533a908a3887802f62d7bc26004214"
+            },
+            "@type": "dcat:DataService",
+            "dct:title": [
+                {
+                    "@language": "en",
+                    "@value": ""
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Atvirų duomenų saugykla"
+                }
+            ],
+            "dct:description": [
+                {
+                    "@language": "en",
+                    "@value": ""
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Duomenų publikavimo paslauga"
+                }
+            ],
+            "dct:format": {
+                "@id": "http://publications.europa.eu/resource/authority/file-type/JSON"
+            },
+            "dcat:endpointURL": {
+                "@id": "https://get.data.gov.lt"
+            },
+            "dct:modified": {
+                "@value": "2026-09-07",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:7cb36b13436d4c9f9e4982733f82c5b6"
+            },
+            "dct:accrualPeriodicity": {
+                "@id": "http://publications.europa.eu/resource/authority/frequency/BIHOURLY"
+            },
+            "dcat:endpointDescription": {
+                "@id": "https://atviriduomenys.readthedocs.io/api/index.html"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+            },
+            "dct:publisher": {
+                "@id": "_:a72c583db6d311c4bcfac4a2b898abb7"
+            }
+        },
+        {
+            "@id": "http://publications.europa.eu/resource/authority/frequency/BIHOURLY",
+            "@type": "dct:Frequency"
+        },
+        {
+            "@id": "_:7cb36b13436d4c9f9e4982733f82c5b6",
+            "vcard:hasEmail": {
+                "@id": "mailto:info@vssa.lt"
+            },
+            "@type": "vcard:Kind"
+        }
+    ],
+    "@context": {
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}
