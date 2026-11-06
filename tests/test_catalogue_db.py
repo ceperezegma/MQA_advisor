@@ -119,7 +119,7 @@ def test_duplicate_resource_rejected(conn):
 
 def test_loaded_at_naive_datetime_rejected(conn):
     with pytest.raises(ValueError, match="timezone-aware"):
-        _add_resource(conn, loaded_at=datetime(2026, 10, 27, 12, 0))  # noqa: DTZ001
+        _add_resource(conn, loaded_at=datetime(2026, 10, 27, 12, 0))
 
 
 def test_connect_closes_connection_when_schema_fails(tmp_path):
