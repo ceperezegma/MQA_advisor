@@ -72,7 +72,7 @@ RESOURCE_LIST_KEYS = {
 
 @dataclass(frozen=True)
 class NestedNode:
-    """A nested object that becomes its own entity, referenced from the root.
+    """A nested object stored as a `node` value of the root's `reference` property.
 
     `types` maps the object's JSON `type` to the entity type; `fields` maps its other keys to
     `(property, value_kind)`. `many` says whether the key holds a list of objects.
@@ -82,7 +82,6 @@ class NestedNode:
     types: dict[str, str]
     fields: dict[str, tuple[str, str]]
     many: bool
-    id_prefix: str
 
 
 NESTED_KEYS = {
@@ -98,14 +97,12 @@ NESTED_KEYS = {
             "homepage": (expand("foaf:homepage"), "uri"),
         },
         many=False,
-        id_prefix="_:publisher",
     ),
     "contact_point": NestedNode(
         reference=expand("dcat:contactPoint"),
         types={"Kind": expand("vcard:Kind")},
         fields={"email": (expand("vcard:hasEmail"), "uri")},
         many=True,
-        id_prefix="_:contact_point",
     ),
 }
 

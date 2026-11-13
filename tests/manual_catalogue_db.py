@@ -4,8 +4,9 @@ Loads the fixtures under `tests/fixtures/ingested/` into a temporary SQLite data
 `catalogue_db.load_catalogue` and prints what the three views return:
 
   - resource and row counts per catalogue (`catalogue_resources`, `LoadSummary`);
-  - the entities stored with a `NULL` `entity_type` (the multi-typed nsip-lu agent/contact
-    nodes); no Dataset, Distribution or Data Service should be among them;
+  - the stored entities per `entity_kind` (only Datasets, Distributions and Data Services have
+    rows; every other node of a file is folded into the `node` value of the property that
+    reaches it);
   - the Distributions and embedded Data Services of a sample Dataset
     (`dataset_distributions`, `dataset_embedded_services`).
 
@@ -33,7 +34,6 @@ CATALOGUES = ["nsip-lu", "data-gov-lt"]
 EXTRA_FOLDERS = {"data-gov-lt": ["dataservices"]}
 # A Dataset with Distributions and an embedded Data Service (resource_id, file-name form).
 SAMPLE_DATASET = ("data-gov-lt", "https-data-gov-lt-datasets-2275-")
-RDF_TYPE_DCAT = "http://www.w3.org/ns/dcat#"
 
 
 def _copy_catalogue(data_dir: Path, catalogue: str) -> None:
@@ -62,28 +62,16 @@ def main() -> None:
             ):
                 print(f"   catalogue_resources: {count} {resource_type}(s)")
 
-        print("\n== Entities with a NULL entity_type")
-        null_rows = conn.execute(
-            "SELECT r.catalogue, r.resource_id, pv.entity_id,"
-            " group_concat(DISTINCT t.value)"
-            " FROM property_value pv"
-            " JOIN resource r ON r.resource_pk = pv.resource_pk"
-            " LEFT JOIN property_value t ON t.resource_pk = pv.resource_pk"
-            "   AND t.entity_id = pv.entity_id"
-            "   AND t.property_uri = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'"
-            " WHERE pv.entity_type IS NULL"
-            " GROUP BY r.catalogue, r.resource_id, pv.entity_id"
-        ).fetchall()
-        for catalogue, resource_id, entity_id, types in null_rows[:15]:
-            print(f"   {catalogue} / {resource_id}: {entity_id}  types={types}")
-        print(f"   total: {len(null_rows)}")
-        wrongly_untyped = [
-            row for row in null_rows if row[3] and RDF_TYPE_DCAT in row[3]
-        ]
-        print(
-            "   Dataset/Distribution/Data Service among them: "
-            f"{len(wrongly_untyped)} (expected 0)"
-        )
+        print("\n== Stored entities per entity_kind")
+        for kind, entities, rows in conn.execute(
+            "SELECT entity_kind, COUNT(DISTINCT resource_pk || entity_id), COUNT(*)"
+            " FROM property_value GROUP BY entity_kind ORDER BY entity_kind"
+        ):
+            print(f"   {kind}: {entities} entities, {rows} rows")
+        (folded,) = conn.execute(
+            "SELECT COUNT(*) FROM property_value WHERE value_kind = 'node'"
+        ).fetchone()
+        print(f"   auxiliary nodes folded into a property value: {folded}")
 
         catalogue, resource_id = SAMPLE_DATASET
         row = conn.execute(

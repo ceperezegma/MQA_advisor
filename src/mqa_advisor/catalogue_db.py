@@ -4,9 +4,13 @@ The database is derived data: the fetched files stay the source of truth and it 
 rebuilt from them. It is not committed (`fetched_catalogues_data/*` is git-ignored).
 
 A *resource* is a Dataset or a standalone Data Service of a catalogue; `property_value` holds
-one row per property value of every node (entity) in the resource's record. Deleting a
-resource deletes its property rows (`ON DELETE CASCADE`), so any table added later must
-reference `resource` the same way.
+one row per property value of every *core entity* in the resource's record: a Dataset, a
+Distribution or a Data Service (`entity_kind`). The other nodes of the JSON-LD graph (a
+`dct:PeriodOfTime`, a legal resource, a contact point...) are *auxiliary nodes*: they have no
+rows of their own. What an auxiliary node says is stored in the `value` of the property that
+reaches it, as one JSON-LD expanded-form object (`value_kind = 'node'`), so reading a property
+never needs a node id. Deleting a resource deletes its property rows (`ON DELETE CASCADE`), so
+any table added later must reference `resource` the same way.
 
 `connect()` returns an open connection: the caller commits its writes and closes it. It also
 creates three read-only views for the common questions: `catalogue_resources` (the Datasets
@@ -18,7 +22,8 @@ and standalone Data Services), `dataset_distributions` (`resource_pk, distributi
 refreshing one record never reloads the others, and a full load also deletes resources whose
 file is gone. The whole call is one transaction: any error leaves the previous data as it was.
 Both `dataset_*.jsonld` files and standalone `dataservice_*.json` files are read; the latter
-are mapped by `dataservice_mapping`.
+are mapped by `dataservice_mapping`. `connect()` raises `RuntimeError` on a database created
+with the older layout (no `entity_kind` column): delete the file and load again.
 
 Usage:
 
@@ -54,6 +59,13 @@ _DATASET_SUFFIX = ".jsonld"
 _DATASERVICE_PREFIX = "dataservice_"
 _DATASERVICE_SUFFIX = ".json"
 _ABSOLUTE_URI_PREFIXES = ("http://", "https://", "urn:")
+_DCAT = "http://www.w3.org/ns/dcat#"
+# The types whose nodes are core entities, and the `entity_kind` each one gives.
+_CORE_KINDS = {
+    _DCAT + "Dataset": "dataset",
+    _DCAT + "Distribution": "distribution",
+    _DCAT + "DataService": "dataservice",
+}
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS resource (
@@ -70,17 +82,17 @@ CREATE TABLE IF NOT EXISTS resource (
 CREATE TABLE IF NOT EXISTS property_value (
     resource_pk    INTEGER NOT NULL REFERENCES resource(resource_pk) ON DELETE CASCADE,
     entity_id      TEXT NOT NULL,
-    entity_type    TEXT,
+    entity_kind    TEXT NOT NULL CHECK (entity_kind IN ('dataset', 'distribution', 'dataservice')),
     property_uri   TEXT NOT NULL,
     value          TEXT NOT NULL,
-    value_kind     TEXT NOT NULL CHECK (value_kind IN ('literal', 'uri', 'bnode')),
+    value_kind     TEXT NOT NULL CHECK (value_kind IN ('literal', 'uri', 'bnode', 'node')),
     datatype       TEXT,
     lang           TEXT
 );
 
 CREATE INDEX IF NOT EXISTS property_value_entity   ON property_value (resource_pk, entity_id);
 CREATE INDEX IF NOT EXISTS property_value_property ON property_value (resource_pk, property_uri);
-CREATE INDEX IF NOT EXISTS property_value_type     ON property_value (resource_pk, entity_type);
+CREATE INDEX IF NOT EXISTS property_value_kind     ON property_value (resource_pk, entity_kind);
 
 -- Plain views (saved queries, no stored data): they always reflect the current rows.
 -- All Datasets and standalone Data Services; embedded Data Services are not resources.
@@ -95,6 +107,7 @@ SELECT pv.resource_pk AS resource_pk, pv.value AS distribution_id
 FROM property_value AS pv
 JOIN resource AS r ON r.resource_pk = pv.resource_pk
 WHERE r.resource_type = 'dataset'
+  AND pv.entity_kind = 'dataset'
   AND pv.property_uri = 'http://www.w3.org/ns/dcat#distribution'
   AND pv.value_kind IN ('uri', 'bnode');
 
@@ -108,7 +121,8 @@ SELECT dd.resource_pk AS resource_pk,
 FROM dataset_distributions AS dd
 JOIN property_value AS pv
   ON pv.resource_pk = dd.resource_pk AND pv.entity_id = dd.distribution_id
-WHERE pv.property_uri = 'http://www.w3.org/ns/dcat#accessService'
+WHERE pv.entity_kind = 'distribution'
+  AND pv.property_uri = 'http://www.w3.org/ns/dcat#accessService'
   AND pv.value_kind IN ('uri', 'bnode');
 """
 
@@ -139,6 +153,12 @@ def connect(path: Path = DB_PATH) -> sqlite3.Connection:
     conn = sqlite3.connect(path, detect_types=sqlite3.PARSE_DECLTYPES)
     try:
         conn.execute("PRAGMA foreign_keys = ON")
+        columns = {r[1] for r in conn.execute("PRAGMA table_info(property_value)")}
+        if columns and "entity_kind" not in columns:
+            raise RuntimeError(
+                f"{path} was created with an older layout (no entity_kind column): delete it"
+                " and rebuild it with `python -m mqa_advisor.pipeline {catalogue} --steps db`"
+            )
         conn.executescript(SCHEMA)
     except BaseException:
         conn.close()
@@ -150,20 +170,19 @@ def connect(path: Path = DB_PATH) -> sqlite3.Connection:
 class LoadSummary:
     """What a `load_catalogue` call did.
 
-    `null_type_entities` counts the entities stored with a NULL `entity_type` (their `@type`
-    was missing or had several values); the load logs one warning with this count, and each
-    entity at DEBUG level.
+    `orphan_nodes` counts the auxiliary nodes that no core entity reaches, so they are not
+    stored; the load logs one warning with this count, and each node at DEBUG level.
     """
 
     resources: int
     pruned: int
     rows: int
-    null_type_entities: int
+    orphan_nodes: int
 
 
 # One `property_value` row without its `resource_pk`:
-# (entity_id, entity_type, property_uri, value, value_kind, datatype, lang)
-_Row = tuple[str, str | None, str, str, str, str | None, str | None]
+# (entity_id, entity_kind, property_uri, value, value_kind, datatype, lang)
+_Row = tuple[str, str, str, str, str, str | None, str | None]
 
 
 def _expand(term: str, context: dict[str, str], source: str) -> str:
@@ -231,58 +250,138 @@ def _value_columns(
     raise ValueError(f"{source}: unsupported value {item!r}")
 
 
-def _node_rows(
-    node: dict, context: dict[str, str], source: str, resource_id: str
-) -> tuple[list[_Row], bool]:
-    """The rows of one `@graph` node, and whether its `entity_type` is NULL.
-
-    A node whose `@type` is missing or has several values gets a NULL `entity_type` and a
-    DEBUG message (`load_catalogue` logs one warning for the whole load); its types are still
-    stored as `rdf:type` rows.
-    """
-    if "@id" not in node:
+def _node_id(node: object, source: str) -> str:
+    """The `@id` of a `@graph` node, which must be an object with a string `@id`."""
+    if not isinstance(node, dict) or "@id" not in node:
         raise ValueError(f"{source}: node without @id: {node!r}")
-    entity = node["@id"]
-    _require_str(entity, "@id", source)
+    _require_str(node["@id"], "@id", source)
+    return node["@id"]
+
+
+def _node_types(node: dict, context: dict[str, str], source: str) -> list[str]:
+    """The `@type` values of a node, as full URIs."""
     types = node.get("@type", [])
     types = [types] if isinstance(types, str) else types
     if not isinstance(types, list):
-        raise ValueError(f"{source}: @type of {entity} must be a string or a list")  # noqa: TRY004 - malformed file, one exception type
+        raise ValueError(  # noqa: TRY004 - malformed file, one exception type
+            f"{source}: @type of {node['@id']} must be a string or a list"
+        )
     for t in types:
         _require_str(t, "@type", source)
-    expanded = [_expand(t, context, source) for t in types]
-    entity_type = expanded[0] if len(expanded) == 1 else None
-    if entity_type is None:
-        logger.debug(
-            "resource %s: entity %s has %d @type value(s), entity_type stored as NULL",
-            resource_id,
-            entity,
-            len(expanded),
-        )
+    return [_expand(t, context, source) for t in types]
 
-    rows: list[_Row] = [
-        (entity, entity_type, RDF_TYPE, t, "uri", None, None) for t in expanded
-    ]
+
+def _node_properties(node: dict, context: dict[str, str], source: str):
+    """(property URI, list of raw values) for each property of a node."""
     for key, raw in node.items():
         if key in ("@id", "@type"):
             continue
         if key.startswith("@"):
-            raise ValueError(f"{source}: unsupported keyword {key!r} in node {entity}")
-        property_uri = _expand(key, context, source)
-        for item in raw if isinstance(raw, list) else [raw]:
-            rows.append(
-                (
-                    entity,
-                    entity_type,
-                    property_uri,
-                    *_value_columns(item, context, source),
-                )
+            raise ValueError(
+                f"{source}: unsupported keyword {key!r} in node {node['@id']}"
             )
-    return rows, entity_type is None
+        yield _expand(key, context, source), raw if isinstance(raw, list) else [raw]
+
+
+def _literal_json(value: str, datatype: str | None, lang: str | None) -> dict:
+    """A literal as a JSON-LD expanded-form value object."""
+    out = {"@value": value}
+    if datatype is not None:
+        out["@type"] = datatype
+    if lang is not None:
+        out["@language"] = lang
+    return out
+
+
+def _node_json(
+    node_id: str,
+    graph: _Graph,
+    context: dict[str, str],
+    source: str,
+    path: tuple[str, ...] = (),
+) -> dict:
+    """What an auxiliary node says, as a JSON-LD expanded-form object.
+
+    `@id` is kept for a URI node and left out for a bnode (its id means nothing outside the
+    file). A reference to a core entity, or to an id the graph does not describe, stays a
+    bare `{"@id": uri}` (a bnode gives `{}`); a reference to another auxiliary node is that
+    node's object, recursively. `graph.reached` collects the auxiliary nodes visited.
+    """
+    graph.reached.add(node_id)
+    node = graph.nodes[node_id]
+    path = (*path, node_id)
+    out: dict = {}
+    if not node_id.startswith("_:"):
+        out["@id"] = node_id
+    types = sorted(_node_types(node, context, source))
+    if types:
+        out["@type"] = types
+    for property_uri, items in _node_properties(node, context, source):
+        values = out.setdefault(property_uri, [])
+        for item in items:
+            value, kind, datatype, lang = _value_columns(item, context, source)
+            if kind == "literal":
+                values.append(_literal_json(value, datatype, lang))
+            elif value in graph.nodes and value not in graph.core:
+                if value in path:
+                    raise ValueError(f"{source}: node {value} refers back to itself")
+                values.append(_node_json(value, graph, context, source, path))
+            else:
+                values.append({"@id": value} if kind == "uri" else {})
+    return out
+
+
+@dataclass
+class _Graph:
+    """The nodes of one JSON-LD file by id, which of them are core entities, and which
+    auxiliary nodes the rows built so far have reached."""
+
+    nodes: dict[str, dict]
+    core: dict[str, str]  # node id -> entity_kind
+    reached: set[str]
+
+
+def _core_kind(types: list[str], node_id: str, source: str) -> str | None:
+    """The `entity_kind` of a node with these types, or None for an auxiliary node."""
+    kinds = {_CORE_KINDS[t] for t in types if t in _CORE_KINDS}
+    if len(kinds) > 1:
+        raise ValueError(
+            f"{source}: node {node_id} has several core types ({sorted(kinds)})"
+        )
+    return next(iter(kinds), None)
+
+
+def _core_rows(
+    node_id: str, kind: str, graph: _Graph, context: dict[str, str], source: str
+) -> list[_Row]:
+    """The rows of one core entity: its types, then one row per property value."""
+    node = graph.nodes[node_id]
+    rows: list[_Row] = [
+        (node_id, kind, RDF_TYPE, t, "uri", None, None)
+        for t in _node_types(node, context, source)
+    ]
+    for property_uri, items in _node_properties(node, context, source):
+        for item in items:
+            value, value_kind, datatype, lang = _value_columns(item, context, source)
+            if (
+                value_kind != "literal"
+                and value in graph.nodes
+                and value not in graph.core
+            ):
+                value = json.dumps(
+                    _node_json(value, graph, context, source),
+                    sort_keys=True,
+                    ensure_ascii=False,
+                )
+                value_kind = "node"
+            rows.append(
+                (node_id, kind, property_uri, value, value_kind, datatype, lang)
+            )
+    return rows
 
 
 def _parse_dataset_file(path: Path) -> tuple[list[_Row], int]:
-    """Rows of one Dataset file and the number of its entities stored with a NULL type."""
+    """Rows of one Dataset file and the number of its auxiliary nodes that were not reached."""
     source = path.name
     resource_id = source.removeprefix(_DATASET_PREFIX).removesuffix(_DATASET_SUFFIX)
     try:
@@ -295,13 +394,30 @@ def _parse_dataset_file(path: Path) -> tuple[list[_Row], int]:
     if not isinstance(context, dict):
         raise ValueError(f"{source}: @context must be a prefix -> URI mapping")  # noqa: TRY004 - same
 
-    rows: list[_Row] = []
-    null_type_entities = 0
+    graph = _Graph(nodes={}, core={}, reached=set())
     for node in doc["@graph"]:
-        node_rows, is_null = _node_rows(node, context, source, resource_id)
-        rows.extend(node_rows)
-        null_type_entities += is_null
-    return rows, null_type_entities
+        node_id = _node_id(node, source)
+        if node_id in graph.nodes:
+            raise ValueError(f"{source}: node {node_id} appears twice in @graph")
+        graph.nodes[node_id] = node
+        kind = _core_kind(_node_types(node, context, source), node_id, source)
+        if kind is not None:
+            graph.core[node_id] = kind
+    if "dataset" not in graph.core.values():
+        raise ValueError(f"{source}: no dcat:Dataset node in @graph")
+
+    rows: list[_Row] = []
+    for node_id, kind in graph.core.items():
+        rows.extend(_core_rows(node_id, kind, graph, context, source))
+    orphans = [n for n in graph.nodes if n not in graph.core and n not in graph.reached]
+    for node_id in orphans:
+        logger.debug(
+            "resource %s: node %s is not reached from any Dataset, Distribution or"
+            " Data Service, not stored",
+            resource_id,
+            node_id,
+        )
+    return rows, len(orphans)
 
 
 def _object(value: object, what: str, source: str) -> dict:
@@ -333,28 +449,34 @@ def _without_nulls(obj: dict) -> dict:
 def _nested_rows(
     key: str, node: dsm.NestedNode, raw: object, root: str, source: str
 ) -> list[_Row]:
-    """Rows of the nested `publisher` / `contact_point` entities and of the root's references."""
+    """One `node` row of the root for each nested `publisher` / `contact_point` object."""
     items = _list(raw, key, source) if node.many else [raw]
     rows: list[_Row] = []
-    for index, item in enumerate(items):
+    for item in items:
         item = _object(item, key, source)
-        entity = f"{node.id_prefix}_{index}" if node.many else node.id_prefix
         json_type = _text(item.get("type"), f"{key}.type", source)
         if json_type not in node.types:
             raise ValueError(f"{source}: unsupported {key} type {json_type!r}")
-        entity_type = node.types[json_type]
         extra = set(item) - {"type"} - node.fields.keys()
         if extra:
             raise ValueError(f"{source}: unmapped key(s) {sorted(extra)} in {key}")
         item = _without_nulls(item)
-        rows.append(
-            (root, dsm.DATA_SERVICE_TYPE, node.reference, entity, "bnode", None, None)
-        )
-        rows.append((entity, entity_type, dsm.RDF_TYPE, entity_type, "uri", None, None))
+        content: dict = {"@type": [node.types[json_type]]}
         for field, (prop, kind) in node.fields.items():
             if field in item:
                 value = _text(item[field], f"{key}.{field}", source)
-                rows.append((entity, entity_type, prop, value, kind, None, None))
+                content[prop] = [{"@id": value} if kind == "uri" else {"@value": value}]
+        rows.append(
+            (
+                root,
+                "dataservice",
+                node.reference,
+                json.dumps(content, sort_keys=True, ensure_ascii=False),
+                "node",
+                None,
+                None,
+            )
+        )
     return rows
 
 
@@ -381,10 +503,12 @@ def _parse_dataservice_file(path: Path) -> tuple[str, list[_Row]]:
     root = _text(record[dsm.ID_KEY], "id", source)
     root_type = dsm.DATA_SERVICE_TYPE
 
-    rows: list[_Row] = [(root, root_type, dsm.RDF_TYPE, root_type, "uri", None, None)]
+    rows: list[_Row] = [
+        (root, "dataservice", dsm.RDF_TYPE, root_type, "uri", None, None)
+    ]
 
     def add(prop: str, value: str, kind: str, lang: str | None = None) -> None:
-        rows.append((root, root_type, prop, value, kind, None, lang))
+        rows.append((root, "dataservice", prop, value, kind, None, lang))
 
     for key, prop in dsm.LANGUAGE_MAP_KEYS.items():
         for lang, text in _object(record.get(key, {}), key, source).items():
@@ -483,7 +607,7 @@ def _replace_resource(
         (env, catalogue, resource_type, resource_id, source_file, loaded_at),
     )
     conn.executemany(
-        "INSERT INTO property_value (resource_pk, entity_id, entity_type, property_uri, value,"
+        "INSERT INTO property_value (resource_pk, entity_id, entity_kind, property_uri, value,"
         " value_kind, datatype, lang) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         [(cur.lastrowid, *row) for row in rows],
     )
@@ -540,7 +664,7 @@ def load_catalogue(
     own_conn = conn is None
     if conn is None:
         conn = connect()
-    resources = rows_count = null_type_entities = null_type_resources = 0
+    resources = rows_count = orphan_nodes = orphan_resources = 0
     try:
         ids = None if resource_ids is None else list(dict.fromkeys(resource_ids))
         for resource_id in ids or []:
@@ -558,14 +682,14 @@ def load_catalogue(
         # One file at a time, so memory does not grow with the catalogue; a malformed file
         # raises here and the rollback below undoes the files already written.
         for rid, path in dataset_files.items():
-            rows, null_entities = _parse_dataset_file(path)
+            rows, orphans = _parse_dataset_file(path)
             _replace_resource(
                 conn, env, catalogue, "dataset", rid, path.name, rows, loaded_at
             )
             resources += 1
             rows_count += len(rows)
-            null_type_entities += null_entities
-            null_type_resources += bool(null_entities)
+            orphan_nodes += orphans
+            orphan_resources += bool(orphans)
         service_files: dict[str, str] = {}  # resource id -> file it came from
         # Two requested ids can map to the same file: load each file once.
         for path in dict.fromkeys(dataservice_files.values()):
@@ -585,15 +709,15 @@ def load_catalogue(
             pruned = _prune(conn, env, catalogue, "dataset", set(dataset_files))
             pruned += _prune(conn, env, catalogue, "dataservice", set(service_files))
         conn.commit()
-        if null_type_entities:
+        if orphan_nodes:
             logger.warning(
-                "%s/%s: %d entities in %d resource(s) stored with entity_type NULL (@type missing"
-                " or with several values; their types are in the rdf:type rows). Set the"
-                " %s logger to DEBUG to list them.",
+                "%s/%s: %d node(s) in %d resource(s) are not reached from any Dataset,"
+                " Distribution or Data Service and were not stored. Set the %s logger to"
+                " DEBUG to list them.",
                 env,
                 catalogue,
-                null_type_entities,
-                null_type_resources,
+                orphan_nodes,
+                orphan_resources,
                 __name__,
             )
     except BaseException:
@@ -606,5 +730,5 @@ def load_catalogue(
         resources=resources,
         pruned=pruned,
         rows=rows_count,
-        null_type_entities=null_type_entities,
+        orphan_nodes=orphan_nodes,
     )
