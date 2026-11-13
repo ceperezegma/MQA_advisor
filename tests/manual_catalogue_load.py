@@ -170,8 +170,8 @@ def load_one(conn, catalogue, kind):
     print(f"\n   {summary}   ({time.perf_counter() - started:.1f}s)")
     print(
         "   resources = Dataset and Data Service files loaded, pruned = resources deleted because\n"
-        "   their file is gone, rows = property_value rows inserted, null_type_entities = entities\n"
-        "   with a missing or multi-valued @type (stored with entity_type NULL)."
+        "   their file is gone, rows = property_value rows inserted, orphan_nodes = nodes that no\n"
+        "   Dataset, Distribution or Data Service reaches (not stored)."
     )
     pause()
 
@@ -180,10 +180,7 @@ def load_one(conn, catalogue, kind):
     pause()
 
     step(5, "Look inside one loaded resource of each kind")
-    for rtype, root_type in (
-        ("dataset", "http://www.w3.org/ns/dcat#Dataset"),
-        ("dataservice", "http://www.w3.org/ns/dcat#DataService"),
-    ):
+    for rtype in ("dataset", "dataservice"):
         sample = conn.execute(
             "SELECT resource_pk, resource_id FROM resource WHERE environment = ?"
             " AND catalogue = ? AND resource_type = ? ORDER BY resource_id LIMIT 1",
@@ -194,10 +191,12 @@ def load_one(conn, catalogue, kind):
             continue
         pk, resource_id = sample
         print(f"\n   [{rtype}] resource_id = {resource_id}")
-        print("   Nodes stored for it (entity_type NULL = no single @type):")
+        print(
+            "   Entities stored for it, by kind (other nodes are folded into values):"
+        )
         show(
             conn,
-            "SELECT entity_type, COUNT(DISTINCT entity_id) AS entities, COUNT(*) AS rows"
+            "SELECT entity_kind, COUNT(DISTINCT entity_id) AS entities, COUNT(*) AS rows"
             " FROM property_value WHERE resource_pk = ? GROUP BY 1 ORDER BY rows DESC",
             (pk,),
         )
@@ -205,8 +204,8 @@ def load_one(conn, catalogue, kind):
         show(
             conn,
             "SELECT property_uri, value, value_kind, datatype, lang FROM property_value"
-            " WHERE resource_pk = ? AND entity_type = ? LIMIT 10",
-            (pk, root_type),
+            " WHERE resource_pk = ? AND entity_kind = ? LIMIT 10",
+            (pk, rtype),
         )
 
 

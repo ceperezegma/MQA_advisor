@@ -70,7 +70,7 @@ def _write_service(directory, record, name=None):
 
 def _rows(conn, resource_id, prop=None):
     sql = (
-        "SELECT p.entity_id, p.entity_type, p.property_uri, p.value, p.value_kind, p.lang"
+        "SELECT p.entity_id, p.entity_kind, p.property_uri, p.value, p.value_kind, p.lang"
         " FROM property_value p JOIN resource r USING (resource_pk)"
         " WHERE r.resource_id = ? AND r.resource_type = 'dataservice'"
     )
@@ -134,25 +134,23 @@ def test_round_trip_keywords_publisher_contact_and_license(conn, directory):
         [(k["label"], "literal", k["language"]) for k in record["keywords"]], key=repr
     )
 
-    root = [r for r in _rows(conn, rid, DCT + "publisher")]
-    assert len(root) == 1
-    assert root[0][:2] == (rid, DCAT + "DataService")
-    assert root[0][4] == "bnode"
-    publisher = [r for r in _rows(conn, rid) if r[0] == root[0][3]]
-    assert {(r[2], r[3], r[4]) for r in publisher} == {
-        (RDF_TYPE, FOAF + "Organization", "uri"),
-        (FOAF + "name", record["publisher"]["name"], "literal"),
-        (FOAF + "mbox", record["publisher"]["email"], "uri"),
-        (FOAF + "homepage", record["publisher"]["homepage"], "uri"),
+    publisher = _rows(conn, rid, DCT + "publisher")
+    assert len(publisher) == 1
+    assert publisher[0][:2] == (rid, "dataservice")
+    assert publisher[0][4] == "node"
+    assert json.loads(publisher[0][3]) == {
+        "@type": [FOAF + "Organization"],
+        FOAF + "name": [{"@value": record["publisher"]["name"]}],
+        FOAF + "mbox": [{"@id": record["publisher"]["email"]}],
+        FOAF + "homepage": [{"@id": record["publisher"]["homepage"]}],
     }
-    assert all(r[1] == FOAF + "Organization" for r in publisher)
 
     contact = _rows(conn, rid, DCAT + "contactPoint")
     assert len(contact) == 1
-    contact_rows = [r for r in _rows(conn, rid) if r[0] == contact[0][3]]
-    assert {(r[2], r[3]) for r in contact_rows} == {
-        (RDF_TYPE, VCARD + "Kind"),
-        (VCARD + "hasEmail", record["contact_point"][0]["email"]),
+    assert contact[0][4] == "node"
+    assert json.loads(contact[0][3]) == {
+        "@type": [VCARD + "Kind"],
+        VCARD + "hasEmail": [{"@id": record["contact_point"][0]["email"]}],
     }
 
     nsip = _fixture_record(NSIP_SERVICE)["result"]
@@ -165,9 +163,10 @@ def test_root_entity_and_id_is_not_a_property(conn, directory):
     _copy(directory, NSIP_SERVICE)
     _load(conn, directory)
     rid = _fixture_record(NSIP_SERVICE)["result"]["id"]
-    root_rows = [r for r in _rows(conn, rid) if r[0] == rid]
-    assert {r[1] for r in root_rows} == {DCAT + "DataService"}
-    assert (rid, DCAT + "DataService", RDF_TYPE, DCAT + "DataService", "uri", None) in (
+    root_rows = _rows(conn, rid)
+    assert {r[0] for r in root_rows} == {rid}  # no other entity has rows
+    assert {r[1] for r in root_rows} == {"dataservice"}
+    assert (rid, "dataservice", RDF_TYPE, DCAT + "DataService", "uri", None) in (
         root_rows
     )
     assert not any(r[3] == rid and r[2] != RDF_TYPE for r in root_rows)
@@ -220,7 +219,6 @@ def test_ignored_keys_create_no_rows(conn, directory):
         DCT + "publisher",
         DCT + "license",
         DCAT + "endpointURL",
-        FOAF + "name",
     }
 
 
@@ -237,7 +235,7 @@ def test_language_is_kept_as_delivered(conn, directory, fixture, langs):
     assert langs <= stored
 
 
-def test_two_contact_points_become_two_entities(conn, directory):
+def test_two_contact_points_become_two_node_values(conn, directory):
     record = _fixture_record(NSIP_SERVICE)["result"]
     record["contact_point"] = [
         {"type": "Kind", "email": "mailto:a@x.org"},
@@ -245,9 +243,9 @@ def test_two_contact_points_become_two_entities(conn, directory):
     ]
     _write_service(directory, record)
     _load(conn, directory)
-    refs = [r[3] for r in _rows(conn, record["id"], DCAT + "contactPoint")]
-    assert len(set(refs)) == 2
-    emails = {r[3] for r in _rows(conn, record["id"], VCARD + "hasEmail")}
+    rows = _rows(conn, record["id"], DCAT + "contactPoint")
+    assert {r[4] for r in rows} == {"node"}
+    emails = {json.loads(r[3])[VCARD + "hasEmail"][0]["@id"] for r in rows}
     assert emails == {"mailto:a@x.org", "mailto:b@x.org"}
 
 
@@ -255,8 +253,8 @@ def test_agent_publisher_type(conn, directory):
     _copy(directory, NSIP_SERVICE)
     _load(conn, directory)
     rid = _fixture_record(NSIP_SERVICE)["result"]["id"]
-    types = {r[3] for r in _rows(conn, rid, RDF_TYPE)}
-    assert FOAF + "Agent" in types
+    (publisher,) = _rows(conn, rid, DCT + "publisher")
+    assert FOAF + "Agent" in json.loads(publisher[3])["@type"]
 
 
 @pytest.mark.parametrize(
@@ -446,8 +444,10 @@ def test_null_values_are_treated_as_absent(conn, directory):
     assert _rows(conn, rid, DCT + "license") == []
     assert _rows(conn, rid, DCAT + "theme") == []
     assert _rows(conn, rid, DCT + "description") == []
-    assert _rows(conn, rid, FOAF + "homepage") == []
-    assert _rows(conn, rid, FOAF + "name") != []
+    (publisher,) = _rows(conn, rid, DCT + "publisher")
+    publisher = json.loads(publisher[3])
+    assert FOAF + "homepage" not in publisher  # the null field is absent
+    assert FOAF + "name" in publisher
     assert record["keywords"][0]["label"] in {
         r[3] for r in _rows(conn, rid, DCAT + "keyword") if r[5] is None
     }

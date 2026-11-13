@@ -224,14 +224,14 @@ def test_literal_values_are_not_followed_as_references(conn, directory):
         conn.execute("SELECT COUNT(*) FROM dataset_embedded_services").fetchone()[0],
     )
     dcat = "http://www.w3.org/ns/dcat#"
-    for entity, prop, value in (
-        ("dataset-with-literal", f"{dcat}distribution", distribution),
-        (distribution, f"{dcat}accessService", "not-a-reference"),
+    for entity, kind, prop, value in (
+        ("dataset-with-literal", "dataset", f"{dcat}distribution", distribution),
+        (distribution, "distribution", f"{dcat}accessService", "not-a-reference"),
     ):
         conn.execute(
-            "INSERT INTO property_value (resource_pk, entity_id, entity_type,"
-            " property_uri, value, value_kind) VALUES (?, ?, NULL, ?, ?, 'literal')",
-            (pk, entity, prop, value),
+            "INSERT INTO property_value (resource_pk, entity_id, entity_kind,"
+            " property_uri, value, value_kind) VALUES (?, ?, ?, ?, ?, 'literal')",
+            (pk, entity, kind, prop, value),
         )
 
     after = (

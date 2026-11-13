@@ -34,11 +34,11 @@ def _add_resource(conn, resource_id="r1", **overrides):
     return cur.lastrowid
 
 
-def _add_value(conn, resource_pk, value_kind="literal"):
+def _add_value(conn, resource_pk, value_kind="literal", entity_kind="dataset"):
     conn.execute(
-        "INSERT INTO property_value (resource_pk, entity_id, property_uri, value, value_kind)"
-        " VALUES (?, 'e1', 'http://purl.org/dc/terms/title', 'x', ?)",
-        (resource_pk, value_kind),
+        "INSERT INTO property_value (resource_pk, entity_id, entity_kind, property_uri,"
+        " value, value_kind) VALUES (?, 'e1', ?, 'http://purl.org/dc/terms/title', 'x', ?)",
+        (resource_pk, entity_kind, value_kind),
     )
 
 
@@ -55,7 +55,7 @@ def test_creates_tables_and_indexes_on_fresh_path(tmp_path):
     assert {
         "property_value_entity",
         "property_value_property",
-        "property_value_type",
+        "property_value_kind",
     } <= _names(conn, "index")
     conn.close()
 
@@ -109,6 +109,36 @@ def test_value_kind_outside_allowed_set_rejected(conn):
     pk = _add_resource(conn)
     with pytest.raises(sqlite3.IntegrityError):
         _add_value(conn, pk, "number")
+
+
+@pytest.mark.parametrize("value_kind", ["literal", "uri", "bnode", "node"])
+def test_every_value_kind_is_accepted(conn, value_kind):
+    _add_value(conn, _add_resource(conn), value_kind)
+
+
+@pytest.mark.parametrize("entity_kind", ["dataset", "distribution", "dataservice"])
+def test_every_entity_kind_is_accepted(conn, entity_kind):
+    _add_value(conn, _add_resource(conn), entity_kind=entity_kind)
+
+
+@pytest.mark.parametrize("entity_kind", ["catalogue", "node", ""])
+def test_entity_kind_outside_allowed_set_rejected(conn, entity_kind):
+    pk = _add_resource(conn)
+    with pytest.raises(sqlite3.IntegrityError):
+        _add_value(conn, pk, entity_kind=entity_kind)
+
+
+def test_database_with_the_older_layout_is_refused_and_closed(tmp_path):
+    path = tmp_path / "old.sqlite"
+    old = sqlite3.connect(path)
+    old.execute(
+        "CREATE TABLE property_value (resource_pk INTEGER, entity_id TEXT, entity_type TEXT)"
+    )
+    old.commit()
+    old.close()
+    with pytest.raises(RuntimeError, match="older layout"):
+        connect(path)
+    path.unlink()  # fails on Windows if the handle was leaked
 
 
 def test_duplicate_resource_rejected(conn):

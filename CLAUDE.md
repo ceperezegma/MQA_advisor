@@ -37,6 +37,8 @@ the SQLite database in `fetched_catalogues_data/mqa.sqlite`. Test fixtures live 
 - `ingest.py` — `PPEIngestor` fetches the manifest's Datasets and Data Services (ADR-0003, ADR-0010).
 - `catalogue_db.py` — SQLite schema, the views `catalogue_resources`, `dataset_distributions`,
   `dataset_embedded_services`, and `load_catalogue()`; `dataservice_mapping.py` maps standalone Data Services.
+  Only Datasets, Distributions and Data Services have rows; other graph nodes are folded into the
+  `node` value of the property that reaches them (ADR-0015).
 - `properties.py` — the Property catalog (`MQA_methodology/MQA-properties-for-app.xlsx`): URI, Importance, Weight.
 - `pipeline.py` — the manifest -> fetch -> db entry point with the step selector. Unlike MQA_test's Test Run,
   any failure of a selected step is fatal.

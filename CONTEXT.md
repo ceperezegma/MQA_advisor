@@ -28,6 +28,18 @@ A Distribution whose:
 * `adms:status` = `<http://publications.europa.eu/resource/authority/dataset-status/DEPRECATED>`
 is marked as deprecated. Excluded entirely: not evaluated, not counted in its parent Dataset's distribution average, not counted in Coverage. A Dataset whose distributions are *all* deprecated is dropped from Catalogue aggregation entirely — distinct from a Dataset with zero distributions, which still scores via its own Entity Score alone.
 
+### Database storage
+
+**Core entity**:
+A Dataset, Distribution or Data Service node of a fetched file. Only core entities have rows in `property_value` (`entity_kind` is `dataset`, `distribution` or `dataservice`).
+
+**Auxiliary node**:
+Any other node of a fetched file's `@graph` (a `dct:PeriodOfTime`, a legal resource, a contact point, a licence...). It describes a property of a core entity, not a resource, so it has no rows: the property that reaches it holds it as a **node value**. Being a URI or a bnode makes no difference.
+_Avoid_: bnode (most auxiliary nodes are URIs, and a core Distribution can be a bnode)
+
+**Node value**:
+The `value` of a `property_value` row whose `value_kind` is `node`: the auxiliary node's content as JSON-LD expanded-form JSON (full-URI keys, every value a list, `@id` only for a URI node). It is the only way to store several facts in one value; read it with SQLite's `json_extract`.
+
 ### MQA Properties
 
 **Property**:

@@ -21,6 +21,11 @@ RDF_TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 DCT = "http://purl.org/dc/terms/"
 DCAT = "http://www.w3.org/ns/dcat#"
 XSD = "http://www.w3.org/2001/XMLSchema#"
+CORE_KINDS = {
+    DCAT + "Dataset": "dataset",
+    DCAT + "Distribution": "distribution",
+    DCAT + "DataService": "dataservice",
+}
 
 DATASET_52N = "dataset_3912ef60-1ee4-45f8-9235-c936989285df.jsonld"
 DATASET_MALAGA = (
@@ -84,9 +89,14 @@ def _counts(conn):
 
 
 def _expected_tuples(path):
-    """The (entity, property, value, kind, datatype, lang) tuples found in a source file."""
+    """The (entity, property, value, kind, datatype, lang) tuples found in a source file.
+
+    Written independently of the loader: only core entities have rows, and a reference to an
+    auxiliary node gives a `node` row whose value is the node's expanded-form JSON.
+    """
     doc = json.loads(path.read_text(encoding="utf-8"))
     context = doc["@context"]
+    nodes = {n["@id"]: n for n in doc["@graph"]}
 
     def full(term):
         if term.startswith(("http://", "https://", "urn:")):
@@ -94,22 +104,63 @@ def _expected_tuples(path):
         prefix, _, rest = term.partition(":")
         return context[prefix] + rest
 
-    out = []
-    for node in doc["@graph"]:
-        entity = node["@id"]
+    def types(node):
+        raw = node.get("@type", [])
+        return [full(t) for t in ([raw] if isinstance(raw, str) else raw)]
+
+    core = {i: n for i, n in nodes.items() if set(types(n)) & set(CORE_KINDS)}
+
+    def expand_node(node_id):
+        node = nodes[node_id]
+        out = {} if node_id.startswith("_:") else {"@id": node_id}
+        if types(node):
+            out["@type"] = sorted(types(node))
         for key, val in node.items():
-            if key == "@id":
+            if key in ("@id", "@type"):
                 continue
-            if key == "@type":
-                for t in [val] if isinstance(val, str) else val:
-                    out.append((entity, RDF_TYPE, full(t), "uri", None, None))
+            out[full(key)] = [
+                value_json(item) for item in (val if isinstance(val, list) else [val])
+            ]
+        return out
+
+    def is_aux(ref):
+        return ref in nodes and ref not in core
+
+    def value_json(item):
+        if isinstance(item, str):
+            return {"@value": item}
+        if "@id" in item:
+            ref = item["@id"]
+            if is_aux(ref):
+                return expand_node(ref)
+            return {} if ref.startswith("_:") else {"@id": ref}
+        out = {"@value": str(item["@value"])}
+        if "@type" in item:
+            out["@type"] = full(item["@type"])
+        if "@language" in item:
+            out["@language"] = item["@language"]
+        return out
+
+    out = []
+    for entity, node in core.items():
+        for t in types(node):
+            out.append((entity, RDF_TYPE, t, "uri", None, None))
+        for key, val in node.items():
+            if key in ("@id", "@type"):
                 continue
             for item in val if isinstance(val, list) else [val]:
                 if isinstance(item, str):
                     out.append((entity, full(key), item, "literal", None, None))
                 elif "@id" in item:
-                    kind = "bnode" if item["@id"].startswith("_:") else "uri"
-                    out.append((entity, full(key), item["@id"], kind, None, None))
+                    ref = item["@id"]
+                    if is_aux(ref):
+                        dumped = json.dumps(
+                            expand_node(ref), sort_keys=True, ensure_ascii=False
+                        )
+                        out.append((entity, full(key), dumped, "node", None, None))
+                    else:
+                        ref_kind = "bnode" if ref.startswith("_:") else "uri"
+                        out.append((entity, full(key), ref, ref_kind, None, None))
                 else:
                     datatype = full(item["@type"]) if "@type" in item else None
                     out.append(
@@ -141,17 +192,24 @@ def test_round_trip_matches_source(conn, data_dir, catalogue, name):
     assert _tuples(conn, resource_id) == _expected_tuples(FIXTURES / catalogue / name)
 
 
-def test_round_trip_stores_whole_graph(conn, data_dir):
+def test_round_trip_stores_core_entities_only(conn, data_dir):
     _copy_fixtures(data_dir, "PROD", "data-gov-lt", {DATASET_2275})
     load_catalogue("PROD", "data-gov-lt", conn=conn, data_dir=data_dir)
     doc = json.loads(
         (FIXTURES / "data-gov-lt" / DATASET_2275).read_text(encoding="utf-8")
     )
+    core_types = {"dcat:Dataset", "dcat:Distribution", "dcat:DataService"}
+
+    def is_core(node):
+        types = node.get("@type", [])
+        return bool(set([types] if isinstance(types, str) else types) & core_types)
+
     stored = {
         r[0] for r in conn.execute("SELECT DISTINCT entity_id FROM property_value")
     }
-    assert stored == {n["@id"] for n in doc["@graph"]}
+    assert stored == {n["@id"] for n in doc["@graph"] if is_core(n)}
     assert SERVICE_2916 in stored
+    assert stored < {n["@id"] for n in doc["@graph"]}  # auxiliary nodes have no rows
 
 
 def test_resource_row(conn, data_dir):
@@ -180,10 +238,6 @@ def test_embedded_service_copies_stored_separately(conn, data_dir):
             t for t in _tuples(conn, resource_id) if t[0] == SERVICE_2916
         ]
         assert rows[resource_id], resource_id
-    assert (
-        rows["https-data-gov-lt-datasets-2275-"]
-        != rows["https-data-gov-lt-datasets-2283-"]
-    )
     pks = conn.execute(
         "SELECT COUNT(DISTINCT resource_pk) FROM property_value WHERE entity_id = ?",
         (SERVICE_2916,),
@@ -275,8 +329,16 @@ def test_embedded_node_with_properties_is_rejected(conn, data_dir):
         {"@id": 5, "@type": "dcat:Dataset"},
         {"@id": "http://example.org/d1", "@type": [None]},
         {"@id": "http://example.org/d1", "@type": {"@id": "dcat:Dataset"}},
-        {"@id": "http://example.org/d1", "dct:title": {"@value": "x", "@type": 7}},
-        {"@id": "http://example.org/d1", "dct:title": {"@id": 7}},
+        {
+            "@id": "http://example.org/d1",
+            "@type": "dcat:Dataset",
+            "dct:title": {"@value": "x", "@type": 7},
+        },
+        {
+            "@id": "http://example.org/d1",
+            "@type": "dcat:Dataset",
+            "dct:title": {"@id": 7},
+        },
     ],
 )
 def test_non_string_id_or_type_names_file(conn, data_dir, node):
@@ -286,101 +348,360 @@ def test_non_string_id_or_type_names_file(conn, data_dir, node):
     assert _counts(conn) == (0, 0)
 
 
-# --- entity_type ----------------------------------------------------------------------------
+# --- entity_kind and auxiliary nodes -------------------------------------------------------
+
+DATASET = {"@id": "http://example.org/d1", "@type": "dcat:Dataset"}
 
 
-def _entity_types(conn):
-    rows = conn.execute("SELECT DISTINCT entity_id, entity_type FROM property_value")
+def _kinds(conn):
+    rows = conn.execute("SELECT DISTINCT entity_id, entity_kind FROM property_value")
     return dict(rows.fetchall())
 
 
-def test_entity_type_single_is_full_uri(conn, data_dir):
-    node = {"@id": "http://example.org/d1", "@type": "dcat:Dataset", "dct:title": "t"}
-    _write_dataset(data_dir / "PROD" / "x", "d1", [node])
-    summary = load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
-    assert _entity_types(conn) == {"http://example.org/d1": DCAT + "Dataset"}
-    assert summary.null_type_entities == 0
-
-
-@pytest.mark.parametrize("types", [["foaf:Agent", "foaf:Organization"],
-                                   ["foaf:Organization", "foaf:Agent"]])  # fmt: skip
-def test_entity_type_multiple_is_null_with_warning(conn, data_dir, caplog, types):
-    context = {"dct": DCT, "foaf": "http://xmlns.com/foaf/0.1/"}
-    node = {"@id": "http://example.org/org", "@type": types, "foaf:name": "Org"}
-    _write_dataset(data_dir / "PROD" / "x", "d1", [node], context)
-    with caplog.at_level(logging.DEBUG, logger="mqa_advisor.catalogue_db"):
-        summary = load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
-    assert _entity_types(conn) == {"http://example.org/org": None}
-    assert summary.null_type_entities == 1
-    assert "d1" in caplog.text
-    assert "http://example.org/org" in caplog.text
-    stored_types = {
-        r[0]
-        for r in conn.execute(
-            "SELECT value FROM property_value WHERE property_uri = ?", (RDF_TYPE,)
+def _node_values(conn, prop):
+    return [
+        json.loads(v)
+        for (v,) in conn.execute(
+            "SELECT value FROM property_value WHERE property_uri = ?"
+            " AND value_kind = 'node'",
+            (prop,),
         )
+    ]
+
+
+def _load_graph(conn, data_dir, graph, resource_id="d1"):
+    path = _write_dataset(data_dir / "PROD" / "x", resource_id, graph)
+    return path, lambda: load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+
+
+def test_entity_kind_comes_from_the_core_type(conn, data_dir):
+    graph = [
+        {**DATASET, "dct:title": "t"},
+        {"@id": "_:dist", "@type": "dcat:Distribution", "dct:title": "d"},
+        {"@id": "http://example.org/s", "@type": "dcat:DataService"},
+    ]
+    _, load = _load_graph(conn, data_dir, graph)
+    summary = load()
+    assert _kinds(conn) == {
+        "http://example.org/d1": "dataset",
+        "_:dist": "distribution",
+        "http://example.org/s": "dataservice",
     }
-    assert stored_types == {"http://xmlns.com/foaf/0.1/Agent",
-                            "http://xmlns.com/foaf/0.1/Organization"}  # fmt: skip
+    assert summary.orphan_nodes == 0
 
 
-def test_entity_type_missing_is_null_with_warning(conn, data_dir, caplog):
-    node = {"@id": "http://example.org/n", "dct:title": "t"}
-    _write_dataset(data_dir / "PROD" / "x", "d1", [node])
-    with caplog.at_level(logging.DEBUG, logger="mqa_advisor.catalogue_db"):
-        summary = load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
-    assert _entity_types(conn) == {"http://example.org/n": None}
-    assert summary.null_type_entities == 1
-    assert "http://example.org/n" in caplog.text
+def test_core_node_keeps_all_its_types_as_rdf_type_rows(conn, data_dir):
+    node = {**DATASET, "@type": ["dcat:Dataset", "dct:Collection"]}
+    _, load = _load_graph(conn, data_dir, [node])
+    load()
+    assert _kinds(conn) == {"http://example.org/d1": "dataset"}
+    stored = {r[0] for r in conn.execute("SELECT value FROM property_value")}
+    assert stored == {DCAT + "Dataset", DCT + "Collection"}
 
 
-def test_null_types_give_one_warning_per_load_and_details_at_debug(
-    conn, data_dir, caplog
-):
-    nodes = [{"@id": f"http://example.org/n{i}", "dct:title": "t"} for i in range(3)]
-    _write_dataset(data_dir / "PROD" / "x", "d1", nodes)
-    _write_dataset(data_dir / "PROD" / "x", "d2", nodes[:1])
-    with caplog.at_level(logging.WARNING, logger="mqa_advisor.catalogue_db"):
-        summary = load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
-    warnings = [r for r in caplog.records if r.levelno == logging.WARNING]
-    assert summary.null_type_entities == 4
-    assert len(warnings) == 1
-    assert "4 entities in 2 resource(s)" in warnings[0].getMessage()
-    assert "http://example.org/n0" not in caplog.text
+def test_untyped_distribution_and_service_reached_by_reference_are_core(conn, data_dir):
+    graph = [
+        {**DATASET, "dcat:distribution": {"@id": "_:dist"}},
+        {"@id": "_:dist", "dcat:accessService": {"@id": "http://example.org/s"}},
+        {"@id": "http://example.org/s", "@type": "dct:Standard", "dct:title": "svc"},
+    ]
+    _, load = _load_graph(conn, data_dir, graph)
+    summary = load()
+    assert _kinds(conn) == {
+        "http://example.org/d1": "dataset",
+        "_:dist": "distribution",
+        "http://example.org/s": "dataservice",
+    }
+    assert summary.orphan_nodes == 0
+    views = {
+        "dataset_distributions": [("_:dist",)],
+        "dataset_embedded_services": [("_:dist", "http://example.org/s")],
+    }
+    columns = {
+        "dataset_distributions": "distribution_id",
+        "dataset_embedded_services": "distribution_id, service_id",
+    }
+    for view, expected in views.items():
+        rows = conn.execute(f"SELECT {columns[view]} FROM {view}").fetchall()
+        assert rows == expected
 
 
-def test_no_warning_when_every_entity_is_typed(conn, data_dir, caplog):
-    _write_dataset(
-        data_dir / "PROD" / "x",
-        "d1",
-        [{"@id": "http://example.org/d1", "@type": "dcat:Dataset"}],
+def test_reference_by_the_wrong_kind_of_owner_does_not_promote(conn, data_dir):
+    # dcat:accessService on a Dataset is not the Distribution -> service link
+    graph = [
+        {**DATASET, "dcat:accessService": {"@id": "_:n"}},
+        {"@id": "_:n", "dct:title": "t"},
+    ]
+    _, load = _load_graph(conn, data_dir, graph)
+    load()
+    assert _kinds(conn) == {"http://example.org/d1": "dataset"}
+    assert len(_node_values(conn, DCAT + "accessService")) == 1
+
+
+def test_node_with_two_core_types_is_rejected(conn, data_dir):
+    node = {**DATASET, "@type": ["dcat:Dataset", "dcat:Distribution"]}
+    path, load = _load_graph(conn, data_dir, [node])
+    with pytest.raises(ValueError, match=path.name):
+        load()
+    assert _counts(conn) == (0, 0)
+
+
+def test_file_without_a_dataset_node_is_rejected(conn, data_dir):
+    graph = [{"@id": "http://example.org/n", "@type": "dct:Location"}]
+    path, load = _load_graph(conn, data_dir, graph)
+    with pytest.raises(ValueError, match=f"{path.name}: no dcat:Dataset"):
+        load()
+    assert _counts(conn) == (0, 0)
+
+
+def test_duplicate_node_id_is_rejected(conn, data_dir):
+    path, load = _load_graph(conn, data_dir, [DATASET, DATASET])
+    with pytest.raises(ValueError, match=path.name):
+        load()
+
+
+def test_auxiliary_node_is_folded_into_the_property_that_reaches_it(conn, data_dir):
+    graph = [
+        {
+            **DATASET,
+            "dct:title": "real title",
+            "dct:temporal": {"@id": "_:period"},
+            "dct:conformsTo": {"@id": "http://example.org/law"},
+        },
+        {"@id": "_:period", "@type": "dct:PeriodOfTime", "dct:title": "period title"},
+        {
+            "@id": "http://example.org/law",
+            "@type": "dct:Standard",
+            "dct:description": {"@language": "eng", "@value": "law text"},
+        },
+    ]
+    _, load = _load_graph(conn, data_dir, graph)
+    load()
+    titles = conn.execute(
+        "SELECT entity_id, value FROM property_value WHERE property_uri = ?",
+        (DCT + "title",),
+    ).fetchall()
+    assert titles == [("http://example.org/d1", "real title")]
+    descriptions = conn.execute(
+        "SELECT COUNT(*) FROM property_value WHERE property_uri = ?",
+        (DCT + "description",),
+    ).fetchone()[0]
+    assert descriptions == 0
+    # a bnode has no @id; a URI node keeps it; every value is a list
+    assert _node_values(conn, DCT + "temporal") == [
+        {"@type": [DCT + "PeriodOfTime"], DCT + "title": [{"@value": "period title"}]}
+    ]
+    assert _node_values(conn, DCT + "conformsTo") == [
+        {
+            "@id": "http://example.org/law",
+            "@type": [DCT + "Standard"],
+            DCT + "description": [{"@language": "eng", "@value": "law text"}],
+        }
+    ]
+
+
+def test_nested_auxiliary_nodes_are_folded_recursively(conn, data_dir):
+    graph = [
+        {**DATASET, "dcat:qualifiedRelation": {"@id": "_:rel"}},
+        {
+            "@id": "_:rel",
+            "@type": "dcat:Relationship",
+            "dcat:hadRole": {"@id": "http://example.org/role"},
+        },
+        {
+            "@id": "http://example.org/role",
+            "@type": "dcat:Role",
+            "dct:title": "related",
+        },
+    ]
+    _, load = _load_graph(conn, data_dir, graph)
+    summary = load()
+    (rel,) = _node_values(conn, DCAT + "qualifiedRelation")
+    assert rel[DCAT + "hadRole"] == [
+        {
+            "@id": "http://example.org/role",
+            "@type": [DCAT + "Role"],
+            DCT + "title": [{"@value": "related"}],
+        }
+    ]
+    assert summary.orphan_nodes == 0
+
+
+def test_shared_auxiliary_node_is_copied_into_each_owner(conn, data_dir):
+    licence = {"@id": "http://example.org/l"}
+    graph = [
+        {**DATASET, "dct:license": licence},
+        {"@id": "_:dist", "@type": "dcat:Distribution", "dct:license": licence},
+        {**licence, "@type": "dct:LicenseDocument", "dct:title": "L"},
+    ]
+    _, load = _load_graph(conn, data_dir, graph)
+    load()
+    rows = conn.execute(
+        "SELECT entity_id, value FROM property_value WHERE value_kind = 'node'"
+    ).fetchall()
+    assert {r[0] for r in rows} == {"http://example.org/d1", "_:dist"}
+    assert len({r[1] for r in rows}) == 1
+
+
+def test_reference_to_a_core_entity_is_not_folded(conn, data_dir):
+    graph = [
+        {**DATASET, "dcat:distribution": {"@id": "_:dist"}},
+        {
+            "@id": "_:dist",
+            "@type": "dcat:Distribution",
+            "dcat:accessService": {"@id": "http://example.org/s"},
+        },
+        {"@id": "http://example.org/s", "@type": "dcat:DataService"},
+    ]
+    _, load = _load_graph(conn, data_dir, graph)
+    load()
+    refs = set(
+        conn.execute(
+            "SELECT entity_id, property_uri, value, value_kind FROM property_value"
+            " WHERE property_uri IN (?, ?)",
+            (DCAT + "distribution", DCAT + "accessService"),
+        )
     )
+    assert refs == {
+        ("http://example.org/d1", DCAT + "distribution", "_:dist", "bnode"),
+        ("_:dist", DCAT + "accessService", "http://example.org/s", "uri"),
+    }
+
+
+def test_reference_inside_a_node_to_a_core_entity_or_unknown_id_is_a_bare_id(
+    conn, data_dir
+):
+    graph = [
+        {**DATASET, "dct:relation": {"@id": "_:n"}},
+        {
+            "@id": "_:n",
+            "dct:source": [
+                {"@id": "http://example.org/d1"},
+                {"@id": "http://example.org/elsewhere"},
+                {"@id": "_:ghost"},
+            ],
+        },
+    ]
+    _, load = _load_graph(conn, data_dir, graph)
+    load()
+    (node,) = _node_values(conn, DCT + "relation")
+    assert node == {
+        DCT + "source": [
+            {"@id": "http://example.org/d1"},
+            {"@id": "http://example.org/elsewhere"},
+            {},
+        ]
+    }
+
+
+def test_auxiliary_nodes_that_refer_back_are_rejected(conn, data_dir):
+    graph = [
+        {**DATASET, "dct:relation": {"@id": "_:a"}},
+        {"@id": "_:a", "dct:relation": {"@id": "_:b"}},
+        {"@id": "_:b", "dct:relation": {"@id": "_:a"}},
+    ]
+    path, load = _load_graph(conn, data_dir, graph)
+    with pytest.raises(ValueError, match=path.name):
+        load()
+    assert _counts(conn) == (0, 0)
+
+
+def test_unreached_nodes_are_not_stored_and_warned_once(conn, data_dir, caplog):
+    orphans = [{"@id": f"_:o{i}", "dct:title": "t"} for i in range(3)]
+    _write_dataset(data_dir / "PROD" / "x", "d1", [DATASET, *orphans])
+    _write_dataset(data_dir / "PROD" / "x", "d2", [DATASET, orphans[0]])
     with caplog.at_level(logging.DEBUG, logger="mqa_advisor.catalogue_db"):
-        load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+        summary = load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+    assert summary.orphan_nodes == 4
+    stored_titles = conn.execute(
+        "SELECT COUNT(*) FROM property_value WHERE property_uri = ?", (DCT + "title",)
+    ).fetchone()[0]
+    assert stored_titles == 0
+    warnings = [r for r in caplog.records if r.levelno == logging.WARNING]
+    assert len(warnings) == 1
+    assert "4 node(s) in 2 resource(s)" in warnings[0].getMessage()
+    assert "_:o0" in caplog.text  # listed at DEBUG
+
+
+def test_no_log_when_every_node_is_reached(conn, data_dir, caplog):
+    _, load = _load_graph(conn, data_dir, [DATASET])
+    with caplog.at_level(logging.DEBUG, logger="mqa_advisor.catalogue_db"):
+        load()
     assert caplog.records == []
 
 
-def test_nsip_lu_multi_typed_nodes_are_null(conn, data_dir):
+def test_node_json_does_not_depend_on_key_or_type_order(conn, data_dir):
+    def graph(reverse):
+        keys = [("dct:title", "t"), ("dct:description", "d")]
+        types = ["dct:Standard", "dct:Location"]
+        node = dict(reversed(keys) if reverse else keys)
+        return [
+            {**DATASET, "dct:relation": {"@id": "_:a"}},
+            {"@id": "_:a", "@type": types[::-1] if reverse else types, **node},
+        ]
+
+    values = []
+    for reverse in (False, True):
+        _write_dataset(data_dir / "PROD" / "x", "d1", graph(reverse))
+        load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+        values.append(
+            conn.execute(
+                "SELECT value FROM property_value WHERE value_kind = 'node'"
+            ).fetchone()[0]
+        )
+    assert values[0] == values[1]
+
+
+def test_nsip_lu_dataset_has_one_title_and_one_description(conn, data_dir):
+    """The reported bug: the title of the PeriodOfTime node and the description of the legal
+    resource were stored as if they were the Dataset's."""
+    _copy_fixtures(
+        data_dir,
+        "PROD",
+        "nsip-lu",
+        {"dataset_16c923dc-7cf7-11f0-9925-46bf4a153a63.jsonld"},
+    )
+    load_catalogue("PROD", "nsip-lu", conn=conn, data_dir=data_dir)
+    dataset = "http://data.europa.eu/88u/dataset/16c923dc-7cf7-11f0-9925-46bf4a153a63"
+    for prop, start in (
+        ("title", "Registre national des personnes physiques"),
+        ("description", "Signalétique : Nom"),
+    ):
+        rows = conn.execute(
+            "SELECT entity_id, value FROM property_value WHERE property_uri = ?",
+            (DCT + prop,),
+        ).fetchall()
+        assert len(rows) == 1
+        assert rows[0][0] == dataset
+        assert rows[0][1].startswith(start)
+    (legislation,) = _node_values(
+        conn, "http://data.europa.eu/r5r/applicableLegislation"
+    )
+    assert legislation[DCT + "description"][0]["@value"].startswith(
+        "Loi du 19 juin 2013"
+    )
+    (temporal,) = _node_values(conn, DCT + "temporal")
+    assert temporal[DCT + "title"] == [
+        {"@language": "eng", "@value": "Dataset Coverage Period"}
+    ]
+
+
+def test_nsip_lu_stores_only_core_entities(conn, data_dir):
     _copy_fixtures(data_dir, "PROD", "nsip-lu")
     summary = load_catalogue("PROD", "nsip-lu", conn=conn, data_dir=data_dir)
-    rows = conn.execute(
-        "SELECT DISTINCT resource_pk, entity_id, entity_type FROM property_value"
-    ).fetchall()
-    null_entities = {(pk, e) for pk, e, t in rows if t is None}
-    assert null_entities
-    assert summary.null_type_entities == len(null_entities)
-    for pk, entity in null_entities:
-        n_types = conn.execute(
-            "SELECT COUNT(*) FROM property_value WHERE resource_pk = ? AND entity_id = ?"
-            " AND property_uri = ?",
-            (pk, entity, RDF_TYPE),
-        ).fetchone()[0]
-        assert n_types != 1
-    for _pk, entity, entity_type in rows:
-        if entity_type is not None:
-            assert entity_type.startswith("http")
-    typed = {t for _pk, _e, t in rows}
-    assert {DCAT + "Dataset", DCAT + "Distribution"} <= typed
+    kinds = {
+        r[0] for r in conn.execute("SELECT DISTINCT entity_kind FROM property_value")
+    }
+    assert kinds == {"dataset", "distribution"}
+    not_core = conn.execute(
+        "SELECT COUNT(DISTINCT p.resource_pk || p.entity_id) FROM property_value p"
+        " WHERE NOT EXISTS (SELECT 1 FROM property_value q"
+        " WHERE q.resource_pk = p.resource_pk AND q.entity_id = p.entity_id"
+        " AND q.property_uri = ? AND q.value IN (?, ?, ?))",
+        (RDF_TYPE, *CORE_KINDS),
+    ).fetchone()[0]
+    assert not_core == 0
+    assert summary.orphan_nodes == 0
 
 
 # --- summary ---------------------------------------------------------------------------------

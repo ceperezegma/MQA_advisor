@@ -8,7 +8,7 @@ from mqa_advisor import pipeline
 from mqa_advisor.catalogue_db import LoadSummary
 from mqa_advisor.pipeline import PipelineInputError, parse_steps, run
 
-SUMMARY = LoadSummary(resources=2, pruned=0, rows=10, null_type_entities=0)
+SUMMARY = LoadSummary(resources=2, pruned=0, rows=10, orphan_nodes=0)
 
 
 class Recorder:
