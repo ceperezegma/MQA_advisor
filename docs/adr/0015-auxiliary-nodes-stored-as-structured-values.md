@@ -19,7 +19,9 @@ description of the legal resource reached by `dcatap:applicableLegislation` look
 ## Decision
 
 - Rows exist only for core entities (Dataset, Distribution, Data Service). `entity_kind` replaces
-  `entity_type`; the rdf:type rows of a core entity stay.
+  `entity_type`; the rdf:type rows of a core entity stay. A node reached through `dcat:distribution`
+  from a Dataset, or `dcat:accessService` from a Distribution, is core even without a DCAT `@type`
+  (the real data has none, this keeps the views from losing one if it ever happens).
 - An auxiliary node is stored in the `value` of the property that reaches it, `value_kind = 'node'`,
   as JSON-LD expanded form (W3C format, no invented one): full-URI keys, every value a list,
   `@type` sorted, `@id` kept for a URI node and dropped for a bnode, nested nodes recursive, keys

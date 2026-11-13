@@ -399,6 +399,45 @@ def test_core_node_keeps_all_its_types_as_rdf_type_rows(conn, data_dir):
     assert stored == {DCAT + "Dataset", DCT + "Collection"}
 
 
+def test_untyped_distribution_and_service_reached_by_reference_are_core(conn, data_dir):
+    graph = [
+        {**DATASET, "dcat:distribution": {"@id": "_:dist"}},
+        {"@id": "_:dist", "dcat:accessService": {"@id": "http://example.org/s"}},
+        {"@id": "http://example.org/s", "@type": "dct:Standard", "dct:title": "svc"},
+    ]
+    _, load = _load_graph(conn, data_dir, graph)
+    summary = load()
+    assert _kinds(conn) == {
+        "http://example.org/d1": "dataset",
+        "_:dist": "distribution",
+        "http://example.org/s": "dataservice",
+    }
+    assert summary.orphan_nodes == 0
+    views = {
+        "dataset_distributions": [("_:dist",)],
+        "dataset_embedded_services": [("_:dist", "http://example.org/s")],
+    }
+    columns = {
+        "dataset_distributions": "distribution_id",
+        "dataset_embedded_services": "distribution_id, service_id",
+    }
+    for view, expected in views.items():
+        rows = conn.execute(f"SELECT {columns[view]} FROM {view}").fetchall()
+        assert rows == expected
+
+
+def test_reference_by_the_wrong_kind_of_owner_does_not_promote(conn, data_dir):
+    # dcat:accessService on a Dataset is not the Distribution -> service link
+    graph = [
+        {**DATASET, "dcat:accessService": {"@id": "_:n"}},
+        {"@id": "_:n", "dct:title": "t"},
+    ]
+    _, load = _load_graph(conn, data_dir, graph)
+    load()
+    assert _kinds(conn) == {"http://example.org/d1": "dataset"}
+    assert len(_node_values(conn, DCAT + "accessService")) == 1
+
+
 def test_node_with_two_core_types_is_rejected(conn, data_dir):
     node = {**DATASET, "@type": ["dcat:Dataset", "dcat:Distribution"]}
     path, load = _load_graph(conn, data_dir, [node])

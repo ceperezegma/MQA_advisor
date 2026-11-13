@@ -21,22 +21,22 @@ A Data Service record SHALL be read from the `result` object of its envelope. Ea
 - **THEN** each yields one `uri` row under `dct:accessRights`, `dct:format`, `dct:license` holding the `resource` value, and their `id`/`label` are not stored
 
 ### Requirement: Root node and id
-The record's `id` SHALL be the resource's `resource_id` and SHALL NOT be stored as a property. The root node SHALL be an entity whose `entity_id` is the `id` and whose `entity_type` is the full URI of `dcat:DataService`, with an `rdf:type` row of the same value.
+The record's `id` SHALL be the resource's `resource_id` and SHALL NOT be stored as a property. The root node SHALL be an entity whose `entity_id` is the `id` and whose `entity_kind` is `dataservice`, with an `rdf:type` row holding the full URI of `dcat:DataService`; it SHALL be the only entity of the record.
 
 #### Scenario: Root entity
 - **WHEN** a Data Service with `id` `X` is loaded
-- **THEN** `resource_id` is `X`, its root rows have `entity_type` `http://www.w3.org/ns/dcat#DataService`, and no row has the property `id`
+- **THEN** `resource_id` is `X`, all its rows have `entity_id` `X` and `entity_kind` `dataservice`, there is an `rdf:type` row `http://www.w3.org/ns/dcat#DataService`, and no row has the property `id`
 
-### Requirement: Nested publisher and contact point are separate entities
-`publisher` SHALL become a new entity with a synthetic `_:` id, typed `foaf:Organization` or `foaf:Agent` according to the JSON `type`, with `foaf:name`, `foaf:mbox` (from `email`) and `foaf:homepage` rows for the keys present, and the root SHALL reference it with a `dct:publisher` row of `value_kind='bnode'`. Each `contact_point[]` item SHALL become a new `_:` entity typed `vcard:Kind` with a `vcard:hasEmail` row, referenced from the root by a `dcat:contactPoint` row of `value_kind='bnode'`. A nested `type` outside `Organization`, `Agent` (publisher) or `Kind` (contact point) SHALL raise an error naming the file.
+### Requirement: Nested publisher and contact point are node values
+`publisher` SHALL become one `dct:publisher` row of the root with `value_kind='node'`, whose `value` is the JSON-LD expanded-form object defined by the `catalogue-database` capability: `@type` is `["foaf:Organization"]` or `["foaf:Agent"]` (full URIs) according to the JSON `type`, and `foaf:name` (literal), `foaf:mbox` (from `email`, `{"@id": ...}`) and `foaf:homepage` (`{"@id": ...}`) are lists holding the keys present; there is no `@id`. Each `contact_point[]` item SHALL become one `dcat:contactPoint` row of the same kind, with `@type` `["vcard:Kind"]` and a `vcard:hasEmail` list. They SHALL NOT be separate entities and no synthetic id SHALL be stored. A nested `type` outside `Organization`, `Agent` (publisher) or `Kind` (contact point) SHALL raise an error naming the file.
 
-#### Scenario: Publisher reachable from root
+#### Scenario: Publisher in the root's value
 - **WHEN** a record with a publisher `{"type": "Organization", "name": "N", "email": "mailto:a@b", "homepage": "https://h"}` is loaded
-- **THEN** the root has a `dct:publisher` row whose value is the id of an entity of type `foaf:Organization` that has `foaf:name` `N`, `foaf:mbox` `mailto:a@b` and `foaf:homepage` `https://h`
+- **THEN** the root has one `dct:publisher` row whose `node` value has type `foaf:Organization`, `foaf:name` `N`, `foaf:mbox` `mailto:a@b` and `foaf:homepage` `https://h`
 
 #### Scenario: Two contact points
 - **WHEN** a record has two `contact_point` items
-- **THEN** two distinct `vcard:Kind` entities exist, each referenced by its own `dcat:contactPoint` row
+- **THEN** the root has two `dcat:contactPoint` `node` rows, one per item
 
 ### Requirement: No key is dropped silently
 Every key of `result` SHALL be either mapped or in an explicit ignore list (`catalog`, `translation_meta`, `count`, `results`); the envelope key `status` is not a record key. A record holding any other key SHALL raise an error naming the file and the key. A file that is not valid JSON, has no `result` object, or has a mapped key of an unexpected shape SHALL raise an error naming the file. A key (or nested field) whose value is `null` SHALL be treated as absent, except that an unmapped key raises even when null.

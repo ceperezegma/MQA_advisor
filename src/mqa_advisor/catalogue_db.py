@@ -65,6 +65,11 @@ _CORE_KINDS = {
     _DCAT + "Dataset": "dataset",
     _DCAT + "Distribution": "distribution",
     _DCAT + "DataService": "dataservice",
+}  # A node reached through one of these properties is a core entity of the given kind even when
+# its own `@type` does not say so: (kind of the owner, property) -> kind of the target.
+_CORE_REFERENCES = {
+    ("dataset", _DCAT + "distribution"): "distribution",
+    ("distribution", _DCAT + "accessService"): "dataservice",
 }
 
 SCHEMA = """
@@ -351,6 +356,33 @@ def _core_kind(types: list[str], node_id: str, source: str) -> str | None:
     return next(iter(kinds), None)
 
 
+def _promote_referenced(graph: _Graph, context: dict[str, str], source: str) -> None:
+    """Make core the nodes that a core entity reaches through `_CORE_REFERENCES`.
+
+    Without it, a Distribution or Data Service whose `@type` is missing or not DCAT would be
+    folded into its owner's `node` value and disappear from the views.
+    """
+    queue = list(graph.core)
+    while queue:
+        node_id = queue.pop()
+        kind = graph.core[node_id]
+        for property_uri, items in _node_properties(
+            graph.nodes[node_id], context, source
+        ):
+            target_kind = _CORE_REFERENCES.get((kind, property_uri))
+            if target_kind is None:
+                continue
+            for item in items:
+                ref = item.get("@id") if isinstance(item, dict) else None
+                if (
+                    isinstance(ref, str)
+                    and ref in graph.nodes
+                    and ref not in graph.core
+                ):
+                    graph.core[ref] = target_kind
+                    queue.append(ref)
+
+
 def _core_rows(
     node_id: str, kind: str, graph: _Graph, context: dict[str, str], source: str
 ) -> list[_Row]:
@@ -403,6 +435,7 @@ def _parse_dataset_file(path: Path) -> tuple[list[_Row], int]:
         kind = _core_kind(_node_types(node, context, source), node_id, source)
         if kind is not None:
             graph.core[node_id] = kind
+    _promote_referenced(graph, context, source)
     if "dataset" not in graph.core.values():
         raise ValueError(f"{source}: no dcat:Dataset node in @graph")
 
