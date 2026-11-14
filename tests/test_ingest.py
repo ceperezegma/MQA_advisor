@@ -963,3 +963,60 @@ def test_failures_are_sorted_and_the_first_one_is_chained_whatever_the_finish_or
     assert keys == [("dataservice", "a"), ("dataset", "a"), ("dataset", "b")]
     assert isinstance(exc.value.failures, tuple)
     assert exc.value.__cause__ is causes[("dataservice", "a")]
+
+
+def _manifest_with_one_failing_resource(tmp_path):
+    auth = FakeAuth()
+    _write_manifest(
+        tmp_path / "catalogues_to_fetch" / "cat.xlsx",
+        [("uri-1", "dataset", "1"), ("uri-2", "dataset", "2")],
+    )
+    auth.queue(build_fetch_url(auth.base_url, "dataset", "1"), FakeResponse(200, b"ok"))
+    auth.queue(
+        build_fetch_url(auth.base_url, "dataset", "2"),
+        *[FakeResponse(404) for _ in range(MAX_FETCH_ATTEMPTS)],
+    )
+    return auth
+
+
+def test_failures_are_kept_when_the_report_cannot_be_written(tmp_path, monkeypatch):
+    from mqa_advisor import ingest
+
+    def report_open_in_excel(catalogue_dir, rows):
+        raise PermissionError("report.xlsx is open in another program")
+
+    monkeypatch.setattr(ingest, "write_report", report_open_in_excel)
+    ingestor = _make_ingestor(tmp_path, _manifest_with_one_failing_resource(tmp_path))
+
+    with pytest.raises(FetchIncompleteError) as exc:
+        ingestor.run_catalogue("cat")
+    ingestor.shutdown()
+
+    error = exc.value
+    assert error.report_path is None
+    assert isinstance(error.report_error, PermissionError)
+    [failure] = error.failures
+    assert (failure.resource_type, failure.resource_id) == ("dataset", "2")
+    assert "1 of 2 resources failed" in str(error)
+    assert "report not written" in str(error)
+    assert "PermissionError" in str(error)
+    assert isinstance(error.__cause__, ResourceFetchError)  # still the first failure
+
+
+def test_a_report_write_error_without_failures_still_propagates(tmp_path, monkeypatch):
+    from mqa_advisor import ingest
+
+    def report_open_in_excel(catalogue_dir, rows):
+        raise PermissionError("report.xlsx is open in another program")
+
+    monkeypatch.setattr(ingest, "write_report", report_open_in_excel)
+    auth = FakeAuth()
+    _write_manifest(
+        tmp_path / "catalogues_to_fetch" / "cat.xlsx", [("uri-1", "dataset", "1")]
+    )
+    auth.queue(build_fetch_url(auth.base_url, "dataset", "1"), FakeResponse(200, b"ok"))
+    ingestor = _make_ingestor(tmp_path, auth)
+
+    with pytest.raises(PermissionError):
+        ingestor.run_catalogue("cat")
+    ingestor.shutdown()

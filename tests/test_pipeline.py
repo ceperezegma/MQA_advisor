@@ -390,6 +390,24 @@ def test_incomplete_fetch_end_to_end_exits_1_and_never_calls_the_loader(
     assert loader_calls == []
 
 
+def test_main_lists_the_failures_even_when_the_report_was_not_written(
+    monkeypatch, capsys
+):
+    failures = [FetchFailure("dataset", "a", RuntimeError("boom"))]
+    error = FetchIncompleteError(
+        None,
+        failures,
+        total=3,
+        report_error=PermissionError("report.xlsx is open in another program"),
+    )
+    err = _stderr_for(monkeypatch, capsys, error)
+
+    assert err.count("\n") == 1
+    assert "1 of 3 resources failed" in err
+    assert "report not written" in err
+    assert "dataset a (RuntimeError: boom)" in err
+
+
 def test_db_only_never_builds_or_calls_the_ingestor(rec, tmp_path):
     (tmp_path / "fetched" / "PROD" / "cat").mkdir(parents=True)
 

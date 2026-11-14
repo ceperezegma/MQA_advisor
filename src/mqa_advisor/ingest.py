@@ -107,17 +107,29 @@ class FetchFailure:
 
 
 class FetchIncompleteError(Exception):
-    """Raised by `run_catalogue`, after the report is written, when any resource failed."""
+    """Raised by `run_catalogue`, after the report is written, when any resource failed.
+
+    If the report itself could not be written (for example `report.xlsx` is open in Excel),
+    `report_path` is `None` and `report_error` holds why: the failures are kept either way.
+    """
 
     def __init__(
-        self, report_path: Path, failures: Sequence[FetchFailure], total: int
+        self,
+        report_path: Path | None,
+        failures: Sequence[FetchFailure],
+        total: int,
+        report_error: OSError | None = None,
     ) -> None:
         self.report_path = report_path
         self.failures = tuple(failures)
         self.total = total
-        super().__init__(
-            f"{len(failures)} of {total} resources failed (report: {report_path})"
-        )
+        self.report_error = report_error
+        if report_path is None and report_error is not None:
+            reason = " ".join(f"{type(report_error).__name__}: {report_error}".split())
+            where = f"report not written: {reason}"
+        else:
+            where = f"report: {report_path}"
+        super().__init__(f"{len(failures)} of {total} resources failed ({where})")
 
 
 class _ResponseEnvelopeError(Exception):
@@ -381,12 +393,20 @@ class PPEIngestor:
                 resource_type, resource_id = futures[future]
                 failures.append(FetchFailure(resource_type, resource_id, exc))
 
-        report_path = write_report(catalogue_dir, rows)
+        report_path: Path | None = None
+        report_error: OSError | None = None
+        try:
+            report_path = write_report(catalogue_dir, rows)
+        except OSError as exc:
+            if not failures:
+                raise
+            report_error = exc  # keep the failures: they matter more than the report
+
         if failures:
             # Completion order depends on thread timing; sort so the error is deterministic.
             failures.sort(key=lambda f: (f.resource_type, f.resource_id))
             raise FetchIncompleteError(
-                report_path, failures, total=len(futures)
+                report_path, failures, total=len(futures), report_error=report_error
             ) from failures[0].cause
         return report_path
 
