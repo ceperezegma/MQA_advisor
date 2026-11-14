@@ -1,16 +1,19 @@
 """Tests for the manifest -> fetch -> db pipeline with its step selector (no network, no DB)."""
 
+import shutil
 from pathlib import Path
 
 import pytest
 
 from mqa_advisor import pipeline
-from mqa_advisor.catalogue_db import LoadSummary
+from mqa_advisor.catalogue_db import LoadSummary, connect
 from mqa_advisor.ingest import (
     MAX_FETCH_ATTEMPTS,
     FetchFailure,
     FetchIncompleteError,
+    ManifestRow,
     ResourceFetchError,
+    write_report,
 )
 from mqa_advisor.pipeline import PipelineInputError, parse_steps, run
 
@@ -416,3 +419,80 @@ def test_db_only_never_builds_or_calls_the_ingestor(rec, tmp_path):
     assert "ingestor" not in rec.names()
     assert "fetch" not in rec.names()
     assert "shutdown" not in rec.names()
+
+
+# --- the db step always loads the folder as it is (issue #14) -----------------
+
+
+def _stored_resources(db_path):
+    conn = connect(db_path)
+    try:
+        rows = conn.execute("SELECT resource_id FROM resource ORDER BY resource_id")
+        return [row[0] for row in rows.fetchall()]
+    finally:
+        conn.close()
+
+
+def test_db_on_a_folder_with_only_the_report_still_loads(rec, tmp_path):
+    folder = tmp_path / "fetched" / "PROD" / "cat"
+    write_report(folder, [ManifestRow("u1", "dataset", "1")])  # Failed: no file
+
+    rec.run(steps={"db"})
+
+    assert rec.names() == ["db"]
+
+
+def test_db_loads_a_folder_whose_report_has_failed_rows(rec, tmp_path):
+    folder = tmp_path / "fetched" / "PROD" / "cat"
+    (folder).mkdir(parents=True)
+    (folder / "dataset_1.jsonld").write_text("{}")
+    rows = [ManifestRow("u1", "dataset", "1"), ManifestRow("u2", "dataset", "2")]
+    write_report(folder, rows)  # resource 2 has no file: Failed
+
+    rec.run(steps={"db"})
+
+    assert rec.names() == ["db"]
+
+
+def test_fetch_and_db_load_when_the_manifest_has_no_fetchable_rows(rec, tmp_path):
+    (tmp_path / "manifests").mkdir()
+    (tmp_path / "manifests" / "cat.xlsx").touch()
+
+    rec.run(steps={"fetch", "db"})
+
+    assert rec.names() == ["session", "ingestor", "fetch", "shutdown", "db"]
+
+
+def test_the_database_follows_the_folder_down_to_an_empty_one(tmp_path):
+    """The real load: a vanished file removes its rows, and an empty folder removes them all."""
+    source = Path(__file__).parent / "fixtures" / "ingested" / "52north"
+    folder = tmp_path / "fetched" / "PROD" / "52north"
+    folder.mkdir(parents=True)
+    names = sorted(path.name for path in source.glob("dataset_*.jsonld"))
+    for name in names:
+        shutil.copy(source / name, folder / name)
+    options = {
+        "env": "PROD",
+        "manifests_dir": tmp_path / "manifests",
+        "fetched_data_dir": tmp_path / "fetched",
+        "db_path": tmp_path / "fetched" / "mqa.sqlite",
+    }
+
+    run("52north", steps={"db"}, **options)
+    assert len(_stored_resources(options["db_path"])) == len(names) == 2
+
+    (folder / names[1]).unlink()
+    run("52north", steps={"db"}, **options)
+    assert len(_stored_resources(options["db_path"])) == 1
+
+    (folder / names[0]).unlink()
+    run("52north", steps={"db"}, **options)
+    assert _stored_resources(options["db_path"]) == []
+
+
+def test_main_rejects_the_removed_allow_partial_option(capsys):
+    with pytest.raises(SystemExit) as exc:
+        pipeline.main(["cat", "--steps", "db", "--allow-partial"])
+
+    assert exc.value.code == 2
+    assert "--allow-partial" in capsys.readouterr().err
