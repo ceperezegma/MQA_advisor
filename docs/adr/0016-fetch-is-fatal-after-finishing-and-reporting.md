@@ -31,12 +31,7 @@ a catalogue with failed downloads, or with bad credentials or a host that is dow
 
 - A catalogue with even one permanently missing resource no longer completes `fetch,db` in one
   command. Re-running resumes: existing files are skipped and only the missing ones are retried.
-- A full database load prunes the rows of resources whose files are missing (spec
-  `catalogue-database`), so `--steps db` after a failed fetch used to delete data silently. Issue
-  #9 closed that in the pipeline: the db step refuses a folder with no resource files (never
-  overridable) and, unless `--allow-partial` is given, one whose `report.xlsx` has `Failed` rows.
-  A folder without a report loads, because its completeness cannot be told. The deliberate route
-  for a catalogue with permanently missing resources is `--steps fetch` (fails, writes the report),
-  then `--steps db --allow-partial`.
+- `--steps db` still loads whatever files are on disk, including after a failed fetch, and the load
+  prunes the rows of resources whose files are missing. Closing that gap is tracked in issue #9.
 - Callers of `run_catalogue` (`tests/manual_ingestion.py` and the integration tests) now see an
   exception where they used to see a `Failed` row; the integration tests were not run.

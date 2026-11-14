@@ -73,8 +73,6 @@ MANIFESTS_DIR = Path("catalogues_to_fetch")
 FETCHED_DATA_DIR = Path("fetched_catalogues_data")
 
 _MANIFEST_COLUMNS = ("resource_uri", "type", "resource_id")
-# The columns of `report.xlsx`, in order; `failed_resources` reads them back by name.
-REPORT_COLUMNS = ("resource_uri", "type", "resource_id", "file_name", "download_result")
 # Single source of truth for which manifest `type`s are fetched: _FETCHABLE_TYPES
 # is derived from this dict's keys so the two can never drift apart.
 _FILE_EXTENSION_BY_TYPE = {"dataset": "jsonld", "dataservice": "json"}
@@ -304,7 +302,9 @@ def write_report(catalogue_dir: Path, rows: list[ManifestRow]) -> Path:
     """Write `report.xlsx`, one row per manifest entry, status from disk ground truth."""
     workbook = openpyxl.Workbook()
     sheet = workbook.active
-    sheet.append(list(REPORT_COLUMNS))
+    sheet.append(
+        ["resource_uri", "type", "resource_id", "file_name", "download_result"]
+    )
 
     for row in rows:
         sheet.append(
@@ -321,35 +321,6 @@ def write_report(catalogue_dir: Path, rows: list[ManifestRow]) -> Path:
     report_path = catalogue_dir / "report.xlsx"
     workbook.save(report_path)
     return report_path
-
-
-def failed_resources(report_path: Path) -> list[tuple[str, str]]:
-    """The (type, id) of every resource a fetch `report.xlsx` records as `Failed`.
-
-    A resource is `Failed` when its file is absent from the catalogue folder, so these are
-    exactly the resources a full database load would prune. Columns are found by name: a
-    workbook without them is not a fetch report and raises `ValueError`, rather than being
-    read as "nothing failed".
-    """
-    workbook = openpyxl.load_workbook(report_path, read_only=True, data_only=True)
-    try:
-        rows = workbook.active.iter_rows(values_only=True)
-        header = next(rows, ())
-        missing = [name for name in REPORT_COLUMNS if name not in header]
-        if missing:
-            raise ValueError(
-                f"{report_path} is not a fetch report: missing column(s) {', '.join(missing)}"
-            )
-        type_i, id_i, result_i = (
-            header.index(name) for name in ("type", "resource_id", "download_result")
-        )
-        return [
-            (row[type_i], row[id_i])
-            for row in rows
-            if len(row) > result_i and row[result_i] == "Failed"
-        ]
-    finally:
-        workbook.close()
 
 
 class PPEIngestor:

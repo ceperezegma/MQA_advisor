@@ -17,10 +17,7 @@ tests under `tests/`.
 
 **Prepare a catalogue's database:** `uv run python -m mqa_advisor.pipeline {catalogue}`; pick the
 steps with `--steps manifest,fetch,db` (a step not selected reuses the files on disk) and add
-`--force` to re-fetch. A failed fetch stops the run before the db step (`FetchIncompleteError`,
-exit 1). The db step also refuses a catalogue folder with no resource files, or whose fetch
-`report.xlsx` has `Failed` rows, because a full load deletes the rows of resources whose file is
-gone; for a deliberate partial load run `--steps fetch`, then `--steps db --allow-partial`.
+`--force` to re-fetch.
 
 **Test:** `uv run pytest` runs the unit suite. Integration tests need network (and PPE credentials
 when `MQA_ENV=PPE`); they are marked `integration`, excluded by default, and run with

@@ -17,7 +17,6 @@ from mqa_advisor.ingest import (
     ResourceFetchError,
     _expected_file_name,
     build_fetch_url,
-    failed_resources,
     fetch_and_store,
     load_manifest,
     write_report,
@@ -1021,41 +1020,3 @@ def test_a_report_write_error_without_failures_still_propagates(tmp_path, monkey
     with pytest.raises(PermissionError):
         ingestor.run_catalogue("cat")
     ingestor.shutdown()
-
-
-# --- failed_resources: reading a fetch report back (issue #9) -----------------
-
-
-def test_failed_resources_lists_only_the_failed_rows(tmp_path):
-    rows = [
-        ManifestRow("u1", "dataset", "1"),
-        ManifestRow("u2", "dataset", "2"),
-        ManifestRow("u3", "dataservice", "3"),
-        ManifestRow("u4", "distribution", "4"),
-    ]
-    (tmp_path / "dataset_1.jsonld").write_text("{}")  # 1 is Success, 4 is Skipped
-    report = write_report(tmp_path, rows)
-
-    assert failed_resources(report) == [("dataset", "2"), ("dataservice", "3")]
-
-
-def test_failed_resources_is_empty_when_nothing_failed(tmp_path):
-    (tmp_path / "dataset_1.jsonld").write_text("{}")
-    report = write_report(tmp_path, [ManifestRow("u1", "dataset", "1")])
-
-    assert failed_resources(report) == []
-
-
-def test_failed_resources_is_empty_for_a_report_without_data_rows(tmp_path):
-    assert failed_resources(write_report(tmp_path, [])) == []
-
-
-def test_failed_resources_rejects_a_workbook_that_is_not_a_fetch_report(tmp_path):
-    workbook = openpyxl.Workbook()
-    workbook.active.append(["name", "status"])
-    workbook.active.append(["x", "Failed"])
-    path = tmp_path / "report.xlsx"
-    workbook.save(path)
-
-    with pytest.raises(ValueError, match="download_result"):
-        failed_resources(path)
