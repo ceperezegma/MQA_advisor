@@ -38,6 +38,9 @@ import sys
 from collections.abc import Callable, Collection, Sequence
 from dataclasses import dataclass
 from pathlib import Path
+from zipfile import BadZipFile
+
+from openpyxl.utils.exceptions import InvalidFileException
 
 from mqa_advisor.auth import ConfigError
 from mqa_advisor.catalogue_db import DB_PATH, LoadSummary, connect, load_catalogue
@@ -59,7 +62,9 @@ MAX_FAILURES_SHOWN = 10
 
 
 class PipelineInputError(Exception):
-    """A selected step needs the output of a step that was not selected, and it is missing."""
+    """A selected step cannot safely run on the files on disk: the output of a step that was not
+    selected is missing, or the fetched folder is empty or incomplete (the db step would delete
+    the catalogue's rows)."""
 
 
 @dataclass(frozen=True)
@@ -102,12 +107,20 @@ def _check_fetched_files(directory: Path, allow_partial: bool) -> None:
     report = directory / "report.xlsx"
     if allow_partial or not report.exists():
         return
-    failed = failed_resources(report)
+    try:
+        failed = failed_resources(report)
+    except (OSError, ValueError, KeyError, BadZipFile, InvalidFileException) as exc:
+        # Not "no failures": an unreadable report must not switch the guard off.
+        raise PipelineInputError(
+            f"cannot read the fetch report {report} ({type(exc).__name__}: {exc}); run"
+            f" --steps fetch to rewrite it, or pass --allow-partial to skip this check"
+        ) from exc
     if failed:
         raise PipelineInputError(
             f"{len(failed)} resource(s) failed to download (see {report}); loading now would"
-            f" delete their rows from the database. Fetch again, or pass --allow-partial to"
-            f" load the partial catalogue anyway"
+            f" delete their rows from the database. Run --steps fetch again to complete the"
+            f" catalogue and refresh the report, or pass --allow-partial to load the partial"
+            f" catalogue anyway"
         )
 
 
@@ -154,8 +167,10 @@ def run(
     """Run the selected `steps` for `catalogue` (see the module docstring).
 
     `force` re-fetches every resource instead of keeping the files already on disk.
-    `allow_partial` lets the db step load a catalogue whose fetch report records failed
-    resources (which prunes their rows); a folder with no resource files is never loaded. The
+    `allow_partial` lets a db step load a catalogue whose fetch report records failed
+    resources (which prunes their rows) or cannot be read; a folder with no resource files is
+    never loaded. It does not change the fetch step: `fetch,db` still stops on an incomplete
+    fetch, so a deliberate partial load is `--steps fetch` followed by `--steps db`. The
     last four parameters replace the real collaborators (tests inject fakes). Raises
     `PipelineInputError` before running anything if an unselected step's output is missing or
     the db step would delete the catalogue's rows; errors of a selected step propagate,
@@ -240,7 +255,9 @@ def main(argv: Sequence[str] | None = None) -> None:
         "--allow-partial",
         action="store_true",
         help="let the db step load a catalogue whose fetch report records failed resources;"
-        " the load then deletes the database rows of those resources",
+        " the load then deletes the database rows of those resources. Only for runs with the"
+        " db step; it does not make a failed fetch continue (run --steps fetch, then"
+        " --steps db --allow-partial)",
     )
     args = parser.parse_args(argv)
 
@@ -248,6 +265,8 @@ def main(argv: Sequence[str] | None = None) -> None:
         steps = parse_steps(args.steps)
     except ValueError as e:
         parser.error(str(e))
+    if args.allow_partial and "db" not in steps:
+        parser.error("--allow-partial only applies to the db step; add 'db' to --steps")
 
     try:
         outcome = run(

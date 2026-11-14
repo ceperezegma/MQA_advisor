@@ -553,18 +553,23 @@ def test_a_refused_db_step_leaves_the_loaded_rows_untouched(tmp_path):
     }
 
     def stored_counts():
+        """Row counts and which resources are stored, so a swap of rows is noticed too."""
         conn = connect(options["db_path"])
         try:
-            return tuple(
+            counts = tuple(
                 conn.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
                 for table in ("resource", "property_value")
             )
+            stored = conn.execute(
+                "SELECT resource_id FROM resource ORDER BY resource_id"
+            ).fetchall()
+            return counts, tuple(row[0] for row in stored)
         finally:
             conn.close()
 
     run("52north", steps={"db"}, **options)  # a complete folder loads
     before = stored_counts()
-    assert before[0] == len(names) == 2
+    assert before[0][0] == len(names) == 2
 
     # the second Dataset's file is gone, and the fetch report says it failed
     (folder / names[1]).unlink()
@@ -577,3 +582,136 @@ def test_a_refused_db_step_leaves_the_loaded_rows_untouched(tmp_path):
         run("52north", steps={"db"}, **options)
 
     assert stored_counts() == before
+
+
+# --- guard robustness (review of issue #9) ------------------------------------
+
+
+def test_db_on_a_folder_with_only_data_service_files_loads(rec, tmp_path):
+    directory = _fetched_dir(tmp_path, files=False)
+    (directory / "dataservice_x.json").write_text("{}")
+
+    rec.run(steps={"db"})
+
+    assert rec.names() == ["db"]
+
+
+def test_stray_files_are_not_resource_files(rec, tmp_path):
+    directory = _fetched_dir(tmp_path, files=False)
+    for name in (
+        "dataset_1.json",
+        "distribution_1.jsonld",
+        "notes.txt",
+        "dataset_2.jsonld.tmp",
+    ):
+        (directory / name).write_text("{}")
+
+    with pytest.raises(PipelineInputError, match="no fetched"):
+        rec.run(steps={"db"})
+
+    assert rec.calls == []
+
+
+def test_files_of_another_catalogue_or_environment_do_not_count(rec, tmp_path):
+    _fetched_dir(tmp_path, files=False)  # PROD/cat is empty
+    _fetched_dir(tmp_path, catalogue="other")  # a resource file in PROD/other
+    other_env = tmp_path / "fetched" / "PPE" / "cat"
+    other_env.mkdir(parents=True)
+    (other_env / "dataset_1.jsonld").write_text("{}")
+
+    with pytest.raises(PipelineInputError, match="no fetched"):
+        rec.run(steps={"db"})
+
+    assert rec.calls == []
+
+
+def test_the_guard_accepts_exactly_the_files_the_loader_reads(tmp_path):
+    from mqa_advisor import catalogue_db
+
+    cases = {
+        "dataset_a.jsonld": True,
+        "dataservice_b.json": True,
+        "dataset_c.json": False,
+        "distribution_d.jsonld": False,
+        "dataset_e.jsonld.tmp": False,
+        "report.xlsx": False,
+    }
+    for index, (name, loaded) in enumerate(cases.items()):
+        directory = tmp_path / str(index)
+        directory.mkdir()
+        (directory / name).write_text("{}")
+        loader_reads = bool(catalogue_db._dataset_files(directory, None)) or bool(
+            catalogue_db._dataservice_files(directory, None)
+        )
+        try:
+            pipeline._check_fetched_files(directory, allow_partial=False)
+            guard_accepts = True
+        except PipelineInputError:
+            guard_accepts = False
+
+        assert loader_reads == guard_accepts == loaded, name
+
+
+def test_a_corrupt_report_is_refused_with_a_clear_message(rec, tmp_path):
+    directory = _fetched_dir(tmp_path)
+    report = directory / "report.xlsx"
+    report.write_bytes(b"this is not a workbook")
+
+    with pytest.raises(PipelineInputError) as exc:
+        rec.run(steps={"db"})
+
+    assert "cannot read the fetch report" in str(exc.value)
+    assert str(report) in str(exc.value)
+    assert rec.calls == []
+
+
+def test_allow_partial_does_not_read_the_report(rec, tmp_path):
+    (_fetched_dir(tmp_path) / "report.xlsx").write_bytes(b"this is not a workbook")
+
+    rec.run(steps={"db"}, allow_partial=True)
+
+    assert rec.names() == ["db"]
+
+
+def test_a_workbook_that_is_not_a_fetch_report_is_refused(rec, tmp_path):
+    import openpyxl
+
+    directory = _fetched_dir(tmp_path)
+    workbook = openpyxl.Workbook()
+    workbook.active.append(["name", "status"])
+    workbook.save(directory / "report.xlsx")
+
+    with pytest.raises(PipelineInputError, match="download_result"):
+        rec.run(steps={"db"})
+
+    assert rec.calls == []
+
+
+def test_allow_partial_does_not_make_an_incomplete_fetch_continue(rec):
+    def incomplete_ingestor(session, **kwargs):
+        ingestor = rec.ingestor_factory(session, **kwargs)
+
+        def incomplete(catalogue, force=False):
+            raise _incomplete_error()
+
+        ingestor.run_catalogue = incomplete
+        return ingestor
+
+    with pytest.raises(FetchIncompleteError):
+        rec.run(ingestor_factory=incomplete_ingestor, allow_partial=True)
+
+    assert "db" not in rec.names()
+    assert rec.names()[-1] == "shutdown"
+
+
+def test_main_rejects_allow_partial_without_the_db_step(monkeypatch, capsys):
+    def run_must_not_be_called(*args, **kwargs):
+        raise AssertionError("run must not be called")
+
+    monkeypatch.setattr(pipeline, "run", run_must_not_be_called)
+
+    with pytest.raises(SystemExit) as exc:
+        pipeline.main(["cat", "--steps", "fetch", "--allow-partial"])
+
+    assert exc.value.code == 2
+    assert "--allow-partial" in capsys.readouterr().err
