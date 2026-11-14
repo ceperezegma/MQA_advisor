@@ -28,3 +28,8 @@ fetched_catalogues_data/*
 
 # Scratch output of the tests/manual_*.py scripts
 manual_tests/
+
+# Databases are never tracked (anywhere in the repo)
+*.sqlite
+*.sqlite3
+*.db

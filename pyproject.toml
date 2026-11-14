@@ -27,6 +27,13 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/mqa_advisor"]
 
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = [
+    "E501",  # line length is owned by `ruff format`; it does not wrap long comments/strings
+    "UP042",  # properties.Importance(str, Enum): StrEnum would change str()/format() behavior
+]
+
 [tool.pytest.ini_options]
 markers = [
     "integration: opt-in, needs real PPE credentials and network access (excluded by default)",
