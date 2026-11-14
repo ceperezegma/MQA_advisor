@@ -45,7 +45,7 @@ the SQLite database in `fetched_catalogues_data/mqa.sqlite`. Test fixtures live 
 
 ## Mandatory workflow
 
-- Always follow the workflow in `.claude/skills/sw_development_methodology.md` for every change — don't skip or reorder its steps except when the user explicitly says which steps to skip or where to start.
+- The development workflow is global, not per project: `~/.claude/CLAUDE.md` makes it mandatory for every change and points to `~/.claude/skills/sw_development_methodology.md`. Don't copy it into this repo.
 
 ## Agent skills
 
