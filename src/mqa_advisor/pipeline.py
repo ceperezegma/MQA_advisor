@@ -18,7 +18,8 @@ One environment (`MQA_ENV`: `PPE` or `PROD`, default `PROD`, see `environment.py
 step and every folder. Unlike the Test Run of MQA_test, any failure of a selected step is fatal:
 the database is this app's product, so it is never "best effort". In particular an incomplete
 fetch (`ingest.FetchIncompleteError`, raised after the report is written) stops the run before the
-db step; `--steps db` can still load the partial files.
+db step; `--steps db` can still load the partial files, and since the database always mirrors the
+folder, that load removes the rows of the resources that failed to download.
 
 Usage:
 

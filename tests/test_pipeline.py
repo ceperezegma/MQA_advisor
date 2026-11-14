@@ -435,6 +435,7 @@ def _stored_resources(db_path):
 
 def test_db_on_a_folder_with_only_the_report_still_loads(rec, tmp_path):
     folder = tmp_path / "fetched" / "PROD" / "cat"
+    folder.mkdir(parents=True)
     write_report(folder, [ManifestRow("u1", "dataset", "1")])  # Failed: no file
 
     rec.run(steps={"db"})
@@ -444,7 +445,7 @@ def test_db_on_a_folder_with_only_the_report_still_loads(rec, tmp_path):
 
 def test_db_loads_a_folder_whose_report_has_failed_rows(rec, tmp_path):
     folder = tmp_path / "fetched" / "PROD" / "cat"
-    (folder).mkdir(parents=True)
+    folder.mkdir(parents=True)
     (folder / "dataset_1.jsonld").write_text("{}")
     rows = [ManifestRow("u1", "dataset", "1"), ManifestRow("u2", "dataset", "2")]
     write_report(folder, rows)  # resource 2 has no file: Failed
@@ -454,13 +455,86 @@ def test_db_loads_a_folder_whose_report_has_failed_rows(rec, tmp_path):
     assert rec.names() == ["db"]
 
 
-def test_fetch_and_db_load_when_the_manifest_has_no_fetchable_rows(rec, tmp_path):
-    (tmp_path / "manifests").mkdir()
-    (tmp_path / "manifests" / "cat.xlsx").touch()
+def _wired_main(monkeypatch, tmp_path, auth, loader):
+    """Make `main` run the real pipeline and ingestor on `tmp_path`, with a fake session."""
+    fetched_dir = tmp_path / "fetched"
+    real_run = pipeline.run
 
-    rec.run(steps={"fetch", "db"})
+    def wired_run(catalogue, *, steps, force):
+        return real_run(
+            catalogue,
+            steps=steps,
+            force=force,
+            env="PPE",
+            manifests_dir=tmp_path / "manifests",
+            fetched_data_dir=fetched_dir,
+            db_path=fetched_dir / "mqa.sqlite",
+            session_factory=lambda env: auth,
+            loader=loader,
+        )
 
-    assert rec.names() == ["session", "ingestor", "fetch", "shutdown", "db"]
+    monkeypatch.setattr(pipeline, "run", wired_run)
+    return fetched_dir
+
+
+def test_fetch_and_db_load_when_the_manifest_has_no_fetchable_rows(
+    tmp_path, monkeypatch
+):
+    from tests.test_ingest import FakeAuth, _write_manifest
+
+    _write_manifest(
+        tmp_path / "manifests" / "cat.xlsx", [("u-1", "distribution", "d1")]
+    )
+    loader_calls = []
+
+    def fake_loader(*args, **kwargs):
+        loader_calls.append(args)
+        return SUMMARY
+
+    fetched_dir = _wired_main(monkeypatch, tmp_path, FakeAuth(), fake_loader)
+
+    pipeline.main(["cat", "--steps", "fetch,db"])
+
+    assert (fetched_dir / "PPE" / "cat" / "report.xlsx").exists()
+    assert len(loader_calls) == 1
+
+
+def test_db_after_a_failed_fetch_loads_the_partial_folder(
+    tmp_path, monkeypatch, capsys
+):
+    from tests.test_ingest import (
+        FakeAuth,
+        FakeResponse,
+        _write_manifest,
+        build_fetch_url,
+    )
+
+    _write_manifest(
+        tmp_path / "manifests" / "cat.xlsx",
+        [("u-1", "dataset", "1"), ("u-2", "dataset", "2")],
+    )
+    auth = FakeAuth()
+    auth.queue(build_fetch_url(auth.base_url, "dataset", "1"), FakeResponse(200, b"x"))
+    auth.queue(
+        build_fetch_url(auth.base_url, "dataset", "2"),
+        *[FakeResponse(404) for _ in range(MAX_FETCH_ATTEMPTS)],
+    )
+    loader_calls = []
+
+    def fake_loader(*args, **kwargs):
+        loader_calls.append(args)
+        return SUMMARY
+
+    _wired_main(monkeypatch, tmp_path, auth, fake_loader)
+
+    with pytest.raises(SystemExit) as exc:
+        pipeline.main(["cat", "--steps", "fetch,db"])
+    assert exc.value.code == 1
+    assert loader_calls == []
+
+    pipeline.main(["cat", "--steps", "db"])  # the partial folder loads as it is
+
+    assert len(loader_calls) == 1
 
 
 def test_the_database_follows_the_folder_down_to_an_empty_one(tmp_path):
@@ -488,6 +562,31 @@ def test_the_database_follows_the_folder_down_to_an_empty_one(tmp_path):
     (folder / names[0]).unlink()
     run("52north", steps={"db"}, **options)
     assert _stored_resources(options["db_path"]) == []
+
+
+def test_a_real_load_ignores_a_report_with_failed_rows(tmp_path):
+    """Resource 2 has no file and the report says Failed: its rows go, the rest stay."""
+    source = Path(__file__).parent / "fixtures" / "ingested" / "52north"
+    folder = tmp_path / "fetched" / "PROD" / "52north"
+    folder.mkdir(parents=True)
+    names = sorted(path.name for path in source.glob("dataset_*.jsonld"))
+    shutil.copy(source / names[0], folder / names[0])
+    ids = [name.removeprefix("dataset_").removesuffix(".jsonld") for name in names]
+    write_report(
+        folder, [ManifestRow(f"u{i}", "dataset", rid) for i, rid in enumerate(ids)]
+    )
+    db_path = tmp_path / "fetched" / "mqa.sqlite"
+
+    run(
+        "52north",
+        steps={"db"},
+        env="PROD",
+        manifests_dir=tmp_path / "manifests",
+        fetched_data_dir=tmp_path / "fetched",
+        db_path=db_path,
+    )
+
+    assert _stored_resources(db_path) == [ids[0]]
 
 
 def test_main_rejects_the_removed_allow_partial_option(capsys):
