@@ -12,4 +12,5 @@
    - All secrets, **.env** files
    - All Claude specific files: **.claude/settings.local.json**
    - All python bytecode caches: **__pycache__/** and ** *.pyc **
-10. During the software development, follow the programming principles in `sw_development_methodology.md` 
+10. During the software development, follow the workflow in `~/.claude/skills/sw_development_methodology.md`. It is global
+   (loaded through `~/.claude/CLAUDE.md`): don't copy it into the project and don't add a "Mandatory workflow" section to the project's CLAUDE.md.
