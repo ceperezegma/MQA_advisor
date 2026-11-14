@@ -16,7 +16,9 @@ if one is missing, so a long fetch is never started only to fail at the load.
 
 One environment (`MQA_ENV`: `PPE` or `PROD`, default `PROD`, see `environment.py`) drives every
 step and every folder. Unlike the Test Run of MQA_test, any failure of a selected step is fatal:
-the database is this app's product, so it is never "best effort".
+the database is this app's product, so it is never "best effort". In particular an incomplete
+fetch (`ingest.FetchIncompleteError`, raised after the report is written) stops the run before the
+db step; `--steps db` can still load the partial files.
 
 Usage:
 
@@ -40,13 +42,16 @@ from mqa_advisor.environment import build_session, resolve_env
 from mqa_advisor.ingest import (
     FETCHED_DATA_DIR,
     MANIFESTS_DIR,
+    FetchIncompleteError,
     ManifestNotFoundError,
     PPEIngestor,
+    ResourceFetchError,
 )
 from mqa_advisor.manifest import ManifestGenerationError
 from mqa_advisor.manifest import generate_manifest as _generate_manifest
 
 STEPS: tuple[str, ...] = ("manifest", "fetch", "db")
+MAX_FAILURES_SHOWN = 10
 
 
 class PipelineInputError(Exception):
@@ -116,7 +121,8 @@ def run(
     `force` re-fetches every resource instead of keeping the files already on disk. The last
     four parameters replace the real collaborators (tests inject fakes). Raises
     `PipelineInputError` before running anything if an unselected step's output is missing;
-    errors of a selected step propagate.
+    errors of a selected step propagate, including `FetchIncompleteError` (the db step then
+    does not run, and the ingestor is still shut down).
     """
     unknown = set(steps) - set(STEPS)
     if unknown:
@@ -158,6 +164,19 @@ def run(
     return PipelineOutcome(run_env, manifest_path, fetch_report_path, load_summary)
 
 
+def _describe_cause(cause: Exception) -> str:
+    """One-line text for a failure's cause, for the stderr summary.
+
+    A `ResourceFetchError` is shown by its underlying cause (its own message repeats the
+    resource type, id and attempt count already printed next to it).
+    """
+    if isinstance(cause, ResourceFetchError):
+        cause = cause.cause
+    message = " ".join(str(cause).split())
+    name = type(cause).__name__
+    return f"{name}: {message}" if message else name
+
+
 def main(argv: Sequence[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         prog="python -m mqa_advisor.pipeline",
@@ -184,6 +203,16 @@ def main(argv: Sequence[str] | None = None) -> None:
 
     try:
         outcome = run(args.catalogue, steps=steps, force=args.force)
+    except FetchIncompleteError as e:
+        shown = ", ".join(
+            f"{f.resource_type} {f.resource_id} ({_describe_cause(f.cause)})"
+            for f in e.failures[:MAX_FAILURES_SHOWN]
+        )
+        hidden = len(e.failures) - MAX_FAILURES_SHOWN
+        if hidden > 0:
+            shown += f", ... and {hidden} more (see the report)"
+        print(f"{type(e).__name__}: {e}: {shown}", file=sys.stderr)
+        raise SystemExit(1) from e
     except (
         PipelineInputError,
         ManifestGenerationError,

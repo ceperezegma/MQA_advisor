@@ -28,6 +28,12 @@ Output is files on disk, not an in-memory result:
       every fetch has been attempted — not by trusting whatever the in-process
       fetch logic believed happened.
 
+Every fetchable resource is attempted and the report is always written. If any of
+them failed (any exception of its fetch, not only a download failure),
+`run_catalogue` then raises `FetchIncompleteError`, which carries the report path
+and the failures, so a caller never goes on with a partial catalogue by accident.
+A fully successful run returns the report path.
+
 Resumability: by default (``force=False``), a resource whose expected output
 file already exists on disk is skipped entirely — no network call is made
 for it, and the report still records it as ``Success`` (ground truth is
@@ -39,7 +45,7 @@ Usage:
     auth = PPEAuth(Config.from_env())
     auth.login()
     ingestor = PPEIngestor(auth, env="PPE")
-    report_path = ingestor.run_catalogue("data-gov-lt")
+    report_path = ingestor.run_catalogue("data-gov-lt")  # may raise FetchIncompleteError
 
     # Production: no login, no credentials.
     ingestor = PPEIngestor(PublicSession(), env="PROD")
@@ -48,6 +54,7 @@ Usage:
 from __future__ import annotations
 
 import json
+from collections.abc import Sequence
 from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from pathlib import Path
@@ -88,6 +95,41 @@ class ResourceFetchError(Exception):
             f"Failed to fetch {resource_type} {resource_id} after "
             f"{MAX_FETCH_ATTEMPTS} attempts: {cause}"
         )
+
+
+@dataclass(frozen=True)
+class FetchFailure:
+    """One fetchable resource whose fetch raised, and why."""
+
+    resource_type: str
+    resource_id: str
+    cause: Exception
+
+
+class FetchIncompleteError(Exception):
+    """Raised by `run_catalogue`, after the report is written, when any resource failed.
+
+    If the report itself could not be written (for example `report.xlsx` is open in Excel),
+    `report_path` is `None` and `report_error` holds why: the failures are kept either way.
+    """
+
+    def __init__(
+        self,
+        report_path: Path | None,
+        failures: Sequence[FetchFailure],
+        total: int,
+        report_error: OSError | None = None,
+    ) -> None:
+        self.report_path = report_path
+        self.failures = tuple(failures)
+        self.total = total
+        self.report_error = report_error
+        if report_path is None and report_error is not None:
+            reason = " ".join(f"{type(report_error).__name__}: {report_error}".split())
+            where = f"report not written: {reason}"
+        else:
+            where = f"report: {report_path}"
+        super().__init__(f"{len(failures)} of {total} resources failed ({where})")
 
 
 class _ResponseEnvelopeError(Exception):
@@ -322,11 +364,14 @@ class PPEIngestor:
         When `force` is `False` (the default), a row whose expected output
         file already exists on disk is skipped — no network call is made
         for it. `force=True` re-fetches every row unconditionally.
+
+        Raises `FetchIncompleteError` once the report is written if any resource failed.
         """
         rows = load_manifest(catalogue, self._manifests_dir)
         catalogue_dir = self.output_dir / catalogue
 
-        futures: list[Future] = [
+        # Remember which resource each future fetches, to attribute a failure to it.
+        futures: dict[Future, tuple[str, str]] = {
             self._executor.submit(
                 fetch_and_store,
                 self._auth,
@@ -335,18 +380,35 @@ class PPEIngestor:
                 row.type,
                 row.resource_id,
                 force,
-            )
+            ): (row.type, row.resource_id)
             for row in rows
             if row.type in _FETCHABLE_TYPES
-        ]
+        }
 
+        failures: list[FetchFailure] = []
         for future in as_completed(futures):
             try:
                 future.result()
-            except ResourceFetchError:
-                pass  # recorded via the report's ground-truth disk check, not here
+            except Exception as exc:  # one resource must never abort the others
+                resource_type, resource_id = futures[future]
+                failures.append(FetchFailure(resource_type, resource_id, exc))
 
-        return write_report(catalogue_dir, rows)
+        report_path: Path | None = None
+        report_error: OSError | None = None
+        try:
+            report_path = write_report(catalogue_dir, rows)
+        except OSError as exc:
+            if not failures:
+                raise
+            report_error = exc  # keep the failures: they matter more than the report
+
+        if failures:
+            # Completion order depends on thread timing; sort so the error is deterministic.
+            failures.sort(key=lambda f: (f.resource_type, f.resource_id))
+            raise FetchIncompleteError(
+                report_path, failures, total=len(futures), report_error=report_error
+            ) from failures[0].cause
+        return report_path
 
     def shutdown(self) -> None:
         self._executor.shutdown(wait=True)

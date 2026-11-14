@@ -10,6 +10,7 @@ from mqa_advisor.auth import SessionExpiredError
 from mqa_advisor.ingest import (
     DEFAULT_MAX_CONCURRENCY,
     MAX_FETCH_ATTEMPTS,
+    FetchIncompleteError,
     ManifestNotFoundError,
     ManifestRow,
     PPEIngestor,
@@ -472,7 +473,8 @@ def test_run_catalogue_isolates_failure_among_successes(tmp_path):
     )
 
     ingestor = _make_ingestor(tmp_path, auth)
-    report_path = ingestor.run_catalogue("cat")
+    with pytest.raises(FetchIncompleteError) as exc:
+        ingestor.run_catalogue("cat")
     ingestor.shutdown()
 
     catalogue_dir = tmp_path / "fetched_catalogues_data" / "PPE" / "cat"
@@ -480,7 +482,82 @@ def test_run_catalogue_isolates_failure_among_successes(tmp_path):
     assert (catalogue_dir / "dataset_3.jsonld").read_bytes() == b"ok-3"
     assert not (catalogue_dir / "dataset_2.jsonld").exists()
 
-    workbook = openpyxl.load_workbook(report_path)
+    workbook = openpyxl.load_workbook(exc.value.report_path)
+    results = {
+        r[2]: r[4] for r in workbook.active.iter_rows(min_row=2, values_only=True)
+    }
+    assert results == {"1": "Success", "2": "Failed", "3": "Success"}
+
+
+def test_fetch_incomplete_error_exposes_report_path_and_failures(tmp_path):
+    auth = FakeAuth()
+    _write_manifest(
+        tmp_path / "catalogues_to_fetch" / "cat.xlsx",
+        [("uri-1", "dataset", "1"), ("uri-2", "dataset", "2")],
+    )
+    auth.queue(build_fetch_url(auth.base_url, "dataset", "1"), FakeResponse(200, b"ok"))
+    auth.queue(
+        build_fetch_url(auth.base_url, "dataset", "2"),
+        *[FakeResponse(404) for _ in range(MAX_FETCH_ATTEMPTS)],
+    )
+
+    ingestor = _make_ingestor(tmp_path, auth)
+    with pytest.raises(FetchIncompleteError) as exc:
+        ingestor.run_catalogue("cat")
+    ingestor.shutdown()
+
+    error = exc.value
+    assert error.report_path == (
+        tmp_path / "fetched_catalogues_data" / "PPE" / "cat" / "report.xlsx"
+    )
+    assert error.report_path.exists()
+    [failure] = error.failures
+    assert (failure.resource_type, failure.resource_id) == ("dataset", "2")
+    assert isinstance(failure.cause, ResourceFetchError)
+    assert error.__cause__ is failure.cause
+    assert "1 of 2" in str(error)
+    assert str(error.report_path) in str(error)
+
+
+def test_run_catalogue_collects_a_non_fetch_exception_from_one_worker(
+    tmp_path, monkeypatch
+):
+    from mqa_advisor import ingest
+
+    auth = FakeAuth()
+    _write_manifest(
+        tmp_path / "catalogues_to_fetch" / "cat.xlsx",
+        [("u1", "dataset", "1"), ("u2", "dataset", "2"), ("u3", "dataset", "3")],
+    )
+    real_fetch_and_store = ingest.fetch_and_store
+
+    def flaky(auth_, base_url, catalogue_dir, resource_type, resource_id, force):
+        if resource_id == "2":
+            raise OSError("disk full")
+        return real_fetch_and_store(
+            auth_, base_url, catalogue_dir, resource_type, resource_id, force
+        )
+
+    monkeypatch.setattr(ingest, "fetch_and_store", flaky)
+    for resource_id in ("1", "3"):
+        auth.queue(
+            build_fetch_url(auth.base_url, "dataset", resource_id),
+            FakeResponse(200, f"ok-{resource_id}".encode()),
+        )
+
+    ingestor = _make_ingestor(tmp_path, auth)
+    with pytest.raises(FetchIncompleteError) as exc:
+        ingestor.run_catalogue("cat")
+    ingestor.shutdown()
+
+    catalogue_dir = tmp_path / "fetched_catalogues_data" / "PPE" / "cat"
+    assert (catalogue_dir / "dataset_1.jsonld").exists()
+    assert (catalogue_dir / "dataset_3.jsonld").exists()
+    [failure] = exc.value.failures
+    assert failure.resource_id == "2"
+    assert isinstance(failure.cause, OSError)
+    assert isinstance(exc.value.__cause__, OSError)
+    workbook = openpyxl.load_workbook(exc.value.report_path)
     results = {
         r[2]: r[4] for r in workbook.active.iter_rows(min_row=2, values_only=True)
     }
@@ -569,8 +646,10 @@ def test_run_catalogue_report_treats_resumed_skip_same_as_fresh_success(tmp_path
     )
 
     ingestor = _make_ingestor(tmp_path, auth)
-    report_path = ingestor.run_catalogue("cat", force=False)
+    with pytest.raises(FetchIncompleteError) as exc:
+        ingestor.run_catalogue("cat", force=False)
     ingestor.shutdown()
+    report_path = exc.value.report_path
 
     assert len(auth.calls) == 5  # nothing for row 1, 1 for row 2, 4 for row 3
 
@@ -718,10 +797,11 @@ def test_production_resource_missing_is_failed_without_affecting_other_rows(tmp_
         *[FakeResponse(404) for _ in range(MAX_FETCH_ATTEMPTS)],
     )
     ingestor = _make_ingestor(tmp_path, auth, env="PROD")
-    report_path = ingestor.run_catalogue("cat")
+    with pytest.raises(FetchIncompleteError) as exc:
+        ingestor.run_catalogue("cat")
     ingestor.shutdown()
 
-    workbook = openpyxl.load_workbook(report_path)
+    workbook = openpyxl.load_workbook(exc.value.report_path)
     results = {
         r[2]: r[4] for r in workbook.active.iter_rows(min_row=2, values_only=True)
     }
@@ -766,3 +846,177 @@ def test_ingestor_env_contradicting_its_session_raises(kind, env):
     )
     with pytest.raises(ConfigError):
         PPEIngestor(session, env=env)
+
+
+# --- Fatal fetch: totals, ordering, success path (issue #6) -------------------
+
+
+def _report_results(report_path):
+    workbook = openpyxl.load_workbook(report_path)
+    return {r[2]: r[4] for r in workbook.active.iter_rows(min_row=2, values_only=True)}
+
+
+@pytest.mark.parametrize(
+    "outcome_factory",
+    [lambda: FakeResponse(404), lambda: SessionExpiredError("session expired")],
+    ids=["http-404", "session-expired"],
+)
+def test_run_catalogue_when_every_resource_fails_reports_them_all(
+    tmp_path, outcome_factory
+):
+    auth = FakeAuth()
+    ids = ["1", "2", "3"]
+    _write_manifest(
+        tmp_path / "catalogues_to_fetch" / "cat.xlsx",
+        [(f"uri-{i}", "dataset", i) for i in ids],
+    )
+    for i in ids:
+        auth.queue(
+            build_fetch_url(auth.base_url, "dataset", i),
+            *[outcome_factory() for _ in range(MAX_FETCH_ATTEMPTS)],
+        )
+
+    ingestor = _make_ingestor(tmp_path, auth)
+    with pytest.raises(FetchIncompleteError) as exc:
+        ingestor.run_catalogue("cat")
+    ingestor.shutdown()
+
+    assert exc.value.total == 3
+    assert len(exc.value.failures) == 3
+    assert exc.value.report_path.exists()
+    assert _report_results(exc.value.report_path) == {i: "Failed" for i in ids}
+
+
+def test_run_catalogue_returns_the_report_path_when_everything_succeeds(tmp_path):
+    auth = FakeAuth()
+    _write_manifest(
+        tmp_path / "catalogues_to_fetch" / "cat.xlsx",
+        [("uri-1", "dataset", "1"), ("uri-2", "dataset", "2")],
+    )
+    for i in ("1", "2"):
+        auth.queue(
+            build_fetch_url(auth.base_url, "dataset", i), FakeResponse(200, b"x")
+        )
+
+    ingestor = _make_ingestor(tmp_path, auth)
+    report_path = ingestor.run_catalogue("cat")
+    ingestor.shutdown()
+
+    assert report_path == (
+        tmp_path / "fetched_catalogues_data" / "PPE" / "cat" / "report.xlsx"
+    )
+    assert _report_results(report_path) == {"1": "Success", "2": "Success"}
+
+
+def test_unfetchable_row_is_skipped_and_is_not_a_failure(tmp_path):
+    auth = FakeAuth()
+    _write_manifest(
+        tmp_path / "catalogues_to_fetch" / "cat.xlsx",
+        [("uri-1", "dataset", "1"), ("uri-2", "distribution", "2")],
+    )
+    auth.queue(build_fetch_url(auth.base_url, "dataset", "1"), FakeResponse(200, b"x"))
+
+    ingestor = _make_ingestor(tmp_path, auth)
+    report_path = ingestor.run_catalogue("cat")  # must not raise
+    ingestor.shutdown()
+
+    assert _report_results(report_path) == {"1": "Success", "2": "Skipped"}
+
+
+def test_failures_are_sorted_and_the_first_one_is_chained_whatever_the_finish_order(
+    tmp_path, monkeypatch
+):
+    from mqa_advisor import ingest
+
+    _write_manifest(
+        tmp_path / "catalogues_to_fetch" / "cat.xlsx",
+        [
+            ("u-b", "dataset", "b"),
+            ("u-a", "dataset", "a"),
+            ("u-s", "dataservice", "a"),
+        ],
+    )
+    b_failed = threading.Event()
+    causes = {
+        ("dataset", "a"): RuntimeError("cause-a"),
+        ("dataset", "b"): OSError("cause-b"),
+        ("dataservice", "a"): ValueError("cause-s"),
+    }
+
+    def fake_fetch(auth_, base_url, catalogue_dir, resource_type, resource_id, force):
+        if (resource_type, resource_id) == ("dataset", "b"):
+            b_failed.set()
+        else:
+            # the other resources finish after dataset b, i.e. out of sorted order
+            assert b_failed.wait(timeout=5)
+            time.sleep(0.05)
+        raise causes[(resource_type, resource_id)]
+
+    monkeypatch.setattr(ingest, "fetch_and_store", fake_fetch)
+
+    ingestor = _make_ingestor(tmp_path, FakeAuth(), max_concurrency=3)
+    with pytest.raises(FetchIncompleteError) as exc:
+        ingestor.run_catalogue("cat")
+    ingestor.shutdown()
+
+    keys = [(f.resource_type, f.resource_id) for f in exc.value.failures]
+    assert keys == [("dataservice", "a"), ("dataset", "a"), ("dataset", "b")]
+    assert isinstance(exc.value.failures, tuple)
+    assert exc.value.__cause__ is causes[("dataservice", "a")]
+
+
+def _manifest_with_one_failing_resource(tmp_path):
+    auth = FakeAuth()
+    _write_manifest(
+        tmp_path / "catalogues_to_fetch" / "cat.xlsx",
+        [("uri-1", "dataset", "1"), ("uri-2", "dataset", "2")],
+    )
+    auth.queue(build_fetch_url(auth.base_url, "dataset", "1"), FakeResponse(200, b"ok"))
+    auth.queue(
+        build_fetch_url(auth.base_url, "dataset", "2"),
+        *[FakeResponse(404) for _ in range(MAX_FETCH_ATTEMPTS)],
+    )
+    return auth
+
+
+def test_failures_are_kept_when_the_report_cannot_be_written(tmp_path, monkeypatch):
+    from mqa_advisor import ingest
+
+    def report_open_in_excel(catalogue_dir, rows):
+        raise PermissionError("report.xlsx is open in another program")
+
+    monkeypatch.setattr(ingest, "write_report", report_open_in_excel)
+    ingestor = _make_ingestor(tmp_path, _manifest_with_one_failing_resource(tmp_path))
+
+    with pytest.raises(FetchIncompleteError) as exc:
+        ingestor.run_catalogue("cat")
+    ingestor.shutdown()
+
+    error = exc.value
+    assert error.report_path is None
+    assert isinstance(error.report_error, PermissionError)
+    [failure] = error.failures
+    assert (failure.resource_type, failure.resource_id) == ("dataset", "2")
+    assert "1 of 2 resources failed" in str(error)
+    assert "report not written" in str(error)
+    assert "PermissionError" in str(error)
+    assert isinstance(error.__cause__, ResourceFetchError)  # still the first failure
+
+
+def test_a_report_write_error_without_failures_still_propagates(tmp_path, monkeypatch):
+    from mqa_advisor import ingest
+
+    def report_open_in_excel(catalogue_dir, rows):
+        raise PermissionError("report.xlsx is open in another program")
+
+    monkeypatch.setattr(ingest, "write_report", report_open_in_excel)
+    auth = FakeAuth()
+    _write_manifest(
+        tmp_path / "catalogues_to_fetch" / "cat.xlsx", [("uri-1", "dataset", "1")]
+    )
+    auth.queue(build_fetch_url(auth.base_url, "dataset", "1"), FakeResponse(200, b"ok"))
+    ingestor = _make_ingestor(tmp_path, auth)
+
+    with pytest.raises(PermissionError):
+        ingestor.run_catalogue("cat")
+    ingestor.shutdown()

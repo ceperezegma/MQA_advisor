@@ -6,6 +6,12 @@ import pytest
 
 from mqa_advisor import pipeline
 from mqa_advisor.catalogue_db import LoadSummary
+from mqa_advisor.ingest import (
+    MAX_FETCH_ATTEMPTS,
+    FetchFailure,
+    FetchIncompleteError,
+    ResourceFetchError,
+)
 from mqa_advisor.pipeline import PipelineInputError, parse_steps, run
 
 SUMMARY = LoadSummary(resources=2, pruned=0, rows=10, orphan_nodes=0)
@@ -144,6 +150,51 @@ def test_ingestor_is_shut_down_when_the_fetch_fails(rec):
     assert rec.names()[-1] == "shutdown"
 
 
+def _incomplete_error(n_failures=1):
+    failures = [
+        FetchFailure("dataset", f"id-{i}", RuntimeError(f"boom-{i}"))
+        for i in range(n_failures)
+    ]
+    return FetchIncompleteError(Path("out/report.xlsx"), failures, total=20)
+
+
+def test_incomplete_fetch_skips_the_db_step_and_shuts_the_ingestor_down(rec):
+    def incomplete_ingestor(session, **kwargs):
+        ingestor = rec.ingestor_factory(session, **kwargs)
+
+        def incomplete(catalogue, force=False):
+            raise _incomplete_error()
+
+        ingestor.run_catalogue = incomplete
+        return ingestor
+
+    with pytest.raises(FetchIncompleteError):
+        rec.run(ingestor_factory=incomplete_ingestor)
+
+    assert "db" not in rec.names()
+    assert rec.names()[-1] == "shutdown"
+
+
+def test_main_exits_1_with_counts_and_report_path_on_incomplete_fetch(
+    monkeypatch, capsys
+):
+    def fake_run(catalogue, *, steps, force):
+        raise _incomplete_error(n_failures=12)
+
+    monkeypatch.setattr(pipeline, "run", fake_run)
+
+    with pytest.raises(SystemExit) as exc:
+        pipeline.main(["nsip-lu"])
+
+    assert exc.value.code == 1
+    err = capsys.readouterr().err
+    assert err.startswith("FetchIncompleteError: 12 of 20 resources failed")
+    assert str(Path("out/report.xlsx")) in err
+    assert "dataset id-0 (RuntimeError: boom-0)" in err
+    assert "id-9" in err
+    assert "id-10" not in err  # only the first 10 failures are listed
+
+
 def test_a_failing_load_is_fatal(rec, tmp_path):
     (tmp_path / "fetched" / "PROD" / "cat").mkdir(parents=True)
 
@@ -194,3 +245,174 @@ def test_main_exits_1_with_a_message_on_input_error(monkeypatch, capsys):
 
     assert exc.value.code == 1
     assert "no files" in capsys.readouterr().err
+
+
+# --- stderr summary of an incomplete fetch ------------------------------------
+
+
+def _stderr_for(monkeypatch, capsys, error):
+    def fake_run(catalogue, *, steps, force):
+        raise error
+
+    monkeypatch.setattr(pipeline, "run", fake_run)
+    with pytest.raises(SystemExit) as exc:
+        pipeline.main(["nsip-lu"])
+    assert exc.value.code == 1
+    return capsys.readouterr().err
+
+
+def test_main_with_exactly_the_cap_of_failures_shows_all_and_no_more_marker(
+    monkeypatch, capsys
+):
+    err = _stderr_for(monkeypatch, capsys, _incomplete_error(n_failures=10))
+
+    assert "id-9" in err
+    assert "more" not in err
+
+
+def test_main_with_one_failure_over_the_cap_hides_it_and_counts_it(monkeypatch, capsys):
+    err = _stderr_for(monkeypatch, capsys, _incomplete_error(n_failures=11))
+
+    assert "id-9" in err
+    assert "id-10" not in err
+    assert err.rstrip("\n").endswith(", ... and 1 more (see the report)")
+
+
+def test_main_with_many_failures_counts_the_hidden_ones(monkeypatch, capsys):
+    err = _stderr_for(monkeypatch, capsys, _incomplete_error(n_failures=15))
+
+    assert "... and 5 more (see the report)" in err
+
+
+def test_main_with_one_failure_has_the_documented_format(monkeypatch, capsys):
+    err = _stderr_for(monkeypatch, capsys, _incomplete_error(n_failures=1))
+
+    assert err == (
+        "FetchIncompleteError: 1 of 20 resources failed"
+        f" (report: {Path('out/report.xlsx')}): dataset id-0 (RuntimeError: boom-0)\n"
+    )
+
+
+def test_main_prints_one_line_even_when_a_cause_contains_newlines(monkeypatch, capsys):
+    failures = [
+        FetchFailure("dataset", "a", RuntimeError("line one\n  line two\r\nline three"))
+    ]
+    err = _stderr_for(
+        monkeypatch,
+        capsys,
+        FetchIncompleteError(Path("out/report.xlsx"), failures, total=1),
+    )
+
+    assert err.count("\n") == 1 and err.endswith("\n")
+    assert "line one line two line three" in err
+
+
+def test_main_shows_the_underlying_cause_of_a_resource_fetch_error(monkeypatch, capsys):
+    wrapped = ResourceFetchError("dataset", "a", ValueError("404 Not Found"))
+    failures = [FetchFailure("dataset", "a", wrapped)]
+    err = _stderr_for(
+        monkeypatch,
+        capsys,
+        FetchIncompleteError(Path("out/report.xlsx"), failures, total=1),
+    )
+
+    assert "dataset a (ValueError: 404 Not Found)" in err
+    assert "Failed to fetch" not in err
+
+
+def test_main_shows_the_type_of_a_cause_with_an_empty_message(monkeypatch, capsys):
+    failures = [FetchFailure("dataset", "a", KeyError())]
+    err = _stderr_for(
+        monkeypatch,
+        capsys,
+        FetchIncompleteError(Path("out/report.xlsx"), failures, total=1),
+    )
+
+    assert "dataset a (KeyError)" in err
+
+
+# --- end to end with the real ingestor ----------------------------------------
+
+
+def test_incomplete_fetch_end_to_end_exits_1_and_never_calls_the_loader(
+    tmp_path, monkeypatch, capsys
+):
+    from tests.test_ingest import (
+        FakeAuth,
+        FakeResponse,
+        _write_manifest,
+        build_fetch_url,
+    )
+
+    manifests_dir = tmp_path / "manifests"
+    fetched_dir = tmp_path / "fetched"
+    _write_manifest(
+        manifests_dir / "cat.xlsx",
+        [("u-1", "dataset", "1"), ("u-2", "dataset", "2")],
+    )
+    auth = FakeAuth()
+    auth.queue(build_fetch_url(auth.base_url, "dataset", "1"), FakeResponse(200, b"x"))
+    auth.queue(
+        build_fetch_url(auth.base_url, "dataset", "2"),
+        *[FakeResponse(404) for _ in range(MAX_FETCH_ATTEMPTS)],
+    )
+    loader_calls = []
+
+    def fake_loader(*args, **kwargs):
+        loader_calls.append((args, kwargs))
+        return SUMMARY
+
+    real_run = pipeline.run
+
+    def wired_run(catalogue, *, steps, force):
+        return real_run(
+            catalogue,
+            steps=steps,
+            force=force,
+            env="PPE",
+            manifests_dir=manifests_dir,
+            fetched_data_dir=fetched_dir,
+            db_path=fetched_dir / "mqa.sqlite",
+            session_factory=lambda env: auth,
+            loader=fake_loader,
+        )
+
+    monkeypatch.setattr(pipeline, "run", wired_run)
+
+    with pytest.raises(SystemExit) as exc:
+        pipeline.main(["cat", "--steps", "fetch,db"])
+
+    assert exc.value.code == 1
+    err = capsys.readouterr().err
+    assert "1 of 2 resources failed" in err
+    assert str(fetched_dir / "PPE" / "cat" / "report.xlsx") in err
+    assert "dataset 2" in err
+    assert loader_calls == []
+
+
+def test_main_lists_the_failures_even_when_the_report_was_not_written(
+    monkeypatch, capsys
+):
+    failures = [FetchFailure("dataset", "a", RuntimeError("boom"))]
+    error = FetchIncompleteError(
+        None,
+        failures,
+        total=3,
+        report_error=PermissionError("report.xlsx is open in another program"),
+    )
+    err = _stderr_for(monkeypatch, capsys, error)
+
+    assert err.count("\n") == 1
+    assert "1 of 3 resources failed" in err
+    assert "report not written" in err
+    assert "dataset a (RuntimeError: boom)" in err
+
+
+def test_db_only_never_builds_or_calls_the_ingestor(rec, tmp_path):
+    (tmp_path / "fetched" / "PROD" / "cat").mkdir(parents=True)
+
+    rec.run(steps={"db"})
+
+    assert "ingestor" not in rec.names()
+    assert "fetch" not in rec.names()
+    assert "shutdown" not in rec.names()

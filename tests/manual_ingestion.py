@@ -21,7 +21,7 @@ from pathlib import Path
 import openpyxl
 
 from mqa_advisor.auth import Config, PPEAuth, PublicSession
-from mqa_advisor.ingest import PPEIngestor
+from mqa_advisor.ingest import FetchIncompleteError, PPEIngestor
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
@@ -45,8 +45,14 @@ if __name__ == "__main__":
         session = PublicSession()
 
     ingestor = PPEIngestor(session, env=ENV)
-    report_path = ingestor.run_catalogue(CATALOGUE)
-    ingestor.shutdown()
+    try:
+        report_path = ingestor.run_catalogue(CATALOGUE)
+    except FetchIncompleteError as exc:
+        # The report is still written; summarise it below, then say what failed.
+        report_path = exc.report_path
+        print(exc)
+    finally:
+        ingestor.shutdown()
 
     sheet = openpyxl.load_workbook(report_path).active
     results = Counter(row[4] for row in sheet.iter_rows(min_row=2, values_only=True))
