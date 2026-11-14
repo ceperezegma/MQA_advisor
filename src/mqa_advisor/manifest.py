@@ -32,8 +32,8 @@ from mqa_advisor.ingest import MANIFESTS_DIR
 
 SPARQL_PATH = "sparql"
 SPARQL_RESULTS_MEDIA_TYPE = "application/sparql-results+json"
-# `PPEAuth.get` sets no timeout of its own (`PublicSession` does), and a stalled connection
-# would otherwise hang the run before anything is fetched.
+# Explicit, longer than the default `auth.REQUEST_TIMEOUT_SECONDS`, so the SPARQL query
+# keeps its own limit.
 SPARQL_TIMEOUT_SECONDS = 60
 
 DCAT_DATASET = "http://www.w3.org/ns/dcat#Dataset"
