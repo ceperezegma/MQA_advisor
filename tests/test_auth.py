@@ -3,6 +3,7 @@ import pytest
 from mqa_advisor.auth import (
     DEFAULT_PPE_BASE_URL,
     PROD_BASE_URL,
+    REQUEST_TIMEOUT_SECONDS,
     AuthenticationError,
     Config,
     ConfigError,
@@ -117,6 +118,34 @@ def test_get_raises_on_redirect_to_login(monkeypatch):
         auth.get(f"{DEFAULT_PPE_BASE_URL}/api/hub/repo/datasets/x.jsonld")
 
 
+def test_get_applies_a_default_timeout(monkeypatch):
+    auth = _make_auth()
+    seen = {}
+
+    def fake_get(url, **kwargs):
+        seen.update(kwargs)
+        return FakeResponse(200, url)
+
+    monkeypatch.setattr(auth._session, "get", fake_get)
+    auth.get(f"{DEFAULT_PPE_BASE_URL}/api/hub/repo/datasets/x.jsonld")
+
+    assert seen["timeout"] == REQUEST_TIMEOUT_SECONDS
+
+
+def test_get_explicit_timeout_wins(monkeypatch):
+    auth = _make_auth()
+    seen = {}
+
+    def fake_get(url, **kwargs):
+        seen.update(kwargs)
+        return FakeResponse(200, url)
+
+    monkeypatch.setattr(auth._session, "get", fake_get)
+    auth.get(f"{DEFAULT_PPE_BASE_URL}/api/hub/repo/datasets/x.jsonld", timeout=5)
+
+    assert seen["timeout"] == 5
+
+
 def test_login_success(monkeypatch):
     auth = _make_auth()
     login_page = FakeResponse(
@@ -218,8 +247,6 @@ def test_public_session_needs_no_credentials(monkeypatch):
 
 
 def test_public_session_applies_a_default_timeout(monkeypatch):
-    from mqa_advisor.auth import PUBLIC_REQUEST_TIMEOUT_SECONDS
-
     session = PublicSession()
     seen = {}
 
@@ -230,7 +257,7 @@ def test_public_session_applies_a_default_timeout(monkeypatch):
     monkeypatch.setattr(session._session, "get", fake_get)
     session.get("https://data.europa.eu/x")
 
-    assert seen["timeout"] == PUBLIC_REQUEST_TIMEOUT_SECONDS
+    assert seen["timeout"] == REQUEST_TIMEOUT_SECONDS
 
 
 def test_public_session_explicit_timeout_wins(monkeypatch):

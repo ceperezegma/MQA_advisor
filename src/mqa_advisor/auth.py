@@ -28,7 +28,7 @@ from dotenv import load_dotenv
 
 DEFAULT_PPE_BASE_URL = "https://ppe.data.europa.eu/"
 PROD_BASE_URL = "https://data.europa.eu/"
-PUBLIC_REQUEST_TIMEOUT_SECONDS = 30
+REQUEST_TIMEOUT_SECONDS = 30
 
 # Cognito Hosted UI login form — see ADR-0007 for how this was confirmed.
 _LOGIN_FORM_ACTION_RE = re.compile(
@@ -80,7 +80,12 @@ class Config:
 
 
 class PPEAuth:
-    """Owns an authenticated `requests.Session` against PPE."""
+    """Owns an authenticated `requests.Session` against PPE.
+
+    Every request made through `get` gets a default timeout (`REQUEST_TIMEOUT_SECONDS`,
+    overridable per call): `requests` has none, so a stalled PPE connection would
+    otherwise block an ingest worker thread forever.
+    """
 
     def __init__(self, config: Config) -> None:
         self._config = config
@@ -124,6 +129,7 @@ class PPEAuth:
         return self._session
 
     def get(self, url: str, **kwargs) -> requests.Response:
+        kwargs.setdefault("timeout", REQUEST_TIMEOUT_SECONDS)
         response = self._session.get(url, allow_redirects=True, **kwargs)
         if self._is_expired(response):
             raise SessionExpiredError(
@@ -147,7 +153,7 @@ class PublicSession:
     Offers the same two members `ingest.PPEIngestor` uses from `PPEAuth` — `get(url)` and
     `base_url` — so the ingestor takes either unchanged. Performs no login and never reads
     `PPE_USERNAME`/`PPE_PASSWORD`. Every request gets a default timeout
-    (`PUBLIC_REQUEST_TIMEOUT_SECONDS`, overridable per call): `requests` has none, so a
+    (`REQUEST_TIMEOUT_SECONDS`, overridable per call): `requests` has none, so a
     stalled connection would otherwise block an ingest worker thread forever.
     """
 
@@ -156,5 +162,5 @@ class PublicSession:
         self._session = requests.Session()
 
     def get(self, url: str, **kwargs) -> requests.Response:
-        kwargs.setdefault("timeout", PUBLIC_REQUEST_TIMEOUT_SECONDS)
+        kwargs.setdefault("timeout", REQUEST_TIMEOUT_SECONDS)
         return self._session.get(url, **kwargs)
