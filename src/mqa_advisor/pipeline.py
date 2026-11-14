@@ -45,6 +45,7 @@ from mqa_advisor.ingest import (
     FetchIncompleteError,
     ManifestNotFoundError,
     PPEIngestor,
+    ResourceFetchError,
 )
 from mqa_advisor.manifest import ManifestGenerationError
 from mqa_advisor.manifest import generate_manifest as _generate_manifest
@@ -120,7 +121,8 @@ def run(
     `force` re-fetches every resource instead of keeping the files already on disk. The last
     four parameters replace the real collaborators (tests inject fakes). Raises
     `PipelineInputError` before running anything if an unselected step's output is missing;
-    errors of a selected step propagate.
+    errors of a selected step propagate, including `FetchIncompleteError` (the db step then
+    does not run, and the ingestor is still shut down).
     """
     unknown = set(steps) - set(STEPS)
     if unknown:
@@ -162,6 +164,19 @@ def run(
     return PipelineOutcome(run_env, manifest_path, fetch_report_path, load_summary)
 
 
+def _describe_cause(cause: Exception) -> str:
+    """One-line text for a failure's cause, for the stderr summary.
+
+    A `ResourceFetchError` is shown by its underlying cause (its own message repeats the
+    resource type, id and attempt count already printed next to it).
+    """
+    if isinstance(cause, ResourceFetchError):
+        cause = cause.cause
+    message = " ".join(str(cause).split())
+    name = type(cause).__name__
+    return f"{name}: {message}" if message else name
+
+
 def main(argv: Sequence[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         prog="python -m mqa_advisor.pipeline",
@@ -190,9 +205,12 @@ def main(argv: Sequence[str] | None = None) -> None:
         outcome = run(args.catalogue, steps=steps, force=args.force)
     except FetchIncompleteError as e:
         shown = ", ".join(
-            f"{f.resource_type} {f.resource_id} ({f.cause})"
+            f"{f.resource_type} {f.resource_id} ({_describe_cause(f.cause)})"
             for f in e.failures[:MAX_FAILURES_SHOWN]
         )
+        hidden = len(e.failures) - MAX_FAILURES_SHOWN
+        if hidden > 0:
+            shown += f", ... and {hidden} more (see the report)"
         print(f"{type(e).__name__}: {e}: {shown}", file=sys.stderr)
         raise SystemExit(1) from e
     except (

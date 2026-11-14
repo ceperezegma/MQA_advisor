@@ -846,3 +846,120 @@ def test_ingestor_env_contradicting_its_session_raises(kind, env):
     )
     with pytest.raises(ConfigError):
         PPEIngestor(session, env=env)
+
+
+# --- Fatal fetch: totals, ordering, success path (issue #6) -------------------
+
+
+def _report_results(report_path):
+    workbook = openpyxl.load_workbook(report_path)
+    return {r[2]: r[4] for r in workbook.active.iter_rows(min_row=2, values_only=True)}
+
+
+@pytest.mark.parametrize(
+    "outcome_factory",
+    [lambda: FakeResponse(404), lambda: SessionExpiredError("session expired")],
+    ids=["http-404", "session-expired"],
+)
+def test_run_catalogue_when_every_resource_fails_reports_them_all(
+    tmp_path, outcome_factory
+):
+    auth = FakeAuth()
+    ids = ["1", "2", "3"]
+    _write_manifest(
+        tmp_path / "catalogues_to_fetch" / "cat.xlsx",
+        [(f"uri-{i}", "dataset", i) for i in ids],
+    )
+    for i in ids:
+        auth.queue(
+            build_fetch_url(auth.base_url, "dataset", i),
+            *[outcome_factory() for _ in range(MAX_FETCH_ATTEMPTS)],
+        )
+
+    ingestor = _make_ingestor(tmp_path, auth)
+    with pytest.raises(FetchIncompleteError) as exc:
+        ingestor.run_catalogue("cat")
+    ingestor.shutdown()
+
+    assert exc.value.total == 3
+    assert len(exc.value.failures) == 3
+    assert exc.value.report_path.exists()
+    assert _report_results(exc.value.report_path) == {i: "Failed" for i in ids}
+
+
+def test_run_catalogue_returns_the_report_path_when_everything_succeeds(tmp_path):
+    auth = FakeAuth()
+    _write_manifest(
+        tmp_path / "catalogues_to_fetch" / "cat.xlsx",
+        [("uri-1", "dataset", "1"), ("uri-2", "dataset", "2")],
+    )
+    for i in ("1", "2"):
+        auth.queue(
+            build_fetch_url(auth.base_url, "dataset", i), FakeResponse(200, b"x")
+        )
+
+    ingestor = _make_ingestor(tmp_path, auth)
+    report_path = ingestor.run_catalogue("cat")
+    ingestor.shutdown()
+
+    assert report_path == (
+        tmp_path / "fetched_catalogues_data" / "PPE" / "cat" / "report.xlsx"
+    )
+    assert _report_results(report_path) == {"1": "Success", "2": "Success"}
+
+
+def test_unfetchable_row_is_skipped_and_is_not_a_failure(tmp_path):
+    auth = FakeAuth()
+    _write_manifest(
+        tmp_path / "catalogues_to_fetch" / "cat.xlsx",
+        [("uri-1", "dataset", "1"), ("uri-2", "distribution", "2")],
+    )
+    auth.queue(build_fetch_url(auth.base_url, "dataset", "1"), FakeResponse(200, b"x"))
+
+    ingestor = _make_ingestor(tmp_path, auth)
+    report_path = ingestor.run_catalogue("cat")  # must not raise
+    ingestor.shutdown()
+
+    assert _report_results(report_path) == {"1": "Success", "2": "Skipped"}
+
+
+def test_failures_are_sorted_and_the_first_one_is_chained_whatever_the_finish_order(
+    tmp_path, monkeypatch
+):
+    from mqa_advisor import ingest
+
+    _write_manifest(
+        tmp_path / "catalogues_to_fetch" / "cat.xlsx",
+        [
+            ("u-b", "dataset", "b"),
+            ("u-a", "dataset", "a"),
+            ("u-s", "dataservice", "a"),
+        ],
+    )
+    b_failed = threading.Event()
+    causes = {
+        ("dataset", "a"): RuntimeError("cause-a"),
+        ("dataset", "b"): OSError("cause-b"),
+        ("dataservice", "a"): ValueError("cause-s"),
+    }
+
+    def fake_fetch(auth_, base_url, catalogue_dir, resource_type, resource_id, force):
+        if (resource_type, resource_id) == ("dataset", "b"):
+            b_failed.set()
+        else:
+            # the other resources finish after dataset b, i.e. out of sorted order
+            assert b_failed.wait(timeout=5)
+            time.sleep(0.05)
+        raise causes[(resource_type, resource_id)]
+
+    monkeypatch.setattr(ingest, "fetch_and_store", fake_fetch)
+
+    ingestor = _make_ingestor(tmp_path, FakeAuth(), max_concurrency=3)
+    with pytest.raises(FetchIncompleteError) as exc:
+        ingestor.run_catalogue("cat")
+    ingestor.shutdown()
+
+    keys = [(f.resource_type, f.resource_id) for f in exc.value.failures]
+    assert keys == [("dataservice", "a"), ("dataset", "a"), ("dataset", "b")]
+    assert isinstance(exc.value.failures, tuple)
+    assert exc.value.__cause__ is causes[("dataservice", "a")]

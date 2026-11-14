@@ -54,6 +54,7 @@ Usage:
 from __future__ import annotations
 
 import json
+from collections.abc import Sequence
 from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from pathlib import Path
@@ -109,10 +110,10 @@ class FetchIncompleteError(Exception):
     """Raised by `run_catalogue`, after the report is written, when any resource failed."""
 
     def __init__(
-        self, report_path: Path, failures: list[FetchFailure], total: int
+        self, report_path: Path, failures: Sequence[FetchFailure], total: int
     ) -> None:
         self.report_path = report_path
-        self.failures = failures
+        self.failures = tuple(failures)
         self.total = total
         super().__init__(
             f"{len(failures)} of {total} resources failed (report: {report_path})"
@@ -382,6 +383,8 @@ class PPEIngestor:
 
         report_path = write_report(catalogue_dir, rows)
         if failures:
+            # Completion order depends on thread timing; sort so the error is deterministic.
+            failures.sort(key=lambda f: (f.resource_type, f.resource_id))
             raise FetchIncompleteError(
                 report_path, failures, total=len(futures)
             ) from failures[0].cause
