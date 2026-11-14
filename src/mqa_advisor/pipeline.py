@@ -16,7 +16,9 @@ if one is missing, so a long fetch is never started only to fail at the load.
 
 One environment (`MQA_ENV`: `PPE` or `PROD`, default `PROD`, see `environment.py`) drives every
 step and every folder. Unlike the Test Run of MQA_test, any failure of a selected step is fatal:
-the database is this app's product, so it is never "best effort".
+the database is this app's product, so it is never "best effort". In particular an incomplete
+fetch (`ingest.FetchIncompleteError`, raised after the report is written) stops the run before the
+db step; `--steps db` can still load the partial files.
 
 Usage:
 
@@ -40,6 +42,7 @@ from mqa_advisor.environment import build_session, resolve_env
 from mqa_advisor.ingest import (
     FETCHED_DATA_DIR,
     MANIFESTS_DIR,
+    FetchIncompleteError,
     ManifestNotFoundError,
     PPEIngestor,
 )
@@ -47,6 +50,7 @@ from mqa_advisor.manifest import ManifestGenerationError
 from mqa_advisor.manifest import generate_manifest as _generate_manifest
 
 STEPS: tuple[str, ...] = ("manifest", "fetch", "db")
+MAX_FAILURES_SHOWN = 10
 
 
 class PipelineInputError(Exception):
@@ -184,6 +188,13 @@ def main(argv: Sequence[str] | None = None) -> None:
 
     try:
         outcome = run(args.catalogue, steps=steps, force=args.force)
+    except FetchIncompleteError as e:
+        shown = ", ".join(
+            f"{f.resource_type} {f.resource_id} ({f.cause})"
+            for f in e.failures[:MAX_FAILURES_SHOWN]
+        )
+        print(f"{type(e).__name__}: {e}: {shown}", file=sys.stderr)
+        raise SystemExit(1) from e
     except (
         PipelineInputError,
         ManifestGenerationError,

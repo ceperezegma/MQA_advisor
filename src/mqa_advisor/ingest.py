@@ -28,6 +28,12 @@ Output is files on disk, not an in-memory result:
       every fetch has been attempted — not by trusting whatever the in-process
       fetch logic believed happened.
 
+Every fetchable resource is attempted and the report is always written. If any of
+them failed (any exception of its fetch, not only a download failure),
+`run_catalogue` then raises `FetchIncompleteError`, which carries the report path
+and the failures, so a caller never goes on with a partial catalogue by accident.
+A fully successful run returns the report path.
+
 Resumability: by default (``force=False``), a resource whose expected output
 file already exists on disk is skipped entirely — no network call is made
 for it, and the report still records it as ``Success`` (ground truth is
@@ -39,7 +45,7 @@ Usage:
     auth = PPEAuth(Config.from_env())
     auth.login()
     ingestor = PPEIngestor(auth, env="PPE")
-    report_path = ingestor.run_catalogue("data-gov-lt")
+    report_path = ingestor.run_catalogue("data-gov-lt")  # may raise FetchIncompleteError
 
     # Production: no login, no credentials.
     ingestor = PPEIngestor(PublicSession(), env="PROD")
@@ -87,6 +93,29 @@ class ResourceFetchError(Exception):
         super().__init__(
             f"Failed to fetch {resource_type} {resource_id} after "
             f"{MAX_FETCH_ATTEMPTS} attempts: {cause}"
+        )
+
+
+@dataclass(frozen=True)
+class FetchFailure:
+    """One fetchable resource whose fetch raised, and why."""
+
+    resource_type: str
+    resource_id: str
+    cause: Exception
+
+
+class FetchIncompleteError(Exception):
+    """Raised by `run_catalogue`, after the report is written, when any resource failed."""
+
+    def __init__(
+        self, report_path: Path, failures: list[FetchFailure], total: int
+    ) -> None:
+        self.report_path = report_path
+        self.failures = failures
+        self.total = total
+        super().__init__(
+            f"{len(failures)} of {total} resources failed (report: {report_path})"
         )
 
 
@@ -322,11 +351,14 @@ class PPEIngestor:
         When `force` is `False` (the default), a row whose expected output
         file already exists on disk is skipped — no network call is made
         for it. `force=True` re-fetches every row unconditionally.
+
+        Raises `FetchIncompleteError` once the report is written if any resource failed.
         """
         rows = load_manifest(catalogue, self._manifests_dir)
         catalogue_dir = self.output_dir / catalogue
 
-        futures: list[Future] = [
+        # Remember which resource each future fetches, to attribute a failure to it.
+        futures: dict[Future, tuple[str, str]] = {
             self._executor.submit(
                 fetch_and_store,
                 self._auth,
@@ -335,18 +367,25 @@ class PPEIngestor:
                 row.type,
                 row.resource_id,
                 force,
-            )
+            ): (row.type, row.resource_id)
             for row in rows
             if row.type in _FETCHABLE_TYPES
-        ]
+        }
 
+        failures: list[FetchFailure] = []
         for future in as_completed(futures):
             try:
                 future.result()
-            except ResourceFetchError:
-                pass  # recorded via the report's ground-truth disk check, not here
+            except Exception as exc:  # one resource must never abort the others
+                resource_type, resource_id = futures[future]
+                failures.append(FetchFailure(resource_type, resource_id, exc))
 
-        return write_report(catalogue_dir, rows)
+        report_path = write_report(catalogue_dir, rows)
+        if failures:
+            raise FetchIncompleteError(
+                report_path, failures, total=len(futures)
+            ) from failures[0].cause
+        return report_path
 
     def shutdown(self) -> None:
         self._executor.shutdown(wait=True)

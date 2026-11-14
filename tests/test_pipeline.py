@@ -6,6 +6,7 @@ import pytest
 
 from mqa_advisor import pipeline
 from mqa_advisor.catalogue_db import LoadSummary
+from mqa_advisor.ingest import FetchFailure, FetchIncompleteError
 from mqa_advisor.pipeline import PipelineInputError, parse_steps, run
 
 SUMMARY = LoadSummary(resources=2, pruned=0, rows=10, orphan_nodes=0)
@@ -142,6 +143,51 @@ def test_ingestor_is_shut_down_when_the_fetch_fails(rec):
         rec.run(steps={"manifest", "fetch"}, ingestor_factory=failing_ingestor)
 
     assert rec.names()[-1] == "shutdown"
+
+
+def _incomplete_error(n_failures=1):
+    failures = [
+        FetchFailure("dataset", f"id-{i}", RuntimeError(f"boom-{i}"))
+        for i in range(n_failures)
+    ]
+    return FetchIncompleteError(Path("out/report.xlsx"), failures, total=20)
+
+
+def test_incomplete_fetch_skips_the_db_step_and_shuts_the_ingestor_down(rec):
+    def incomplete_ingestor(session, **kwargs):
+        ingestor = rec.ingestor_factory(session, **kwargs)
+
+        def incomplete(catalogue, force=False):
+            raise _incomplete_error()
+
+        ingestor.run_catalogue = incomplete
+        return ingestor
+
+    with pytest.raises(FetchIncompleteError):
+        rec.run(ingestor_factory=incomplete_ingestor)
+
+    assert "db" not in rec.names()
+    assert rec.names()[-1] == "shutdown"
+
+
+def test_main_exits_1_with_counts_and_report_path_on_incomplete_fetch(
+    monkeypatch, capsys
+):
+    def fake_run(catalogue, *, steps, force):
+        raise _incomplete_error(n_failures=12)
+
+    monkeypatch.setattr(pipeline, "run", fake_run)
+
+    with pytest.raises(SystemExit) as exc:
+        pipeline.main(["nsip-lu"])
+
+    assert exc.value.code == 1
+    err = capsys.readouterr().err
+    assert err.startswith("FetchIncompleteError: 12 of 20 resources failed")
+    assert str(Path("out/report.xlsx")) in err
+    assert "dataset id-0 (boom-0)" in err
+    assert "id-9" in err
+    assert "id-10" not in err  # only the first 10 failures are listed
 
 
 def test_a_failing_load_is_fatal(rec, tmp_path):
