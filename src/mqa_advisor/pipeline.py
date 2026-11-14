@@ -18,13 +18,16 @@ One environment (`MQA_ENV`: `PPE` or `PROD`, default `PROD`, see `environment.py
 step and every folder. Unlike the Test Run of MQA_test, any failure of a selected step is fatal:
 the database is this app's product, so it is never "best effort". In particular an incomplete
 fetch (`ingest.FetchIncompleteError`, raised after the report is written) stops the run before the
-db step; `--steps db` can still load the partial files.
+db step. The db step also refuses a folder that would make the load delete the catalogue's rows (a
+full load prunes the resources whose file is gone): no resource files at all, or a fetch report
+with failed resources. `--allow-partial` overrides the second, deliberately, never the first.
 
 Usage:
 
     uv run python -m mqa_advisor.pipeline {catalogue}
     uv run python -m mqa_advisor.pipeline {catalogue} --steps db
     uv run python -m mqa_advisor.pipeline {catalogue} --steps fetch,db --force
+    uv run python -m mqa_advisor.pipeline {catalogue} --steps db --allow-partial
 """
 
 from __future__ import annotations
@@ -46,6 +49,7 @@ from mqa_advisor.ingest import (
     ManifestNotFoundError,
     PPEIngestor,
     ResourceFetchError,
+    failed_resources,
 )
 from mqa_advisor.manifest import ManifestGenerationError
 from mqa_advisor.manifest import generate_manifest as _generate_manifest
@@ -79,12 +83,41 @@ def parse_steps(value: str) -> tuple[str, ...]:
     return tuple(step for step in STEPS if step in chosen)
 
 
+def _check_fetched_files(directory: Path, allow_partial: bool) -> None:
+    """Refuse a database load that would delete the catalogue's rows (issue #9).
+
+    A full load prunes every resource whose file is not in `directory` (spec
+    `catalogue-database`), so it must not run on a folder with no resource files, nor, unless
+    `allow_partial`, on one whose fetch report records failed resources. A folder without a
+    report is accepted: its completeness cannot be told.
+    """
+    has_files = any(directory.glob("dataset_*.jsonld")) or any(
+        directory.glob("dataservice_*.json")
+    )
+    if not has_files:
+        raise PipelineInputError(
+            f"no fetched Dataset or Data Service files in {directory}; loading would delete"
+            f" every resource of the catalogue from the database"
+        )
+    report = directory / "report.xlsx"
+    if allow_partial or not report.exists():
+        return
+    failed = failed_resources(report)
+    if failed:
+        raise PipelineInputError(
+            f"{len(failed)} resource(s) failed to download (see {report}); loading now would"
+            f" delete their rows from the database. Fetch again, or pass --allow-partial to"
+            f" load the partial catalogue anyway"
+        )
+
+
 def _check_inputs(
     catalogue: str,
     steps: Collection[str],
     env: str,
     manifests_dir: Path,
     fetched_data_dir: Path,
+    allow_partial: bool,
 ) -> None:
     if "fetch" in steps and "manifest" not in steps:
         manifest = manifests_dir / f"{catalogue}.xlsx"
@@ -100,6 +133,7 @@ def _check_inputs(
                 f"the db step needs the fetched files in {directory}, which does not exist;"
                 f" add the 'fetch' step"
             )
+        _check_fetched_files(directory, allow_partial)
 
 
 def run(
@@ -108,6 +142,7 @@ def run(
     steps: Collection[str] = STEPS,
     env: str | None = None,
     force: bool = False,
+    allow_partial: bool = False,
     manifests_dir: Path = MANIFESTS_DIR,
     fetched_data_dir: Path = FETCHED_DATA_DIR,
     db_path: Path = DB_PATH,
@@ -118,17 +153,22 @@ def run(
 ) -> PipelineOutcome:
     """Run the selected `steps` for `catalogue` (see the module docstring).
 
-    `force` re-fetches every resource instead of keeping the files already on disk. The last
-    four parameters replace the real collaborators (tests inject fakes). Raises
-    `PipelineInputError` before running anything if an unselected step's output is missing;
-    errors of a selected step propagate, including `FetchIncompleteError` (the db step then
-    does not run, and the ingestor is still shut down).
+    `force` re-fetches every resource instead of keeping the files already on disk.
+    `allow_partial` lets the db step load a catalogue whose fetch report records failed
+    resources (which prunes their rows); a folder with no resource files is never loaded. The
+    last four parameters replace the real collaborators (tests inject fakes). Raises
+    `PipelineInputError` before running anything if an unselected step's output is missing or
+    the db step would delete the catalogue's rows; errors of a selected step propagate,
+    including `FetchIncompleteError` (the db step then does not run, and the ingestor is still
+    shut down).
     """
     unknown = set(steps) - set(STEPS)
     if unknown:
         raise ValueError(f"unknown step(s): {', '.join(sorted(unknown))}")
     run_env = resolve_env(env)
-    _check_inputs(catalogue, steps, run_env, manifests_dir, fetched_data_dir)
+    _check_inputs(
+        catalogue, steps, run_env, manifests_dir, fetched_data_dir, allow_partial
+    )
 
     manifest_path = fetch_report_path = load_summary = None
 
@@ -153,6 +193,8 @@ def run(
             ingestor.shutdown()
 
     if "db" in steps:
+        if "fetch" in steps:  # a db-only run was already checked, before anything ran
+            _check_fetched_files(fetched_data_dir / run_env / catalogue, allow_partial)
         conn = connect(db_path)
         try:
             load_summary = loader(
@@ -194,6 +236,12 @@ def main(argv: Sequence[str] | None = None) -> None:
         action="store_true",
         help="re-fetch every resource instead of keeping the files already on disk",
     )
+    parser.add_argument(
+        "--allow-partial",
+        action="store_true",
+        help="let the db step load a catalogue whose fetch report records failed resources;"
+        " the load then deletes the database rows of those resources",
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -202,7 +250,12 @@ def main(argv: Sequence[str] | None = None) -> None:
         parser.error(str(e))
 
     try:
-        outcome = run(args.catalogue, steps=steps, force=args.force)
+        outcome = run(
+            args.catalogue,
+            steps=steps,
+            force=args.force,
+            allow_partial=args.allow_partial,
+        )
     except FetchIncompleteError as e:
         shown = ", ".join(
             f"{f.resource_type} {f.resource_id} ({_describe_cause(f.cause)})"

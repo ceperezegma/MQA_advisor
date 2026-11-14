@@ -323,6 +323,20 @@ def write_report(catalogue_dir: Path, rows: list[ManifestRow]) -> Path:
     return report_path
 
 
+def failed_resources(report_path: Path) -> list[tuple[str, str]]:
+    """The (type, id) of every resource a fetch `report.xlsx` records as `Failed`.
+
+    A resource is `Failed` when its file is absent from the catalogue folder, so these are
+    exactly the resources a full database load would prune.
+    """
+    workbook = openpyxl.load_workbook(report_path, read_only=True, data_only=True)
+    try:
+        rows = workbook.active.iter_rows(min_row=2, values_only=True)
+        return [(row[1], row[2]) for row in rows if row[4] == "Failed"]
+    finally:
+        workbook.close()
+
+
 class PPEIngestor:
     """Owns one session (`PPEAuth` for PPE, `PublicSession` for production) and a shared,
     bounded thread pool for a catalogue run.
