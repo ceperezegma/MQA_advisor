@@ -52,3 +52,18 @@ _Avoid_: Relevance, Layer (synonyms used inconsistently across the source spread
 
 **Weight**:
 The numeric value attached to a Property's Importance: 1.0 (Mandatory), 0.5 (Recommended), 0.25 (Optional).
+
+### Proposals
+
+**Proposal**:
+A `dcat:theme` or `dcat:keyword` value the LLM suggests adding to a Dataset or standalone Data Service, stored in `proposed_property_value`. It never changes the resource's own `property_value` rows, and it is deleted with the resource when the catalogue is reloaded.
+_Avoid_: recommendation (the later, broader advice built on the Properties), suggestion
+
+**Enrichment**:
+Asking for Proposals even when the resource already has values for the Property, up to a cap (5 themes, 10 keywords counting the existing ones). Not gap filling: a resource with some themes still gets more.
+
+**Effective themes**:
+The in-vocabulary themes of a resource after the theme step: its existing themes that are in the EU `data-theme` vocabulary plus the themes just proposed. They are the context of the keyword call.
+
+**Prompt version**:
+One immutable file `prompts/{prompt_name}/v{N}.md`, with the model, parameters and output schema it was written for. A Proposal records the prompt name, version and content hash that produced it.
