@@ -71,14 +71,21 @@ The cost SHALL be described as an estimate.
 - **WHEN** a prompt names a model that is not in the price table
 - **THEN** an error naming the model is raised and the backend is not called
 
-#### Scenario: Prompt longer than the price table covers
-- **WHEN** the backend reports more than 100,000 input tokens (the prompt length up to which the table prices apply)
-- **THEN** the client raises an error saying the price table does not cover this call, instead of reporting a
-  wrong cost
+#### Scenario: Prompt too long to send
+- **WHEN** the system and user text together are longer than 100,000 bytes in UTF-8 (a token is at least one byte,
+  so 100,000 bytes can never exceed the 100,000 tokens the price table covers)
+- **THEN** the client raises `LLMInputError` before any request is made, so nothing is billed
+
+#### Scenario: Billed but not priced
+- **WHEN** the backend reports more than 100,000 input tokens (input plus cached) although the size check passed
+- **THEN** the call is logged with its real token counts and the cost shown as unpriced, it counts in the run
+  total as an unpriced call (not as a cost of 0), and `LLMInputError` is raised
 
 #### Scenario: Price table carries its date
 - **WHEN** the price table is read
-- **THEN** it has an `as_of` date in ISO format and an entry for `claude-haiku-5-5` and `claude-sonnet-5-5`
+- **THEN** it has an `as_of` date in ISO format and an entry for `claude-haiku-5-5` (the only model in use; a model
+  is added when a prompt version needs it, because a model that rejects a forced tool call, such as Sonnet 5.5,
+  needs a different call)
 
 ### Requirement: Fake backend for tests
 The system SHALL define a backend interface that the real SDK backend and a fake both implement. The fake SHALL
@@ -110,9 +117,31 @@ logged when the run ends. A dry run SHALL create no log file. `logs/` SHALL be g
 - **THEN** one INFO record is logged that contains the resource and the estimated cost of that call
 
 #### Scenario: Failed call is logged
-- **WHEN** a call ends in `LLMCallError` or `LLMResponseError`
-- **THEN** the file has a block for it with the same fields (response and tokens as far as known) and the
-  error outcome, and the call's cost counts as 0 in the run total unless tokens were reported
+- **WHEN** a call ends in any exception after the request was sent (`LLMCallError`, `LLMResponseError`, or an
+  unexpected exception from the backend)
+- **THEN** the file has a block for it with the same fields (response, tokens and attempt as far as known, taken
+  from the error) and the error outcome; the cost is that of the tokens reported, or 0 when none were reported,
+  and the exception is re-raised. A failure before the request (unknown model, prompt too long) is not a call: it
+  raises and writes no block
+
+#### Scenario: Run log is safe for worker threads
+- **WHEN** many threads record calls at the same time
+- **THEN** every block has a unique call number and the run total equals the sum of the call costs
+
+#### Scenario: Closing twice, recording after close
+- **WHEN** `close()` is called twice
+- **THEN** the run total is logged once
+- **WHEN** a call is recorded after `close()`
+- **THEN** an error is raised
+
+#### Scenario: A log write fails
+- **WHEN** writing to the log file fails (for example the disk is full)
+- **THEN** an ERROR is logged at once with the cause, and `close()` raises an error carrying the cause, so the run
+  cannot end looking successful with a missing audit log
+
+#### Scenario: Timestamps are UTC
+- **WHEN** a line is written to the log file
+- **THEN** its timestamp is in UTC and marked with `Z`
 
 #### Scenario: Run total
 - **WHEN** a run with two calls ends

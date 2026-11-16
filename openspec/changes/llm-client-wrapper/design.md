@@ -56,9 +56,9 @@ model's behaviour is steered by the prompt and the output schema only.
 keeps cost and `max_tokens` use low. Sonnet 5.5 rejects a forced `tool_choice` (400): a future prompt version for
 that model would need `tool_choice: auto` with `strict: true` and an instruction naming the tool. Not built now.
 
-**Price table.** A module-level dict `PRICES: dict[str, ModelPrice]` (input, output, cached-input USD per million
-tokens) and `PRICES_AS_OF = "YYYY-MM-DD"`, for `claude-haiku-5-5` and `claude-sonnet-5-5` (the models of design
-section 6). Prices are filled from Anthropic's published pricing at implementation time and the date recorded;
+**Price table.** A read-only module-level mapping `PRICES` (input, output, cached-input USD per million
+tokens) and `PRICES_AS_OF = "YYYY-MM-DD"`, for `claude-haiku-5-5` only (design section 6 also names Sonnet 5.5 for a later
+comparison; it is added when a prompt version needs it, see "Forced tool use per model"). Prices are filled from Anthropic's published pricing at implementation time and the date recorded;
 they are an estimate. The table holds the rate for prompts of up to 100,000 tokens (Haiku 5.5 charges more above that);
 a call whose reported input tokens exceed 100,000 raises, because the table would give a wrong cost. Our prompts
 (a title, a description, the vocabulary) are far below it. Cost = uncached x input + cached x cached-input + output x output, per million. Uncached
@@ -69,6 +69,21 @@ input = `input_tokens` as the API reports it (the API's `input_tokens` already e
 **API key.** `load_api_key()` calls `dotenv.load_dotenv()` (as `auth.py` does) and reads `ANTHROPIC_API_KEY`;
 missing or blank raises `LLMInputError`. #23 turns this into `PipelineInputError` for the pipeline step.
 `AnthropicBackend` is built from that key; the key is never put in a log call or exception text.
+
+**Size guard and billed-but-unpriced.** Haiku 5.5 is priced higher above 100,000 prompt tokens and the token count
+is only known after the call. So `LLMClient.call` first checks the UTF-8 byte length of system + user (a token is at
+least one byte): over 100,000 bytes raises `LLMInputError` before any request. If the backend still reports more than
+100,000 input tokens, the call was billed: it is logged with the real tokens and cost `None` ("unpriced"), counted in
+`RunLog.unpriced_calls` and shown in the run total, and `LLMInputError` is raised.
+
+**Failures and the log.** `LLMError` carries optional `attempt`, `raw_response` and `usage` so one handler in `call`
+logs any failure from the error itself. An unexpected exception from the backend is logged as `unexpected
+{type}: {message}` and re-raised. Pre-request failures (unknown model, size guard, invalid schema) raise without a
+block. `RunLog` takes a lock around counters, writes and `close`; `close` is idempotent and `record` after it raises.
+The file is created with mode `x` (retrying with a numbered name) so two runs never share a file, timestamps are UTC
+(`...Z`), and the per-run loggers are plain unregistered `Logger` objects whose parent is `mqa_advisor.propose`, so
+they are not kept in logging's global registry. The file handler remembers the first write error; it is logged at
+ERROR at once and `close()` raises it.
 
 **Run log.** `RunLog(catalogue, *, enabled=True, log_dir=Path("logs/propose"), now=...)`:
 

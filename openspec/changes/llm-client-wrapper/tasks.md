@@ -34,7 +34,16 @@
 - [x] 6.1 `RunLog`: per-run file `logs/propose/{catalogue}-{UTC timestamp}.log`, unique name, `logging` handler, block format, INFO cost line, run total on close, disabled mode writes nothing
 - [x] 6.2 Tests (use `tmp_path`): block has every field; two runs two files; total equals sum; dry run creates nothing; key never in file or records; schema-mismatch raw response is in the file
 
-## 7. Finish
+## 7. Review fixes (code review, python-reviewer, silent-failure-hunter, pr-test-analyzer)
 
-- [x] 7.1 Update `CLAUDE.md` architecture notes (`llm.py`) and the design doc status if needed
-- [x] 7.2 `uv run ruff check`, `uv run ruff format`, `uv run pytest`
+- [x] 7.1 `LLMError` carries `attempt`, `raw_response`, `usage`; `LLMClient.call` has one failure handler (also for unexpected exceptions); `stop_reason` in a schema-mismatch message; validator built once per schema with `check_schema` before the request
+- [x] 7.2 Size guard before the call (100,000 bytes) and billed-but-unpriced logging (`unpriced_calls`); `PRICES` read-only with Haiku only
+- [x] 7.3 `RunLog`: lock, idempotent `close`, error on `record` after close, mode `x` file creation, UTC timestamps, unregistered loggers, write errors logged and raised at close
+- [x] 7.4 `AnthropicBackend.close()` and context manager; retry warning reworded; `httpx2` types; comments (cache-creation cost is a lower bound, 60 s is per phase)
+- [x] 7.5 Loader: empty rendered system or user part raises
+- [x] 7.6 Tests for every point above and the test gaps of the review (literal costs, real-backend failure paths, 401 body with the key, truncated and mixed responses, failed-call blocks, keywords schema, RunLog lifecycle and threads, unicode, INFO level, prompt placement)
+
+## 8. Finish
+
+- [x] 8.1 Update `CLAUDE.md` architecture notes (`llm.py`) and the design doc status if needed
+- [x] 8.2 `uv run ruff check`, `uv run ruff format`, `uv run pytest`

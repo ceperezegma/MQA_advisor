@@ -78,6 +78,10 @@ value, when a value is not used by either part, or when a value is not a string.
 - **WHEN** a prompt is loaded with a value whose key is not a placeholder of either part
 - **THEN** an error naming the key is raised
 
+#### Scenario: A part renders empty
+- **WHEN** the system part or the user part is empty or only whitespace after the values are filled in
+- **THEN** an error naming the file is raised (the API rejects an empty message)
+
 #### Scenario: A value is not a string
 - **WHEN** a prompt is loaded with a non-string value (for example a number)
 - **THEN** an error naming the key is raised

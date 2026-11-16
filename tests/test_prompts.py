@@ -232,6 +232,54 @@ def test_a_value_cannot_move_the_boundary_between_the_parts(tmp_path):
     assert loaded.user == "Hello " + hostile
 
 
+def test_a_part_that_renders_empty_raises(tmp_path):
+    # The user part is only a placeholder, and its value is blank: the API would reject an empty message.
+    folder = write_prompt(tmp_path, "p", 1, "$who")
+    with pytest.raises(PromptError, match="empty after filling"):
+        load_prompt("p", 1, {"who": "  "}, prompts_dir=folder)
+
+
+def test_a_part_with_only_whitespace_raises(tmp_path):
+    folder = write_prompt(tmp_path, "p", 1, two_parts("   ", "user $who"), raw=True)
+    with pytest.raises(PromptError, match=r"v1\.md"):
+        load_prompt("p", 1, {"who": "x"}, prompts_dir=folder)
+
+
+@pytest.mark.parametrize(
+    "separator", [USER_SEPARATOR + " ", " " + USER_SEPARATOR, USER_SEPARATOR.lower()]
+)
+def test_a_near_miss_of_the_separator_is_not_a_separator(tmp_path, separator):
+    body = chr(10).join(["system $who", separator, "user"])
+    folder = write_prompt(tmp_path, "p", 1, body, raw=True)
+    with pytest.raises(PromptError, match="exactly one"):
+        load_prompt("p", 1, {"who": "x"}, prompts_dir=folder)
+
+
+def test_a_dollar_in_a_value_stays_literal(tmp_path):
+    folder = write_prompt(tmp_path, "p", 1, "Hello $who")
+    assert (
+        load_prompt("p", 1, {"who": "$other ${x}"}, prompts_dir=folder).user
+        == "Hello $other ${x}"
+    )
+
+
+def test_the_fixed_list_is_in_the_system_part_and_the_resource_data_in_the_user_part():
+    themes = render_committed(
+        "propose_themes", vocabulary="V-LIST", existing_themes="E-THEMES", remaining="3"
+    )
+    assert "V-LIST" in themes.system and "V-LIST" not in themes.user
+    for value in ("E-THEMES", "up to 3"):
+        assert value in themes.user and value not in themes.system
+    keywords = render_committed(
+        "propose_keywords",
+        language="L-VALUE",
+        themes="T-VALUE",
+        existing_keywords="K-VALUE",
+    )
+    for value in ("L-VALUE", "T-VALUE", "K-VALUE"):
+        assert value in keywords.user and value not in keywords.system
+
+
 # --- frontmatter errors ------------------------------------------------------------------------
 
 

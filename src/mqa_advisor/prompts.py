@@ -182,6 +182,11 @@ def _render(
         raise PromptError(
             f"{path.name}: no value for placeholder {error.args[0]!r}"
         ) from error
+    # A part that is only a placeholder can still render empty, and the API rejects an empty message.
+    if not system.strip() or not user.strip():
+        raise PromptError(
+            f"{path.name}: the system part or the user part is empty after filling in the values"
+        )
     return system, user
 
 
