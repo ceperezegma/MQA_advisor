@@ -240,21 +240,31 @@ _PROPOSAL_COLUMNS = (
 )
 
 
-def _check_pairing(proposals: list[ProposedValue]) -> None:
-    """Raise `ValueError` if a `uri` proposal has a `lang` or a `literal` one has none.
+_REQUIRED_TEXT_FIELDS = ("value", "prompt_name", "model", "prompt_sha256")
 
-    Themes are `uri` rows without a language and keywords are `literal` rows with one. The whole
-    list is checked before anything is written. (No CHECK constraint: it could not name the row,
-    and it would not reach databases created earlier.)
+
+def _check_proposals(proposals: list[ProposedValue]) -> None:
+    """Raise `ValueError` naming the first proposal that must not be stored.
+
+    A proposal is rejected when its value or provenance (`prompt_name`, `model`,
+    `prompt_sha256`) is empty, when a `uri` value has a `lang`, or when a `literal` value has
+    none (themes are `uri` rows without a language, keywords are `literal` rows with one). The
+    whole list is checked before anything is written. (No CHECK constraint for the pairing: it
+    could not name the row, and it would not reach databases created earlier.)
     """
     for position, proposal in enumerate(proposals):
-        if proposal.value_kind == "uri" and proposal.lang is not None:
-            problem = "a uri value must not have a lang"
-        elif proposal.value_kind == "literal" and not proposal.lang:
-            problem = "a literal value must have a lang"
+        problem = None
+        for field in _REQUIRED_TEXT_FIELDS:
+            if not getattr(proposal, field):
+                problem = f"{field} must not be empty"
+                break
         else:
-            continue
-        raise ValueError(f"proposal {position} ({proposal}): {problem}")
+            if proposal.value_kind == "uri" and proposal.lang is not None:
+                problem = "a uri value must not have a lang"
+            elif proposal.value_kind == "literal" and not proposal.lang:
+                problem = "a literal value must have a lang"
+        if problem:
+            raise ValueError(f"proposal {position} ({proposal}): {problem}")
 
 
 def replace_proposals(
@@ -264,11 +274,17 @@ def replace_proposals(
 
     Deletes the resource's previous proposals and inserts the new ones (an empty list just
     clears them). Commits on success; on any error rolls back, so the previous proposals stay.
-    Like `load_catalogue`, `conn` must have no pending writes. A `uri` proposal with a `lang`, or
-    a `literal` one without, raises `ValueError` before anything is written. Apart from that and
-    the table's CHECK constraints, the values are stored as given.
+    `conn` must have no pending writes (the commit or rollback here would take the caller's own
+    uncommitted work with it): otherwise `RuntimeError` is raised and nothing is done. An empty
+    value or provenance field, a `uri` proposal with a `lang`, or a `literal` one without raises
+    `ValueError` before anything is written. Apart from that and the table's CHECK constraints,
+    the values are stored as given.
     """
-    _check_pairing(proposals)
+    if conn.in_transaction:
+        raise RuntimeError(
+            "replace_proposals needs a connection with no pending writes; commit or roll back first"
+        )
+    _check_proposals(proposals)
     try:
         conn.execute(
             "DELETE FROM proposed_property_value WHERE resource_pk = ?", (resource_pk,)
@@ -780,7 +796,11 @@ def _prune(
 
 
 def _count_proposals(conn: sqlite3.Connection, env: str, catalogue: str) -> int:
-    """How many proposals the catalogue's resources have."""
+    """How many proposals the catalogue's resources have.
+
+    It counts the whole catalogue on purpose, also when only some resources are reloaded: the
+    difference between the count before and after the load is exactly the rows removed.
+    """
     return conn.execute(
         "SELECT COUNT(*) FROM proposed_property_value AS p"
         " JOIN resource AS r USING (resource_pk)"
@@ -864,8 +884,14 @@ def load_catalogue(
         # The cascade removed the proposals of every replaced or pruned resource: the difference
         # is how many (the load never adds proposals).
         proposals_removed = proposals_before - _count_proposals(conn, env, catalogue)
+        if proposals_removed < 0:  # the load never adds proposals: this would be a bug
+            raise RuntimeError(
+                f"{env}/{catalogue}: negative proposals_removed ({proposals_removed})"
+            )
         conn.commit()
-        logger.info(
+        # Always logged so every reload is tracked; a warning when real data was lost.
+        logger.log(
+            logging.WARNING if proposals_removed else logging.INFO,
             "%s/%s: removed %d proposal(s) with the reloaded resources",
             env,
             catalogue,

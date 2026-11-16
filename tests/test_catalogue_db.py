@@ -209,6 +209,13 @@ def _keyword(text="river", **overrides):
     return _theme(**fields)
 
 
+def _committed_resource(conn, resource_id="r1", **overrides):
+    """Add a resource and commit, so `replace_proposals` sees no pending writes."""
+    pk = _add_resource(conn, resource_id, **overrides)
+    conn.commit()
+    return pk
+
+
 def _insert_raw(conn, resource_pk, **overrides):
     """Insert one proposal row directly, bypassing `replace_proposals`."""
     row = {"resource_pk": resource_pk, **_theme(**overrides).__dict__}
@@ -230,7 +237,7 @@ def test_creates_proposal_table_and_index_on_fresh_path(tmp_path):
 def test_proposal_table_is_added_to_a_database_that_has_the_other_tables(tmp_path):
     path = tmp_path / "mqa.sqlite"
     conn = connect(path)
-    pk = _add_resource(conn)
+    pk = _committed_resource(conn)
     _add_value(conn, pk)
     conn.execute("DROP TABLE proposed_property_value")
     conn.commit()
@@ -244,7 +251,7 @@ def test_proposal_table_is_added_to_a_database_that_has_the_other_tables(tmp_pat
 def test_connect_again_keeps_the_proposals(tmp_path):
     path = tmp_path / "mqa.sqlite"
     conn = connect(path)
-    pk = _add_resource(conn)
+    pk = _committed_resource(conn)
     replace_proposals(conn, pk, [_theme()])
     conn.close()
     conn = connect(path)
@@ -256,7 +263,7 @@ def test_connect_again_keeps_the_proposals(tmp_path):
     "overrides", [{"entity_kind": "distribution"}, {"value_kind": "node"}]
 )
 def test_proposal_check_constraints_reject_bad_kinds(conn, overrides):
-    pk = _add_resource(conn)
+    pk = _committed_resource(conn)
     with pytest.raises(sqlite3.IntegrityError):
         _insert_raw(conn, pk, **overrides)
 
@@ -267,14 +274,14 @@ def test_proposal_for_missing_resource_fails(conn):
 
 
 def test_replace_proposals_stores_the_given_rows(conn):
-    pk = _add_resource(conn)
+    pk = _committed_resource(conn)
     replace_proposals(conn, pk, [_theme(), _keyword("river"), _keyword("water")])
     # keywords sort before the theme (property URI order)
     assert read_proposals(conn, pk) == [_keyword("river"), _keyword("water"), _theme()]
 
 
 def test_replace_proposals_twice_with_the_same_input_gives_the_same_rows(conn):
-    pk = _add_resource(conn)
+    pk = _committed_resource(conn)
     proposals = [_theme(), _keyword()]
     replace_proposals(conn, pk, proposals)
     first = read_proposals(conn, pk)
@@ -283,28 +290,28 @@ def test_replace_proposals_twice_with_the_same_input_gives_the_same_rows(conn):
 
 
 def test_replace_proposals_leaves_only_the_second_set(conn):
-    pk = _add_resource(conn)
+    pk = _committed_resource(conn)
     replace_proposals(conn, pk, [_theme(), _keyword("old")])
     replace_proposals(conn, pk, [_keyword("new")])
     assert read_proposals(conn, pk) == [_keyword("new")]
 
 
 def test_replace_proposals_with_an_empty_list_clears_the_resource(conn):
-    pk = _add_resource(conn)
+    pk = _committed_resource(conn)
     replace_proposals(conn, pk, [_theme()])
     replace_proposals(conn, pk, [])
     assert read_proposals(conn, pk) == []
 
 
 def test_replace_proposals_leaves_other_resources_alone(conn):
-    pk1, pk2 = _add_resource(conn, "r1"), _add_resource(conn, "r2")
+    pk1, pk2 = _committed_resource(conn, "r1"), _committed_resource(conn, "r2")
     replace_proposals(conn, pk2, [_keyword("other")])
     replace_proposals(conn, pk1, [_theme()])
     assert read_proposals(conn, pk2) == [_keyword("other")]
 
 
 def test_replace_proposals_failure_keeps_the_previous_rows(conn):
-    pk = _add_resource(conn)
+    pk = _committed_resource(conn)
     replace_proposals(conn, pk, [_theme()])
     with pytest.raises(sqlite3.IntegrityError):
         replace_proposals(
@@ -314,7 +321,7 @@ def test_replace_proposals_failure_keeps_the_previous_rows(conn):
 
 
 def test_replace_proposals_naive_time_raises_and_keeps_the_previous_rows(conn):
-    pk = _add_resource(conn)
+    pk = _committed_resource(conn)
     replace_proposals(conn, pk, [_theme()])
     with pytest.raises(ValueError):
         replace_proposals(conn, pk, [_keyword(proposed_at=datetime(2026, 11, 15))])
@@ -322,7 +329,7 @@ def test_replace_proposals_naive_time_raises_and_keeps_the_previous_rows(conn):
 
 
 def test_read_proposals_round_trips_lang_and_aware_time(conn):
-    pk = _add_resource(conn)
+    pk = _committed_resource(conn)
     replace_proposals(conn, pk, [_theme(), _keyword()])
     keyword, theme = read_proposals(conn, pk)
     assert theme.lang is None and keyword.lang == "eng"
@@ -330,7 +337,7 @@ def test_read_proposals_round_trips_lang_and_aware_time(conn):
 
 
 def test_read_proposals_is_ordered_by_property_then_insertion(conn):
-    pk = _add_resource(conn)
+    pk = _committed_resource(conn)
     proposals = [_keyword("b"), _theme(), _keyword("a")]
     replace_proposals(conn, pk, proposals)
     # dcat:keyword sorts before dcat:theme; within a property, insertion order
@@ -338,30 +345,77 @@ def test_read_proposals_is_ordered_by_property_then_insertion(conn):
 
 
 def test_read_proposals_of_a_resource_without_proposals_is_empty(conn):
-    assert read_proposals(conn, _add_resource(conn)) == []
+    assert read_proposals(conn, _committed_resource(conn)) == []
 
 
 @pytest.mark.parametrize(
-    "bad",
+    ("bad", "reason"),
     [
-        _theme(lang="eng"),  # a uri row must have no lang
-        _keyword(lang=None),  # a literal row must have a lang
-        _keyword(lang=""),
+        (_theme(lang="eng"), "a uri value must not have a lang"),  # uri row with a lang
+        (_keyword(lang=None), "a literal value must have a lang"),
+        (_keyword(lang=""), "a literal value must have a lang"),
+        (_keyword(value=""), "value must not be empty"),
+        (_keyword(prompt_name=""), "prompt_name must not be empty"),
+        (_keyword(model=""), "model must not be empty"),
+        (_keyword(prompt_sha256=""), "prompt_sha256 must not be empty"),
     ],
-    ids=["uri-with-lang", "literal-without-lang", "literal-with-empty-lang"],
+    ids=[
+        "uri-with-lang",
+        "literal-without-lang",
+        "literal-with-empty-lang",
+        "empty-value",
+        "empty-prompt-name",
+        "empty-model",
+        "empty-sha",
+    ],
 )
-def test_replace_proposals_rejects_a_bad_uri_lang_pairing(conn, bad):
-    pk = _add_resource(conn)
+def test_replace_proposals_rejects_a_bad_proposal(conn, bad, reason):
+    pk = _committed_resource(conn)
     replace_proposals(conn, pk, [_theme()])
     # The bad row comes after a valid one: nothing of the new list may be stored.
-    with pytest.raises(ValueError, match="proposal 1"):
+    with pytest.raises(ValueError, match=rf"proposal 1 .*{reason}"):
         replace_proposals(conn, pk, [_keyword("fine"), bad])
     assert read_proposals(conn, pk) == [_theme()]
 
 
 def test_replace_proposals_checks_the_whole_list_before_writing(conn):
-    pk = _add_resource(conn)
-    conn.commit()
+    pk = _committed_resource(conn)
     with pytest.raises(ValueError):
         replace_proposals(conn, pk, [_theme(lang="eng")])
     assert not conn.in_transaction  # nothing was even started
+
+
+def test_replace_proposals_refuses_a_connection_with_pending_writes(conn):
+    pk = _add_resource(conn)  # not committed: a pending write
+    with pytest.raises(RuntimeError, match="pending"):
+        replace_proposals(conn, pk, [_theme()])
+    assert (
+        conn.in_transaction
+    )  # the caller's work was neither committed nor rolled back
+    assert conn.execute("SELECT COUNT(*) FROM resource").fetchone()[0] == 1
+
+
+def test_replace_proposals_for_an_unknown_resource_fails_and_rolls_back(conn):
+    pk = _committed_resource(conn)
+    replace_proposals(conn, pk, [_theme()])
+    with pytest.raises(sqlite3.IntegrityError):
+        replace_proposals(conn, 999, [_theme()])
+    assert not conn.in_transaction
+    assert read_proposals(conn, pk) == [_theme()]
+
+
+def test_deleting_a_resource_cascades_to_its_proposals(conn):
+    pk1, pk2 = _committed_resource(conn, "r1"), _committed_resource(conn, "r2")
+    replace_proposals(conn, pk1, [_theme()])
+    replace_proposals(conn, pk2, [_theme()])
+    conn.execute("DELETE FROM resource WHERE resource_pk = ?", (pk1,))
+    conn.commit()
+    assert read_proposals(conn, pk1) == []
+    assert read_proposals(conn, pk2) == [_theme()]
+
+
+def test_a_dataservice_proposal_can_be_stored(conn):
+    pk = _committed_resource(conn, resource_type="dataservice")
+    proposal = _keyword(entity_kind="dataservice")
+    replace_proposals(conn, pk, [proposal])
+    assert read_proposals(conn, pk) == [proposal]

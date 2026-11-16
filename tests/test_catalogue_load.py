@@ -633,10 +633,10 @@ def test_no_log_when_every_node_is_reached(conn, data_dir, caplog):
     _, load = _load_graph(conn, data_dir, [DATASET])
     with caplog.at_level(logging.DEBUG, logger="mqa_advisor.catalogue_db"):
         load()
-    # Only the always-logged proposal count (INFO): no warning, no node listed at DEBUG.
-    assert [
-        r.getMessage() for r in caplog.records if "proposal" not in r.getMessage()
-    ] == []
+    # The only record is the always-logged removal count, at INFO because nothing was removed.
+    (record,) = caplog.records
+    assert record.levelno == logging.INFO
+    assert "removed 0 proposal" in record.getMessage()
 
 
 def test_node_json_does_not_depend_on_key_or_type_order(conn, data_dir):
@@ -1031,11 +1031,12 @@ def _write_simple(directory, *resource_ids):
         )
 
 
-def _propose(conn, catalogue, resource_id):
+def _propose(conn, catalogue, resource_id, env="PROD"):
     """Store one proposal for the loaded resource."""
     pk = conn.execute(
-        "SELECT resource_pk FROM resource WHERE catalogue = ? AND resource_id = ?",
-        (catalogue, resource_id),
+        "SELECT resource_pk FROM resource WHERE environment = ? AND catalogue = ?"
+        " AND resource_id = ?",
+        (env, catalogue, resource_id),
     ).fetchone()[0]
     replace_proposals(
         conn,
@@ -1058,21 +1059,24 @@ def _propose(conn, catalogue, resource_id):
     )
 
 
-def _proposal_count(conn, catalogue=None):
+def _proposed_resources(conn, env=None):
+    """The (environment, catalogue, resource_id) of every resource that has proposals."""
     sql = (
-        "SELECT COUNT(*) FROM proposed_property_value p"
-        " JOIN resource r USING (resource_pk)"
+        "SELECT DISTINCT r.environment, r.catalogue, r.resource_id"
+        " FROM proposed_property_value p JOIN resource r USING (resource_pk)"
     )
-    if catalogue is None:
-        return conn.execute(sql).fetchone()[0]
-    return conn.execute(sql + " WHERE r.catalogue = ?", (catalogue,)).fetchone()[0]
+    params = ()
+    if env is not None:
+        sql += " WHERE r.environment = ?"
+        params = (env,)
+    return sorted(conn.execute(sql, params).fetchall())
 
 
 def _removal_messages(caplog):
     return [r for r in caplog.records if "proposal" in r.getMessage()]
 
 
-def test_full_reload_removes_the_catalogues_proposals_and_logs_the_count(
+def test_full_reload_removes_the_catalogues_proposals_and_warns_with_the_count(
     conn, data_dir, caplog
 ):
     _write_simple(data_dir / "PROD" / "x", "a", "b")
@@ -1084,22 +1088,30 @@ def test_full_reload_removes_the_catalogues_proposals_and_logs_the_count(
     with caplog.at_level(logging.INFO, logger="mqa_advisor.catalogue_db"):
         summary = load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
     assert summary.proposals_removed == 2
-    assert _proposal_count(conn, "x") == 0
-    assert _proposal_count(conn, "y") == 1
+    assert _proposed_resources(conn) == [("PROD", "y", "c")]
     (message,) = _removal_messages(caplog)
-    assert message.levelno == logging.INFO and "2" in message.getMessage()
+    # Real data was lost, so it is a warning, not an info.
+    assert message.levelno == logging.WARNING
+    assert "removed 2 proposal" in message.getMessage()
 
 
-def test_partial_reload_removes_only_the_reloaded_resources_proposals(conn, data_dir):
+def test_partial_reload_removes_only_the_reloaded_resources_proposals(
+    conn, data_dir, caplog
+):
     _write_simple(data_dir / "PROD" / "x", "a", "b")
     load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
     _propose(conn, "x", "a")
     _propose(conn, "x", "b")
-    summary = load_catalogue(
-        "PROD", "x", resource_ids=["a"], conn=conn, data_dir=data_dir
-    )
+    with caplog.at_level(logging.INFO, logger="mqa_advisor.catalogue_db"):
+        summary = load_catalogue(
+            "PROD", "x", resource_ids=["a"], conn=conn, data_dir=data_dir
+        )
     assert summary.proposals_removed == 1
-    assert _proposal_count(conn) == 1
+    assert _proposed_resources(conn) == [
+        ("PROD", "x", "b")
+    ]  # only b keeps its proposals
+    (message,) = _removal_messages(caplog)
+    assert "removed 1 proposal" in message.getMessage()
 
 
 def test_pruned_resource_loses_its_proposals(conn, data_dir):
@@ -1109,26 +1121,87 @@ def test_pruned_resource_loses_its_proposals(conn, data_dir):
     (data_dir / "PROD" / "x" / "dataset_b.jsonld").unlink()
     summary = load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
     assert (summary.pruned, summary.proposals_removed) == (1, 1)
-    assert _proposal_count(conn) == 0
+    assert _proposed_resources(conn) == []
 
 
-def test_load_without_proposals_reports_zero_and_logs_it(conn, data_dir, caplog):
+def test_replacing_one_resource_and_pruning_another_adds_their_proposals(
+    conn, data_dir, caplog
+):
+    _write_simple(data_dir / "PROD" / "x", "a", "b")
+    load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+    _propose(conn, "x", "a")
+    _propose(conn, "x", "b")
+    (
+        data_dir / "PROD" / "x" / "dataset_b.jsonld"
+    ).unlink()  # a is replaced, b is pruned
+    with caplog.at_level(logging.INFO, logger="mqa_advisor.catalogue_db"):
+        summary = load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+    assert (summary.pruned, summary.proposals_removed) == (1, 2)
+    (message,) = _removal_messages(caplog)
+    assert "removed 2 proposal" in message.getMessage()
+
+
+def test_same_catalogue_name_in_the_other_environment_is_not_touched(conn, data_dir):
+    for env in ("PPE", "PROD"):
+        _write_simple(data_dir / env / "x", "a")
+        load_catalogue(env, "x", conn=conn, data_dir=data_dir)
+        _propose(conn, "x", "a", env=env)
+    summary = load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+    assert summary.proposals_removed == 1  # PROD's only; PPE's proposal is not counted
+    assert _proposed_resources(conn) == [("PPE", "x", "a")]
+
+
+def test_load_without_proposals_reports_zero_and_logs_it_at_info(
+    conn, data_dir, caplog
+):
     _write_simple(data_dir / "PROD" / "x", "a")
     with caplog.at_level(logging.INFO, logger="mqa_advisor.catalogue_db"):
         summary = load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
     assert summary.proposals_removed == 0
     (message,) = _removal_messages(caplog)
-    assert message.levelno == logging.INFO and " 0 " in message.getMessage()
+    assert message.levelno == logging.INFO
+    assert "removed 0 proposal" in message.getMessage()
 
 
-def test_failed_load_keeps_the_proposals_and_logs_nothing(conn, data_dir, caplog):
-    directory = data_dir / "PROD" / "x"
-    _write_simple(directory, "a", "b")
+def test_failure_after_proposals_were_deleted_keeps_them_and_logs_nothing(
+    conn, data_dir, caplog, monkeypatch
+):
+    _write_simple(data_dir / "PROD" / "x", "a", "b")
     load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
     _propose(conn, "x", "a")
-    (directory / "dataset_b.jsonld").write_text("{ not json", encoding="utf-8")
+    _propose(conn, "x", "b")
+    real = catalogue_db._replace_resource
+    seen = {}
+
+    def fail_on_the_second_resource(*args, **kwargs):
+        if "after_first" in seen:
+            raise RuntimeError("disk full")
+        real(
+            *args, **kwargs
+        )  # whichever resource comes first is deleted and re-inserted
+        seen["after_first"] = len(_proposed_resources(conn))
+
+    monkeypatch.setattr(catalogue_db, "_replace_resource", fail_on_the_second_resource)
     with caplog.at_level(logging.INFO, logger="mqa_advisor.catalogue_db"):
-        with pytest.raises(ValueError):
+        with pytest.raises(RuntimeError, match="disk full"):
             load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
-    assert _proposal_count(conn) == 1
+    assert (
+        seen["after_first"] == 1
+    )  # the first resource's proposals really were deleted
+    assert _proposed_resources(conn) == [("PROD", "x", "a"), ("PROD", "x", "b")]
     assert _removal_messages(caplog) == []
+
+
+def test_a_negative_removed_count_fails_the_load_and_rolls_it_back(
+    conn, data_dir, monkeypatch
+):
+    _write_simple(data_dir / "PROD" / "x", "a")
+    load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+    _propose(conn, "x", "a")
+    counts = iter(
+        [0, 3]
+    )  # "after" larger than "before": cannot happen unless there is a bug
+    monkeypatch.setattr(catalogue_db, "_count_proposals", lambda *args: next(counts))
+    with pytest.raises(RuntimeError, match="negative"):
+        load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+    assert _proposed_resources(conn) == [("PROD", "x", "a")]
