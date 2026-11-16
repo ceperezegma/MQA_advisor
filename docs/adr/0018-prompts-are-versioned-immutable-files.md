@@ -16,8 +16,14 @@ service is overkill for one developer and a CLI pipeline.
   a change is a new `v{N+1}`. Two prompts exist in v1: `propose_themes` and `propose_keywords`.
 - **Format:** Markdown whose first block is TOML frontmatter, parsed with the stdlib `tomllib`
   (no PyYAML). Frontmatter fields: `version` (must equal the `N` in the file name), `model`,
-  `temperature`, `max_tokens`, and the output limits. The body is a `string.Template`. The model is
-  part of the prompt version: changing it is a new version.
+  `max_tokens`, and the output limits (no `temperature`: current models reject sampling parameters). The body is a `string.Template` in two parts
+  split by a line `---USER---`: the system part (role, rules, fixed lists such as the theme
+  vocabulary) and the user part (the resource's title and description and the counts). The two are
+  sent separately, as the model's system and user messages; untrusted catalogue text only ever goes
+  in the user part. The model is part of the prompt version: changing it is a new version.
+- **One-time exception:** `v1` of both prompts was rewritten in place to add the system part
+  (ticket #20) because no proposal had ever been produced or stored with it. From the first real
+  run on, `v1` is frozen like any other version.
 - **Active version:** a registry in code (`ACTIVE = {"propose_themes": 1, ...}`). Rollback is a
   one-line change that shows up in a PR.
 - **Output schema: one per prompt version, with the same version number.** Prompt `v{N}` of

@@ -42,6 +42,11 @@ the SQLite database in `fetched_catalogues_data/mqa.sqlite`. Test fixtures live 
   Only Datasets, Distributions and Data Services have rows; other graph nodes are folded into the
   `node` value of the property that reaches them (ADR-0015).
 - `properties.py` — the Property catalog (`MQA_methodology/MQA-properties-for-app.xlsx`): URI, Importance, Weight.
+- `prompts.py` + `prompts/` — versioned prompt files (frontmatter, a system part and a user part split by `---USER---`)
+  and `proposal_schemas.py`, their output schemas (ADR-0018).
+- `llm.py` — `LLMClient`: one forced-tool-call model call from a loaded prompt with schema validation, token usage,
+  estimated cost (committed price table) and the per-run log `logs/propose/` (`RunLog`); `AnthropicBackend` (needs
+  `ANTHROPIC_API_KEY` in `.env`) and `FakeBackend` for tests. No sampling parameter is ever sent (ADR-0019).
 - `pipeline.py` — the manifest -> fetch -> db entry point with the step selector. Unlike MQA_test's Test Run,
   any failure of a selected step is fatal.
 

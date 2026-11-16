@@ -33,3 +33,6 @@ manual_tests/
 *.sqlite
 *.sqlite3
 *.db
+
+# Per-run LLM interaction logs of the propose step (logs/propose/)
+logs/
