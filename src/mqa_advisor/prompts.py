@@ -10,11 +10,14 @@ no field of the file names a schema.
 
 import hashlib
 import logging
+import math
+import re
 import tomllib
 from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
 from string import Template
+from typing import TypedDict
 
 logger = logging.getLogger(__name__)
 
@@ -24,31 +27,42 @@ PROMPTS_DIR = Path(__file__).parent / "prompts"
 # never depends on this registry.
 ACTIVE: dict[str, int] = {"propose_themes": 1, "propose_keywords": 1}
 
+# The value callers pass as $language when the resource title has no language tag. The keywords prompt
+# tells the model what to do with this exact word, and a test pins that the prompt mentions it.
+UNKNOWN_LANGUAGE = "unknown"
+
 _DELIMITER = "+++"
-# Frontmatter keys and their allowed types. bool is excluded explicitly: it is an int in Python.
-_KEYS: dict[str, tuple[type, ...]] = {
-    "version": (int,),
-    "model": (str,),
-    "temperature": (int, float),
-    "max_tokens": (int,),
-    "max_items": (int,),
-}
+_NAME = re.compile(
+    r"[A-Za-z_][A-Za-z0-9_]*"
+)  # a plain ASCII identifier: cannot leave the prompts folder
 
 
 class PromptError(ValueError):
     """A prompt file or request is invalid."""
 
 
-@dataclass(frozen=True)
-class LoadedPrompt:
-    name: str
+class Frontmatter(TypedDict):
+    """The validated frontmatter of a prompt file."""
+
     version: int
     model: str
     temperature: float
     max_tokens: int
     max_items: int
+
+
+@dataclass(frozen=True)
+class LoadedPrompt:
+    """A prompt file read, validated and rendered: what a caller needs to build one model call."""
+
+    name: str
+    version: int
+    model: str
+    temperature: float
+    max_tokens: int
+    max_items: int  # the cap on proposed values; the callers enforce it in code, it is not in the schema
     text: str  # the body with every placeholder filled
-    sha256: str  # of the file content (line endings normalised)
+    sha256: str  # of the file content (line endings normalised), to detect an edit of an immutable version
 
 
 def active_version(name: str) -> int:
@@ -68,8 +82,17 @@ def load_prompt(
 ) -> LoadedPrompt:
     """Load ``{name}/v{version}.md``, check its frontmatter and render the body with ``values``.
 
-    ``prompts_dir`` exists so tests can point at small fixture folders.
+    Every value must be a string and must be used by the body, and every placeholder of the body must have
+    a value. ``prompts_dir`` exists so tests can point at small fixture folders.
     """
+    if not _NAME.fullmatch(name):
+        raise PromptError(
+            f"invalid prompt name {name!r}: it must be a plain identifier"
+        )
+    if isinstance(version, bool) or not isinstance(version, int) or version < 1:
+        raise PromptError(
+            f"invalid prompt version {version!r}: it must be an integer >= 1"
+        )
     path = prompts_dir / name / f"v{version}.md"
     if not path.is_file():
         raise PromptError(
@@ -78,23 +101,21 @@ def load_prompt(
 
     # CRLF -> LF so the hash is the same for a Windows and a Linux checkout of the same commit.
     content = path.read_bytes().replace(b"\r\n", b"\n")
-    meta, body = _split_frontmatter(content.decode("utf-8"), path)
+    try:
+        text = content.decode(
+            "utf-8-sig"
+        )  # -sig: a BOM written by an editor is accepted
+    except UnicodeDecodeError as error:
+        raise PromptError(
+            f"{path.name}: the file is not valid UTF-8 ({error})"
+        ) from error
+    meta, body = _split_frontmatter(text, path)
     if meta["version"] != version:
         raise PromptError(
             f"{path.name}: frontmatter version {meta['version']} differs from the file number {version}"
         )
 
-    try:
-        text = Template(body).substitute(values)
-    except KeyError as error:
-        raise PromptError(
-            f"{path.name}: no value for placeholder {error.args[0]!r}"
-        ) from error
-    except ValueError as error:
-        raise PromptError(
-            f"{path.name}: invalid placeholder in the body ({error})"
-        ) from error
-
+    rendered = _render(body, values, path)
     sha256 = hashlib.sha256(content).hexdigest()
     logger.debug("prompt loaded: name=%s version=%d sha256=%s", name, version, sha256)
     return LoadedPrompt(
@@ -104,12 +125,38 @@ def load_prompt(
         temperature=meta["temperature"],
         max_tokens=meta["max_tokens"],
         max_items=meta["max_items"],
-        text=text,
+        text=rendered,
         sha256=sha256,
     )
 
 
-def _split_frontmatter(content: str, path: Path) -> tuple[dict, str]:
+def _render(body: str, values: Mapping[str, str], path: Path) -> str:
+    """Fill the placeholders of ``body``; any mismatch with ``values`` is an error, never ignored."""
+    for key, value in values.items():
+        if not isinstance(value, str):
+            raise PromptError(
+                f"{path.name}: the value for {key!r} must be a string, got {type(value).__name__}"
+            )
+    template = Template(body)
+    if (
+        not template.is_valid()
+    ):  # a stray "$" or "$1"; "$$" is a literal dollar and is valid
+        raise PromptError(
+            f"{path.name}: the body has an invalid placeholder (a stray '$'; write '$$' for one)"
+        )
+    if unused := set(values) - set(template.get_identifiers()):
+        raise PromptError(
+            f"{path.name}: value(s) {sorted(unused)} are not placeholders of the body"
+        )
+    try:
+        return template.substitute(values)
+    except KeyError as error:
+        raise PromptError(
+            f"{path.name}: no value for placeholder {error.args[0]!r}"
+        ) from error
+
+
+def _split_frontmatter(content: str, path: Path) -> tuple[Frontmatter, str]:
     """Return the validated frontmatter and the body of a prompt file."""
     lines = content.split("\n")
     if lines[0] != _DELIMITER:
@@ -127,18 +174,53 @@ def _split_frontmatter(content: str, path: Path) -> tuple[dict, str]:
         raise PromptError(f"{path.name}: invalid TOML frontmatter ({error})") from error
 
     # The format is closed: an unexpected key (for example a schema name) is an error, not ignored.
-    if extra := set(meta) - set(_KEYS):
+    if extra := set(meta) - set(Frontmatter.__annotations__):
         raise PromptError(f"{path.name}: unexpected frontmatter key(s) {sorted(extra)}")
-    for key, types in _KEYS.items():
-        if key not in meta:
-            raise PromptError(f"{path.name}: frontmatter key {key!r} is missing")
-        value = meta[key]
-        if isinstance(value, bool) or not isinstance(value, types):
-            raise PromptError(
-                f"{path.name}: frontmatter key {key!r} has the wrong type ({value!r})"
-            )
-    for key in ("max_tokens", "max_items"):
-        if meta[key] < 1:
-            raise PromptError(f"{path.name}: {key} must be at least 1, got {meta[key]}")
+    version = _int(meta, "version", path)
+    max_tokens = _int(meta, "max_tokens", path)
+    max_items = _int(meta, "max_items", path)
+    model = _get(meta, "model", path)
+    if not isinstance(model, str):
+        raise PromptError(
+            f"{path.name}: frontmatter key 'model' has the wrong type ({model!r})"
+        )
+    temperature = _get(meta, "temperature", path)
+    if isinstance(temperature, bool) or not isinstance(temperature, int | float):
+        raise PromptError(
+            f"{path.name}: frontmatter key 'temperature' has the wrong type ({temperature!r})"
+        )
+    if not math.isfinite(temperature) or not 0 <= temperature <= 1:
+        raise PromptError(
+            f"{path.name}: temperature must be between 0 and 1, got {temperature}"
+        )
 
-    return meta, "\n".join(lines[end + 1 :])
+    frontmatter = Frontmatter(
+        version=version,
+        model=model,
+        temperature=float(temperature),
+        max_tokens=max_tokens,
+        max_items=max_items,
+    )
+    for key in ("version", "max_tokens", "max_items"):
+        if frontmatter[key] < 1:
+            raise PromptError(
+                f"{path.name}: {key} must be at least 1, got {frontmatter[key]}"
+            )
+    return frontmatter, "\n".join(lines[end + 1 :])
+
+
+def _get(meta: dict, key: str, path: Path):
+    if key not in meta:
+        raise PromptError(f"{path.name}: frontmatter key {key!r} is missing")
+    return meta[key]
+
+
+def _int(meta: dict, key: str, path: Path) -> int:
+    value = _get(meta, key, path)
+    if isinstance(value, bool) or not isinstance(
+        value, int
+    ):  # bool is an int in Python
+        raise PromptError(
+            f"{path.name}: frontmatter key {key!r} has the wrong type ({value!r})"
+        )
+    return value
