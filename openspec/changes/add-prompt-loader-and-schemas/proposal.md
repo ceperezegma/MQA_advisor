@@ -16,8 +16,11 @@ parallel with #17 and #18.
   content; the active-version registry; errors for unknown name/version, version mismatch, malformed frontmatter
   and missing placeholder values.
 - Add `proposal_schemas.py`: the output schemas, in code, keyed by `(prompt_name, version)`, with `minItems` 1
-  and `maxItems` passed per call; the keyword schema also carries the `language` field.
-- Make sure the wheel build ships the prompt files.
+  and no `maxItems` (the structured-output schema subset does not support it, so the cap `max_items` of the
+  frontmatter is enforced in code by #21/#22); the keyword schema also carries the required `language` field
+  (2 or 3 lowercase letters).
+- Make sure the wheel build ships the prompt files, with an `integration`-marked test that builds the wheel.
+- Update ADR-0018 and design document section 6 to say the cap is enforced in code, not in the schema.
 - No change to existing modules, tables, pipeline steps or dependencies (`tomllib`, `string` and `hashlib` are
   stdlib).
 

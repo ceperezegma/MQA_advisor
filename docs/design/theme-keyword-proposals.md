@@ -115,7 +115,7 @@ version = 1
 model = "claude-haiku-5-5"
 temperature = 0
 max_tokens = 1024
-max_items = 5          # the total cap; the call asks for between 1 and (max_items - existing)
+max_items = 5          # the total cap, enforced in code by the caller; the call asks for up to (max_items - existing)
 +++
 You assign themes from a fixed list ... $title ... $description ... $vocabulary ... $remaining
 ```
@@ -123,7 +123,9 @@ You assign themes from a fixed list ... $title ... $description ... $vocabulary 
 - Structured output through a forced tool call whose input schema is the output schema of the same
   prompt name and **the same version number**: `propose_themes/v1.md` always uses schema
   `("propose_themes", 1)`, never another version (ADR-0018). The frontmatter does not name a
-  schema, so a mismatch cannot be written. `minItems` is 1 and `maxItems` is passed per call.
+  schema, so a mismatch cannot be written. `minItems` is 1; there is no `maxItems`: structured outputs
+  do not support it (the docs allow `minItems` only as 0 or 1), so the cap `max_items` is enforced in
+  code after the call (extras dropped with a warning and a count), never by the schema.
   Schemas live in code, in a registry keyed by `(prompt_name, version)`.
 - A registry in code gives the active version of each prompt. Committed versions are immutable.
 - v1 uses `claude-haiku-5-5` at temperature 0. Whether `claude-sonnet-5-5` is worth the cost is
