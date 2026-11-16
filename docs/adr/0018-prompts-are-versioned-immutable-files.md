@@ -32,6 +32,9 @@ service is overkill for one developer and a CLI pipeline.
     a prompt file;
   - the frontmatter `version` equals the number in the file name;
   - the call for a prompt version is built with that version's schema (never the active one's).
+- **No item limit in the schema:** the schema has `minItems` 1 and no `maxItems`. Structured outputs do
+  not support `maxItems` (the docs allow `minItems` only as 0 or 1), so the cap, the frontmatter's
+  `max_items`, is enforced in code after the call, never silently (a warning with the count).
 - **Provenance:** every row of `proposed_property_value` stores `prompt_name`, `prompt_version`,
   `prompt_sha256` (hash of the file content, to detect an edit of a supposedly immutable version)
   and `model`; the interaction log repeats them.
