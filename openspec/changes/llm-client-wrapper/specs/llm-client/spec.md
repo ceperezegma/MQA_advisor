@@ -67,6 +67,10 @@ The cost SHALL be described as an estimate.
 - **WHEN** a prompt names a model that is not in the price table
 - **THEN** an error naming the model is raised and the backend is not called
 
+#### Scenario: Price table carries its date
+- **WHEN** the price table is read
+- **THEN** it has an `as_of` date in ISO format and an entry for `claude-haiku-5-5` and `claude-sonnet-5-5`
+
 ### Requirement: Fake backend for tests
 The system SHALL define a backend interface that the real SDK backend and a fake both implement. The fake SHALL
 return scripted responses (or raise scripted errors) and record each request, so unit tests never touch the
@@ -91,6 +95,15 @@ logged when the run ends. A dry run SHALL create no log file. `logs/` SHALL be g
 #### Scenario: Two runs, two files
 - **WHEN** two runs of the same catalogue start at different times
 - **THEN** two files with different names exist under `logs/propose/`
+
+#### Scenario: INFO line per call
+- **WHEN** a call completes
+- **THEN** one INFO record is logged that contains the resource and the estimated cost of that call
+
+#### Scenario: Failed call is logged
+- **WHEN** a call ends in `LLMCallError` or `LLMResponseError`
+- **THEN** the file has a block for it with the same fields (response and tokens as far as known) and the
+  error outcome, and the call's cost counts as 0 in the run total unless tokens were reported
 
 #### Scenario: Run total
 - **WHEN** a run with two calls ends
