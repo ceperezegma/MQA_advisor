@@ -14,7 +14,13 @@ from pathlib import Path
 import pytest
 
 from mqa_advisor import catalogue_db
-from mqa_advisor.catalogue_db import LoadSummary, connect, load_catalogue
+from mqa_advisor.catalogue_db import (
+    LoadSummary,
+    ProposedValue,
+    connect,
+    load_catalogue,
+    replace_proposals,
+)
 
 FIXTURES = Path(__file__).parent / "fixtures" / "ingested"
 RDF_TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
@@ -1008,3 +1014,117 @@ def test_own_connection_is_closed_and_passed_connection_stays_open(
     load_catalogue("PROD", "x", conn=check, data_dir=data_dir)
     check.execute("SELECT 1")  # still open
     check.close()
+
+
+# --- proposals are removed with the resources they belong to -----------------------------------
+
+
+def _write_simple(directory, *resource_ids):
+    for rid in resource_ids:
+        _write_dataset(
+            directory,
+            rid,
+            [{"@id": f"http://example.org/{rid}", "@type": "dcat:Dataset"}],
+        )
+
+
+def _propose(conn, catalogue, resource_id):
+    """Store one proposal for the loaded resource."""
+    pk = conn.execute(
+        "SELECT resource_pk FROM resource WHERE catalogue = ? AND resource_id = ?",
+        (catalogue, resource_id),
+    ).fetchone()[0]
+    replace_proposals(
+        conn,
+        pk,
+        [
+            ProposedValue(
+                entity_id=f"http://example.org/{resource_id}",
+                entity_kind="dataset",
+                property_uri=DCAT + "keyword",
+                value="river",
+                value_kind="literal",
+                lang="eng",
+                prompt_name="propose_keywords",
+                prompt_version=1,
+                prompt_sha256="abc",
+                model="claude-haiku-5-5",
+                proposed_at=datetime(2026, 11, 15, tzinfo=UTC),
+            )
+        ],
+    )
+
+
+def _proposal_count(conn, catalogue=None):
+    sql = (
+        "SELECT COUNT(*) FROM proposed_property_value p"
+        " JOIN resource r USING (resource_pk)"
+    )
+    if catalogue is None:
+        return conn.execute(sql).fetchone()[0]
+    return conn.execute(sql + " WHERE r.catalogue = ?", (catalogue,)).fetchone()[0]
+
+
+def _removal_messages(caplog):
+    return [r for r in caplog.records if "proposal" in r.getMessage()]
+
+
+def test_full_reload_removes_the_catalogues_proposals_and_logs_the_count(
+    conn, data_dir, caplog
+):
+    _write_simple(data_dir / "PROD" / "x", "a", "b")
+    _write_simple(data_dir / "PROD" / "y", "c")
+    for cat in ("x", "y"):
+        load_catalogue("PROD", cat, conn=conn, data_dir=data_dir)
+    for cat, rid in (("x", "a"), ("x", "b"), ("y", "c")):
+        _propose(conn, cat, rid)
+    with caplog.at_level(logging.INFO, logger="mqa_advisor.catalogue_db"):
+        summary = load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+    assert summary.proposals_removed == 2
+    assert _proposal_count(conn, "x") == 0
+    assert _proposal_count(conn, "y") == 1
+    (message,) = _removal_messages(caplog)
+    assert message.levelno == logging.INFO and "2" in message.getMessage()
+
+
+def test_partial_reload_removes_only_the_reloaded_resources_proposals(conn, data_dir):
+    _write_simple(data_dir / "PROD" / "x", "a", "b")
+    load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+    _propose(conn, "x", "a")
+    _propose(conn, "x", "b")
+    summary = load_catalogue(
+        "PROD", "x", resource_ids=["a"], conn=conn, data_dir=data_dir
+    )
+    assert summary.proposals_removed == 1
+    assert _proposal_count(conn) == 1
+
+
+def test_pruned_resource_loses_its_proposals(conn, data_dir):
+    _write_simple(data_dir / "PROD" / "x", "a", "b")
+    load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+    _propose(conn, "x", "b")
+    (data_dir / "PROD" / "x" / "dataset_b.jsonld").unlink()
+    summary = load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+    assert (summary.pruned, summary.proposals_removed) == (1, 1)
+    assert _proposal_count(conn) == 0
+
+
+def test_load_without_proposals_reports_zero_and_logs_nothing(conn, data_dir, caplog):
+    _write_simple(data_dir / "PROD" / "x", "a")
+    with caplog.at_level(logging.INFO, logger="mqa_advisor.catalogue_db"):
+        summary = load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+    assert summary.proposals_removed == 0
+    assert _removal_messages(caplog) == []
+
+
+def test_failed_load_keeps_the_proposals_and_logs_nothing(conn, data_dir, caplog):
+    directory = data_dir / "PROD" / "x"
+    _write_simple(directory, "a", "b")
+    load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+    _propose(conn, "x", "a")
+    (directory / "dataset_b.jsonld").write_text("{ not json", encoding="utf-8")
+    with caplog.at_level(logging.INFO, logger="mqa_advisor.catalogue_db"):
+        with pytest.raises(ValueError):
+            load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
+    assert _proposal_count(conn) == 1
+    assert _removal_messages(caplog) == []

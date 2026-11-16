@@ -12,6 +12,12 @@ reaches it, as one JSON-LD expanded-form object (`value_kind = 'node'`), so read
 never needs a node id. Deleting a resource deletes its property rows (`ON DELETE CASCADE`), so
 any table added later must reference `resource` the same way.
 
+`proposed_property_value` holds the themes and keywords an LLM proposes for a resource (ADR-0017).
+It references `resource` with `ON DELETE CASCADE`, so a reload deletes the proposals of every
+resource it replaces, and a resource whose file is gone loses its proposals: the database always
+mirrors the folder. `replace_proposals()` stores the proposals of one resource (replacing its
+previous ones) and `read_proposals()` returns them.
+
 `connect()` returns an open connection: the caller commits its writes and closes it. It also
 creates three read-only views for the common questions: `catalogue_resources` (the Datasets
 and standalone Data Services), `dataset_distributions` (`resource_pk, distribution_id`) and
@@ -40,7 +46,7 @@ import json
 import logging
 import sqlite3
 from collections.abc import Iterable
-from dataclasses import dataclass
+from dataclasses import astuple, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -98,6 +104,26 @@ CREATE TABLE IF NOT EXISTS property_value (
 CREATE INDEX IF NOT EXISTS property_value_entity   ON property_value (resource_pk, entity_id);
 CREATE INDEX IF NOT EXISTS property_value_property ON property_value (resource_pk, property_uri);
 CREATE INDEX IF NOT EXISTS property_value_kind     ON property_value (resource_pk, entity_kind);
+
+-- Themes and keywords proposed by the LLM. Themes are `uri` rows (authority URI), keywords are
+-- `literal` rows with a `lang`. `entity_kind` is keyed like `property_value` so embedded Data
+-- Services can be added later without a schema change.
+CREATE TABLE IF NOT EXISTS proposed_property_value (
+    resource_pk     INTEGER NOT NULL REFERENCES resource(resource_pk) ON DELETE CASCADE,
+    entity_id       TEXT NOT NULL,
+    entity_kind     TEXT NOT NULL CHECK (entity_kind IN ('dataset', 'dataservice')),
+    property_uri    TEXT NOT NULL,
+    value           TEXT NOT NULL,
+    value_kind      TEXT NOT NULL CHECK (value_kind IN ('literal', 'uri')),
+    lang            TEXT,
+    prompt_name     TEXT NOT NULL,
+    prompt_version  INTEGER NOT NULL,
+    prompt_sha256   TEXT NOT NULL,
+    model           TEXT NOT NULL,
+    proposed_at     TIMESTAMP NOT NULL
+);
+CREATE INDEX IF NOT EXISTS proposed_property_value_resource
+    ON proposed_property_value (resource_pk, property_uri);
 
 -- Plain views (saved queries, no stored data): they always reflect the current rows.
 -- All Datasets and standalone Data Services; embedded Data Services are not resources.
@@ -177,12 +203,76 @@ class LoadSummary:
 
     `orphan_nodes` counts the auxiliary nodes that no core entity reaches, so they are not
     stored; the load logs one warning with this count, and each node at DEBUG level.
+    `proposals_removed` counts the proposals deleted with the resources the load replaced or pruned.
     """
 
     resources: int
     pruned: int
     rows: int
     orphan_nodes: int
+    proposals_removed: int = 0
+
+
+@dataclass(frozen=True)
+class ProposedValue:
+    """One proposed theme or keyword, as stored in `proposed_property_value`.
+
+    A theme is a `uri` value (the authority URI) without `lang`; a keyword is a `literal`
+    value with a `lang`. `proposed_at` must be timezone-aware (UTC).
+    """
+
+    entity_id: str
+    entity_kind: str
+    property_uri: str
+    value: str
+    value_kind: str
+    lang: str | None
+    prompt_name: str
+    prompt_version: int
+    prompt_sha256: str
+    model: str
+    proposed_at: datetime
+
+
+_PROPOSAL_COLUMNS = (
+    "entity_id, entity_kind, property_uri, value, value_kind, lang, prompt_name,"
+    " prompt_version, prompt_sha256, model, proposed_at"
+)
+
+
+def replace_proposals(
+    conn: sqlite3.Connection, resource_pk: int, proposals: list[ProposedValue]
+) -> None:
+    """Replace the proposals of one resource with `proposals`, in one transaction.
+
+    Deletes the resource's previous proposals and inserts the new ones (an empty list just
+    clears them). Commits on success; on any error rolls back, so the previous proposals stay.
+    Like `load_catalogue`, `conn` must have no pending writes. The values are stored as given:
+    only the table's CHECK constraints validate them.
+    """
+    try:
+        conn.execute(
+            "DELETE FROM proposed_property_value WHERE resource_pk = ?", (resource_pk,)
+        )
+        conn.executemany(
+            f"INSERT INTO proposed_property_value (resource_pk, {_PROPOSAL_COLUMNS})"
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            [(resource_pk, *astuple(p)) for p in proposals],
+        )
+        conn.commit()
+    except BaseException:
+        conn.rollback()
+        raise
+
+
+def read_proposals(conn: sqlite3.Connection, resource_pk: int) -> list[ProposedValue]:
+    """Return the proposals of one resource, ordered by property and then insertion order."""
+    rows = conn.execute(
+        f"SELECT {_PROPOSAL_COLUMNS} FROM proposed_property_value WHERE resource_pk = ?"
+        " ORDER BY property_uri, rowid",
+        (resource_pk,),
+    )
+    return [ProposedValue(*row) for row in rows]
 
 
 # One `property_value` row without its `resource_pk`:
@@ -670,6 +760,16 @@ def _prune(
     return len(gone)
 
 
+def _count_proposals(conn: sqlite3.Connection, env: str, catalogue: str) -> int:
+    """How many proposals the catalogue's resources have."""
+    return conn.execute(
+        "SELECT COUNT(*) FROM proposed_property_value AS p"
+        " JOIN resource AS r USING (resource_pk)"
+        " WHERE r.environment = ? AND r.catalogue = ?",
+        (env, catalogue),
+    ).fetchone()[0]
+
+
 def load_catalogue(
     env: str,
     catalogue: str,
@@ -711,6 +811,7 @@ def load_catalogue(
                 raise FileNotFoundError(
                     f"no Dataset or Data Service file for resource id {rid!r} in {directory}"
                 )
+        proposals_before = _count_proposals(conn, env, catalogue)
         loaded_at = datetime.now(UTC)
         # One file at a time, so memory does not grow with the catalogue; a malformed file
         # raises here and the rollback below undoes the files already written.
@@ -741,7 +842,17 @@ def load_catalogue(
         if ids is None:
             pruned = _prune(conn, env, catalogue, "dataset", set(dataset_files))
             pruned += _prune(conn, env, catalogue, "dataservice", set(service_files))
+        # The cascade removed the proposals of every replaced or pruned resource: the difference
+        # is how many (the load never adds proposals).
+        proposals_removed = proposals_before - _count_proposals(conn, env, catalogue)
         conn.commit()
+        if proposals_removed:
+            logger.info(
+                "%s/%s: removed %d proposal(s) with the reloaded resources",
+                env,
+                catalogue,
+                proposals_removed,
+            )
         if orphan_nodes:
             logger.warning(
                 "%s/%s: %d node(s) in %d resource(s) are not reached from any Dataset,"
@@ -764,4 +875,5 @@ def load_catalogue(
         pruned=pruned,
         rows=rows_count,
         orphan_nodes=orphan_nodes,
+        proposals_removed=proposals_removed,
     )

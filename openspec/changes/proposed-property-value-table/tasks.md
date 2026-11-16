@@ -1,17 +1,17 @@
 ## 1. Schema
 
-- [ ] 1.1 Append `proposed_property_value` and index `proposed_property_value_resource` to `SCHEMA` exactly as in design section 5, and verify with tests: fresh database, database with the other tables and rows, repeated `connect()`, and CHECK/foreign-key rejections (bad `entity_kind`, bad `value_kind`, orphan `resource_pk`)
+- [x] 1.1 Append `proposed_property_value` and index `proposed_property_value_resource` to `SCHEMA` exactly as in design section 5, and verify with tests: fresh database, database with the other tables and rows, repeated `connect()`, and CHECK/foreign-key rejections (bad `entity_kind`, bad `value_kind`, orphan `resource_pk`)
 
 ## 2. Storage functions
 
-- [ ] 2.1 Add the `ProposedValue` dataclass and `replace_proposals(conn, resource_pk, proposals)` (delete + insert + commit, rollback on error), and verify with tests: first write, same input twice, replacement, empty list, other resources untouched, failure mid-list keeps the previous rows, naive timestamp raises
-- [ ] 2.2 Add `read_proposals(conn, resource_pk)` and verify with tests: round trip including `lang` and the timezone-aware time, stable order, empty list
+- [x] 2.1 Add the `ProposedValue` dataclass and `replace_proposals(conn, resource_pk, proposals)` (delete + insert + commit, rollback on error), and verify with tests: first write, same input twice, replacement, empty list, other resources untouched, failure mid-list keeps the previous rows, naive timestamp raises
+- [x] 2.2 Add `read_proposals(conn, resource_pk)` and verify with tests: round trip including `lang` and the timezone-aware time, stable order, empty list
 
 ## 3. Reload behavior
 
-- [ ] 3.1 Count the catalogue's proposals before and just before commit in `load_catalogue`, add `LoadSummary.proposals_removed` (default 0) and an INFO message after commit when above zero; verify with tests (use `caplog`): full reload removes them and other catalogues keep theirs, partial reload keeps other resources' proposals, pruned resource loses its proposals, zero case logs nothing, failed load keeps proposals and logs nothing
+- [x] 3.1 Count the catalogue's proposals before and just before commit in `load_catalogue`, add `LoadSummary.proposals_removed` (default 0) and an INFO message after commit when above zero; verify with tests (use `caplog`): full reload removes them and other catalogues keep theirs, partial reload keeps other resources' proposals, pruned resource loses its proposals, zero case logs nothing, failed load keeps proposals and logs nothing
 
 ## 4. Documentation and checks
 
-- [ ] 4.1 Update the `catalogue_db.py` module docstring (new table, cascade, reload deletes proposals) and verify by reading it against the "Module documentation" requirement
-- [ ] 4.2 Run `uv run ruff check src/ tests/`, `uv run ruff format src/ tests/` and `uv run pytest`; verify all pass and `openspec validate proposed-property-value-table --strict` still passes
+- [x] 4.1 Update the `catalogue_db.py` module docstring (new table, cascade, reload deletes proposals) and verify by reading it against the "Module documentation" requirement
+- [x] 4.2 Run `uv run ruff check src/ tests/`, `uv run ruff format src/ tests/` and `uv run pytest`; verify all pass and `openspec validate proposed-property-value-table --strict` still passes
