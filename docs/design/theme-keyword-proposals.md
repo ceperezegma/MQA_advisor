@@ -107,7 +107,10 @@ src/mqa_advisor/prompts/
     propose_keywords/v1.md
 ```
 
-Each file is TOML frontmatter between `+++` lines, then the body (a `string.Template`):
+Each file is TOML frontmatter between `+++` lines, then the body (a `string.Template`) in two parts
+split by a line `---USER---`: the system part (role, rules, the theme vocabulary) and the user part
+(title, description, existing values, count). They are sent as the model's system and user
+messages; catalogue text goes only in the user part. Example (abridged):
 
 ```
 +++
@@ -117,7 +120,9 @@ temperature = 0
 max_tokens = 1024
 max_items = 5          # the total cap, enforced in code by the caller; the call asks for up to (max_items - existing)
 +++
-You assign themes from a fixed list ... $title ... $description ... $vocabulary ... $remaining
+You assign themes from a fixed list ... $vocabulary ...
+---USER---
+<title>$title</title> <description>$description</description> ... up to $remaining themes
 ```
 
 - Structured output through a forced tool call whose input schema is the output schema of the same

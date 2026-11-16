@@ -21,7 +21,7 @@ class Backend(Protocol):
     def create(self, request: BackendRequest) -> BackendResponse: ...
 ```
 
-- `BackendRequest`: model, temperature, max_tokens, system text, user text, tool name, tool input schema.
+- `BackendRequest`: model, max_tokens, system text, user text, tool name, tool input schema.
 - `BackendResponse`: the tool input as a dict, the raw response text (JSON), input/output/cached tokens, attempt.
 - `AnthropicBackend` implements it with the `anthropic` SDK; `FakeBackend` (in `llm.py`, used by tests of #20-#23)
   replays a script and records requests.
@@ -41,16 +41,27 @@ Any error raises `LLMResponseError(message, raw_response)`; the message lists th
 The schemas are also checked once with `check_schema` in a test.
 
 **Retries and attempt number.** SDK `max_retries=3`, `timeout=60`. The SDK does not report how many requests it
-made, so the backend passes an `httpx.Client` with request/response event hooks: the request hook counts
+made, so the backend passes an `httpx2.Client` (the SDK's HTTP library; `httpx` is not installed) with request/response event hooks: the request hook counts
 requests (attempt number), and the response hook logs a WARNING with the attempt number for each retryable
 status (408, 409, 429, >=500). Connection-level errors that never get a response are retried by the SDK without
 our WARNING; the attempt number is still correct because it counts requests. After the SDK gives up the SDK
 exception is re-raised as `LLMCallError` (chained).
 
+**No sampling parameters.** `temperature`, `top_p` and `top_k` are never sent: current models reject them (Haiku 5.5
+accepts only the default; API version 2026-10-21 rejects any value). So the prompt frontmatter has no `temperature`
+key (removed from the `prompt-versioning` spec and from both v1 files; allowed because v1 is not yet frozen). The
+model's behaviour is steered by the prompt and the output schema only.
+
+**Forced tool use per model.** Haiku 5.5 accepts a forced `tool_choice`, and a forced call skips thinking, which
+keeps cost and `max_tokens` use low. Sonnet 5.5 rejects a forced `tool_choice` (400): a future prompt version for
+that model would need `tool_choice: auto` with `strict: true` and an instruction naming the tool. Not built now.
+
 **Price table.** A module-level dict `PRICES: dict[str, ModelPrice]` (input, output, cached-input USD per million
 tokens) and `PRICES_AS_OF = "YYYY-MM-DD"`, for `claude-haiku-5-5` and `claude-sonnet-5-5` (the models of design
 section 6). Prices are filled from Anthropic's published pricing at implementation time and the date recorded;
-they are an estimate. Cost = uncached x input + cached x cached-input + output x output, per million. Uncached
+they are an estimate. The table holds the rate for prompts of up to 100,000 tokens (Haiku 5.5 charges more above that);
+a call whose reported input tokens exceed 100,000 raises, because the table would give a wrong cost. Our prompts
+(a title, a description, the vocabulary) are far below it. Cost = uncached x input + cached x cached-input + output x output, per million. Uncached
 input = `input_tokens` as the API reports it (the API's `input_tokens` already excludes cache reads), so
 `cache_read_input_tokens` is the cached count. Cache-creation tokens are billed at input price in this estimate
 (we do not use prompt caching).
@@ -148,7 +159,7 @@ Return up to $remaining additional keywords (at least 1).
 
 ## Risks / Trade-offs
 
-- The httpx-hook attempt counting depends on the SDK accepting a custom `http_client`; it does. If a future SDK
+- The httpx2-hook attempt counting depends on the SDK accepting a custom `http_client`; it does. If a future SDK
   stops doing so the retry-logging test fails loudly.
 - Prices go stale (ADR-0019); `as_of` makes that visible in the table and the log.
 - Prices and exact model ids of the table must be checked against the published pricing when implementing; if

@@ -3,7 +3,7 @@
 ### Requirement: Structured model call from a loaded prompt
 The system SHALL provide an `LLMClient` that makes one model call from a `LoadedPrompt` and returns the output
 parsed from a forced tool call. The tool's input schema SHALL be `output_schema(prompt.name, prompt.version)`,
-the call SHALL use the prompt's `model`, `temperature` and `max_tokens`, the prompt's rendered system part SHALL
+the call SHALL use the prompt's `model` and `max_tokens` and SHALL NOT send `temperature`, `top_p` or `top_k` (current models reject them), the prompt's rendered system part SHALL
 be sent as the system message and its rendered user part as the single user message. The result SHALL contain the parsed output, input tokens,
 output tokens, cached input tokens, estimated cost in USD, latency in seconds and the attempt number (1 when the
 first request succeeded).
@@ -11,6 +11,10 @@ first request succeeded).
 #### Scenario: Successful call
 - **WHEN** the fake backend answers a `propose_themes` v1 call with `{"themes": ["ENVI"]}`
 - **THEN** the result's output is `{"themes": ["ENVI"]}` and it carries the token counts, cost, latency and attempt
+
+#### Scenario: No sampling parameters
+- **WHEN** a call is made
+- **THEN** the backend request has no `temperature`, `top_p` or `top_k`
 
 #### Scenario: System and user parts are sent separately
 - **WHEN** a prompt with a system part and a user part is called
@@ -56,7 +60,7 @@ log message or in the log file. `.env.example` SHALL contain an `ANTHROPIC_API_K
 The system SHALL keep a committed price table: USD per million tokens for input, output and cached input, per
 model, with an `as_of` date. The cost of a call SHALL be `(uncached input tokens x input price + cached tokens x
 cached price + output tokens x output price) / 1,000,000`, where uncached input tokens are the input tokens not
-served from the cache. A model that is not in the table SHALL raise an error naming the model, before any call.
+served from the cache. The table holds the rate for prompts of up to 100,000 tokens. A model that is not in the table SHALL raise an error naming the model, before any call.
 The cost SHALL be described as an estimate.
 
 #### Scenario: Cost arithmetic
@@ -66,6 +70,11 @@ The cost SHALL be described as an estimate.
 #### Scenario: Unknown model
 - **WHEN** a prompt names a model that is not in the price table
 - **THEN** an error naming the model is raised and the backend is not called
+
+#### Scenario: Prompt longer than the price table covers
+- **WHEN** the backend reports more than 100,000 input tokens (the prompt length up to which the table prices apply)
+- **THEN** the client raises an error saying the price table does not cover this call, instead of reporting a
+  wrong cost
 
 #### Scenario: Price table carries its date
 - **WHEN** the price table is read

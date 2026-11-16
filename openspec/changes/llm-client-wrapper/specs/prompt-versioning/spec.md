@@ -6,16 +6,21 @@ is accepted). The file SHALL start with a TOML frontmatter block between two lin
 followed by the body, a `string.Template`. The body SHALL have two parts separated by exactly one line containing
 only `---USER---`: the part before it is the **system part** (the role, the rules and any fixed list) and the part
 after it is the **user part** (the resource data and the counts); both parts SHALL be non-empty. The frontmatter
-SHALL contain exactly the keys `version` (integer >= 1), `model` (string), `temperature` (number, finite,
-0 <= t <= 1), `max_tokens` (integer >= 1) and `max_items` (integer >= 1), and no other key. `max_items` is the cap
-on the number of proposed values that the callers enforce in code after the call; it is not part of the output
-schema. Two prompts SHALL exist in version 1: `propose_themes` and `propose_keywords`, both with
-`model = "claude-haiku-5-5"` and `temperature = 0`.
+SHALL contain exactly the keys `version` (integer >= 1), `model` (string), `max_tokens` (integer >= 1) and
+`max_items` (integer >= 1), and no other key. There is deliberately no `temperature` key: current models reject
+sampling parameters (any `temperature`, `top_p` or `top_k` returns a 400), so a prompt cannot set one. `max_items`
+is the cap on the number of proposed values that the callers enforce in code after the call; it is not part of
+the output schema. Two prompts SHALL exist in version 1: `propose_themes` and `propose_keywords`, both with
+`model = "claude-haiku-5-5"`.
 
 #### Scenario: Committed prompt files are valid
 - **WHEN** `propose_themes` v1 and `propose_keywords` v1 are loaded
-- **THEN** each yields its model `claude-haiku-5-5`, temperature `0.0` (a float), a positive `max_tokens` and a
-  positive `max_items`, and a non-empty system part and user part
+- **THEN** each yields its model `claude-haiku-5-5`, a positive `max_tokens` and a positive `max_items`, and a
+  non-empty system part and user part
+
+#### Scenario: Temperature is not allowed
+- **WHEN** a prompt file's frontmatter contains `temperature`
+- **THEN** loading it raises an error naming the unexpected key
 
 #### Scenario: Frontmatter version must equal the file number
 - **WHEN** a file `v2.md` has `version = 1` in its frontmatter
@@ -31,12 +36,12 @@ schema. Two prompts SHALL exist in version 1: `propose_themes` and `propose_keyw
 - **THEN** loading it raises an error naming the file and the problem, and never returns a partial prompt
 
 #### Scenario: Out-of-range values
-- **WHEN** `max_tokens` or `max_items` is 0, `version` is below 1, or `temperature` is below 0, above 1 or NaN
+- **WHEN** `max_tokens` or `max_items` is 0, `version` is below 1, or `max_tokens` or `max_items` is not an integer
 - **THEN** loading raises an error naming the file and the key
 
 #### Scenario: Boundary values are accepted
-- **WHEN** `max_tokens` and `max_items` are 1 and `temperature` is 0, 0.5 or 1
-- **THEN** the file loads, and an integer temperature is returned as a float
+- **WHEN** `max_tokens` and `max_items` are 1
+- **THEN** the file loads
 
 #### Scenario: Encoding
 - **WHEN** a prompt file is not valid UTF-8
