@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import logging
 import xml.etree.ElementTree as ET
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -38,6 +38,8 @@ class VocabularyError(Exception):
 
 @dataclass(frozen=True)
 class ThemeEntry:
+    """One data theme. `uri` is the authority URI; `code` is the last segment of the URI."""
+
     uri: str
     code: str
     label: str
@@ -46,22 +48,35 @@ class ThemeEntry:
 
 @dataclass(frozen=True)
 class Vocabulary:
+    """The non-deprecated data themes of one vocabulary file and the file's version.
+
+    `uris_by_code` maps each code to its authority URI (built once at load, used by
+    `code_to_uri`).
+    """
+
     version: str
     entries: tuple[ThemeEntry, ...]
+    uris_by_code: dict[str, str] = field(repr=False, compare=False)
 
 
 def _english_text(concept: ET.Element, tag: str) -> str | None:
-    """Return the stripped English text of the first `tag` child, or None if absent/empty."""
+    """Return the stripped text of the first English `tag` child that has text, else None."""
     for child in concept.findall(tag):
         if child.get(_XML_LANG) == "en":
-            return (child.text or "").strip() or None
+            text = (child.text or "").strip()
+            if text:
+                return text
     return None
 
 
 def _parse_concept(concept: ET.Element, path: Path) -> ThemeEntry:
-    uri = concept.get(f"{_RDF}about", "")
+    uri = concept.get(f"{_RDF}about", "").strip()
     code = uri.rsplit("/", 1)[-1]
     label = _english_text(concept, f"{_SKOS}prefLabel")
+    if not code:
+        raise VocabularyError(
+            f"Concept {label or '(no English label)'!r} has no usable rdf:about URI in {path}"
+        )
     if label is None:
         raise VocabularyError(f"Concept {code!r} has no English label in {path}")
     return ThemeEntry(
@@ -72,13 +87,26 @@ def _parse_concept(concept: ET.Element, path: Path) -> ThemeEntry:
     )
 
 
+def _is_deprecated(concept: ET.Element, path: Path) -> bool:
+    """`at:deprecated` must be "true", "false" or absent; anything else is an error."""
+    value = concept.get(f"{_AT}deprecated")
+    if value is None or value == "false":
+        return False
+    if value == "true":
+        return True
+    uri = concept.get(f"{_RDF}about", "")
+    raise VocabularyError(
+        f"Concept {uri!r} has at:deprecated={value!r} (expected true or false) in {path}"
+    )
+
+
 def load_vocabulary(path: Path = DEFAULT_VOCABULARY_PATH) -> Vocabulary:
     """Read the non-deprecated data themes and the file version from `path`."""
     try:
         root = ET.parse(path).getroot()
-    except FileNotFoundError as exc:
-        raise VocabularyError(f"Vocabulary file not found: {path}") from exc
-    except ET.ParseError as exc:
+    except OSError as exc:  # missing file, a directory, permissions, ...
+        raise VocabularyError(f"Cannot read vocabulary file {path}: {exc}") from exc
+    except ET.ParseError as exc:  # includes an empty file
         raise VocabularyError(
             f"Vocabulary file is not well-formed XML: {path}"
         ) from exc
@@ -87,17 +115,33 @@ def load_vocabulary(path: Path = DEFAULT_VOCABULARY_PATH) -> Vocabulary:
     if not version:
         raise VocabularyError(f"No owl:versionInfo in {path}")
 
-    # A concept is skipped only when explicitly deprecated; a missing attribute keeps it.
-    entries = tuple(
-        _parse_concept(concept, path)
-        for concept in root.iter(f"{_SKOS}Concept")
-        if concept.get(f"{_AT}deprecated") != "true"
-    )
+    entries = []
+    uris_by_code: dict[str, str] = {}
+    deprecated_skipped = 0
+    for concept in root.iter(f"{_SKOS}Concept"):
+        if _is_deprecated(concept, path):
+            deprecated_skipped += 1
+            continue
+        entry = _parse_concept(concept, path)
+        # The code is the last segment of the URI, so a duplicate URI is also a duplicate code.
+        if entry.code in uris_by_code:
+            raise VocabularyError(
+                f"Duplicate data-theme code {entry.code!r} (URI {entry.uri}) in {path}"
+            )
+        uris_by_code[entry.code] = entry.uri
+        entries.append(entry)
     if not entries:
         raise VocabularyError(f"No data-theme concepts found in {path}")
 
-    logger.info("Loaded %d data-theme concepts, version %s", len(entries), version)
-    return Vocabulary(version=version, entries=entries)
+    logger.info(
+        "Loaded %d data-theme concepts (%d deprecated skipped), version %s",
+        len(entries),
+        deprecated_skipped,
+        version,
+    )
+    return Vocabulary(
+        version=version, entries=tuple(entries), uris_by_code=uris_by_code
+    )
 
 
 def format_entries(vocabulary: Vocabulary) -> list[str]:
@@ -112,7 +156,4 @@ def format_entries(vocabulary: Vocabulary) -> list[str]:
 
 def code_to_uri(vocabulary: Vocabulary, code: str) -> str | None:
     """Return the authority URI for an exact code, or None. Never guesses or normalizes."""
-    for entry in vocabulary.entries:
-        if entry.code == code:
-            return entry.uri
-    return None
+    return vocabulary.uris_by_code.get(code)

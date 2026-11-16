@@ -1,6 +1,7 @@
 """Tests for the data-theme vocabulary reader (vocabulary.py)."""
 
 import logging
+import re
 
 import pytest
 
@@ -195,8 +196,159 @@ def test_load_logs_one_info_line_with_count_and_version(caplog):
     records = [r for r in caplog.records if r.name == "mqa_advisor.vocabulary"]
     assert len(records) == 1
     assert records[0].levelno == logging.INFO
-    assert "14" in records[0].getMessage()
-    assert "20241211-0" in records[0].getMessage()
+    message = records[0].getMessage()
+    assert "14 data-theme concepts" in message
+    assert "0 deprecated skipped" in message
+    assert "20241211-0" in message
+
+
+def test_load_log_counts_skipped_deprecated_concepts(tmp_path, caplog):
+    path = _write_rdf(
+        tmp_path,
+        [
+            _concept("AAA"),
+            _concept("OLD1", deprecated="true"),
+            _concept("OLD2", deprecated="true"),
+        ],
+    )
+    with caplog.at_level(logging.INFO, logger="mqa_advisor.vocabulary"):
+        load_vocabulary(path)
+    records = [r for r in caplog.records if r.name == "mqa_advisor.vocabulary"]
+    assert len(records) == 1
+    assert "1 data-theme concepts" in records[0].getMessage()
+    assert "2 deprecated skipped" in records[0].getMessage()
+
+
+# --- review fixes: definitions in other languages, blanks, padding ----------
+
+
+def _raw_concept(about, inner, *, deprecated=None):
+    about_attr = f' rdf:about="{about}"' if about is not None else ""
+    dep_attr = f' at:deprecated="{deprecated}"' if deprecated is not None else ""
+    return f"<skos:Concept{about_attr}{dep_attr}>{inner}</skos:Concept>"
+
+
+_EN_LABEL = '<skos:prefLabel xml:lang="en">Label</skos:prefLabel>'
+
+
+def test_german_only_definition_gives_none(tmp_path):
+    inner = _EN_LABEL + '<skos:definition xml:lang="de">Nur deutsch</skos:definition>'
+    path = _write_rdf(tmp_path, [_raw_concept(THEME_BASE + "AAA", inner)])
+    assert load_vocabulary(path).entries[0].definition is None
+
+
+def test_german_definition_before_english_returns_the_english_text(tmp_path):
+    inner = (
+        _EN_LABEL
+        + '<skos:definition xml:lang="de">Deutsch</skos:definition>'
+        + '<skos:definition xml:lang="en">English</skos:definition>'
+    )
+    path = _write_rdf(tmp_path, [_raw_concept(THEME_BASE + "AAA", inner)])
+    assert load_vocabulary(path).entries[0].definition == "English"
+
+
+@pytest.mark.parametrize("blank", ["", "   ", "\n\t "])
+def test_blank_definition_gives_none_and_label_only_line(tmp_path, blank):
+    path = _write_rdf(tmp_path, [_concept("AAA", label="Alpha", definition=blank)])
+    vocabulary = load_vocabulary(path)
+    assert vocabulary.entries[0].definition is None
+    assert format_entries(vocabulary) == ["AAA — Alpha"]
+
+
+def test_blank_english_element_is_skipped_for_the_next_english_one(tmp_path):
+    inner = (
+        '<skos:prefLabel xml:lang="en">  </skos:prefLabel>'
+        '<skos:prefLabel xml:lang="en">Real label</skos:prefLabel>'
+        '<skos:definition xml:lang="en"> </skos:definition>'
+        '<skos:definition xml:lang="en">Real definition</skos:definition>'
+    )
+    path = _write_rdf(tmp_path, [_raw_concept(THEME_BASE + "AAA", inner)])
+    entry = load_vocabulary(path).entries[0]
+    assert (entry.label, entry.definition) == ("Real label", "Real definition")
+
+
+def test_padded_label_and_definition_are_stripped(tmp_path):
+    path = _write_rdf(
+        tmp_path, [_concept("AAA", label="  Alpha \n", definition="\n  first  ")]
+    )
+    entry = load_vocabulary(path).entries[0]
+    assert (entry.label, entry.definition) == ("Alpha", "first")
+
+
+def test_format_entries_on_committed_file_gives_14_lines():
+    lines = format_entries(load_vocabulary())
+    assert len(lines) == 14
+    assert "OP_DATPRO — Provisional data" in lines
+    assert sum(1 for line in lines if ":" not in line) == 1
+
+
+# --- review fixes: bad files and concepts -----------------------------------
+
+
+def test_empty_file_raises(tmp_path):
+    path = tmp_path / "empty.rdf"
+    path.write_bytes(b"")
+    with pytest.raises(VocabularyError, match="empty.rdf"):
+        load_vocabulary(path)
+
+
+def test_non_rdf_xml_raises(tmp_path):
+    path = tmp_path / "foo.xml"
+    path.write_text("<foo/>", encoding="utf-8")
+    with pytest.raises(VocabularyError, match="foo.xml"):
+        load_vocabulary(path)
+
+
+def test_directory_path_raises_vocabulary_error(tmp_path):
+    with pytest.raises(VocabularyError, match=tmp_path.name):
+        load_vocabulary(tmp_path)
+
+
+def test_oserror_is_chained(tmp_path):
+    with pytest.raises(VocabularyError) as excinfo:
+        load_vocabulary(tmp_path / "missing.rdf")
+    assert isinstance(excinfo.value.__cause__, OSError)
+
+
+@pytest.mark.parametrize("about", [None, "", THEME_BASE])
+def test_concept_without_usable_uri_raises_naming_its_label(tmp_path, about):
+    path = _write_rdf(tmp_path, [_raw_concept(about, _EN_LABEL)])
+    with pytest.raises(VocabularyError, match="Label"):
+        load_vocabulary(path)
+
+
+def test_duplicate_code_raises(tmp_path):
+    other_uri = "http://example.org/other/AAA"
+    path = _write_rdf(
+        tmp_path,
+        [_concept("AAA"), _raw_concept(other_uri, _EN_LABEL, deprecated="false")],
+    )
+    with pytest.raises(VocabularyError, match="AAA"):
+        load_vocabulary(path)
+
+
+def test_duplicate_uri_raises(tmp_path):
+    path = _write_rdf(tmp_path, [_concept("AAA"), _concept("AAA")])
+    with pytest.raises(VocabularyError, match=re.escape(THEME_BASE + "AAA")):
+        load_vocabulary(path)
+
+
+@pytest.mark.parametrize("value", ["True", "1", "yes", ""])
+def test_invalid_deprecated_value_raises_naming_the_concept(tmp_path, value):
+    path = _write_rdf(tmp_path, [_concept("AAA", deprecated=value)])
+    with pytest.raises(VocabularyError, match="AAA"):
+        load_vocabulary(path)
+
+
+def test_deprecated_false_and_absent_are_kept(tmp_path):
+    path = _write_rdf(
+        tmp_path,
+        [
+            _concept("AAA", deprecated="false"),
+            _raw_concept(THEME_BASE + "BBB", _EN_LABEL),
+        ],
+    )
+    assert [e.code for e in load_vocabulary(path).entries] == ["AAA", "BBB"]
 
 
 def test_theme_entry_is_frozen():
