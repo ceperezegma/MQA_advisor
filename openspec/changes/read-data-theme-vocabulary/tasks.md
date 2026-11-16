@@ -12,3 +12,14 @@
 
 - [x] 2.1 Run `uv run ruff check src/ tests/` and `uv run ruff format src/ tests/` and verify they are clean
 - [x] 2.2 Run `uv run pytest` and verify the whole unit suite passes
+
+## 3. Review fixes
+
+- [ ] 3.1 Write failing tests for: non-English-only and German-before-English definitions, empty/whitespace/padded text, 14 formatted lines of the committed file, an empty file, `<foo/>` and a directory path, a concept without `rdf:about`, duplicate code, duplicate URI, `at:deprecated` `"True"`/`"1"`, and the log message with `14 data-theme concepts` and the skipped count; verify they fail
+- [ ] 3.2 Skip empty English elements and continue to the next English one
+- [ ] 3.3 Reject a concept with a missing or empty URI or empty code (naming its label), and duplicate codes or URIs
+- [ ] 3.4 Build the code-to-URI dict once in `Vocabulary` and use it in `code_to_uri`
+- [ ] 3.5 Wrap any `OSError` in `VocabularyError` (chained, with the path)
+- [ ] 3.6 Accept only `"true"`, `"false"` or absent for `at:deprecated`; add the skipped count to the single INFO line
+- [ ] 3.7 Add docstrings to `ThemeEntry` and `Vocabulary`
+- [ ] 3.8 Run ruff and the full `uv run pytest`, then verify all pass

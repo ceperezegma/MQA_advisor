@@ -5,11 +5,12 @@ The theme/keyword proposal feature (ADR-0017) asks an LLM to answer with codes f
 ## What Changes
 
 - Add a `vocabulary` module that parses `vocabularies/data-theme-skos.rdf` with the stdlib `xml.etree` (no `rdflib`) and returns the data-theme entries: authority URI, code, English `skos:prefLabel`, English `skos:definition` (None when absent) and the file's `owl:versionInfo`.
-- Skip concepts with `at:deprecated="true"`.
+- Skip concepts with `at:deprecated="true"`; accept only `"true"`, `"false"` or an absent attribute.
+- Reject an unusable concept: no URI or an empty code, duplicate codes or URIs, an invalid `at:deprecated` value.
 - Add a function that formats the entries as prompt lines `CODE — English label: English definition` (label alone when there is no definition).
 - Add a function that maps a code to its authority URI and returns nothing for an unknown code (case-sensitive, never guesses).
 - A missing or malformed file raises a clear error instead of returning an empty vocabulary.
-- Log at INFO, once per load, the number of concepts and the version.
+- Log at INFO, once per load, the number of concepts, the number of deprecated concepts skipped and the version.
 - No change to the pipeline, the database or existing modules.
 
 ## Capabilities
