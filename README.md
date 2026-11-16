@@ -39,8 +39,9 @@ the catalogue folder as it is, so resources whose file is gone lose their rows.
 ## Prompt versions
 
 Prompts are immutable versioned files (ADR-0018): `src/mqa_advisor/prompts/{name}/v{N}.md`, with a TOML
-frontmatter (`version`, `model`, `temperature`, `max_tokens`, `max_items`) and a `string.Template` body
-(`$placeholder`, `$$` for a literal dollar). The output schema is found by the same `(name, version)` in
+frontmatter (`version`, `model`, `max_tokens`, `max_items`; no `temperature`, current models reject sampling
+parameters) and a `string.Template` body (`$placeholder`, `$$` for a literal dollar) split by one `---USER---`
+line into a system part and a user part. The output schema is found by the same `(name, version)` in
 `proposal_schemas.py`. `ACTIVE` in `prompts.py` is the version each prompt uses today; callers should use
 `load_prompt(name, active_version(name), values)` and never a literal version number.
 
@@ -51,7 +52,7 @@ To move a prompt to v2:
    if the output shape is unchanged, otherwise write a `_{name}_v2()` builder.
 3. Set `"{name}": 2` in `ACTIVE` in `prompts.py`.
 4. Update the tests that pin the old state: `test_active_versions` (`tests/test_prompts.py`),
-   `test_schema_keys_are_the_registered_pairs` (`tests/test_proposal_schemas.py`), and the model/temperature
+   `test_schema_keys_are_the_registered_pairs` (`tests/test_proposal_schemas.py`), and the model
    assertions in `test_committed_prompt_loads_with_a_value_for_every_placeholder` if v2 changes them.
 5. Run `uv run pytest` and `uv run ruff check src tests`.
 
