@@ -116,7 +116,6 @@ messages; catalogue text goes only in the user part. Example (abridged):
 +++
 version = 1
 model = "claude-haiku-5-5"
-temperature = 0
 max_tokens = 1024
 max_items = 5          # the total cap, enforced in code by the caller; the call asks for up to (max_items - existing)
 +++
@@ -133,7 +132,7 @@ You assign themes from a fixed list ... $vocabulary ...
   code after the call (extras dropped with a warning and a count), never by the schema.
   Schemas live in code, in a registry keyed by `(prompt_name, version)`.
 - A registry in code gives the active version of each prompt. Committed versions are immutable.
-- v1 uses `claude-haiku-5-5` at temperature 0. Whether `claude-sonnet-5-5` is worth the cost is
+- v1 uses `claude-haiku-5-5` (no sampling parameters are sent: current models reject them). Whether `claude-sonnet-5-5` is worth the cost is
   decided by running the regression examples against both as separate prompt versions.
 - The keyword prompt's theme context (the effective themes) is part of v1, as in section 3.
 

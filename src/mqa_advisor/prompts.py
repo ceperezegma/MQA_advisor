@@ -1,7 +1,8 @@
 """Versioned prompt files, their loader and the registry of active versions (ADR-0018).
 
 A prompt lives in ``prompts/{name}/v{N}.md`` next to this module: a TOML frontmatter between two ``+++``
-lines, then a ``string.Template`` body. Files are immutable once published; a change is a new ``vN+1.md``.
+lines, then a ``string.Template`` body in two parts split by a ``---USER---`` line: the system part (role,
+rules, fixed lists) and the user part (the resource data and the counts). Files are immutable once published; a change is a new ``vN+1.md``.
 The output schema of a prompt version is looked up by the same name and version in ``proposal_schemas``;
 no field of the file names a schema.
 
@@ -10,7 +11,6 @@ no field of the file names a schema.
 
 import hashlib
 import logging
-import math
 import re
 import tomllib
 from collections.abc import Mapping
@@ -32,6 +32,9 @@ ACTIVE: dict[str, int] = {"propose_themes": 1, "propose_keywords": 1}
 UNKNOWN_LANGUAGE = "unknown"
 
 _DELIMITER = "+++"
+_USER_SEPARATOR = (
+    "---USER---"  # the line between the system part and the user part of the body
+)
 _NAME = re.compile(
     r"[A-Za-z_][A-Za-z0-9_]*"
 )  # a plain ASCII identifier: cannot leave the prompts folder
@@ -46,7 +49,6 @@ class Frontmatter(TypedDict):
 
     version: int
     model: str
-    temperature: float
     max_tokens: int
     max_items: int
 
@@ -58,10 +60,10 @@ class LoadedPrompt:
     name: str
     version: int
     model: str
-    temperature: float
     max_tokens: int
     max_items: int  # the cap on proposed values; the callers enforce it in code, it is not in the schema
-    text: str  # the body with every placeholder filled
+    system: str  # the system part of the body with every placeholder filled
+    user: str  # the user part of the body with every placeholder filled
     sha256: str  # of the file content (line endings normalised), to detect an edit of an immutable version
 
 
@@ -115,45 +117,72 @@ def load_prompt(
             f"{path.name}: frontmatter version {meta['version']} differs from the file number {version}"
         )
 
-    rendered = _render(body, values, path)
+    system, user = _render(_split_parts(body, path), values, path)
     sha256 = hashlib.sha256(content).hexdigest()
     logger.debug("prompt loaded: name=%s version=%d sha256=%s", name, version, sha256)
     return LoadedPrompt(
         name=name,
         version=version,
         model=meta["model"],
-        temperature=meta["temperature"],
         max_tokens=meta["max_tokens"],
         max_items=meta["max_items"],
-        text=rendered,
+        system=system,
+        user=user,
         sha256=sha256,
     )
 
 
-def _render(body: str, values: Mapping[str, str], path: Path) -> str:
-    """Fill the placeholders of ``body``; any mismatch with ``values`` is an error, never ignored."""
+def _split_parts(body: str, path: Path) -> tuple[str, str]:
+    """Split the template body into its system and user parts at the single ``---USER---`` line.
+
+    This runs on the template, before any value is filled in: a value (catalogue text) containing a
+    ``---USER---`` line can then never move the boundary between the two parts.
+    """
+    lines = body.split("\n")
+    marks = [i for i, line in enumerate(lines) if line == _USER_SEPARATOR]
+    if len(marks) != 1:
+        raise PromptError(
+            f"{path.name}: the body must have exactly one {_USER_SEPARATOR} line, found {len(marks)}"
+        )
+    system = "\n".join(lines[: marks[0]]).strip()
+    user = "\n".join(lines[marks[0] + 1 :]).strip()
+    if not system or not user:
+        raise PromptError(
+            f"{path.name}: the system part and the user part must not be empty"
+        )
+    return system, user
+
+
+def _render(
+    parts: tuple[str, str], values: Mapping[str, str], path: Path
+) -> tuple[str, str]:
+    """Fill the placeholders of both parts; any mismatch with ``values`` is an error, never ignored.
+
+    A value may be used by either part, but it must be used by at least one.
+    """
     for key, value in values.items():
         if not isinstance(value, str):
             raise PromptError(
                 f"{path.name}: the value for {key!r} must be a string, got {type(value).__name__}"
             )
-    template = Template(body)
-    if (
-        not template.is_valid()
-    ):  # a stray "$" or "$1"; "$$" is a literal dollar and is valid
+    templates = [Template(part) for part in parts]
+    # a stray "$" or "$1"; "$$" is a literal dollar and is valid
+    if not all(template.is_valid() for template in templates):
         raise PromptError(
             f"{path.name}: the body has an invalid placeholder (a stray '$'; write '$$' for one)"
         )
-    if unused := set(values) - set(template.get_identifiers()):
+    used = {name for template in templates for name in template.get_identifiers()}
+    if unused := set(values) - used:
         raise PromptError(
             f"{path.name}: value(s) {sorted(unused)} are not placeholders of the body"
         )
     try:
-        return template.substitute(values)
+        system, user = (template.substitute(values) for template in templates)
     except KeyError as error:
         raise PromptError(
             f"{path.name}: no value for placeholder {error.args[0]!r}"
         ) from error
+    return system, user
 
 
 def _split_frontmatter(content: str, path: Path) -> tuple[Frontmatter, str]:
@@ -173,7 +202,8 @@ def _split_frontmatter(content: str, path: Path) -> tuple[Frontmatter, str]:
     except tomllib.TOMLDecodeError as error:
         raise PromptError(f"{path.name}: invalid TOML frontmatter ({error})") from error
 
-    # The format is closed: an unexpected key (for example a schema name) is an error, not ignored.
+    # The format is closed: an unexpected key (for example a schema name, or a temperature: current
+    # models reject sampling parameters) is an error, not ignored.
     if extra := set(meta) - set(Frontmatter.__annotations__):
         raise PromptError(f"{path.name}: unexpected frontmatter key(s) {sorted(extra)}")
     version = _int(meta, "version", path)
@@ -184,20 +214,10 @@ def _split_frontmatter(content: str, path: Path) -> tuple[Frontmatter, str]:
         raise PromptError(
             f"{path.name}: frontmatter key 'model' has the wrong type ({model!r})"
         )
-    temperature = _get(meta, "temperature", path)
-    if isinstance(temperature, bool) or not isinstance(temperature, int | float):
-        raise PromptError(
-            f"{path.name}: frontmatter key 'temperature' has the wrong type ({temperature!r})"
-        )
-    if not math.isfinite(temperature) or not 0 <= temperature <= 1:
-        raise PromptError(
-            f"{path.name}: temperature must be between 0 and 1, got {temperature}"
-        )
 
     frontmatter = Frontmatter(
         version=version,
         model=model,
-        temperature=float(temperature),
         max_tokens=max_tokens,
         max_items=max_items,
     )
