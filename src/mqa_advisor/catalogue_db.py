@@ -240,6 +240,23 @@ _PROPOSAL_COLUMNS = (
 )
 
 
+def _check_pairing(proposals: list[ProposedValue]) -> None:
+    """Raise `ValueError` if a `uri` proposal has a `lang` or a `literal` one has none.
+
+    Themes are `uri` rows without a language and keywords are `literal` rows with one. The whole
+    list is checked before anything is written. (No CHECK constraint: it could not name the row,
+    and it would not reach databases created earlier.)
+    """
+    for position, proposal in enumerate(proposals):
+        if proposal.value_kind == "uri" and proposal.lang is not None:
+            problem = "a uri value must not have a lang"
+        elif proposal.value_kind == "literal" and not proposal.lang:
+            problem = "a literal value must have a lang"
+        else:
+            continue
+        raise ValueError(f"proposal {position} ({proposal}): {problem}")
+
+
 def replace_proposals(
     conn: sqlite3.Connection, resource_pk: int, proposals: list[ProposedValue]
 ) -> None:
@@ -247,9 +264,11 @@ def replace_proposals(
 
     Deletes the resource's previous proposals and inserts the new ones (an empty list just
     clears them). Commits on success; on any error rolls back, so the previous proposals stay.
-    Like `load_catalogue`, `conn` must have no pending writes. The values are stored as given:
-    only the table's CHECK constraints validate them.
+    Like `load_catalogue`, `conn` must have no pending writes. A `uri` proposal with a `lang`, or
+    a `literal` one without, raises `ValueError` before anything is written. Apart from that and
+    the table's CHECK constraints, the values are stored as given.
     """
+    _check_pairing(proposals)
     try:
         conn.execute(
             "DELETE FROM proposed_property_value WHERE resource_pk = ?", (resource_pk,)
@@ -846,13 +865,12 @@ def load_catalogue(
         # is how many (the load never adds proposals).
         proposals_removed = proposals_before - _count_proposals(conn, env, catalogue)
         conn.commit()
-        if proposals_removed:
-            logger.info(
-                "%s/%s: removed %d proposal(s) with the reloaded resources",
-                env,
-                catalogue,
-                proposals_removed,
-            )
+        logger.info(
+            "%s/%s: removed %d proposal(s) with the reloaded resources",
+            env,
+            catalogue,
+            proposals_removed,
+        )
         if orphan_nodes:
             logger.warning(
                 "%s/%s: %d node(s) in %d resource(s) are not reached from any Dataset,"

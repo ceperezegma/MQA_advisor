@@ -198,14 +198,15 @@ def _theme(**overrides):
 
 
 def _keyword(text="river", **overrides):
-    return _theme(
-        property_uri="http://www.w3.org/ns/dcat#keyword",
-        value=text,
-        value_kind="literal",
-        lang="eng",
-        prompt_name="propose_keywords",
-        **overrides,
-    )
+    fields = {
+        "property_uri": "http://www.w3.org/ns/dcat#keyword",
+        "value": text,
+        "value_kind": "literal",
+        "lang": "eng",
+        "prompt_name": "propose_keywords",
+    }
+    fields.update(overrides)
+    return _theme(**fields)
 
 
 def _insert_raw(conn, resource_pk, **overrides):
@@ -338,3 +339,29 @@ def test_read_proposals_is_ordered_by_property_then_insertion(conn):
 
 def test_read_proposals_of_a_resource_without_proposals_is_empty(conn):
     assert read_proposals(conn, _add_resource(conn)) == []
+
+
+@pytest.mark.parametrize(
+    "bad",
+    [
+        _theme(lang="eng"),  # a uri row must have no lang
+        _keyword(lang=None),  # a literal row must have a lang
+        _keyword(lang=""),
+    ],
+    ids=["uri-with-lang", "literal-without-lang", "literal-with-empty-lang"],
+)
+def test_replace_proposals_rejects_a_bad_uri_lang_pairing(conn, bad):
+    pk = _add_resource(conn)
+    replace_proposals(conn, pk, [_theme()])
+    # The bad row comes after a valid one: nothing of the new list may be stored.
+    with pytest.raises(ValueError, match="proposal 1"):
+        replace_proposals(conn, pk, [_keyword("fine"), bad])
+    assert read_proposals(conn, pk) == [_theme()]
+
+
+def test_replace_proposals_checks_the_whole_list_before_writing(conn):
+    pk = _add_resource(conn)
+    conn.commit()
+    with pytest.raises(ValueError):
+        replace_proposals(conn, pk, [_theme(lang="eng")])
+    assert not conn.in_transaction  # nothing was even started

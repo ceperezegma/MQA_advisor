@@ -633,7 +633,10 @@ def test_no_log_when_every_node_is_reached(conn, data_dir, caplog):
     _, load = _load_graph(conn, data_dir, [DATASET])
     with caplog.at_level(logging.DEBUG, logger="mqa_advisor.catalogue_db"):
         load()
-    assert caplog.records == []
+    # Only the always-logged proposal count (INFO): no warning, no node listed at DEBUG.
+    assert [
+        r.getMessage() for r in caplog.records if "proposal" not in r.getMessage()
+    ] == []
 
 
 def test_node_json_does_not_depend_on_key_or_type_order(conn, data_dir):
@@ -1109,12 +1112,13 @@ def test_pruned_resource_loses_its_proposals(conn, data_dir):
     assert _proposal_count(conn) == 0
 
 
-def test_load_without_proposals_reports_zero_and_logs_nothing(conn, data_dir, caplog):
+def test_load_without_proposals_reports_zero_and_logs_it(conn, data_dir, caplog):
     _write_simple(data_dir / "PROD" / "x", "a")
     with caplog.at_level(logging.INFO, logger="mqa_advisor.catalogue_db"):
         summary = load_catalogue("PROD", "x", conn=conn, data_dir=data_dir)
     assert summary.proposals_removed == 0
-    assert _removal_messages(caplog) == []
+    (message,) = _removal_messages(caplog)
+    assert message.levelno == logging.INFO and " 0 " in message.getMessage()
 
 
 def test_failed_load_keeps_the_proposals_and_logs_nothing(conn, data_dir, caplog):
