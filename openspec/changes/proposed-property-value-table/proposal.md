@@ -11,10 +11,10 @@ rest of `catalogue-database`. This is ticket 2/8 (#18); it has no dependency on 
   `proposed_property_value_resource (resource_pk, property_uri)` to the schema created by `connect()`.
   Existing tables and `connect()` behavior are unchanged.
 - Add a function that replaces all proposals of one resource in one transaction, and a function that
-  reads them back. The replace function first checks the whole input (a `uri` row has no `lang`, a
-  `literal` row has a `lang`) and raises `ValueError` before writing anything.
+  reads them back. The replace function refuses a connection with pending writes, then checks the whole input (a
+  `uri` row has no `lang`, a `literal` row has a `lang`, no empty value or provenance field) and raises `ValueError` before writing anything.
 - `load_catalogue` removes the proposals of every resource it reloads or prunes (through the
-  `ON DELETE CASCADE`) and always logs how many it removed (also zero); `LoadSummary` reports the count.
+  `ON DELETE CASCADE`) and always logs how many it removed (INFO at zero, WARNING above zero); `LoadSummary` reports the count.
 - The `catalogue_db.py` module docstring mentions the new table.
 
 ## Capabilities

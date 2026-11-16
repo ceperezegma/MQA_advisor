@@ -28,7 +28,7 @@
 - **THEN** the insert fails with an integrity error
 
 ### Requirement: Proposals of one resource are replaced atomically
-The module SHALL provide a function that takes a connection, a `resource_pk` and a list of proposals (entity id, entity kind, property URI, value, value kind, language or none, prompt name, prompt version, prompt SHA-256, model, and a timezone-aware UTC time), and in one transaction deletes every `proposed_property_value` row of that resource and inserts the given ones. It SHALL commit on success and, on any error, roll back so that the previous proposals of the resource remain. Before writing anything it SHALL check every proposal in the list: a proposal whose `value_kind` is `uri` SHALL have no `lang`, and one whose `value_kind` is `literal` SHALL have a non-empty `lang`; on a violation it SHALL raise `ValueError` that names the offending proposal and leave the resource's previous proposals untouched. It SHALL touch no other resource's proposals and no other table. Calling it twice with the same input SHALL leave the same rows, and calling it with an empty list SHALL leave the resource with no proposals. As for `load_catalogue`, the connection passed in SHALL have no pending writes. Theme proposals are stored by the caller as `uri` rows holding the authority URI and no language, and keyword proposals as `literal` rows with a `lang`; apart from the pairing check above, the function stores what it is given and does not interpret it. The table itself SHALL NOT have a CHECK constraint on the pairing.
+The module SHALL provide a function that takes a connection, a `resource_pk` and a list of proposals (entity id, entity kind, property URI, value, value kind, language or none, prompt name, prompt version, prompt SHA-256, model, and a timezone-aware UTC time), and in one transaction deletes every `proposed_property_value` row of that resource and inserts the given ones. It SHALL commit on success and, on any error, roll back so that the previous proposals of the resource remain. Before writing anything it SHALL check every proposal in the list: a proposal whose `value_kind` is `uri` SHALL have no `lang`, and one whose `value_kind` is `literal` SHALL have a non-empty `lang`; a proposal whose `value`, `prompt_name`, `model` or `prompt_sha256` is empty SHALL be rejected too; on a violation it SHALL raise `ValueError` that names the offending proposal and states the reason, and leave the resource's previous proposals untouched. It SHALL touch no other resource's proposals and no other table. Calling it twice with the same input SHALL leave the same rows, and calling it with an empty list SHALL leave the resource with no proposals. The connection passed in SHALL have no pending writes: when `conn.in_transaction` is true the function SHALL raise `RuntimeError` before doing anything (`load_catalogue` is unchanged in this respect). Theme proposals are stored by the caller as `uri` rows holding the authority URI and no language, and keyword proposals as `literal` rows with a `lang`; apart from the pairing check above, the function stores what it is given and does not interpret it. The table itself SHALL NOT have a CHECK constraint on the pairing.
 
 #### Scenario: First write
 - **WHEN** the function is called for a resource with no proposals and three proposals
@@ -66,6 +66,18 @@ The module SHALL provide a function that takes a connection, a `resource_pk` and
 - **WHEN** the offending proposal is not the first of the list
 - **THEN** none of the proposals before it is stored either, and the previous proposals remain
 
+#### Scenario: Empty value or provenance
+- **WHEN** the function is called with a list in which one proposal has an empty `value`, `prompt_name`, `model` or `prompt_sha256`
+- **THEN** a `ValueError` naming that proposal and the empty field is raised, nothing is written and the resource's previous proposals remain
+
+#### Scenario: Unknown resource
+- **WHEN** the function is called with a `resource_pk` that has no `resource` row and a non-empty list
+- **THEN** an integrity error is raised and nothing is stored
+
+#### Scenario: Pending writes
+- **WHEN** the function is called on a connection with a pending transaction
+- **THEN** a `RuntimeError` is raised and the pending work is neither committed nor rolled back
+
 #### Scenario: Naive timestamp
 - **WHEN** a proposal's time is a naive `datetime`
 - **THEN** a `ValueError` is raised and the previous proposals remain
@@ -82,11 +94,11 @@ The module SHALL provide a function that returns the stored proposals of one res
 - **THEN** an empty list is returned
 
 ### Requirement: Reloading a resource removes its proposals
-Whenever `load_catalogue` replaces a resource, or deletes it because its file is gone on a full load, the proposals of that resource SHALL be removed with it. Proposals of resources it does not replace or delete, of other catalogues and of the other environment SHALL be unchanged. After the load commits, it SHALL log at INFO one message with the number of proposals removed, always, also when that number is zero, and `LoadSummary` SHALL carry the number (zero when none). When the load fails and rolls back, the proposals SHALL remain and nothing SHALL be logged about removal.
+Whenever `load_catalogue` replaces a resource, or deletes it because its file is gone on a full load, the proposals of that resource SHALL be removed with it. Proposals of resources it does not replace or delete, of other catalogues and of the other environment SHALL be unchanged. After the load commits, it SHALL always log one message with the number of proposals removed: at INFO when the number is zero and at WARNING when it is above zero (real data was lost), and `LoadSummary` SHALL carry the number (zero when none). When the load fails and rolls back, the proposals SHALL remain and nothing SHALL be logged about removal.
 
 #### Scenario: Full reload removes the catalogue's proposals
 - **WHEN** a catalogue whose resources have proposals is loaded again in full
-- **THEN** no proposal remains for those resources, the summary and the INFO message give the number removed, and the proposals of another catalogue are unchanged
+- **THEN** no proposal remains for those resources, the summary and the WARNING message give the number removed, and the proposals of another catalogue are unchanged
 
 #### Scenario: Partial reload
 - **WHEN** only some resources of a catalogue are reloaded through `resource_ids`
@@ -98,10 +110,22 @@ Whenever `load_catalogue` replaces a resource, or deletes it because its file is
 
 #### Scenario: Zero removed is logged
 - **WHEN** a catalogue with no proposals is loaded
-- **THEN** the summary reports zero removed and the INFO message states that zero proposals were removed
+- **THEN** the summary reports zero removed and an INFO message states that 0 proposals were removed
+
+#### Scenario: Replace one resource and prune another
+- **WHEN** one load replaces a resource that has proposals and prunes another resource that has proposals
+- **THEN** `proposals_removed` is the sum of both
+
+#### Scenario: Same catalogue name in the other environment
+- **WHEN** a catalogue is loaded in one environment while the other environment has a catalogue of the same name with proposals
+- **THEN** the other environment's proposals remain and are not counted
+
+#### Scenario: Count is never negative
+- **WHEN** a load finishes
+- **THEN** `proposals_removed` is zero or more; a negative difference (a bug) raises an error and rolls the load back
 
 #### Scenario: Failed load
-- **WHEN** a load raises an error after it deleted a resource that had proposals
+- **WHEN** a load raises an error after it already deleted a resource that had proposals (for example while writing a later resource)
 - **THEN** the transaction is rolled back, the proposals are still there and no removal message is logged
 
 ### Requirement: Module documentation covers the proposal table

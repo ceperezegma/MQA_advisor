@@ -32,11 +32,14 @@ this change does not revisit it. See proposal.md for motivation.
   resource is identified by `resource_pk`, which the `propose` step already has; looking it up from
   env/catalogue/id is not needed.
 - **Transaction handling mirrors `load_catalogue`:** delete, `executemany` insert, `commit`; on any
-  exception `rollback` and re-raise; the connection must have no pending writes. The naive-timestamp
+  exception `rollback` and re-raise; the connection must have no pending writes (`replace_proposals` enforces it and raises
+  `RuntimeError` when `conn.in_transaction`; `load_catalogue` keeps its documented, unenforced precondition). The naive-timestamp
   check comes from the existing datetime adapter (raises `ValueError`), so no new validation code.
 - **Pairing is validated in `replace_proposals`, not by a CHECK constraint.** Before the first SQL
   statement the function checks every proposal: `value_kind = 'uri'` requires `lang` to be `None`;
-  `value_kind = 'literal'` requires a non-empty `lang` (only keywords are literals). A violation raises
+  `value_kind = 'literal'` requires a non-empty `lang` (only keywords are literals). The same check also
+  rejects an empty `value`, `prompt_name`, `model` or `prompt_sha256`, so a proposal without its
+  provenance is never stored. A violation raises
   `ValueError` naming the position and the row, so nothing is deleted or inserted and the previous
   proposals stay. Checking the whole list first, instead of relying on rollback, means no write happens
   for input already known to be bad. Why no CHECK: the ticket fixes the table to design section 5,
@@ -54,9 +57,12 @@ this change does not revisit it. See proposal.md for motivation.
   per-resource bookkeeping. Alternative: count inside `_replace_resource` and `_prune`: more code in two
   places for the same number.
 - **`LoadSummary.proposals_removed: int = 0`**, a new last field with a default, so existing callers and
-  tests that build a summary by keyword keep working. The INFO message is logged after `commit`,
-  always, also when the count is zero (the user wants every reload tracked), and a rolled-back load
-  logs nothing false.
+  tests that build a summary by keyword keep working. The message is logged after `commit`,
+  always (the user wants every reload tracked): at INFO when the count is zero and at WARNING when it
+  is above zero, because proposals are paid-for data that was lost. A rolled-back load logs nothing
+  false. The count is the difference of two counts of the *whole* catalogue on purpose: the same
+  rule covers replaced, pruned and partial loads. A negative difference cannot happen (the load never
+  adds proposals), so it is guarded: a negative value raises `RuntimeError` and rolls the load back.
 
 ## Risks / Trade-offs
 
@@ -64,7 +70,7 @@ this change does not revisit it. See proposal.md for motivation.
   INFO message makes the cost visible before the next paid `propose` run.
 - [A caller stores a `uri` theme with a `lang`, or a keyword without one] → rejected by
   `replace_proposals` with `ValueError` before any write; see the pairing decision.
-- [A log line on every load, even with no proposals] → accepted by the user; one INFO line per load.
+- [A log line on every load, even with no proposals] → accepted by the user; one line per load, INFO at 0 and WARNING above 0.
 - [The count query runs on every load] → two `COUNT(*)` over a join per load, negligible next to
   parsing the files.
 
