@@ -19,8 +19,8 @@ without a database.
 unaffected). Pure helper: `validate_keywords(keywords, existing, remaining)`. `propose_keywords` takes no connection.
 
 **Signature.** `propose_keywords(resource, client, theme_result: ThemeResult | None, vocabulary)`. The effective
-themes are `theme_result.existing_themes + theme_result.themes` when its status is `ok` or `skipped`; they are empty
-when the status is `error` or `theme_result` is `None`. Their English labels are sent joined by `, `; with no theme
+themes are `theme_result.existing_themes + theme_result.themes` (the proposed ones are empty after a failed theme
+call; URIs not in the vocabulary are skipped); they are empty when `theme_result` is `None`. Their English labels are sent joined by `, `; with no theme
 context `$themes` is `none`.
 
 **Existing keywords.** Count = number of non-blank existing keyword values, any language. `remaining = 10 - count`;

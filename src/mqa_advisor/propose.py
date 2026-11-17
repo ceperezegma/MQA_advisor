@@ -27,7 +27,12 @@ from sqlite3 import Connection
 from typing import Literal
 
 from mqa_advisor.llm import LLMClient, LLMError
-from mqa_advisor.prompts import PromptError, active_version, load_prompt
+from mqa_advisor.prompts import (
+    UNKNOWN_LANGUAGE,
+    PromptError,
+    active_version,
+    load_prompt,
+)
 from mqa_advisor.vocabulary import Vocabulary, code_to_uri, format_entries
 
 logger = logging.getLogger(__name__)
@@ -138,6 +143,14 @@ def read_resource(conn: Connection, resource_pk: int) -> ResourceText:
             themes.append(_node_id(value, resource_id))
         elif property_uri == DCAT_KEYWORD and value_kind == "literal":
             keywords.append((lang, value))
+        elif property_uri == DCAT_KEYWORD:
+            # Not counted toward the keyword cap and not checked for duplicates: say so, it changes the proposal.
+            logger.warning(
+                "resource %s: dcat:keyword value of kind %s ignored: %r",
+                resource_id,
+                value_kind,
+                value,
+            )
         elif property_uri in (DCT_TITLE, DCT_DESCRIPTION) and value_kind == "literal":
             (titles if property_uri == DCT_TITLE else descriptions).append(
                 (lang, value)
@@ -476,6 +489,8 @@ def propose_keywords(
         issues.append(Issue(severity, resource_id, message))
 
     existing = tuple(k.strip() for _, k in resource.keywords if k.strip())
+    if blanks := len(resource.keywords) - len(existing):
+        report("warning", f"{blanks} blank existing keyword(s) ignored")
 
     def result(
         status: Status,
@@ -519,7 +534,7 @@ def propose_keywords(
         {
             "title": text.title,
             "description": text.description,
-            "language": text.language or "unknown",
+            "language": text.language or UNKNOWN_LANGUAGE,
             "themes": _theme_labels(theme_result, vocabulary),
             "existing_keywords": "\n".join(existing) or "none",
             "remaining": str(remaining),
@@ -568,8 +583,9 @@ def propose_keywords(
 
 def _theme_labels(theme_result: ThemeResult | None, vocabulary: Vocabulary) -> str:
     """The English labels of the effective themes, comma-separated, or ``none`` without theme context."""
-    if theme_result is None or theme_result.status == "error":
+    if theme_result is None:
         return "none"
     by_uri = {entry.uri: entry.label for entry in vocabulary.entries}
-    uris = theme_result.existing_themes + theme_result.themes
-    return ", ".join(by_uri[u] for u in uris) or "none"
+    # After a failed theme call ``themes`` is empty, but the existing in-vocabulary themes are still valid context.
+    uris = dict.fromkeys(theme_result.existing_themes + theme_result.themes)
+    return ", ".join(by_uri[u] for u in uris if u in by_uri) or "none"

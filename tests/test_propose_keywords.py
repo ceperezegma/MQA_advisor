@@ -110,7 +110,9 @@ def asked_for(backend, call=0) -> int:
 # --- reading -----------------------------------------------------------------------------------
 
 
-def test_read_keywords_of_the_own_entity_in_any_language(tmp_path):
+@pytest.fixture
+def loaded(tmp_path):
+    """A database with one Dataset record: its own entity and a related dataset, each with keywords."""
     related = "https://example.org/other.html"
     folder = tmp_path / "data" / "PROD" / "cat"
     folder.mkdir(parents=True)
@@ -135,18 +137,37 @@ def test_read_keywords_of_the_own_entity_in_any_language(tmp_path):
         json.dumps({"@context": CONTEXT, "@graph": graph}), encoding="utf-8"
     )
     conn = connect(tmp_path / "mqa.sqlite")
-    try:
-        load_catalogue("PROD", "cat", conn=conn, data_dir=folder.parents[1])
-        pk = conn.execute("SELECT resource_pk FROM resource").fetchone()[0]
+    load_catalogue("PROD", "cat", conn=conn, data_dir=folder.parents[1])
+    yield conn, conn.execute("SELECT resource_pk FROM resource").fetchone()[0]
+    conn.close()
+
+
+def test_read_keywords_of_the_own_entity_in_any_language(loaded):
+    conn, pk = loaded
+    assert sorted(read_resource(conn, pk).keywords) == [
+        ("deu", "luft"),
+        ("eng", "air"),
+    ]
+
+
+def test_non_literal_keyword_is_ignored_with_a_warning(loaded, caplog):
+    conn, pk = loaded
+    conn.execute("UPDATE property_value SET value_kind = 'uri' WHERE value = 'luft'")
+    with caplog.at_level(logging.WARNING):
         text = read_resource(conn, pk)
-        assert sorted(text.keywords) == [("deu", "luft"), ("eng", "air")]
-        # Proposing writes nothing.
-        changes = conn.total_changes
-        result, _ = run(text, load_vocabulary(), answer("Noise"))
-        assert result.status == "ok"
-        assert conn.total_changes == changes
-    finally:
-        conn.close()
+    assert text.keywords == (("eng", "air"),)
+    assert "kind uri ignored" in caplog.text
+
+
+def test_proposing_writes_nothing_to_the_database(loaded):
+    conn, pk = loaded
+    text = read_resource(conn, pk)
+    changes = conn.total_changes
+    rows = conn.execute("SELECT COUNT(*) FROM property_value").fetchone()
+    result, _ = run(text, load_vocabulary(), answer("Noise"))
+    assert result.status == "ok"
+    assert conn.total_changes == changes
+    assert conn.execute("SELECT COUNT(*) FROM property_value").fetchone() == rows
 
 
 # --- validation --------------------------------------------------------------------------------
@@ -276,7 +297,7 @@ def test_effective_themes_are_in_the_prompt(vocabulary):
 @pytest.mark.parametrize(
     "theme_result",
     [None, themes(status="error"), themes(status="skipped")],
-    ids=["no-result", "theme-call-failed", "no-themes"],
+    ids=["no-result", "theme-call-failed-no-existing", "no-themes"],
 )
 def test_no_theme_context(vocabulary, theme_result):
     result, backend = run(
@@ -286,9 +307,17 @@ def test_no_theme_context(vocabulary, theme_result):
     assert "Themes: none" in backend.requests[0].user
 
 
-def test_failed_theme_call_ignores_the_existing_themes(vocabulary):
+def test_failed_theme_call_still_sends_the_existing_themes(vocabulary):
     context = themes(existing=["ENVI"], status="error")
     _, backend = run(resource(), vocabulary, answer("Noise"), theme_result=context)
+    label = next(e.label for e in vocabulary.entries if e.code == "ENVI")
+    assert f"Themes: {label}\n" in backend.requests[0].user
+
+
+def test_theme_uri_outside_the_vocabulary_is_skipped(vocabulary):
+    context = ThemeResult("d1", "ok", ("http://example.org/x",), (), None, 1, ())
+    result, backend = run(resource(), vocabulary, answer("Noise"), theme_result=context)
+    assert result.status == "ok"
     assert "Themes: none" in backend.requests[0].user
 
 
@@ -320,3 +349,72 @@ def test_prompt_cap_mismatch_raises_before_any_call(vocabulary, monkeypatch):
         with pytest.raises(PromptError):
             propose_keywords(resource(), LLMClient(backend, run_log), None, vocabulary)
     assert backend.requests == []
+
+
+# --- review additions --------------------------------------------------------------------------
+
+
+def test_blank_existing_keywords_do_not_count_and_are_reported(vocabulary):
+    item = resource(keywords=kw(*[f"k{i}" for i in range(9)], "  ", ""))
+    result, backend = run(item, vocabulary, answer("Noise"))
+    assert result.status == "ok" and result.existing_count == 9
+    assert asked_for(backend) == 1
+    assert [i.severity for i in result.issues] == ["warning"]
+
+
+def test_ten_real_keywords_and_blanks_make_no_call(vocabulary):
+    item = resource(keywords=kw(*[f"k{i}" for i in range(10)], " "))
+    result, backend = run(item, vocabulary)
+    assert result.status == "skipped" and backend.requests == []
+
+
+def test_non_english_title_is_the_working_language(vocabulary):
+    item = resource(
+        titles=(("fra", "Qualité de l'air"), ("deu", "Luftqualität")),
+        descriptions=(("fra", "Valeurs horaires"),),
+    )
+    result, backend = run(item, vocabulary, answer("bruit"))
+    user = backend.requests[0].user
+    assert "Luftqualität" in user and "Qualité" not in user  # alphabetically first tag
+    assert "Language to write the keywords in: deu" in user
+    assert (result.lang, result.lang_inferred) == ("deu", False)
+
+
+def test_success_on_the_fourth_call(vocabulary):
+    item = resource(keywords=kw("Air quality"))
+    script = [answer("air quality")] * 3 + [answer("Noise")]
+    result, backend = run(item, vocabulary, *script)
+    assert (result.status, result.calls) == ("ok", 4)
+    assert len(backend.requests) == 4
+
+
+def test_prompt_provenance_is_present_only_when_a_call_was_made(vocabulary):
+    skipped, _ = run(resource(titles=()), vocabulary)
+    assert skipped.prompt is None
+    ok, _ = run(resource(), vocabulary, answer("Noise"))
+    failed, _ = run(resource(), vocabulary, LLMCallError("boom"))
+    exhausted, _ = run(
+        resource(keywords=kw("Noise")), vocabulary, *[answer("noise")] * 4
+    )
+    for result in (ok, failed, exhausted):
+        assert result.prompt.version >= 1 and result.prompt.sha256
+        assert result.prompt.model
+
+
+def test_exhausted_retries_log_at_error_level(vocabulary, caplog):
+    with caplog.at_level(logging.DEBUG):
+        run(resource(keywords=kw("Noise")), vocabulary, *[answer("noise")] * 4)
+    errors = [r for r in caplog.records if r.levelno == logging.ERROR]
+    assert len(errors) == 1 and "d1" in errors[0].getMessage()
+
+
+def test_tagged_title_logs_no_inferred_language(vocabulary, caplog):
+    with caplog.at_level(logging.INFO):
+        run(resource(), vocabulary, answer("Noise"))
+    assert "inferred" not in caplog.text
+
+
+def test_ten_keywords_log_no_warning(vocabulary, caplog):
+    with caplog.at_level(logging.WARNING):
+        run(resource(keywords=kw(*[f"k{i}" for i in range(10)])), vocabulary)
+    assert caplog.records == []
