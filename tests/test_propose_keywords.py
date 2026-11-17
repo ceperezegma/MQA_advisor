@@ -297,7 +297,7 @@ def test_effective_themes_are_in_the_prompt(vocabulary):
 @pytest.mark.parametrize(
     "theme_result",
     [None, themes(status="error"), themes(status="skipped")],
-    ids=["no-result", "theme-call-failed-no-existing", "no-themes"],
+    ids=["no-result", "theme-call-failed", "no-themes"],
 )
 def test_no_theme_context(vocabulary, theme_result):
     result, backend = run(
@@ -307,11 +307,12 @@ def test_no_theme_context(vocabulary, theme_result):
     assert "Themes: none" in backend.requests[0].user
 
 
-def test_failed_theme_call_still_sends_the_existing_themes(vocabulary):
+def test_failed_theme_call_gives_no_theme_context_even_with_existing_themes(
+    vocabulary,
+):
     context = themes(existing=["ENVI"], status="error")
     _, backend = run(resource(), vocabulary, answer("Noise"), theme_result=context)
-    label = next(e.label for e in vocabulary.entries if e.code == "ENVI")
-    assert f"Themes: {label}\n" in backend.requests[0].user
+    assert "Themes: none" in backend.requests[0].user
 
 
 def test_theme_uri_outside_the_vocabulary_is_skipped(vocabulary):
