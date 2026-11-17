@@ -47,6 +47,9 @@ the SQLite database in `fetched_catalogues_data/mqa.sqlite`. Test fixtures live 
 - `llm.py` — `LLMClient`: one forced-tool-call model call from a loaded prompt with schema validation, token usage,
   estimated cost (committed price table) and the per-run log `logs/propose/` (`RunLog`); `AnthropicBackend` (needs
   `ANTHROPIC_API_KEY` in `.env`) and `FakeBackend` for tests. No sampling parameter is ever sent (ADR-0019).
+- `propose.py` — the theme proposal for one resource: `read_resource()` (the only db read; a Dataset's own entity is
+  the one whose id starts with `http://data.europa.eu/88u/`), the language rule, code validation, and
+  `propose_themes()` (up to 3 retries of an empty answer, returns a `ThemeResult`; writes nothing).
 - `pipeline.py` — the manifest -> fetch -> db entry point with the step selector. Unlike MQA_test's Test Run,
   any failure of a selected step is fatal.
 
