@@ -27,7 +27,12 @@ from sqlite3 import Connection
 from typing import Literal
 
 from mqa_advisor.llm import LLMClient, LLMError
-from mqa_advisor.prompts import PromptError, active_version, load_prompt
+from mqa_advisor.prompts import (
+    UNKNOWN_LANGUAGE,
+    PromptError,
+    active_version,
+    load_prompt,
+)
 from mqa_advisor.vocabulary import Vocabulary, code_to_uri, format_entries
 
 logger = logging.getLogger(__name__)
@@ -35,6 +40,7 @@ logger = logging.getLogger(__name__)
 DCT_TITLE = "http://purl.org/dc/terms/title"
 DCT_DESCRIPTION = "http://purl.org/dc/terms/description"
 DCAT_THEME = "http://www.w3.org/ns/dcat#theme"
+DCAT_KEYWORD = "http://www.w3.org/ns/dcat#keyword"
 
 # A Dataset's own entity has an id under this prefix; any other dataset entity of the record is a related one.
 OWN_DATASET_PREFIX = "http://data.europa.eu/88u/"
@@ -43,6 +49,9 @@ ENGLISH_TAGS = frozenset({"en", "eng"})
 THEME_CAP = 5
 MAX_EMPTY_RETRIES = 3  # retries of an answer with nothing valid left: at most 4 calls
 THEMES_PROMPT = "propose_themes"
+# Existing + proposed keywords of any language; also ``max_items`` of the prompt.
+KEYWORD_CAP = 10
+KEYWORDS_PROMPT = "propose_keywords"
 
 Status = Literal["ok", "skipped", "error"]
 Severity = Literal["warning", "error"]
@@ -64,6 +73,7 @@ class ResourceText:
     titles: tuple[LangText, ...] = ()
     descriptions: tuple[LangText, ...] = ()
     theme_uris: tuple[str, ...] = ()
+    keywords: tuple[LangText, ...] = ()  # existing keywords, any language
 
 
 def own_entity(
@@ -110,10 +120,11 @@ def read_resource(conn: Connection, resource_pk: int) -> ResourceText:
     titles: list[LangText] = []
     descriptions: list[LangText] = []
     themes: list[str] = []
+    keywords: list[LangText] = []
     for property_uri, value, value_kind, lang in conn.execute(
         "SELECT property_uri, value, value_kind, lang FROM property_value"
         " WHERE resource_pk = ? AND entity_kind = ? AND entity_id = ?"
-        " AND property_uri IN (?, ?, ?) ORDER BY property_uri, lang, value",
+        " AND property_uri IN (?, ?, ?, ?) ORDER BY property_uri, lang, value",
         (
             resource_pk,
             resource_type,
@@ -121,6 +132,7 @@ def read_resource(conn: Connection, resource_pk: int) -> ResourceText:
             DCT_TITLE,
             DCT_DESCRIPTION,
             DCAT_THEME,
+            DCAT_KEYWORD,
         ),
     ):
         lang = lang or None  # an empty tag is no tag
@@ -129,12 +141,22 @@ def read_resource(conn: Connection, resource_pk: int) -> ResourceText:
         elif property_uri == DCAT_THEME and value_kind == "node":
             # A Dataset stores a theme as a node (the concept's JSON, its URI in @id), a Data Service as a uri.
             themes.append(_node_id(value, resource_id))
-        elif property_uri != DCAT_THEME and value_kind == "literal":
+        elif property_uri == DCAT_KEYWORD and value_kind == "literal":
+            keywords.append((lang, value))
+        elif property_uri == DCAT_KEYWORD:
+            # Not counted toward the keyword cap and not checked for duplicates: say so, it changes the proposal.
+            logger.warning(
+                "resource %s: dcat:keyword value of kind %s ignored: %r",
+                resource_id,
+                value_kind,
+                value,
+            )
+        elif property_uri in (DCT_TITLE, DCT_DESCRIPTION) and value_kind == "literal":
             (titles if property_uri == DCT_TITLE else descriptions).append(
                 (lang, value)
             )
         else:
-            # A literal or blank-node theme cannot be a vocabulary URI; a non-text title cannot be sent.
+            # A literal or blank-node theme cannot be a vocabulary URI; a non-text title or keyword cannot be sent.
             logger.debug(
                 "resource %s: %s value of kind %s ignored: %r",
                 resource_id,
@@ -151,6 +173,7 @@ def read_resource(conn: Connection, resource_pk: int) -> ResourceText:
         tuple(titles),
         tuple(descriptions),
         tuple(themes),
+        tuple(keywords),
     )
 
 
@@ -391,3 +414,178 @@ def _existing_lines(existing: tuple[str, ...], vocabulary: Vocabulary) -> str:
     by_uri = {entry.uri: entry for entry in vocabulary.entries}
     lines = [f"{by_uri[u].code} — {by_uri[u].label}" for u in existing]
     return "\n".join(lines) or "none"
+
+
+# --- the keyword proposal ----------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class KeywordResult:
+    """The outcome of the keyword proposal for one resource, for storage (#23) and the report.
+
+    ``ok``: ``keywords`` holds 1 to (10 - existing) new keywords, to be stored with ``lang``. ``skipped``: no
+    call was needed or possible. ``error``: calls were made but gave nothing usable.
+    """
+
+    resource_id: str
+    status: Status
+    keywords: tuple[str, ...]  # new keywords, case kept; empty unless "ok"
+    lang: str | None  # the title's own tag, or the model's code when the title has none
+    lang_inferred: bool  # True when ``lang`` is the model's code
+    existing_count: int
+    prompt: PromptInfo | None  # None when no call was made
+    calls: int
+    issues: tuple[Issue, ...]
+
+
+def validate_keywords(
+    keywords: Iterable[str], existing: Iterable[str], remaining: int
+) -> tuple[tuple[str, ...], tuple[str, ...]]:
+    """Keep the returned keywords that are new, up to ``remaining``.
+
+    Values are trimmed; empty ones and case-insensitive duplicates of existing or already kept keywords are
+    dropped without a warning; the case of a kept keyword is not changed. Returns the kept keywords and one
+    warning message if the list was cut.
+    """
+    seen = {k.strip().casefold() for k in existing}
+    kept: list[str] = []
+    for keyword in keywords:
+        keyword = keyword.strip()
+        if keyword and keyword.casefold() not in seen:
+            seen.add(keyword.casefold())
+            kept.append(keyword)
+    warnings: tuple[str, ...] = ()
+    if len(kept) > remaining:
+        warnings = (
+            f"keyword list cut: {len(kept)} new keywords returned, {remaining} asked for,"
+            f" {len(kept) - remaining} dropped",
+        )
+        kept = kept[:remaining]
+    return tuple(kept), warnings
+
+
+def propose_keywords(
+    resource: ResourceText,
+    client: LLMClient,
+    theme_result: ThemeResult | None,
+    vocabulary: Vocabulary,
+) -> KeywordResult:
+    """Propose between 1 and (10 - existing) new keywords for ``resource`` (design section 3, step 4).
+
+    The effective themes (existing in-vocabulary + just proposed) are sent as context; none when
+    ``theme_result`` is None or its call failed. Skipped (no call) when the resource has no own entity or no
+    title (with a warning) or already has 10 keywords of any language (without one). An answer with nothing
+    valid left is retried up to 3 times; a failed call (``LLMError``) ends at once. Both give an ``error``
+    result with no keywords.
+
+    Raises ``PromptError`` when the active prompt cannot be loaded or its ``max_items`` is not the keyword cap.
+    """
+    resource_id = resource.resource_id
+    issues: list[Issue] = []
+
+    def report(severity: Severity, message: str) -> None:
+        log = logger.error if severity == "error" else logger.warning
+        log("resource %s: %s", resource_id, message)
+        issues.append(Issue(severity, resource_id, message))
+
+    existing = tuple(k.strip() for _, k in resource.keywords if k.strip())
+    if blanks := len(resource.keywords) - len(existing):
+        report("warning", f"{blanks} blank existing keyword(s) ignored")
+
+    def result(
+        status: Status,
+        keywords: tuple[str, ...] = (),
+        lang: str | None = None,
+        inferred: bool = False,
+        prompt: PromptInfo | None = None,
+        calls: int = 0,
+    ) -> KeywordResult:
+        return KeywordResult(
+            resource_id,
+            status,
+            keywords,
+            lang,
+            inferred,
+            len(existing),
+            prompt,
+            calls,
+            tuple(issues),
+        )
+
+    if resource.entity_id is None:
+        report("warning", f"skipped: {resource.problem}")
+        return result("skipped")
+    text = choose_language(resource.titles, resource.descriptions)
+    if text is None:
+        report("warning", "skipped: no title")
+        return result("skipped")
+    remaining = KEYWORD_CAP - len(existing)
+    if remaining <= 0:
+        logger.info(
+            "resource %s: keywords skipped, already %d keywords",
+            resource_id,
+            len(existing),
+        )
+        return result("skipped")
+
+    prompt = load_prompt(
+        KEYWORDS_PROMPT,
+        active_version(KEYWORDS_PROMPT),
+        {
+            "title": text.title,
+            "description": text.description,
+            "language": text.language or UNKNOWN_LANGUAGE,
+            "themes": _theme_labels(theme_result, vocabulary),
+            "existing_keywords": "\n".join(existing) or "none",
+            "remaining": str(remaining),
+        },
+    )
+    if prompt.max_items != KEYWORD_CAP:
+        raise PromptError(
+            f"{KEYWORDS_PROMPT} v{prompt.version}: max_items is {prompt.max_items}, the keyword cap is {KEYWORD_CAP}"
+        )
+    info = PromptInfo(prompt.name, prompt.version, prompt.sha256, prompt.model)
+
+    calls = 0
+    returned: list[str] = []
+    for _ in range(1 + MAX_EMPTY_RETRIES):
+        calls += 1
+        try:
+            answer = client.call(prompt, resource=resource_id)
+        except LLMError as error:
+            report("error", f"keyword call failed: {error}")
+            return result("error", prompt=info, calls=calls)
+        returned = answer.output["keywords"]
+        keywords, warnings = validate_keywords(returned, existing, remaining)
+        for message in warnings:
+            report("warning", message)
+        if keywords:
+            inferred = text.language is None
+            lang = answer.output["language"] if inferred else text.language
+            if inferred:
+                logger.info(
+                    "resource %s: keyword language inferred by the model: %s",
+                    resource_id,
+                    lang,
+                )
+            return result("ok", keywords, lang, inferred, info, calls)
+        logger.info(
+            "resource %s: no valid new keyword in answer %d: %r",
+            resource_id,
+            calls,
+            returned,
+        )
+    report(
+        "error", f"no valid new keyword after {calls} calls (last answer: {returned!r})"
+    )
+    return result("error", prompt=info, calls=calls)
+
+
+def _theme_labels(theme_result: ThemeResult | None, vocabulary: Vocabulary) -> str:
+    """The English labels of the effective themes, comma-separated, or ``none`` without theme context."""
+    if theme_result is None:
+        return "none"
+    by_uri = {entry.uri: entry.label for entry in vocabulary.entries}
+    # After a failed theme call ``themes`` is empty, but the existing in-vocabulary themes are still valid context.
+    uris = dict.fromkeys(theme_result.existing_themes + theme_result.themes)
+    return ", ".join(by_uri[u] for u in uris if u in by_uri) or "none"
