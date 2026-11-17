@@ -28,8 +28,8 @@ warning and no call, as for themes.
 
 ### Requirement: Theme context
 The keyword call SHALL receive the labels of the effective themes: the existing in-vocabulary themes plus the themes
-just proposed. When the theme call failed (`error`), only the existing in-vocabulary themes are sent (nothing was
-proposed); when no theme result is given, the call SHALL be made without theme context.
+just proposed. When the theme call failed (`error`) or no theme result is given, the call SHALL be made without
+theme context.
 
 #### Scenario: Themes present
 - **WHEN** the resource has the existing theme `ENVI` and `AGRI` was just proposed
@@ -37,7 +37,8 @@ proposed); when no theme result is given, the call SHALL be made without theme c
 
 #### Scenario: Theme call failed
 - **WHEN** the theme result is `error`
-- **THEN** the keyword call is still made; the prompt has the labels of the existing themes, if any
+- **THEN** the keyword call is still made and the rendered prompt has no theme labels, even if the resource
+  has existing themes
 
 ### Requirement: Language of the keywords
 The working language and the title and description sent SHALL follow the same rule as the theme proposal. Keywords

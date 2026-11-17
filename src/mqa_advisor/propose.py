@@ -583,9 +583,10 @@ def propose_keywords(
 
 def _theme_labels(theme_result: ThemeResult | None, vocabulary: Vocabulary) -> str:
     """The English labels of the effective themes, comma-separated, or ``none`` without theme context."""
-    if theme_result is None:
+    # A failed theme call means no theme context at all (issue #22, design section 3 step 5), even though the
+    # resource's existing themes are known.
+    if theme_result is None or theme_result.status == "error":
         return "none"
     by_uri = {entry.uri: entry.label for entry in vocabulary.entries}
-    # After a failed theme call ``themes`` is empty, but the existing in-vocabulary themes are still valid context.
     uris = dict.fromkeys(theme_result.existing_themes + theme_result.themes)
     return ", ".join(by_uri[u] for u in uris if u in by_uri) or "none"
