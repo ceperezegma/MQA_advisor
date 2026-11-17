@@ -25,8 +25,9 @@ resources whose file is gone, or a folder with no resource files, remove their r
 **Propose themes and keywords (opt-in):** `uv run python -m mqa_advisor.pipeline {catalogue} --steps propose`
 (or `--steps db,propose`) calls the model for every resource of the catalogue already in the database, and
 needs `ANTHROPIC_API_KEY` in `.env`. Options: `--limit N` (first N resources by id), `--dry-run` (no model call,
-nothing written; prints the number of calls and a rough cost estimate) and `--workers N` (default 4); they are
-rejected unless `propose` is selected. Every resource is attempted and every valid proposal saved;
+nothing written, no key needed; prints the number of calls and a rough cost estimate, and fails if it cannot build a prompt) and `--workers N` (default 4); they are
+rejected unless `propose` is selected. Every resource is attempted (a failure of one never stops the others; only a broken prompt file does) and every
+valid proposal saved; a failed call never deletes the earlier proposals of its property;
 `propose_report.xlsx` (sheets Errors and Summary) is always written in the catalogue folder, and the step exits 1
 if any resource had an error. A later `db` step deletes the proposals (the load logs how many). Use `--limit` and
 `--dry-run` before a full run: a catalogue of about 2,300 Datasets is up to about 4,600 calls.

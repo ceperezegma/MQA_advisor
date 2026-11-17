@@ -66,12 +66,15 @@ from mqa_advisor.ingest import (
 from mqa_advisor.llm import LLMError, LLMInputError, load_api_key
 from mqa_advisor.manifest import ManifestGenerationError
 from mqa_advisor.manifest import generate_manifest as _generate_manifest
+from mqa_advisor.prompts import ACTIVE, PROMPTS_DIR
 from mqa_advisor.propose_step import (
     DEFAULT_WORKERS,
     ProposeIncompleteError,
+    ProposeOptions,
     ProposeSummary,
     run_propose,
 )
+from mqa_advisor.vocabulary import VocabularyError, load_vocabulary
 
 STEPS: tuple[str, ...] = ("manifest", "fetch", "db", "propose")
 # `propose` is opt-in: it spends money.
@@ -106,18 +109,42 @@ def parse_steps(value: str) -> tuple[str, ...]:
 
 
 def _catalogue_in_database(db_path: Path, env: str, catalogue: str) -> bool:
-    """Whether the database has resources of the catalogue (it never creates the database file)."""
+    """Whether the database has resources of the catalogue.
+
+    Read-only: it never creates, migrates or otherwise changes the database file, so a missing file or a
+    missing table just means "no resources".
+    """
     if not db_path.exists():
         return False
-    conn = connect(db_path)
+    conn = sqlite3.connect(f"{db_path.resolve().as_uri()}?mode=ro", uri=True)
     try:
         row = conn.execute(
             "SELECT 1 FROM resource WHERE environment = ? AND catalogue = ? LIMIT 1",
             (env, catalogue),
         ).fetchone()
+    except (
+        sqlite3.OperationalError
+    ):  # no `resource` table: a database that was never loaded
+        return False
     finally:
         conn.close()
     return row is not None
+
+
+def _check_propose_setup() -> None:
+    """The things the propose step needs besides the database, checked before any step runs."""
+    try:
+        load_vocabulary()
+    except VocabularyError as e:
+        raise PipelineInputError(
+            f"the propose step cannot load the theme vocabulary: {e}"
+        ) from e
+    for name, version in ACTIVE.items():
+        prompt_file = PROMPTS_DIR / name / f"v{version}.md"
+        if not prompt_file.is_file():
+            raise PipelineInputError(
+                f"the propose step needs the prompt file {prompt_file}, which does not exist"
+            )
 
 
 def _check_inputs(
@@ -144,6 +171,7 @@ def _check_inputs(
                 f" add the 'fetch' step"
             )
     if "propose" in steps:
+        _check_propose_setup()
         if not dry_run:
             try:
                 load_api_key()  # only checks the key is there; a dry run calls no model
@@ -186,8 +214,7 @@ def run(
     unknown = set(steps) - set(STEPS)
     if unknown:
         raise ValueError(f"unknown step(s): {', '.join(sorted(unknown))}")
-    if workers < 1 or (limit is not None and limit < 1):
-        raise ValueError("workers and limit must be positive integers")
+    options = ProposeOptions(limit, dry_run, workers)  # validates the three
     run_env = resolve_env(env)
     _check_inputs(
         catalogue, steps, run_env, manifests_dir, fetched_data_dir, db_path, dry_run
@@ -237,9 +264,7 @@ def run(
                 catalogue,
                 conn=conn,
                 fetched_data_dir=fetched_data_dir,
-                limit=limit,
-                dry_run=dry_run,
-                workers=workers,
+                options=options,
             )
         finally:
             conn.close()
@@ -310,52 +335,58 @@ def main(argv: Sequence[str] | None = None) -> None:
         given = [name for name, used in propose_options.items() if used]
         if given:
             parser.error(f"{', '.join(given)} only apply to the 'propose' step")
-    if args.limit is not None and args.limit < 1:
-        parser.error("--limit must be a positive integer")
-    if args.workers is not None and args.workers < 1:
-        parser.error("--workers must be a positive integer")
+    try:
+        # The one place that validates the numbers (the same class `run` builds).
+        options = ProposeOptions(
+            args.limit,
+            args.dry_run,
+            DEFAULT_WORKERS if args.workers is None else args.workers,
+        )
+    except ValueError as e:
+        parser.error(str(e))
 
-    # The console handler for the progress lines of every step (the propose step logs per resource).
+    # The console shows the application's own INFO lines (the propose step logs per resource) but not the
+    # third-party ones (the HTTP client logs one line per request).
     logging.basicConfig(
-        level=logging.INFO, format="%(levelname)s %(name)s: %(message)s"
+        level=logging.WARNING, format="%(levelname)s %(name)s: %(message)s"
     )
+    logging.getLogger("mqa_advisor").setLevel(logging.INFO)
 
     try:
         outcome = run(
             args.catalogue,
             steps=steps,
             force=args.force,
-            limit=args.limit,
-            dry_run=args.dry_run,
-            workers=args.workers or DEFAULT_WORKERS,
+            limit=options.limit,
+            dry_run=options.dry_run,
+            workers=options.workers,
         )
     except FetchIncompleteError as e:
-        shown = ", ".join(
+        shown = [
             f"{f.resource_type} {f.resource_id} ({_describe_cause(f.cause)})"
-            for f in e.failures[:MAX_FAILURES_SHOWN]
-        )
-        hidden = len(e.failures) - MAX_FAILURES_SHOWN
-        if hidden > 0:
-            shown += f", ... and {hidden} more (see the report)"
-        print(f"{type(e).__name__}: {e}: {shown}", file=sys.stderr)
+            for f in e.failures
+        ]
+        print(_incomplete_line(e, shown), file=sys.stderr)
         raise SystemExit(1) from e
     except ProposeIncompleteError as e:
-        shown = ", ".join(
+        shown = [
             f"{f.resource_type} {f.resource_id} ({f.call}: {' '.join(f.message.split())})"
-            for f in e.failures[:MAX_FAILURES_SHOWN]
-        )
-        hidden = len(e.failures) - MAX_FAILURES_SHOWN
-        if hidden > 0:
-            shown += f", ... and {hidden} more (see the report)"
-        print(f"{type(e).__name__}: {e}: {shown}", file=sys.stderr)
+            for f in e.failures
+        ]
+        print(
+            _describe_proposals(e.summary)
+        )  # what the run did, next to the error line
+        print(_incomplete_line(e, shown), file=sys.stderr)
         raise SystemExit(1) from e
     except (
         PipelineInputError,
         ManifestGenerationError,
         ManifestNotFoundError,
         ConfigError,
+        VocabularyError,
         LLMError,
         sqlite3.Error,
+        RuntimeError,  # connect(): a database with an old layout
         ValueError,
         OSError,
     ) as e:
@@ -373,6 +404,15 @@ def main(argv: Sequence[str] | None = None) -> None:
         print(_describe_proposals(outcome.propose_summary))
 
 
+def _incomplete_line(error: Exception, failures: Sequence[str]) -> str:
+    """The one stderr line of a fetch or propose step that finished with failures (at most 10 are listed)."""
+    shown = ", ".join(failures[:MAX_FAILURES_SHOWN])
+    hidden = len(failures) - MAX_FAILURES_SHOWN
+    if hidden > 0:
+        shown += f", ... and {hidden} more (see the report)"
+    return f"{type(error).__name__}: {error}: {shown}"
+
+
 def _describe_proposals(summary: ProposeSummary) -> str:
     """The lines printed after a propose step (a dry run prints its rough estimate instead)."""
     if summary.dry_run:
@@ -381,12 +421,15 @@ def _describe_proposals(summary: ProposeSummary) -> str:
             f" (text length / 4): {summary.input_tokens} input and {summary.output_tokens} output"
             f" tokens, about USD {summary.cost_usd:.4f}. Nothing was written."
         )
-    return (
+    text = (
         f"Proposals:   {summary.themes} theme(s) and {summary.keywords} keyword(s) for"
         f" {summary.stored} of {summary.resources} resource(s), {summary.calls} call(s),"
-        f" estimated cost USD {summary.cost_usd:.4f}, {summary.warnings} warning(s)\n"
-        f"Propose report: {summary.report_path}"
+        f" estimated cost USD {summary.cost_usd:.4f}, {summary.errors} error(s),"
+        f" {summary.warnings} warning(s)"
     )
+    if summary.report_path:
+        text += f"\nPropose report: {summary.report_path}"
+    return text
 
 
 if __name__ == "__main__":
