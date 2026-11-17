@@ -39,9 +39,8 @@ DCAT_THEME = "http://www.w3.org/ns/dcat#theme"
 # A Dataset's own entity has an id under this prefix; any other dataset entity of the record is a related one.
 OWN_DATASET_PREFIX = "http://data.europa.eu/88u/"
 ENGLISH_TAGS = frozenset({"en", "eng"})
-THEME_CAP = (
-    5  # existing in-vocabulary themes + proposed ones; also ``max_items`` of the prompt
-)
+# Existing in-vocabulary themes + proposed ones; also ``max_items`` of the prompt.
+THEME_CAP = 5
 MAX_EMPTY_RETRIES = 3  # retries of an answer with nothing valid left: at most 4 calls
 THEMES_PROMPT = "propose_themes"
 
@@ -72,16 +71,15 @@ def own_entity(
 ) -> tuple[str | None, str | None]:
     """The resource's own entity among the ids of its kind: ``(entity_id, None)`` or ``(None, reason)``."""
     ids = sorted(set(entity_ids))
+    where = ""
     if resource_type == "dataset":
         ids = [i for i in ids if i.startswith(OWN_DATASET_PREFIX)]
-        what = f"dataset entity with an id starting with {OWN_DATASET_PREFIX}"
-    else:
-        what = f"{resource_type} entity"
+        where = f" with an id starting with {OWN_DATASET_PREFIX}"
     if len(ids) == 1:
         return ids[0], None
     if not ids:
-        return None, f"no {what}"
-    return None, f"{len(ids)} {what}s ({', '.join(ids)})"
+        return None, f"no {resource_type} entity{where}"
+    return None, f"{len(ids)} {resource_type} entities{where} ({', '.join(ids)})"
 
 
 def read_resource(conn: Connection, resource_pk: int) -> ResourceText:
@@ -125,15 +123,24 @@ def read_resource(conn: Connection, resource_pk: int) -> ResourceText:
             DCAT_THEME,
         ),
     ):
-        if property_uri == DCAT_THEME:
+        lang = lang or None  # an empty tag is no tag
+        if property_uri == DCAT_THEME and value_kind == "uri":
+            themes.append(value)
+        elif property_uri == DCAT_THEME and value_kind == "node":
             # A Dataset stores a theme as a node (the concept's JSON, its URI in @id), a Data Service as a uri.
-            if value_kind == "uri":
-                themes.append(value)
-            elif value_kind == "node":
-                themes.append(_node_id(value, resource_id))
-        elif value_kind == "literal":
+            themes.append(_node_id(value, resource_id))
+        elif property_uri != DCAT_THEME and value_kind == "literal":
             (titles if property_uri == DCT_TITLE else descriptions).append(
                 (lang, value)
+            )
+        else:
+            # A literal or blank-node theme cannot be a vocabulary URI; a non-text title cannot be sent.
+            logger.debug(
+                "resource %s: %s value of kind %s ignored: %r",
+                resource_id,
+                property_uri,
+                value_kind,
+                value,
             )
     return ResourceText(
         resource_pk,
@@ -273,6 +280,13 @@ class PromptInfo:
 
 @dataclass(frozen=True)
 class ThemeResult:
+    """The outcome of the theme proposal for one resource, for storage (#23) and the report.
+
+    ``ok``: ``themes`` holds 1 to (5 - existing) new themes. ``skipped``: no call was needed or possible
+    (``issues`` says why, except at the cap). ``error``: calls were made but gave nothing usable; ``themes``
+    is empty and the last issue is the error.
+    """
+
     resource_id: str
     status: Status
     themes: tuple[str, ...]  # new themes as authority URIs; empty unless "ok"
@@ -290,6 +304,9 @@ def propose_themes(
     Skipped (no call) when the resource has no own entity or no title (with a warning) or already has 5
     in-vocabulary themes (without one). An answer with nothing valid left is retried up to 3 times; a failed
     call (``LLMError``) ends at once. Both give an ``error`` result with no themes.
+
+    Raises ``PromptError`` when the active prompt cannot be loaded or its ``max_items`` is not the theme cap:
+    a broken prompt is a setup error for the whole run, not a problem of one resource.
     """
     resource_id = resource.resource_id
     issues: list[Issue] = []
@@ -320,6 +337,11 @@ def propose_themes(
         return result("skipped", existing)
     remaining = THEME_CAP - len(existing)
     if remaining <= 0:
+        logger.info(
+            "resource %s: skipped, already %d in-vocabulary themes",
+            resource_id,
+            len(existing),
+        )
         return result("skipped", existing)
 
     prompt = load_prompt(
@@ -340,6 +362,7 @@ def propose_themes(
     info = PromptInfo(prompt.name, prompt.version, prompt.sha256, prompt.model)
 
     calls = 0
+    codes: list[str] = []
     for _ in range(1 + MAX_EMPTY_RETRIES):
         calls += 1
         try:
@@ -347,15 +370,19 @@ def propose_themes(
         except LLMError as error:
             report("error", f"theme call failed: {error}")
             return result("error", existing, prompt=info, calls=calls)
-        themes, warnings = validate_codes(
-            answer.output["themes"], existing, remaining, vocabulary
-        )
+        codes = answer.output["themes"]
+        themes, warnings = validate_codes(codes, existing, remaining, vocabulary)
         for message in warnings:
             report("warning", message)
         if themes:
             return result("ok", existing, themes, info, calls)
-        logger.info("resource %s: no valid new theme in answer %d", resource_id, calls)
-    report("error", f"no valid new theme after {calls} calls")
+        logger.info(
+            "resource %s: no valid new theme in answer %d: %r",
+            resource_id,
+            calls,
+            codes,
+        )
+    report("error", f"no valid new theme after {calls} calls (last answer: {codes!r})")
     return result("error", existing, prompt=info, calls=calls)
 
 

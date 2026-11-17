@@ -6,17 +6,22 @@ small records written by the tests with the real loader, so the stored shapes ar
 
 import json
 import logging
+import re
 
 import pytest
 
+from mqa_advisor import propose
 from mqa_advisor.catalogue_db import connect, load_catalogue
 from mqa_advisor.llm import (
     BackendResponse,
     FakeBackend,
     LLMCallError,
     LLMClient,
+    LLMInputError,
+    LLMResponseError,
     RunLog,
 )
+from mqa_advisor.prompts import PromptError, active_version, load_prompt
 from mqa_advisor.propose import (
     OWN_DATASET_PREFIX,
     ResourceText,
@@ -88,7 +93,7 @@ def _write_service(folder, record):
 
 
 def _dataset_with_related_dataset(folder):
-    """A record holding its own Dataset and a related one, each with a title and themes."""
+    """A record holding its own Dataset, a related Dataset and a Distribution, each with its own text."""
     _write_dataset(
         folder,
         "d1",
@@ -99,12 +104,20 @@ def _dataset_with_related_dataset(folder):
                 "dct:title": {"@value": "Air quality", "@language": "eng"},
                 "dct:description": {"@value": "Valeurs horaires", "@language": "fra"},
                 "dcat:theme": [{"@id": uri("ENVI")}, {"@id": OUTSIDE}],
+                "dcat:distribution": {"@id": "https://example.org/dist/1"},
             },
             {"@id": uri("ENVI"), "@type": "skos:Concept"},
+            {
+                "@id": "https://example.org/dist/1",
+                "@type": "dcat:Distribution",
+                "dct:title": {"@value": "CSV file", "@language": "eng"},
+                "dct:description": {"@value": "Download", "@language": "eng"},
+            },
             {
                 "@id": RELATED,
                 "@type": "dcat:Dataset",
                 "dct:title": {"@value": "Other dataset", "@language": "eng"},
+                "dct:description": {"@value": "Other text", "@language": "eng"},
                 "dcat:theme": {"@id": uri("AGRI")},
             },
         ],
@@ -149,6 +162,11 @@ def run(item, vocabulary, *script):
     return result, backend
 
 
+def asked_for(backend, call=0) -> int:
+    """The number of new themes a request asked for (the ``$remaining`` value in the user part)."""
+    return int(re.search(r"up to (\d+)", backend.requests[call].user).group(1))
+
+
 # --- own entity --------------------------------------------------------------------------------
 
 
@@ -165,7 +183,7 @@ def test_dataset_without_an_own_entity():
 def test_dataset_with_two_own_entities():
     entity, problem = own_entity("dataset", [OWN, OWN_DATASET_PREFIX + "dataset/d2"])
     assert entity is None
-    assert problem.startswith("2 ")
+    assert problem.startswith("2 dataset entities with an id starting with")
 
 
 def test_own_entity_of_a_data_service():
@@ -226,6 +244,61 @@ def test_read_data_service_theme_shape(conn, folder):
         (("eng", "Traffic API"),),
         (uri("TRAN"),),
     )
+
+
+def test_read_dataset_with_two_own_entities(conn, folder):
+    _write_dataset(
+        folder,
+        "d3",
+        [
+            {"@id": OWN, "@type": "dcat:Dataset", "dct:title": "One"},
+            {"@id": OWN_DATASET_PREFIX + "dataset/d3", "@type": "dcat:Dataset"},
+        ],
+    )
+    _load(conn, folder)
+    text = read_resource(conn, _pk(conn, "d3"))
+    assert text.entity_id is None
+    assert text.problem.startswith("2 dataset entities")
+    assert text.titles == ()
+
+
+def test_read_data_service_with_two_entities(conn, folder):
+    _write_service(folder, {"id": "svc1", "title": {"eng": "Traffic API"}})
+    _load(conn, folder)
+    pk = _pk(conn, "svc1")
+    # The mapper writes one entity per Data Service; a second one can only come from a broken database.
+    conn.execute(
+        "INSERT INTO property_value (resource_pk, entity_id, entity_kind, property_uri, value, value_kind)"
+        " VALUES (?, 'svc2', 'dataservice', ?, 'Other', 'literal')",
+        (pk, propose.DCT_TITLE),
+    )
+    text = read_resource(conn, pk)
+    assert text.entity_id is None
+    assert "2 dataservice entities" in text.problem
+
+
+def test_read_ignores_non_text_titles_and_literal_themes(conn, folder, caplog):
+    _write_dataset(
+        folder,
+        "d4",
+        [
+            {
+                "@id": OWN_DATASET_PREFIX + "dataset/d4",
+                "@type": "dcat:Dataset",
+                "dct:title": [
+                    {"@value": "Air quality", "@language": ""},
+                    {"@id": "https://example.org/title"},
+                ],
+                "dcat:theme": "ENVI",
+            }
+        ],
+    )
+    _load(conn, folder)
+    with caplog.at_level(logging.DEBUG, logger="mqa_advisor.propose"):
+        text = read_resource(conn, _pk(conn, "d4"))
+    assert text.titles == ((None, "Air quality"),)  # an empty tag is no tag
+    assert text.theme_uris == ()
+    assert sum("ignored" in r.getMessage() for r in caplog.records) == 2
 
 
 def test_read_unknown_resource_raises(conn):
@@ -293,6 +366,42 @@ def test_read_unknown_resource_raises(conn):
             ("Air quality", "", "eng"),
             id="no-description",
         ),
+        pytest.param(
+            [("ENG", "Air quality")],
+            [("en", "Values")],
+            ("Air quality", "Values", "ENG"),
+            id="upper-case-english-tag",
+        ),
+        pytest.param(
+            [("FRA", "Qualité")],
+            [("fra", "Valeurs")],
+            ("Qualité", "Valeurs", "FRA"),
+            id="tags-compared-without-case",
+        ),
+        pytest.param(
+            [("eng", "  "), ("fra", "Qualité")],
+            [("fra", "Valeurs")],
+            ("Qualité", "Valeurs", "fra"),
+            id="blank-english-title-ignored",
+        ),
+        pytest.param(
+            [("eng", "Air quality")],
+            [("eng", "B text"), ("eng", "A text")],
+            ("Air quality", "A text", "eng"),
+            id="two-descriptions-in-the-language",
+        ),
+        pytest.param(
+            [("eng", "Air quality")],
+            [("fra", "Valeurs"), ("deu", "Werte")],
+            ("Air quality", "(language: deu) Werte", "eng"),
+            id="several-other-languages-first-tag",
+        ),
+        pytest.param(
+            [("eng", "Air quality")],
+            [("eng", " ")],
+            ("Air quality", "", "eng"),
+            id="blank-description",
+        ),
     ],
 )
 def test_choose_language(titles, descriptions, expected):
@@ -348,6 +457,14 @@ def test_validate_cuts_at_the_remaining_count(vocabulary):
     assert "cut" in warnings[0]
 
 
+def test_validate_unknown_codes_do_not_use_the_cap(vocabulary):
+    themes, warnings = validate_codes(["BOGUS", "AGRI", "ECON"], [], 1, vocabulary)
+    assert themes == (uri("AGRI"),)
+    assert "'BOGUS'" in warnings[0]
+    assert "cut" in warnings[1]
+    assert len(warnings) == 2
+
+
 # --- the proposal ------------------------------------------------------------------------------
 
 
@@ -356,15 +473,29 @@ def test_valid_answer(vocabulary):
     assert result.status == "ok"
     assert result.themes == (uri("ENVI"), uri("AGRI"))
     assert (result.calls, result.issues, result.existing_themes) == (1, (), ())
-    assert (result.prompt.name, result.prompt.version) == ("propose_themes", 1)
-    assert result.prompt.model == "claude-haiku-5-5"
-    user = backend.requests[0].user
-    assert "<title>Air quality</title>" in user
-    assert "<description>Hourly NO2 values</description>" in user
-    assert "up to 5 additional themes" in user
-    assert (
-        "ENVI — " in backend.requests[0].system
-    )  # the vocabulary is in the system part
+    # The provenance is the active prompt's, whatever its version or model.
+    version = active_version("propose_themes")
+    loaded = load_prompt(
+        "propose_themes",
+        version,
+        {
+            "vocabulary": "v",
+            "title": "t",
+            "description": "d",
+            "existing_themes": "none",
+            "remaining": "5",
+        },
+    )
+    assert result.prompt == propose.PromptInfo(
+        "propose_themes", version, loaded.sha256, loaded.model
+    )
+    request = backend.requests[0]
+    assert "Air quality" in request.user
+    assert "Hourly NO2 values" in request.user
+    assert asked_for(backend) == 5
+    assert "none" in request.user  # no existing theme
+    # The whole vocabulary is in the system part.
+    assert all(line in request.system for line in propose.format_entries(vocabulary))
 
 
 def test_mixed_valid_and_invalid_codes(vocabulary, caplog):
@@ -387,7 +518,7 @@ def test_over_the_cap(vocabulary):
     result, backend = run(resource(themes=four), vocabulary, answer("AGRI", "ECON"))
     assert result.themes == (uri("AGRI"),)
     assert "cut" in result.issues[0].message
-    assert "up to 1 additional themes" in backend.requests[0].user
+    assert asked_for(backend) == 1
 
 
 def test_remaining_count_and_existing_themes_in_the_prompt(vocabulary):
@@ -395,14 +526,32 @@ def test_remaining_count_and_existing_themes_in_the_prompt(vocabulary):
         resource(themes=[uri("ENVI"), uri("TRAN"), OUTSIDE]), vocabulary, answer("AGRI")
     )
     user = backend.requests[0].user
-    assert "up to 3 additional themes" in user
+    assert asked_for(backend) == 3
     assert "ENVI — Environment" in user
     assert "TRAN — Transport" in user
 
 
-def test_cap_reached_makes_no_call(vocabulary):
-    five = [uri(c) for c in ("ENVI", "TRAN", "HEAL", "SOCI", "AGRI")]
-    result, backend = run(resource(themes=five), vocabulary)
+def test_duplicate_existing_uris_count_once(vocabulary):
+    themes = [uri(c) for c in ("ENVI", "ENVI", "TRAN", "HEAL", "SOCI")]
+    result, backend = run(resource(themes=themes), vocabulary, answer("AGRI"))
+    assert result.status == "ok"
+    assert asked_for(backend) == 1
+
+
+def test_four_themes_and_outside_ones_ask_for_one(vocabulary):
+    themes = [uri(c) for c in ("ENVI", "TRAN", "HEAL", "SOCI")] + [
+        OUTSIDE,
+        OUTSIDE + "2",
+    ]
+    _, backend = run(resource(themes=themes), vocabulary, answer("AGRI"))
+    assert asked_for(backend) == 1
+
+
+@pytest.mark.parametrize("count", [5, 6], ids=["five", "more-than-five"])
+def test_cap_reached_makes_no_call(vocabulary, count, caplog):
+    codes = ("ENVI", "TRAN", "HEAL", "SOCI", "AGRI", "ECON")[:count]
+    with caplog.at_level(logging.INFO, logger="mqa_advisor.propose"):
+        result, backend = run(resource(themes=[uri(c) for c in codes]), vocabulary)
     assert (result.status, result.calls, result.issues, result.prompt) == (
         "skipped",
         0,
@@ -410,12 +559,16 @@ def test_cap_reached_makes_no_call(vocabulary):
         None,
     )
     assert backend.requests == []
+    # Only this module's records: the run log writes its own lines under a child logger.
+    records = [r for r in caplog.records if r.name == "mqa_advisor.propose"]
+    assert [r.levelname for r in records] == ["INFO"]
+    assert "resource d1" in records[0].getMessage()
 
 
 def test_themes_all_outside_the_vocabulary_still_get_a_call(vocabulary):
     result, backend = run(resource(themes=[OUTSIDE]), vocabulary, answer("ENVI"))
     assert result.status == "ok"
-    assert "up to 5 additional themes" in backend.requests[0].user
+    assert asked_for(backend) == 5
 
 
 def test_description_in_another_language_is_labelled(vocabulary):
@@ -432,23 +585,48 @@ def test_no_description_sends_the_title_alone(vocabulary):
     assert "<description></description>" in backend.requests[0].user
 
 
-def test_no_title_is_skipped_with_a_warning(vocabulary):
-    result, backend = run(resource(titles=[]), vocabulary)
+def test_no_title_is_skipped_with_a_warning(vocabulary, caplog):
+    with caplog.at_level(logging.WARNING, logger="mqa_advisor.propose"):
+        result, backend = run(resource(titles=[]), vocabulary)
     assert result.status == "skipped"
     assert [(i.severity, i.message) for i in result.issues] == [
         ("warning", "skipped: no title")
     ]
     assert backend.requests == []
+    assert [r.levelname for r in caplog.records] == ["WARNING"]
+    assert "resource d1" in caplog.records[0].getMessage()
 
 
-def test_no_own_entity_is_skipped_with_a_warning(vocabulary):
-    result, backend = run(
-        resource(entity_id=None, problem="no dataset entity"), vocabulary
-    )
+def test_no_own_entity_is_skipped_with_a_warning(vocabulary, caplog):
+    with caplog.at_level(logging.WARNING, logger="mqa_advisor.propose"):
+        result, backend = run(
+            resource(entity_id=None, problem="no dataset entity"), vocabulary
+        )
     assert result.status == "skipped"
     assert result.issues[0].severity == "warning"
     assert "no dataset entity" in result.issues[0].message
     assert backend.requests == []
+    assert [r.levelname for r in caplog.records] == ["WARNING"]
+    assert "resource d1" in caplog.records[0].getMessage()
+
+
+def test_data_service_end_to_end(conn, folder, vocabulary):
+    _write_service(
+        folder,
+        {
+            "id": "svc1",
+            "title": {"eng": "Open data platform API"},
+            "theme": [{"resource": uri("TECH")}],
+        },
+    )
+    _load(conn, folder)
+    result, backend = run(
+        read_resource(conn, _pk(conn, "svc1")), vocabulary, answer("GOVE")
+    )
+    assert (result.status, result.themes) == ("ok", (uri("GOVE"),))
+    assert result.existing_themes == (uri("TECH"),)
+    assert "TECH — " in backend.requests[0].user
+    assert asked_for(backend) == 4
 
 
 def test_third_retry_succeeds(vocabulary):
@@ -461,41 +639,78 @@ def test_third_retry_succeeds(vocabulary):
 
 
 def test_retries_exhausted(vocabulary, caplog):
-    script = [answer("X")] * 4 + [
-        answer("ENVI")
-    ]  # a fifth answer exists but must not be asked for
+    # A fifth answer exists but must not be asked for.
+    script = [answer("X")] * 4 + [answer("ENVI")]
     with caplog.at_level(logging.ERROR, logger="mqa_advisor.propose"):
-        result, backend = run(resource(), vocabulary, *script)
+        result, backend = run(resource(themes=[uri("TRAN")]), vocabulary, *script)
     assert (result.status, result.themes, result.calls) == ("error", (), 4)
     assert len(backend.requests) == 4
-    assert result.issues[-1].severity == "error"
+    assert [i.severity for i in result.issues] == ["warning"] * 4 + ["error"]
+    error = result.issues[-1]
+    assert error.resource_id == "d1"
+    assert "4 calls" in error.message
+    assert "'X'" in error.message  # the last answer
+    assert result.existing_themes == (uri("TRAN"),)
+    assert result.prompt is not None
     assert [r.levelname for r in caplog.records] == ["ERROR"]
     assert "resource d1" in caplog.records[0].getMessage()
 
 
-def test_call_failure_is_an_error_without_retry(vocabulary):
-    result, backend = run(
-        resource(), vocabulary, LLMCallError("API down", attempt=4), answer("ENVI")
-    )
-    assert (result.status, result.calls) == ("error", 1)
+@pytest.mark.parametrize(
+    "script",
+    [
+        pytest.param([answer("ENVI")] * 4, id="only-existing-themes"),
+    ],
+)
+def test_empty_answers_are_retried_without_a_warning(vocabulary, script):
+    # An empty list never gets here: the schema's minItems makes it a schema mismatch (an error, no retry).
+    result, backend = run(resource(themes=[uri("ENVI")]), vocabulary, *script)
+    assert (result.status, result.calls, len(backend.requests)) == ("error", 4, 4)
+    assert [i.severity for i in result.issues] == ["error"]
+
+
+@pytest.mark.parametrize(
+    "error",
+    [
+        pytest.param(LLMCallError("API down", attempt=4), id="api-failure"),
+        pytest.param(LLMResponseError("API down: schema", "{}"), id="schema-mismatch"),
+        pytest.param(LLMInputError("API down: prompt too long"), id="call-not-made"),
+    ],
+)
+def test_call_failure_is_an_error_without_retry(vocabulary, error, caplog):
+    with caplog.at_level(logging.ERROR, logger="mqa_advisor.propose"):
+        result, backend = run(resource(), vocabulary, error, answer("ENVI"))
+    assert (result.status, result.calls, result.themes) == ("error", 1, ())
     assert len(backend.requests) == 1
+    assert [i.severity for i in result.issues] == ["error"]
     assert "API down" in result.issues[0].message
+    assert [r.levelname for r in caplog.records] == ["ERROR"]
+    assert "resource d1" in caplog.records[0].getMessage()
+
+
+def test_call_failure_after_an_empty_answer(vocabulary):
+    result, backend = run(
+        resource(), vocabulary, answer("X"), LLMCallError("API down"), answer("ENVI")
+    )
+    assert (result.status, result.calls, len(backend.requests)) == ("error", 2, 2)
+    assert [i.severity for i in result.issues] == ["warning", "error"]
+
+
+def test_prompt_cap_mismatch_raises_before_any_call(vocabulary, monkeypatch):
+    monkeypatch.setattr(propose, "THEME_CAP", 4)
+    backend = FakeBackend([answer("ENVI")])
+    with RunLog("cat", enabled=False) as run_log:
+        with pytest.raises(PromptError, match="max_items"):
+            propose_themes(resource(), LLMClient(backend, run_log), vocabulary)
+    assert backend.requests == []
 
 
 def test_nothing_is_written_to_the_database(conn, folder, vocabulary):
     _dataset_with_related_dataset(folder)
     _load(conn, folder)
-
-    def counts():
-        return [
-            conn.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]  # noqa: S608 - fixed table names
-            for table in ("resource", "property_value", "proposed_property_value")
-        ]
-
-    before = counts()
+    changes = conn.total_changes
     result, _ = run(read_resource(conn, _pk(conn, "d1")), vocabulary, answer("AGRI"))
     assert result.status == "ok"
-    assert result.existing_themes == (
-        uri("ENVI"),
-    )  # the related dataset's AGRI is not existing
-    assert counts() == before
+    # The related dataset's AGRI is not an existing theme of d1.
+    assert result.existing_themes == (uri("ENVI"),)
+    assert conn.total_changes == changes
