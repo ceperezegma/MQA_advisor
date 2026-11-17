@@ -24,9 +24,12 @@ The pipeline SHALL accept `propose` as a step, run after `db` when selected. The
 - **THEN** the proposals are made after the database load, on the freshly loaded resources
 
 ### Requirement: Inputs are checked before any call
-Before any model call, the step SHALL check that `ANTHROPIC_API_KEY` is set and that the catalogue has resources in
-the database for the selected environment, and SHALL raise `PipelineInputError` otherwise. No call, no row written and
-no log file SHALL result from a failed check. A dry run needs no key, since it calls no model.
+Before any step runs, the pipeline SHALL check, when `propose` is selected, that `ANTHROPIC_API_KEY` is set, that the
+data-theme vocabulary can be loaded and that the active prompt files exist, and, when the `db` step is not selected,
+that the catalogue has resources in the database for the selected environment. A failed check SHALL raise
+`PipelineInputError`; no call, no row written and no log file SHALL result from it, and the check SHALL NOT create or
+modify the database file. When `db` is selected the catalogue is checked again right after the load. A dry run needs no
+key, since it calls no model.
 
 #### Scenario: Missing key
 - **WHEN** the step runs without `ANTHROPIC_API_KEY`, not as a dry run
@@ -35,6 +38,14 @@ no log file SHALL result from a failed check. A dry run needs no key, since it c
 #### Scenario: Unknown catalogue
 - **WHEN** the catalogue has no resources in the database
 - **THEN** a `PipelineInputError` names the catalogue and the step does not start
+
+#### Scenario: Checks come before the other steps
+- **WHEN** `--steps db,propose` is given without a key
+- **THEN** the input error is raised before the `db` step loads anything
+
+#### Scenario: Unusable vocabulary
+- **WHEN** the data-theme vocabulary file is missing or malformed
+- **THEN** a `PipelineInputError` is raised before any step runs
 
 ### Requirement: Per-resource flow and write order
 For each resource the step SHALL make the themes call and then the keywords call (the keyword call receives the
@@ -54,6 +65,11 @@ The stored proposals SHALL NOT depend on the number of workers.
 - **WHEN** the `db` step reloads the catalogue after a propose run
 - **THEN** the proposals are gone and the pipeline logs how many the reload removed
 
+#### Scenario: A broken prompt stops the run
+- **WHEN** an active prompt file cannot be loaded or rendered while processing a resource
+- **THEN** the run stops with that error (a setup problem of the whole run, not of one resource), no further call is
+  started, and the exit code is 1
+
 ### Requirement: Limit
 `--limit N` SHALL restrict the step to the first N resources ordered by resource id. `N` and `--workers` SHALL be
 positive integers.
@@ -65,12 +81,18 @@ positive integers.
 ### Requirement: Dry run
 `--dry-run` SHALL build every prompt the run would send, call no model, write no proposal row, create no log file
 and not touch the report. It SHALL print the number of calls and a token and cost estimate computed locally from text
-length, labelled as rough.
+length, labelled as rough. A resource whose prompt cannot be built SHALL be reported as an error, so a dry run that
+could not estimate every resource fails with exit code 1 instead of printing an underestimate. A model missing from the
+price table SHALL NOT make a resource fail; its cost is counted as zero with a warning.
 
 #### Scenario: Nothing is written
 - **WHEN** the step runs with `--dry-run`
 - **THEN** the proposals table is unchanged, no file is created under `logs/propose/`, and the output shows the number
   of calls and a rough estimate labelled as such
+
+#### Scenario: Dry run that cannot estimate
+- **WHEN** a dry run meets a resource for which the step raises an unexpected error
+- **THEN** the error is reported and the exit code is 1, and still nothing is written
 
 ### Requirement: Step options belong to the propose step
 `--limit`, `--dry-run` and `--workers` SHALL be rejected as a usage error when `propose` is not among the selected
@@ -81,9 +103,12 @@ steps. `--workers` SHALL default to 4.
 - **THEN** the command fails with a usage error and nothing runs
 
 ### Requirement: Every resource is attempted and valid proposals are saved
-A failure of one resource SHALL NOT stop the others. Every valid proposal SHALL be saved, also in a run that ends with
-errors. A resource skipped for having no title is a warning and SHALL NOT fail the run. A resource whose calls all
-failed SHALL keep its earlier proposals.
+A failure of one resource SHALL NOT stop the others, whatever its cause: a failed call, an unreadable resource, a
+proposal that cannot be stored, an unexpected exception. Each becomes an `error` of that resource. Every valid proposal
+SHALL be saved, also in a run that ends with errors. A resource skipped for having no title is a warning and SHALL NOT
+fail the run. When one of a resource's two calls failed, the earlier proposals of that call's property (themes or
+keywords) SHALL be kept and those of the other property replaced; when both failed, all earlier proposals are kept. A
+successful call that cannot be stored (for example no own entity) SHALL be an `error`, never a silent drop.
 
 #### Scenario: One resource fails
 - **WHEN** the model call fails for one of three resources
@@ -94,13 +119,27 @@ failed SHALL keep its earlier proposals.
 - **WHEN** a resource has no title
 - **THEN** the report has a `warning` row for it, nothing is stored for it, and the exit code is 0
 
+#### Scenario: Only one call fails
+- **WHEN** a resource has stored themes and keywords, and on a re-run the themes call fails but the keywords call
+  succeeds
+- **THEN** the stored themes are kept, the keywords are replaced, and the report has an `error` row for the themes call
+
+#### Scenario: A resource cannot be stored
+- **WHEN** storing the proposals of one resource raises an error
+- **THEN** that resource has an `error` row, the other resources are stored, the report is written, and the exit code
+  is 1
+
 ### Requirement: The report is always written
 The step SHALL write `propose_report.xlsx` in the catalogue folder on every non-dry run, even with zero errors. Sheet
 *Errors* SHALL have one row per problem (resource type and id, which call, severity `error` or `warning`, message,
 prompt name and version, model, UTC time). Sheet *Summary* SHALL give the counts of resources per outcome and of
 problems per severity, the call and token totals and the estimated total cost in USD. If any `error` exists the step
-SHALL exit 1, after saving the proposals and writing the report. If the report cannot be written, the failures SHALL
-still be raised, naming the report problem as well.
+SHALL exit 1, after saving the proposals and writing the report, and a resource whose call failed SHALL always have an
+`error` row. The report SHALL be written atomically (a failed write leaves no truncated or stale file as the report),
+characters a workbook cannot hold SHALL be removed from text cells, and text cells SHALL never be interpreted as
+formulas. If the report cannot be written, for whatever reason, the failures SHALL still be raised, naming the report
+problem as well; the exit code is 1 and the proposals saved so far stay saved. Token figures cover the answered calls;
+the cost is the run log total, which also includes failed calls that were billed.
 
 #### Scenario: No problems
 - **WHEN** every resource succeeds
@@ -118,3 +157,13 @@ log of the LLM client is written for each non-dry run.
 #### Scenario: Run summary
 - **WHEN** a non-dry run ends
 - **THEN** a summary line with the resource, call and item totals and the estimated cost is logged
+
+#### Scenario: Progress on the console
+- **WHEN** the pipeline runs
+- **THEN** the application's own INFO lines are shown, and the INFO lines of third-party libraries (for example one
+  line per HTTP request) are not
+
+#### Scenario: Failure still shows the totals
+- **WHEN** the step ends with errors
+- **THEN** the proposals summary (counts, calls, estimated cost, warnings) is printed together with the one-line
+  error message
