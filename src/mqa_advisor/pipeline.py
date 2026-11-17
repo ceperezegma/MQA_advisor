@@ -1,6 +1,6 @@
-"""Prepares the catalogue database: manifest -> fetch -> database load, each step optional.
+"""Prepares the catalogue database and proposes metadata: manifest -> fetch -> db -> propose, each optional.
 
-Three steps run in this fixed order; each one either runs or reuses what an earlier run left
+Four steps run in this fixed order; each one either runs or reuses what an earlier run left
 on disk:
 
     manifest   generate `catalogues_to_fetch/{catalogue}.xlsx` from the environment's SPARQL
@@ -9,10 +9,15 @@ on disk:
                `fetched_catalogues_data/{PPE|PROD}/{catalogue}/` (`ingest.PPEIngestor`)
     db         load those files into `fetched_catalogues_data/mqa.sqlite`, creating the tables
                and views on first use (`catalogue_db.load_catalogue`)
+    propose    (opt-in: not in the default steps) ask the model for new `dcat:theme` and
+               `dcat:keyword` values of every resource of the catalogue in the database and
+               store them in `proposed_property_value` (`propose_step.run_propose`, ADR-0017)
 
 A step that is not selected is not run: the next one reads its output from the existing files.
 Before anything runs, `run` checks those files exist and stops early with a `PipelineInputError`
-if one is missing, so a long fetch is never started only to fail at the load.
+if one is missing, so a long fetch is never started only to fail at the load. For `propose` it
+also checks that `ANTHROPIC_API_KEY` is set (not on a dry run) and, without the `db` step, that
+the catalogue is in the database.
 
 One environment (`MQA_ENV`: `PPE` or `PROD`, default `PROD`, see `environment.py`) drives every
 step and every folder. Unlike the Test Run of MQA_test, any failure of a selected step is fatal:
@@ -21,16 +26,26 @@ fetch (`ingest.FetchIncompleteError`, raised after the report is written) stops 
 db step; `--steps db` can still load the partial files, and since the database always mirrors the
 folder, that load removes the rows of the resources that failed to download.
 
+The propose step follows the same pattern (ADR-0016, ADR-0019): it attempts every resource, saves every
+valid proposal, always writes `propose_report.xlsx` in the catalogue folder, and only then fails
+(`ProposeIncompleteError`, exit 1) if any resource had an error. Its options are `--limit N` (the first N
+resources by id), `--dry-run` (builds every prompt, calls no model, writes nothing, prints the number of
+calls and a rough cost estimate) and `--workers N` (default 4); they are rejected unless `propose` is
+selected. A later `db` step reloads the catalogue and deletes its proposals (the load logs how many).
+
 Usage:
 
     uv run python -m mqa_advisor.pipeline {catalogue}
     uv run python -m mqa_advisor.pipeline {catalogue} --steps db
     uv run python -m mqa_advisor.pipeline {catalogue} --steps fetch,db --force
+    uv run python -m mqa_advisor.pipeline {catalogue} --steps propose --limit 20 --dry-run
+    uv run python -m mqa_advisor.pipeline {catalogue} --steps db,propose --workers 8
 """
 
 from __future__ import annotations
 
 import argparse
+import logging
 import sqlite3
 import sys
 from collections.abc import Callable, Collection, Sequence
@@ -48,10 +63,19 @@ from mqa_advisor.ingest import (
     PPEIngestor,
     ResourceFetchError,
 )
+from mqa_advisor.llm import LLMError, LLMInputError, load_api_key
 from mqa_advisor.manifest import ManifestGenerationError
 from mqa_advisor.manifest import generate_manifest as _generate_manifest
+from mqa_advisor.propose_step import (
+    DEFAULT_WORKERS,
+    ProposeIncompleteError,
+    ProposeSummary,
+    run_propose,
+)
 
-STEPS: tuple[str, ...] = ("manifest", "fetch", "db")
+STEPS: tuple[str, ...] = ("manifest", "fetch", "db", "propose")
+# `propose` is opt-in: it spends money.
+DEFAULT_STEPS: tuple[str, ...] = ("manifest", "fetch", "db")
 MAX_FAILURES_SHOWN = 10
 
 
@@ -67,6 +91,7 @@ class PipelineOutcome:
     manifest_path: Path | None = None
     fetch_report_path: Path | None = None
     load_summary: LoadSummary | None = None
+    propose_summary: ProposeSummary | None = None
 
 
 def parse_steps(value: str) -> tuple[str, ...]:
@@ -80,12 +105,29 @@ def parse_steps(value: str) -> tuple[str, ...]:
     return tuple(step for step in STEPS if step in chosen)
 
 
+def _catalogue_in_database(db_path: Path, env: str, catalogue: str) -> bool:
+    """Whether the database has resources of the catalogue (it never creates the database file)."""
+    if not db_path.exists():
+        return False
+    conn = connect(db_path)
+    try:
+        row = conn.execute(
+            "SELECT 1 FROM resource WHERE environment = ? AND catalogue = ? LIMIT 1",
+            (env, catalogue),
+        ).fetchone()
+    finally:
+        conn.close()
+    return row is not None
+
+
 def _check_inputs(
     catalogue: str,
     steps: Collection[str],
     env: str,
     manifests_dir: Path,
     fetched_data_dir: Path,
+    db_path: Path,
+    dry_run: bool,
 ) -> None:
     if "fetch" in steps and "manifest" not in steps:
         manifest = manifests_dir / f"{catalogue}.xlsx"
@@ -101,14 +143,28 @@ def _check_inputs(
                 f"the db step needs the fetched files in {directory}, which does not exist;"
                 f" add the 'fetch' step"
             )
+    if "propose" in steps:
+        if not dry_run:
+            try:
+                load_api_key()  # only checks the key is there; a dry run calls no model
+            except LLMInputError as e:
+                raise PipelineInputError(f"the propose step needs a key: {e}") from e
+        if "db" not in steps and not _catalogue_in_database(db_path, env, catalogue):
+            raise PipelineInputError(
+                f"the propose step needs {env}/{catalogue} in the database {db_path}, which has no"
+                f" such resources; add the 'db' step"
+            )
 
 
 def run(
     catalogue: str,
     *,
-    steps: Collection[str] = STEPS,
+    steps: Collection[str] = DEFAULT_STEPS,
     env: str | None = None,
     force: bool = False,
+    limit: int | None = None,
+    dry_run: bool = False,
+    workers: int = DEFAULT_WORKERS,
     manifests_dir: Path = MANIFESTS_DIR,
     fetched_data_dir: Path = FETCHED_DATA_DIR,
     db_path: Path = DB_PATH,
@@ -116,22 +172,28 @@ def run(
     manifest_generator: Callable[..., Path] = _generate_manifest,
     ingestor_factory: Callable[..., PPEIngestor] = PPEIngestor,
     loader: Callable[..., LoadSummary] = load_catalogue,
+    proposer: Callable[..., ProposeSummary] = run_propose,
 ) -> PipelineOutcome:
     """Run the selected `steps` for `catalogue` (see the module docstring).
 
-    `force` re-fetches every resource instead of keeping the files already on disk. The last
-    four parameters replace the real collaborators (tests inject fakes). Raises
-    `PipelineInputError` before running anything if an unselected step's output is missing;
-    errors of a selected step propagate, including `FetchIncompleteError` (the db step then
-    does not run, and the ingestor is still shut down).
+    `force` re-fetches every resource instead of keeping the files already on disk; `limit`,
+    `dry_run` and `workers` belong to the propose step. The last five parameters replace the
+    real collaborators (tests inject fakes). Raises `PipelineInputError` before running anything
+    if an unselected step's output is missing; errors of a selected step propagate, including
+    `FetchIncompleteError` (the db step then does not run, and the ingestor is still shut down)
+    and `ProposeIncompleteError` (raised after the proposals are saved and the report written).
     """
     unknown = set(steps) - set(STEPS)
     if unknown:
         raise ValueError(f"unknown step(s): {', '.join(sorted(unknown))}")
+    if workers < 1 or (limit is not None and limit < 1):
+        raise ValueError("workers and limit must be positive integers")
     run_env = resolve_env(env)
-    _check_inputs(catalogue, steps, run_env, manifests_dir, fetched_data_dir)
+    _check_inputs(
+        catalogue, steps, run_env, manifests_dir, fetched_data_dir, db_path, dry_run
+    )
 
-    manifest_path = fetch_report_path = load_summary = None
+    manifest_path = fetch_report_path = load_summary = propose_summary = None
 
     # One session (and so one PPE login) serves the manifest query and the fetch.
     session = session_factory(run_env) if {"manifest", "fetch"} & set(steps) else None
@@ -162,7 +224,29 @@ def run(
         finally:
             conn.close()
 
-    return PipelineOutcome(run_env, manifest_path, fetch_report_path, load_summary)
+    if "propose" in steps:
+        # After a db step the catalogue is in the database only now, so this check cannot be earlier.
+        if not _catalogue_in_database(db_path, run_env, catalogue):
+            raise PipelineInputError(
+                f"the propose step found no resources of {run_env}/{catalogue} in {db_path}"
+            )
+        conn = connect(db_path)
+        try:
+            propose_summary = proposer(
+                run_env,
+                catalogue,
+                conn=conn,
+                fetched_data_dir=fetched_data_dir,
+                limit=limit,
+                dry_run=dry_run,
+                workers=workers,
+            )
+        finally:
+            conn.close()
+
+    return PipelineOutcome(
+        run_env, manifest_path, fetch_report_path, load_summary, propose_summary
+    )
 
 
 def _describe_cause(cause: Exception) -> str:
@@ -186,14 +270,30 @@ def main(argv: Sequence[str] | None = None) -> None:
     parser.add_argument("catalogue", help="catalogue name, e.g. nsip-lu")
     parser.add_argument(
         "--steps",
-        default=",".join(STEPS),
-        help="comma-separated steps to run, from: %(default)s (default: all)."
-        " The steps not run reuse the existing files.",
+        default=",".join(DEFAULT_STEPS),
+        help=f"comma-separated steps to run, from: {', '.join(STEPS)} (default: %(default)s;"
+        " `propose` is opt-in). The steps not run reuse the existing files.",
     )
     parser.add_argument(
         "--force",
         action="store_true",
         help="re-fetch every resource instead of keeping the files already on disk",
+    )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        help="propose step: only the first N resources by id",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="propose step: build every prompt, call no model, write nothing, and print the number"
+        " of calls and a rough cost estimate",
+    )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        help=f"propose step: parallel model calls (default {DEFAULT_WORKERS})",
     )
     args = parser.parse_args(argv)
 
@@ -201,12 +301,47 @@ def main(argv: Sequence[str] | None = None) -> None:
         steps = parse_steps(args.steps)
     except ValueError as e:
         parser.error(str(e))
+    propose_options = {
+        "--limit": args.limit is not None,
+        "--dry-run": args.dry_run,
+        "--workers": args.workers is not None,
+    }
+    if "propose" not in steps:
+        given = [name for name, used in propose_options.items() if used]
+        if given:
+            parser.error(f"{', '.join(given)} only apply to the 'propose' step")
+    if args.limit is not None and args.limit < 1:
+        parser.error("--limit must be a positive integer")
+    if args.workers is not None and args.workers < 1:
+        parser.error("--workers must be a positive integer")
+
+    # The console handler for the progress lines of every step (the propose step logs per resource).
+    logging.basicConfig(
+        level=logging.INFO, format="%(levelname)s %(name)s: %(message)s"
+    )
 
     try:
-        outcome = run(args.catalogue, steps=steps, force=args.force)
+        outcome = run(
+            args.catalogue,
+            steps=steps,
+            force=args.force,
+            limit=args.limit,
+            dry_run=args.dry_run,
+            workers=args.workers or DEFAULT_WORKERS,
+        )
     except FetchIncompleteError as e:
         shown = ", ".join(
             f"{f.resource_type} {f.resource_id} ({_describe_cause(f.cause)})"
+            for f in e.failures[:MAX_FAILURES_SHOWN]
+        )
+        hidden = len(e.failures) - MAX_FAILURES_SHOWN
+        if hidden > 0:
+            shown += f", ... and {hidden} more (see the report)"
+        print(f"{type(e).__name__}: {e}: {shown}", file=sys.stderr)
+        raise SystemExit(1) from e
+    except ProposeIncompleteError as e:
+        shown = ", ".join(
+            f"{f.resource_type} {f.resource_id} ({f.call}: {' '.join(f.message.split())})"
             for f in e.failures[:MAX_FAILURES_SHOWN]
         )
         hidden = len(e.failures) - MAX_FAILURES_SHOWN
@@ -219,6 +354,7 @@ def main(argv: Sequence[str] | None = None) -> None:
         ManifestGenerationError,
         ManifestNotFoundError,
         ConfigError,
+        LLMError,
         sqlite3.Error,
         ValueError,
         OSError,
@@ -233,6 +369,24 @@ def main(argv: Sequence[str] | None = None) -> None:
         print(f"Fetch report: {outcome.fetch_report_path}")
     if outcome.load_summary:
         print(f"Database:    {outcome.load_summary}")
+    if outcome.propose_summary:
+        print(_describe_proposals(outcome.propose_summary))
+
+
+def _describe_proposals(summary: ProposeSummary) -> str:
+    """The lines printed after a propose step (a dry run prints its rough estimate instead)."""
+    if summary.dry_run:
+        return (
+            f"Dry run:     {summary.resources} resource(s), {summary.calls} call(s); ROUGH estimate"
+            f" (text length / 4): {summary.input_tokens} input and {summary.output_tokens} output"
+            f" tokens, about USD {summary.cost_usd:.4f}. Nothing was written."
+        )
+    return (
+        f"Proposals:   {summary.themes} theme(s) and {summary.keywords} keyword(s) for"
+        f" {summary.stored} of {summary.resources} resource(s), {summary.calls} call(s),"
+        f" estimated cost USD {summary.cost_usd:.4f}, {summary.warnings} warning(s)\n"
+        f"Propose report: {summary.report_path}"
+    )
 
 
 if __name__ == "__main__":
