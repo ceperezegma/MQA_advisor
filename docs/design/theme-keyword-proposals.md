@@ -25,7 +25,10 @@ methodology; Distributions have neither, so they are out of scope.
 ## 3. Flow per resource
 
 1. Read the resource's title, description, existing themes and existing keywords from
-   `property_value` (`entity_kind` of the resource's own entity only).
+   `property_value` (`entity_kind` of the resource's own entity only). A Dataset's own entity is
+   the `dataset` entity whose id starts with `http://data.europa.eu/88u/` (a record can also hold
+   a related `dcat:Dataset` under another URI, which is ignored); a standalone Data Service has a
+   single entity. None or several found: the resource is skipped with a warning.
 2. **Themes.** Existing themes count when they are in the vocabulary (a Dataset stores a theme as a
    `node` value whose `@id` is the authority URI; a Data Service stores it as a `uri` value).
    If fewer than 5 count, call `propose_themes` asking for between 1 and (5 − existing) new ones.
@@ -49,7 +52,7 @@ A resource already at both caps makes no call.
 - Working language: English if the title has an English version; otherwise the title's language
   (the alphabetically first tag if there are several).
 - The description is sent in that language if it exists, otherwise in its own language, labelled
-  with that language.
+  with that language as a prefix of the value: `(language: fra) text`.
 - Keywords are written in the working language and stored with the title's own tag (`eng` in the
   data we have). An untagged title: the model infers the language, returns it as a 3-letter code in
   the keyword call's output, and it is logged as inferred. Only the title's tag counts; the
