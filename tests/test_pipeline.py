@@ -181,7 +181,7 @@ def test_incomplete_fetch_skips_the_db_step_and_shuts_the_ingestor_down(rec):
 def test_main_exits_1_with_counts_and_report_path_on_incomplete_fetch(
     monkeypatch, capsys
 ):
-    def fake_run(catalogue, *, steps, force):
+    def fake_run(catalogue, *, steps, force, **options):
         raise _incomplete_error(n_failures=12)
 
     monkeypatch.setattr(pipeline, "run", fake_run)
@@ -225,7 +225,7 @@ def test_parse_steps_returns_pipeline_order_and_validates():
 def test_main_passes_steps_and_force(monkeypatch, capsys):
     seen = {}
 
-    def fake_run(catalogue, *, steps, force):
+    def fake_run(catalogue, *, steps, force, **options):
         seen.update(catalogue=catalogue, steps=steps, force=force)
         return pipeline.PipelineOutcome("PROD", load_summary=SUMMARY)
 
@@ -238,7 +238,7 @@ def test_main_passes_steps_and_force(monkeypatch, capsys):
 
 
 def test_main_exits_1_with_a_message_on_input_error(monkeypatch, capsys):
-    def fake_run(catalogue, *, steps, force):
+    def fake_run(catalogue, *, steps, force, **options):
         raise PipelineInputError("no files")
 
     monkeypatch.setattr(pipeline, "run", fake_run)
@@ -254,7 +254,7 @@ def test_main_exits_1_with_a_message_on_input_error(monkeypatch, capsys):
 
 
 def _stderr_for(monkeypatch, capsys, error):
-    def fake_run(catalogue, *, steps, force):
+    def fake_run(catalogue, *, steps, force, **options):
         raise error
 
     monkeypatch.setattr(pipeline, "run", fake_run)
@@ -367,7 +367,7 @@ def test_incomplete_fetch_end_to_end_exits_1_and_never_calls_the_loader(
 
     real_run = pipeline.run
 
-    def wired_run(catalogue, *, steps, force):
+    def wired_run(catalogue, *, steps, force, **options):
         return real_run(
             catalogue,
             steps=steps,
@@ -460,7 +460,7 @@ def _wired_main(monkeypatch, tmp_path, auth, loader):
     fetched_dir = tmp_path / "fetched"
     real_run = pipeline.run
 
-    def wired_run(catalogue, *, steps, force):
+    def wired_run(catalogue, *, steps, force, **options):
         return real_run(
             catalogue,
             steps=steps,

@@ -16,10 +16,21 @@ tests under `tests/`.
 `pytest`, `ruff`, `pre-commit`).
 
 **Prepare a catalogue's database:** `uv run python -m mqa_advisor.pipeline {catalogue}`; pick the
-steps with `--steps manifest,fetch,db` (a step not selected reuses the files on disk) and add
+steps with `--steps manifest,fetch,db,propose` (the default is the first three; a step not selected
+reuses the files on disk) and add
 `--force` to re-fetch. A failed fetch stops the run before the db step (`FetchIncompleteError`,
 exit 1). The db step always loads the catalogue folder as it is: the database mirrors the folder, so
 resources whose file is gone, or a folder with no resource files, remove their rows (no guard, no flag).
+
+**Propose themes and keywords (opt-in):** `uv run python -m mqa_advisor.pipeline {catalogue} --steps propose`
+(or `--steps db,propose`) calls the model for every resource of the catalogue already in the database, and
+needs `ANTHROPIC_API_KEY` in `.env`. Options: `--limit N` (first N resources by id), `--dry-run` (no model call,
+nothing written, no key needed; prints the number of calls and a rough cost estimate, and fails if it cannot build a prompt) and `--workers N` (default 4); they are
+rejected unless `propose` is selected. Every resource is attempted (a failure of one never stops the others; only a broken prompt file does) and every
+valid proposal saved; a failed call never deletes the earlier proposals of its property;
+`propose_report.xlsx` (sheets Errors and Summary) is always written in the catalogue folder, and the step exits 1
+if any resource had an error. A later `db` step deletes the proposals (the load logs how many). Use `--limit` and
+`--dry-run` before a full run: a catalogue of about 2,300 Datasets is up to about 4,600 calls.
 
 **Test:** `uv run pytest` runs the unit suite. Integration tests need network (and PPE credentials
 when `MQA_ENV=PPE`); they are marked `integration`, excluded by default, and run with
@@ -52,7 +63,11 @@ the SQLite database in `fetched_catalogues_data/mqa.sqlite`. Test fixtures live 
   `propose_themes()` (up to 3 retries of an empty answer, returns a `ThemeResult`; writes nothing), and
   `propose_keywords()` (existing keywords of any language count toward the cap of 10, the effective themes are the
   context, stored language = the title's tag or the model's code; returns a `KeywordResult`; writes nothing).
-- `pipeline.py` — the manifest -> fetch -> db entry point with the step selector. Unlike MQA_test's Test Run,
+- `propose_step.py` — the `propose` step: `run_propose()` reads the resources (main thread), runs the theme and
+  keyword proposals in a thread pool, saves each result with `replace_proposals` from the main thread in resource-id
+  order, writes `propose_report.xlsx` and raises `ProposeIncompleteError` after that if any `error` exists; `DryRunClient`
+  stands in for the model on a dry run (ADR-0016, ADR-0019).
+- `pipeline.py` — the manifest -> fetch -> db -> propose entry point with the step selector (`propose` is opt-in). Unlike MQA_test's Test Run,
   any failure of a selected step is fatal.
 
 ## Mandatory workflow
