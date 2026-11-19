@@ -27,7 +27,6 @@ EXAMPLES_PATH = (
     Path(__file__).parent / "fixtures" / "prompts" / "regression_examples.json"
 )
 THEME_URI_PREFIX = "http://publications.europa.eu/resource/authority/data-theme/"
-ENGLISH_TAGS = {"en", "eng"}
 
 
 @dataclass(frozen=True)
@@ -41,9 +40,10 @@ class Example:
     existing_themes: tuple[str, ...]  # vocabulary codes
     existing_keywords: tuple[str, ...]
     accepted_themes: frozenset[str]  # vocabulary codes, at least one must be proposed
-    keyword_pattern: (
-        str | None
-    )  # optional regex every keyword must match (script of the language)
+    # Optional regex every new keyword must fully match (the script or alphabet of the language).
+    keyword_pattern: str | None
+    # Primary subtag the model must infer for an untagged title (e.g. "es"); None for a tagged one.
+    expected_language: str | None
 
     def resource(self) -> ResourceText:
         """The example as the resource the proposal functions read from the database."""
@@ -62,7 +62,7 @@ class Example:
 
 
 def load_examples(path: Path = EXAMPLES_PATH) -> list[Example]:
-    return [
+    examples = [
         Example(
             name=o["name"],
             case=o["case"],
@@ -74,9 +74,17 @@ def load_examples(path: Path = EXAMPLES_PATH) -> list[Example]:
             existing_keywords=tuple(o["existing_keywords"]),
             accepted_themes=frozenset(o["accepted_themes"]),
             keyword_pattern=o.get("keyword_pattern"),
+            expected_language=o.get("expected_language"),
         )
         for o in json.loads(path.read_text(encoding="utf-8"))
     ]
+    names = [e.name for e in examples]
+    if len(set(names)) != len(names):
+        raise ValueError(f"duplicate example names in {path}")
+    for e in examples:
+        if (e.title_language is None) != (e.expected_language is not None):
+            raise ValueError(f"{e.name}: expected_language is for untagged titles only")
+    return examples
 
 
 def run_example(
@@ -87,10 +95,6 @@ def run_example(
     themes = propose_themes(resource, client, vocabulary)
     keywords = propose_keywords(resource, client, themes, vocabulary)
     return themes, keywords
-
-
-def _is_english(tag: str | None) -> bool:
-    return tag is not None and tag.lower() in ENGLISH_TAGS
 
 
 def check_example(
@@ -137,12 +141,17 @@ def check_example(
                 "keyword language",
                 f"{keywords.lang!r}, expected the title's {example.title_language!r}",
             )
-    elif not keywords.lang_inferred or _is_english(keywords.lang):
-        # An untagged title: the model names the language. The only untagged example is not English.
-        fail("keyword language", f"{keywords.lang!r} inferred for a non-English title")
+    elif not keywords.lang_inferred or (
+        (keywords.lang or "").lower().split("-")[0] != example.expected_language
+    ):
+        # An untagged title: the model names the language and it must be the one the example expects.
+        fail(
+            "keyword language",
+            f"{keywords.lang!r} inferred, expected {example.expected_language!r}",
+        )
     if example.keyword_pattern and (
         bad := [
-            k for k in keywords.keywords if not re.search(example.keyword_pattern, k)
+            k for k in keywords.keywords if not re.fullmatch(example.keyword_pattern, k)
         ]
     ):
         fail("keywords in the title's language", f"no {example.keyword_pattern}: {bad}")

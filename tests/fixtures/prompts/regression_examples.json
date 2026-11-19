@@ -20,7 +20,8 @@
       "EDUC",
       "REGI",
       "GOVE"
-    ]
+    ],
+    "keyword_pattern": "[A-Za-z0-9\\s\\-/&.,()']+"
   },
   {
     "name": "lt-dataservice-meteorology",
@@ -45,7 +46,8 @@
       "TRAN",
       "AGRI",
       "TECH"
-    ]
+    ],
+    "keyword_pattern": "[A-Za-z0-9\\s\\-/&.,()']+"
   },
   {
     "name": "lt-dataset-medicinal-products",
@@ -70,7 +72,8 @@
       "SOCI",
       "GOVE",
       "ECON"
-    ]
+    ],
+    "keyword_pattern": "[A-Za-z0-9\\s\\-/&.,()']+"
   },
   {
     "name": "lu-dataset-social-benefits",
@@ -94,7 +97,8 @@
     ],
     "accepted_themes": [
       "GOVE"
-    ]
+    ],
+    "keyword_pattern": "[A-Za-z0-9\\s\\-/&.,()']+"
   },
   {
     "name": "lt-dataset-mineral-resources-no-description",
@@ -113,7 +117,8 @@
       "ENVI",
       "ENER",
       "ECON"
-    ]
+    ],
+    "keyword_pattern": "[A-Za-z0-9\\s\\-/&.,()']+"
   },
   {
     "name": "lt-dataset-protection-structures-no-description",
@@ -130,7 +135,8 @@
       "JUST",
       "GOVE",
       "REGI"
-    ]
+    ],
+    "keyword_pattern": "[A-Za-z0-9\\s\\-/&.,()']+"
   },
   {
     "name": "lt-dataservice-bg-title",
@@ -147,7 +153,7 @@
       "GOVE",
       "TECH"
     ],
-    "keyword_pattern": "[Ѐ-ӿ]"
+    "keyword_pattern": "[Ѐ-ӿ\\s\\-]+"
   },
   {
     "name": "es-dataset-untagged-title",
@@ -167,6 +173,7 @@
     "accepted_themes": [
       "REGI",
       "GOVE"
-    ]
+    ],
+    "expected_language": "es"
   }
 ]

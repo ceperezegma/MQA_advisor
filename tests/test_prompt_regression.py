@@ -3,6 +3,7 @@
 import pytest
 
 from mqa_advisor.llm import BackendResponse, FakeBackend, LLMClient, RunLog
+from mqa_advisor.propose import KEYWORD_CAP
 from mqa_advisor.vocabulary import load_vocabulary
 from tests.prompt_regression import (
     THEME_URI_PREFIX,
@@ -130,12 +131,23 @@ def test_count_above_the_cap_fails(examples, vocabulary):
     example = examples["lt-dataset-medicinal-products"]
     code = sorted(example.accepted_themes)[0]
     (themes, keywords), _ = run(example, vocabulary, [code], ["a", "b"])
-    too_many = replace(keywords, keywords=tuple("abcdef"))
+    too_many = replace(keywords, keywords=tuple("abcdefghijk"))
     [failure] = check_example(example, themes, too_many, vocabulary)
-    assert "number of new keywords" in failure and "1..5" in failure
+    assert (
+        "number of new keywords" in failure
+        and f"1..{KEYWORD_CAP - len(example.existing_keywords)}" in failure
+    )
 
 
 def test_the_example_resource_builds_the_prompt_input(examples):
     resource = examples["lt-dataset-mineral-resources-no-description"].resource()
     assert resource.descriptions == ()
     assert resource.theme_uris == (THEME_URI_PREFIX + "REGI",)
+
+
+def test_diacritics_fail_the_ascii_check_of_an_english_title(examples, vocabulary):
+    example = examples["lt-dataservice-meteorology"]
+    code = sorted(example.accepted_themes)[0]
+    (themes, keywords), _ = run(example, vocabulary, [code], ["žemės ūkis"])
+    [failure] = check_example(example, themes, keywords, vocabulary)
+    assert example.name in failure and "title's language" in failure

@@ -35,7 +35,12 @@ def live_results():
         with RunLog("prompt-regression") as run_log:
             client = LLMClient(backend, run_log)
             for example in EXAMPLES:
-                results[example.name] = run_example(example, client, vocabulary)
+                try:
+                    results[example.name] = run_example(example, client, vocabulary)
+                except (
+                    Exception
+                ) as error:  # one failing example must not hide the others
+                    results[example.name] = error
             print(f"\nprompt regression log: {run_log.path}")
         print(
             f"prompt regression: {run_log.calls} calls, estimated cost USD {run_log.total_cost_usd:.6f}"
@@ -46,6 +51,9 @@ def live_results():
 @pytest.mark.parametrize("example", EXAMPLES, ids=lambda e: e.name)
 def test_example(example, live_results):
     vocabulary, results = live_results
-    themes, keywords = results[example.name]
+    outcome = results[example.name]
+    if isinstance(outcome, Exception):
+        pytest.fail(f"{example.name}: the run raised {outcome!r}")
+    themes, keywords = outcome
     failures = check_example(example, themes, keywords, vocabulary)
     assert not failures, "\n".join(failures)
