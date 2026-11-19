@@ -123,16 +123,16 @@ def test_an_untagged_title_needs_a_non_english_inferred_language(examples, vocab
 
 
 def test_count_above_the_cap_fails(examples, vocabulary):
-    # An example with 8 existing keywords leaves room for 2: a fake answer cannot exceed it after validation,
+    # An example with 5 existing keywords leaves room for 5: a fake answer cannot exceed it after validation,
     # so check the check directly with a result built by hand.
     from dataclasses import replace
 
     example = examples["lt-dataset-medicinal-products"]
     code = sorted(example.accepted_themes)[0]
     (themes, keywords), _ = run(example, vocabulary, [code], ["a", "b"])
-    too_many = replace(keywords, keywords=("a", "b", "c"))
+    too_many = replace(keywords, keywords=tuple("abcdef"))
     [failure] = check_example(example, themes, too_many, vocabulary)
-    assert "number of new keywords" in failure and "1..2" in failure
+    assert "number of new keywords" in failure and "1..5" in failure
 
 
 def test_the_example_resource_builds_the_prompt_input(examples):
