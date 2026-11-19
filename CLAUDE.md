@@ -34,7 +34,9 @@ if any resource had an error. A later `db` step deletes the proposals (the load 
 
 **Test:** `uv run pytest` runs the unit suite. Integration tests need network (and PPE credentials
 when `MQA_ENV=PPE`); they are marked `integration`, excluded by default, and run with
-`uv run pytest -m integration` after copying `.env.example` to `.env`.
+`uv run pytest -m integration` after copying `.env.example` to `.env`. The prompt regression examples
+(`tests/fixtures/prompts/`, `tests/test_prompt_regression_integration.py`) call the live model (about USD 0.003 a run, needs
+`ANTHROPIC_API_KEY`, skipped without it): run them before a new prompt version becomes the active one.
 
 **Lint/format:** `uv run ruff check src/ tests/` and `uv run ruff format src/ tests/`.
 

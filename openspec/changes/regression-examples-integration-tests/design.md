@@ -29,3 +29,5 @@ proposal.md for why.
 
 - A live model is not deterministic → checks are loose; a flaky failure is re-run once before concluding.
 - Fixtures contain public catalogue text → acceptable, it is open data.
+- **Existing keywords are trimmed to the first 5** when the real resource has 7 or more: at 10 the model is not
+  called (keywords skipped), so an example with 11 or 27 keywords would test nothing. Found by the first live run.
