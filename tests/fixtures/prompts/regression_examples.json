@@ -1,0 +1,179 @@
+[
+  {
+    "name": "lt-dataservice-cultural-heritage",
+    "catalogue": "data-gov-lt",
+    "resource_id": "https-data-gov-lt-datasets-2946-",
+    "resource_type": "dataservice",
+    "case": "standalone Data Service, no existing theme",
+    "title": "Cultural heritage register (WMS service)",
+    "title_language": "en",
+    "description": "The objects of the register of Cultural heritage are immovable and movable cultural objects. The providers of the register data are: Councils for the Evaluation of Immovable Cultural Heritage, the Ministry of Culture, the Department of Cultural Heritage, municipal administrations, owners of cultural property, researchers of cultural property and research, reporting institutions, foundations and other public institutions.",
+    "existing_themes": [],
+    "existing_keywords": [
+      "Dvaras",
+      "Kvr",
+      "Saugomos Teritorijos",
+      "addresses",
+      "bažnyčia"
+    ],
+    "accepted_themes": [
+      "EDUC",
+      "REGI",
+      "GOVE"
+    ],
+    "keyword_pattern": "[A-Za-z0-9\\s\\-/&.,()']+"
+  },
+  {
+    "name": "lt-dataservice-meteorology",
+    "catalogue": "data-gov-lt",
+    "resource_id": "https-data-gov-lt-datasets-2073-",
+    "resource_type": "dataservice",
+    "case": "standalone Data Service with an existing theme",
+    "title": "Meteorological observations",
+    "title_language": "en",
+    "description": "Access to meteorological observation data for the last 10 years of Lithuanian meteorological stations. The dataset consists of meteorological observations and measurements measured at 18 meteorological stations, hourly data of 8 meteorological elements: average air temperature, relative air humidity, average wind speed, wind speed direction, wind gust, amount of precipitation, cloudiness, atmospheric pressure. For more information – api.meteo.lt",
+    "existing_themes": [
+      "ENVI"
+    ],
+    "existing_keywords": [
+      "Debesuotumas",
+      "Krituliai",
+      "Lhmt",
+      "Meteorologija",
+      "Oro Temperatūra"
+    ],
+    "accepted_themes": [
+      "TRAN",
+      "AGRI",
+      "TECH"
+    ],
+    "keyword_pattern": "[A-Za-z0-9\\s\\-/&.,()']+"
+  },
+  {
+    "name": "lt-dataset-medicinal-products",
+    "catalogue": "data-gov-lt",
+    "resource_id": "https--data.gov.lt-datasets-5389-",
+    "resource_type": "dataset",
+    "case": "Dataset with an existing theme",
+    "title": "Data Set of Registered Medicinal Products of the State Medicines Control",
+    "title_language": "en",
+    "description": "The package shall contain the data of medicinal products accumulated by the State Medicines Control Agency: name, active substance in the preparation, strength, pharmaceutical form and routes of administration of the medicinal product, group and subset of the medicinal product, need for prescription, state of monitoring and control, date of first registration and last re-registration, current stage of the medicinal product, name and country of the undertaking registering the product. The package shall also contain information on the packaging of medicinal products, such as the state, type and description of the packaging. The dataset consists of two tables: “medicinal product” (information on the medicinal product and its packaging) and “Phase of medicinal product” (information on changes in the stages of the medicinal product in time). In the first table, one line corresponds to one medicinal product and its packaging. One row of the second table contains information about a change in the stage of one medicinal product. Both tables can be combined through the product identification number (vid) column.\nContact the atverimas@stat.gov.lt for technical questions or possible errors.",
+    "existing_themes": [
+      "HEAL"
+    ],
+    "existing_keywords": [
+      "Vda",
+      "farmacija",
+      "receptas",
+      "vaistai",
+      "vaistinio preparato  veiklioji medžiaga"
+    ],
+    "accepted_themes": [
+      "SOCI",
+      "GOVE",
+      "ECON"
+    ],
+    "keyword_pattern": "[A-Za-z0-9\\s\\-/&.,()']+"
+  },
+  {
+    "name": "lu-dataset-social-benefits",
+    "catalogue": "nsip-lu",
+    "resource_id": "1eb6a0ee-caac-11f0-a122-8aadbbc611c1",
+    "resource_type": "dataset",
+    "case": "Dataset with two existing themes",
+    "title": "Social benefits",
+    "title_language": "eng",
+    "description": "This dataset contains all social benefits received by beneficiaries for a reference period (year and month) and paid out under Luxembourg's social policy. These include family benefits, replacement income and minimum income. All variables concerning social benefits are related to a reference period (year and month). \nThis dataset is part of those provided by the IGSS within the framework of the Luxembourg Microdata Platform on Labour and Social Protection. All datasets offered by the IGSS are designed to be interoperable through the use of common pseudonymized identifiers, enabling the linkage of information across different datasets. \nAll the variables in this dataset are personal data and are subject to GDPR compliant protection measures. \nScope: all persons receiving social benefits provided by Luxembourg. \nDelay for providing the most recent data: current month -3. \nData sources : CCSS, CAE, ADEM, CNAP, public pension schemes.",
+    "existing_themes": [
+      "ECON",
+      "SOCI"
+    ],
+    "existing_keywords": [
+      "family benefits",
+      "labour market",
+      "parental leave",
+      "pensions",
+      "replacement benefits"
+    ],
+    "accepted_themes": [
+      "GOVE"
+    ],
+    "keyword_pattern": "[A-Za-z0-9\\s\\-/&.,()']+"
+  },
+  {
+    "name": "lt-dataset-mineral-resources-no-description",
+    "catalogue": "data-gov-lt",
+    "resource_id": "https-data-gov-lt-datasets-2646-",
+    "resource_type": "dataset",
+    "case": "no description, existing theme",
+    "title": "Mineral resources",
+    "title_language": "en",
+    "description": "",
+    "existing_themes": [
+      "REGI"
+    ],
+    "existing_keywords": [],
+    "accepted_themes": [
+      "ENVI",
+      "ENER",
+      "ECON"
+    ],
+    "keyword_pattern": "[A-Za-z0-9\\s\\-/&.,()']+"
+  },
+  {
+    "name": "lt-dataset-protection-structures-no-description",
+    "catalogue": "data-gov-lt",
+    "resource_id": "https-data-gov-lt-datasets-2805-",
+    "resource_type": "dataset",
+    "case": "no description, no existing theme",
+    "title": "LIST OF SELECTED COLLECTIVE PROTECTION STRUCTURES AND THEIR NEEDS",
+    "title_language": "en",
+    "description": "",
+    "existing_themes": [],
+    "existing_keywords": [],
+    "accepted_themes": [
+      "JUST",
+      "GOVE",
+      "REGI"
+    ],
+    "keyword_pattern": "[A-Za-z0-9\\s\\-/&.,()']+"
+  },
+  {
+    "name": "lt-dataservice-bg-title",
+    "catalogue": "data-gov-lt",
+    "resource_id": "https:-data.gov.lt-datasets-2916-",
+    "resource_type": "dataservice",
+    "case": "non-English title, thin description, Data Service",
+    "title": "Хранилище за свободно достъпни данни",
+    "title_language": "bg",
+    "description": "Услуга за публикуване на данни",
+    "existing_themes": [],
+    "existing_keywords": [],
+    "accepted_themes": [
+      "GOVE",
+      "TECH"
+    ],
+    "keyword_pattern": "[Ѐ-ӿ\\s\\-]+"
+  },
+  {
+    "name": "es-dataset-untagged-title",
+    "catalogue": "52north",
+    "resource_id": "http-edp-int-com-open-data-context-dataset-fiware-parking-malaga",
+    "resource_type": "dataset",
+    "case": "untagged non-English title",
+    "title": "Ocupación de los aparcamientos públicos municipales.",
+    "title_language": null,
+    "description": "Ocupación de los aparcamientos públicos municipales. La información de actualiza cada 1 minuto.",
+    "existing_themes": [
+      "TRAN"
+    ],
+    "existing_keywords": [
+      "transportation"
+    ],
+    "accepted_themes": [
+      "REGI",
+      "GOVE"
+    ],
+    "expected_language": "es"
+  }
+]

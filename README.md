@@ -96,4 +96,5 @@ To move a prompt to v2:
 
     uv run pytest                  # unit tests
     uv run pytest -m integration   # needs network (and PPE credentials for PPE)
+    uv run pytest -m integration tests/test_prompt_regression_integration.py   # live prompt regression, needs ANTHROPIC_API_KEY
     uv run ruff check src tests
