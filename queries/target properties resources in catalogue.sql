@@ -2,7 +2,7 @@
 -- resource information about the 'nsip-lu' catalogue: 51 datasets + 1 dataservice
 select *
 from resource
-where catalogue = 'nsip-lu';
+where catalogue = '52north' --''nsip-lu';
 
 -- Getting info about the resources properties that we need to generate improvement proposals:
 -- `dcat:keyword`, `dcat:theme`
