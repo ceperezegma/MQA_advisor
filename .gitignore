@@ -20,11 +20,16 @@ __pycache__/
 .venv/
 
 # Generated output, never source: the manifests and the fetched catalogue data (+ the SQLite
-# database). Keep fetched_catalogues_data/ itself tracked (via .gitkeep) so it exists after a
-# fresh clone.
-catalogues_to_fetch/
-fetched_catalogues_data/*
-!fetched_catalogues_data/.gitkeep
+# database). Keep both folders themselves tracked (via .gitkeep) so they exist after a fresh
+# clone; their contents are never tracked.
+/catalogues_to_fetch/*
+!/catalogues_to_fetch/.gitkeep
+/fetched_catalogues_data/*
+!/fetched_catalogues_data/.gitkeep
+
+# Copies of the data folders created when the app runs with src/ as working directory
+/src/**/catalogues_to_fetch/
+/src/**/fetched_catalogues_data/
 
 # Scratch output of the tests/manual_*.py scripts
 manual_tests/
