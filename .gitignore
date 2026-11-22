@@ -27,10 +27,6 @@ __pycache__/
 /fetched_catalogues_data/*
 !/fetched_catalogues_data/.gitkeep
 
-# Copies of the data folders created when the app runs with src/ as working directory
-/src/**/catalogues_to_fetch/
-/src/**/fetched_catalogues_data/
-
 # Scratch output of the tests/manual_*.py scripts
 manual_tests/
 
